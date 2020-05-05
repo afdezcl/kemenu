@@ -8,7 +8,13 @@ import { LoginModule } from './components/login/login.module';
 import { FooterModule } from './components/footer/footer.module';
 import { NavbarModule } from './components/navbar/navbar.module';
 import { HomeModule } from './components/home/home.module';
+
+//NGX-BOOTSTRAP
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+
 
 
 @NgModule({
@@ -18,7 +24,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
   imports: [
     BrowserModule,
     AppRoutingModule,
-
+    FormsModule,
+ 
 
     //My modules
     RegisterModule,
@@ -27,6 +34,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     FooterModule,
     HomeModule,
     ModalModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
