@@ -8,6 +8,7 @@ import { LoginModule } from './components/login/login.module';
 import { FooterModule } from './components/footer/footer.module';
 import { NavbarModule } from './components/navbar/navbar.module';
 import { HomeModule } from './components/home/home.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { HomeModule } from './components/home/home.module';
     LoginModule,
     NavbarModule,
     FooterModule,
-    HomeModule
+    HomeModule,
+    ModalModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
