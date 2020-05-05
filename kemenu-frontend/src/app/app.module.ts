@@ -7,6 +7,7 @@ import { RegisterModule } from './components/register/register.module';
 import { LoginModule } from './components/login/login.module';
 import { FooterModule } from './components/footer/footer.module';
 import { NavbarModule } from './components/navbar/navbar.module';
+import { HomeModule } from './components/home/home.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { NavbarModule } from './components/navbar/navbar.module';
     RegisterModule,
     LoginModule,
     NavbarModule,
-    FooterModule
+    FooterModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
