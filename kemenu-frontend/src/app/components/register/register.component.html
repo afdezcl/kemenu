@@ -1,0 +1,85 @@
+<div class="background vh-100">
+  <div class="wrapper container">
+    <div class="row justify-content-md-center align-items-center">
+      <div class="col-auto">
+        <div class="card p-5 shadow" style="border-radius: 25px;">
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-sm-6">
+                <img src="../../../assets/images/options-mobile.svg" alt="" class="img-fluid">
+              </div>
+              <div class="col-sm-6">
+                <div class="text-center">
+                  <h4 class="card-title mb-4">Registra tu restaurante</h4>
+                </div>
+                <form [formGroup]="registerForm" (submit)="onSubmit(registerForm)">
+                  <div class="form-group">
+                    <span class="icon-input">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    <input type="email" class="form-control" id="restaurantName" aria-describedby="restaurantName"
+                      placeholder="Nombre del restaurante" formControlName="restaurantName" required>
+                      <div
+                      *ngIf="registerForm.get('restaurantName').errors && (registerForm.get('restaurantName').dirty || registerForm.get('restaurantName').touched)">
+                      <small *ngIf="registerForm.get('restaurantName').hasError('required')" class="text-muted ml-2 mt-1">
+                        Nombre del restaurante requerido
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <span class="icon-input">
+                      <i class="fas fa-envelope"></i>
+                    </span>
+                    <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Email"
+                      formControlName="email" required>
+                    <div
+                      *ngIf="registerForm.get('email').errors && (registerForm.get('email').dirty || registerForm.get('email').touched)">
+                      <small *ngIf="registerForm.get('email').hasError('email')" class="text-muted ml-2 mt-1">
+                        Email inválido
+                      </small>
+                      <small *ngIf="registerForm.get('email').hasError('required')" class="text-muted ml-2 mt-1">
+                        Email requerido
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <span class="icon-input">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                    <input type="password" class="form-control" id="digest" placeholder="Contraseña"
+                      formControlName="digest" required>
+                      <div
+                      *ngIf="registerForm.get('digest').errors && (registerForm.get('digest').dirty || registerForm.get('digest').touched)">
+                      <small *ngIf="registerForm.get('digest').hasError('minlength')" class="text-muted ml-2 mt-1">
+                        Mínimo 8 dígitos
+                      </small>
+                      <small *ngIf="registerForm.get('digest').hasError('required')" class="text-muted ml-2 mt-1">
+                        Contraseña requerida
+                      </small>
+                    </div>  
+                  </div>
+                  <div class="form-group">
+                    <span class="icon-input">
+                      <i class="fas fa-unlock"></i>
+                    </span>
+                    <input type="password" class="form-control" id="confirmDigest" placeholder="Repetir contraseña"
+                      formControlName="confirmDigest" required>
+                      <small *ngIf="registerForm.hasError('notSame')" class="text-muted ml-2 mt-1">
+                        Las contraseñas no coinciden
+                      </small>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Registrarse <i
+                      class="fas fa-sign-in-alt pl-2"></i></button>
+                      <p class="text-muted mt-2">Ya tengo una cuenta</p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

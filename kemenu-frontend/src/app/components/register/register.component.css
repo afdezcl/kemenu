@@ -1,0 +1,6 @@
+.background {
+    background-color: #e7475e;
+}
+.container, .row {
+    height: 100%;
+  }
