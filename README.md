@@ -4,15 +4,15 @@ Kemenu web app, for menu management written in Java and Angular.
 
 ## IMPORTANT:exclamation:: Use npm as follows
 
-1. Start frontend hot reloading to work with frontend:
+1. Hot reloading to work with frontend:
 
 `bash kemenu-frontend/npm --prefix kemenu-frontend run start`
 
-2. To use ng command:
+2. For use ng command:
 
 `bash kemenu-frontend/npm --prefix kemenu-frontend run ng <NG_COMMAND>`
 
-3. To install a npm package:
+3. For install a npm package:
 
 `bash kemenu-frontend/npm --prefix kemenu-frontend install <PACKAGE>`
 
@@ -36,7 +36,7 @@ Kemenu web app, for menu management written in Java and Angular.
 
 ## How to run backend in local with Intellij IDEA
 
-:warning: Before running the backend, you need to have the docker-compose running with mongodb.
+:warning: Before running the backend, you need to have the docker running with mongodb.
 
 1. Go to `kemenu-backend/src/main/java/com/kemenu/kemenu_backend/Application.java`
 2. Right click and click on `Debug 'Application'`
