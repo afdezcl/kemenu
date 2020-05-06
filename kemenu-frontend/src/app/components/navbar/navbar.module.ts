@@ -3,12 +3,14 @@ import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar.component';
 import { RouterModule } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    BsDropdownModule
+    BsDropdownModule,
+    TranslateModule
 
   ],
   declarations: [NavbarComponent],

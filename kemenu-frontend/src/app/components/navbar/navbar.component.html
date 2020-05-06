@@ -15,14 +15,14 @@
 
           <li class="nav-item dropdown" dropdown>
             <a id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-              class="nav-link dropdown-toggle" dropdownToggle >Languages</a>
+              class="nav-link dropdown-toggle" dropdownToggle >{{ 'Languages' | translate }}</a>
             <div class="dropdown-menu" *dropdownMenu role="menu">
-              <a href="faq.html" class="dropdown-item" role="menuitem">English</a>
-              <a href="text.html" class="dropdown-item" role="menuitem">Spanish</a>
+              <a (click)="changeLanguage('en')" class="dropdown-item" role="menuitem">{{ 'English' | translate }}</a>
+              <a (click)="changeLanguage('es')" class="dropdown-item" role="menuitem">{{ 'Spanish' | translate }}</a>
             </div>
           </li>
                 
-        </ul><a style="color: white;" (click)="openModalLogIn()" class="btn btn-primary navbar-btn ml-0 ml-lg-3">Login </a>
+        </ul><a style="color: white;" (click)="openModalLogIn()" class="btn btn-primary navbar-btn ml-0 ml-lg-3">{{ 'LogIn' | translate }} </a>
       </div>
     </div>
   </nav>

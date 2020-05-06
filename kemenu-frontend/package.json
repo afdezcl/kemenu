@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "extract": "ngx-translate-extract --input ./src --output ./src/assets/i18n/*.json --clean --sort --format namespaced-json"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +20,8 @@
     "@angular/platform-browser": "~9.0.0",
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
+    "@ngx-translate/core": "^12.1.2",
+    "@ngx-translate/http-loader": "^4.0.0",
     "bootstrap": "^4.4.1",
     "ngx-bootstrap": "^5.6.1",
     "rxjs": "~6.5.4",
@@ -30,9 +33,10 @@
     "@angular/cli": "~9.0.1",
     "@angular/compiler-cli": "~9.0.0",
     "@angular/language-service": "~9.0.0",
-    "@types/node": "^12.11.1",
+    "@biesbjerg/ngx-translate-extract": "^6.0.4",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
