@@ -6,6 +6,7 @@
 	"InvalidEmail": "Email inválido",
 	"Languages": "Idiomas",
 	"LogIn": "Iniciar sesión",
+	"NoHaveAccount": "¿No tienes una cuenta? Regístrate",
 	"Password": "Contraseña",
 	"PasswordCoincidence": "Las contraseñas no coinciden",
 	"PlaceholderConfirmPasword": "Confirmar contraseña",
