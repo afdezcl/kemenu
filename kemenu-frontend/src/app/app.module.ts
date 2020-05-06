@@ -9,7 +9,7 @@ import { FooterModule } from './components/footer/footer.module';
 import { NavbarModule } from './components/navbar/navbar.module';
 import { HomeModule } from './components/home/home.module';
 
-//NGX-BOOTSTRAP
+// NGX-BOOTSTRAP
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,9 +25,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
- 
-
-    //My modules
+    // My modules
     RegisterModule,
     LoginModule,
     NavbarModule,

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -7,10 +7,11 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  
+
   registerForm: FormGroup;
-  
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
     this.registerForm = new FormGroup({
@@ -18,15 +19,17 @@ export class RegisterComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       digest: new FormControl('', [Validators.required, Validators.minLength(8)]),
       confirmDigest: new FormControl('')
-    }, { validators: this.checkPasswords });
+    }, {validators: this.checkPasswords});
   }
-  onSubmit(registerForm: FormGroup){
-    console.log(registerForm.value);   
-  }
-  checkPasswords(form: FormGroup) {
-    let pass = form.controls.digest.value;
-    let confirmPass = form.controls.confirmDigest.value;
 
-    return pass === confirmPass ? null : { notSame: true }
+  onSubmit(registerForm: FormGroup) {
+    console.log(registerForm.value);
+  }
+
+  checkPasswords(form: FormGroup) {
+    const pass = form.controls.digest.value;
+    const confirmPass = form.controls.confirmDigest.value;
+
+    return pass === confirmPass ? null : {notSame: true};
   }
 }

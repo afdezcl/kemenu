@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { LoginComponent } from '../login/login.component';
+import {Component, OnInit} from '@angular/core';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {LoginComponent} from '../login/login.component';
 
 @Component({
   selector: 'app-navbar',
@@ -8,17 +8,16 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  
+
   bsModalRef: BsModalRef;
 
-  constructor(
-    private modalService: BsModalService,
-  ) { }
+  constructor(private modalService: BsModalService) {
+  }
 
   ngOnInit() {
   }
-  
-  openModalLogIn(){    
+
+  openModalLogIn() {
     this.bsModalRef = this.modalService.show(LoginComponent);
   }
 }
