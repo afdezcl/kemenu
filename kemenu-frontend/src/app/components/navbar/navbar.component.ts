@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
-    public translate: TranslateService
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {

@@ -6,21 +6,21 @@
   <div class="modal-body p-4 p-lg-5">
     <form action="#" class="login-form text-left">
       <div class="form-group mb-4">
-        <label>Email address</label>
+        <label>{{ 'Email' | translate }}</label>
         <span class="icon-input">
           <i class="fas fa-envelope"></i>
         </span>
         <input type="email" name="email" placeholder="name@company.com" class="form-control">
       </div>
       <div class="form-group mb-4">
-        <label>Password</label>
+        <label>{{ 'Password' | translate }}</label>
         <span class="icon-input">
           <i class="fas fa-lock"></i>
         </span>
-        <input type="password" name="password" placeholder="Min 8 characters" class="form-control">
+        <input type="password" name="password" placeholder="{{ 'PlaceholderPassword' | translate }}" class="form-control">
       </div>
       <div class="form-group">
-        <input type="submit" value="Login" class="btn btn-primary">
+        <input type="submit" value="{{ 'LogIn' | translate }}" class="btn btn-primary">
       </div>
     </form>
   </div>
