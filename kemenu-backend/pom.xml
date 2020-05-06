@@ -70,7 +70,7 @@
                 <version>3.1.0</version>
                 <executions>
                     <execution>
-                        <id>copy Angular frontend content</id>
+                        <id>copy Angular frontend content to backend</id>
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
