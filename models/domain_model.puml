@@ -1,0 +1,38 @@
+@startuml
+class Customer {
+  String id;
+  List<Business> businesses;
+
+  String createBusiness(Business business);
+  String createMenu(Business business, Menu menu);
+}
+
+class Business {
+  String id;
+  Customer customer;
+  List<Menu> menus;
+
+  String createMenu(Menu menu);
+}
+
+class Menu {
+  Business business;
+  List<Dish> dishes;
+
+  String createDish(Dish dish);
+}
+
+class Dish {
+  Menu menu;
+  List<Intolerance> intolerances;
+}
+
+class Intolerance {
+  String name;
+}
+
+Customer *-- Business
+Business *-- Menu
+Menu *-- Dish
+Dish *-- Intolerance
+@enduml
