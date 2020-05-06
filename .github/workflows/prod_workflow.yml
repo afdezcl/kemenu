@@ -1,0 +1,57 @@
+name: Kemenu CI
+
+on: [push]
+
+jobs:
+
+  kemenu_job:
+    name: Kemenu job
+    runs-on: ubuntu-latest
+    env:
+      KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
+      JAVA_CMD_PATH: ~/jdk/bin/java
+      JAR_NAME: kemenu-backend-
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Set up JDK 14
+        uses: actions/setup-java@v1
+        with:
+          java-version: 14
+      - name: Test & Package frontend
+        run: mvn -B clean install -pl :kemenu-frontend
+      - name: Create version
+        run: |
+          APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          APP_RELEASE_VERSION_ARRAY=(${APP_RELEASE_VERSION//./ })
+          ((APP_RELEASE_VERSION_ARRAY[2]++))
+          APP_RELEASE_VERSION="${APP_RELEASE_VERSION_ARRAY[0]}.${APP_RELEASE_VERSION_ARRAY[1]}.${APP_RELEASE_VERSION_ARRAY[2]}"
+          echo "::set-env name=JAR_NAME::$JAR_NAME$APP_RELEASE_VERSION-SNAPSHOT.jar"
+          mvn -B --batch-mode release:update-versions -DdevelopmentVersion=$APP_RELEASE_VERSION-SNAPSHOT
+      - name: Test & Package backend
+        run: mvn -B clean test package -pl :kemenu-backend
+      - name: Prepare SSH Keys
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVATE_CLIENT_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.SERVER_PUB_KEY }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Kill java process
+        run: |
+          ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'bash -s' < $KILL_JAVA_SH
+      - name: Remove old artifacts
+        run: |
+          ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "rm -rf kemenu-backend-*.jar"
+      - name: Copy jar to server
+        run: |
+          scp -P ${{ secrets.PORT }} ${{ github.workspace }}/kemenu-backend/target/$JAR_NAME ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~
+      - name: Launch app
+        run: |
+          ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "$JAVA_CMD_PATH -Dspring.profiles.active=prod -Xms64M -Xmx256M -jar $JAR_NAME &"
+      - name: Commit version
+        run: |
+          git config --global user.name 'Nicolas Vargas Ortega'
+          git config --global user.email 'soasada@users.noreply.github.com'
+          git commit -am "AUTO: Updated version"
+          git push
