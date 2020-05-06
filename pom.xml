@@ -18,6 +18,7 @@
     <modules>
         <module>kemenu-backend</module>
         <module>kemenu-frontend</module>
+        <module>kemenu-acceptance-tests</module>
     </modules>
 
     <properties>
