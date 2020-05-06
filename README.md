@@ -12,6 +12,10 @@ Kemenu web app, for menu management written in Java and Angular.
 
 `bash kemenu-frontend/npm run ng <NG_COMMAND>`
 
+3. To install a npm package:
+
+`bash kemenu-frontend/npm install <PACKAGE>`
+
 ## Build project
 
 1. Compile frontend
