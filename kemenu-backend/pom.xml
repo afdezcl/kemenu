@@ -70,11 +70,7 @@
                 <version>3.1.0</version>
                 <executions>
                     <execution>
-<<<<<<< HEAD
-                        <id>copy Angular frontend content to backend</id>
-=======
                         <id>copy Angular frontend content</id>
->>>>>>> 2c39b07... Added acceptance test module
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>copy-resources</goal>
