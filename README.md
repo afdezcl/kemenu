@@ -6,15 +6,15 @@ Kemenu web app, for menu management written in Java and Angular.
 
 1. Start frontend hot reloading to work with frontend:
 
-`bash kemenu-frontend/npm run start`
+`bash kemenu-frontend/npm --prefix kemenu-frontend run start`
 
 2. To use ng command:
 
-`bash kemenu-frontend/npm run ng <NG_COMMAND>`
+`bash kemenu-frontend/npm --prefix kemenu-frontend run ng <NG_COMMAND>`
 
 3. To install a npm package:
 
-`bash kemenu-frontend/npm install <PACKAGE>`
+`bash kemenu-frontend/npm --prefix kemenu-frontend install <PACKAGE>`
 
 ## Build project
 
