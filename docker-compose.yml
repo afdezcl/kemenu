@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  mongo:
+    image: mongo:4-bionic
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: kemenudb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js
