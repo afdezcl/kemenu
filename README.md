@@ -1,8 +1,8 @@
 # kemenu
 
-Adjoin web app, for neighbor management written in Java and Angular.
+Kemenu web app, for menu management written in Java and Angular.
 
-## IMPORTANT!: Use npm as follows:
+## IMPORTANT!: Use npm as follows
 
 1. `bash kemenu-frontend/npm run start`
 
