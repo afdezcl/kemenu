@@ -1,6 +1,27 @@
+spring.profiles: dev
+
 server:
   port: 8085
   address: 127.0.0.1
 
 app:
   version: @project.version@
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://admin:password@localhost:27017/kemenudb
+---
+spring.profiles: prod
+
+server:
+  port: 8085
+  address: 127.0.0.1
+
+app:
+  version: @project.version@
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://admin:password@morcilla:27017/kemenudb

@@ -2,7 +2,7 @@
 
 Kemenu web app, for menu management written in Java and Angular.
 
-## IMPORTANT!: Use npm as follows
+## IMPORTANT:exclamation:: Use npm as follows
 
 1. Start frontend hot reloading to work with frontend:
 
@@ -33,6 +33,18 @@ Kemenu web app, for menu management written in Java and Angular.
 4. How to launch docker
 
 `docker-compose up`
+
+## How to run backend in local with Intellij IDEA
+
+:warning: Before running the backend, you need to have the docker-compose running with mongodb.
+
+1. Go to `kemenu-backend/src/main/java/com/kemenu/kemenu_backend/Application.java`
+2. Right click and click on `Debug 'Application'`
+3. Stop it
+4. Go to `Run` > `Edit Configurations...`
+5. In the new window select `Spring Boot` > `Application` > `Environment`
+6. Put in `VM options` the following `-Dspring.profiles.active=dev`
+7. Click on `Apply` and then in `OK`
 
 # Stack
 
