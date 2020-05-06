@@ -7,7 +7,7 @@
 	"Languages": "Idiomas",
 	"LogIn": "Iniciar sesión",
 	"Password": "Contraseña",
-	"PasswordCoincidence": "",
+	"PasswordCoincidence": "Las contraseñas no coinciden",
 	"PlaceholderConfirmPasword": "Confirmar contraseña",
 	"PlaceholderNameRestaurant": "Nombre del restaurante",
 	"PlaceholderPassword": "Mínimo 8 caracteres",

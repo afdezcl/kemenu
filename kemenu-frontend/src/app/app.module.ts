@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 // NGX-BOOTSTRAP
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Translation
@@ -49,6 +50,7 @@ export function createTranslateLoader(http: HttpClient) {
     HomeModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
+    CollapseModule.forRoot(),
     BrowserAnimationsModule,
   ],
   providers: [],
