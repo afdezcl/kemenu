@@ -3,4 +3,10 @@
 }
 .container, .row {
     height: 100%;
-  }
+}
+
+  @media (max-width: 991.98px) {
+    .card {
+        margin-top: 100px;
+    }
+  }  

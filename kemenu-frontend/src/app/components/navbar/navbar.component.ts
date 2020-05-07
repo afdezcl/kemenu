@@ -9,12 +9,13 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  
+  isCollapsed = true;
   bsModalRef: BsModalRef;
 
   constructor(
     private modalService: BsModalService,
-    public translate: TranslateService
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {

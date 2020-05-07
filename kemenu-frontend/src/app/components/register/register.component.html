@@ -10,7 +10,7 @@
               </div>
               <div class="col-sm-6">
                 <div class="text-center">
-                  <h4 class="card-title mb-4">Registra tu restaurante</h4>
+                  <h4 class="card-title mb-4">{{ 'RegisterRestaurant' | translate }}</h4>
                 </div>
                 <form [formGroup]="registerForm" (submit)="onSubmit(registerForm)">
                   <div class="form-group">
@@ -18,11 +18,11 @@
                       <i class="fas fa-user"></i>
                     </span>
                     <input type="email" class="form-control" id="restaurantName" aria-describedby="restaurantName"
-                      placeholder="Nombre del restaurante" formControlName="restaurantName" required>
+                      placeholder="{{ 'PlaceholderNameRestaurant' | translate }}" formControlName="restaurantName" required>
                       <div
                       *ngIf="registerForm.get('restaurantName').errors && (registerForm.get('restaurantName').dirty || registerForm.get('restaurantName').touched)">
                       <small *ngIf="registerForm.get('restaurantName').hasError('required')" class="text-muted ml-2 mt-1">
-                        Nombre del restaurante requerido
+                        {{ 'RequiredNameRestaurant' | translate }}
                       </small>
                     </div>
                   </div>
@@ -30,15 +30,15 @@
                     <span class="icon-input">
                       <i class="fas fa-envelope"></i>
                     </span>
-                    <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Email"
+                    <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="{{ 'Email' | translate }}"
                       formControlName="email" required>
                     <div
                       *ngIf="registerForm.get('email').errors && (registerForm.get('email').dirty || registerForm.get('email').touched)">
                       <small *ngIf="registerForm.get('email').hasError('email')" class="text-muted ml-2 mt-1">
-                        Email inválido
+                        {{ 'InvalidEmail' | translate }}
                       </small>
                       <small *ngIf="registerForm.get('email').hasError('required')" class="text-muted ml-2 mt-1">
-                        Email requerido
+                        {{ 'RequiredEmail' | translate }}
                       </small>
                     </div>
                   </div>
@@ -46,15 +46,15 @@
                     <span class="icon-input">
                       <i class="fas fa-lock"></i>
                     </span>
-                    <input type="password" class="form-control" id="digest" placeholder="Contraseña"
+                    <input type="password" class="form-control" id="digest" placeholder="{{ 'Password' | translate }}"
                       formControlName="digest" required>
                       <div
                       *ngIf="registerForm.get('digest').errors && (registerForm.get('digest').dirty || registerForm.get('digest').touched)">
                       <small *ngIf="registerForm.get('digest').hasError('minlength')" class="text-muted ml-2 mt-1">
-                        Mínimo 8 dígitos
+                        {{ 'PlaceholderPassword' | translate }}
                       </small>
                       <small *ngIf="registerForm.get('digest').hasError('required')" class="text-muted ml-2 mt-1">
-                        Contraseña requerida
+                        {{ 'RequiredPassword' | translate }}
                       </small>
                     </div>  
                   </div>
@@ -62,16 +62,16 @@
                     <span class="icon-input">
                       <i class="fas fa-unlock"></i>
                     </span>
-                    <input type="password" class="form-control" id="confirmDigest" placeholder="Repetir contraseña"
+                    <input type="password" class="form-control" id="confirmDigest" placeholder="{{ 'PlaceholderConfirmPasword' | translate }}"
                       formControlName="confirmDigest" required>
                       <small *ngIf="registerForm.hasError('notSame')" class="text-muted ml-2 mt-1">
-                        Las contraseñas no coinciden
+                        {{ 'PasswordCoincidence' | translate }}
                       </small>
                   </div>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">Registrarse <i
+                    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">{{ 'SignUp' | translate }} <i
                       class="fas fa-sign-in-alt pl-2"></i></button>
-                      <p class="text-muted mt-2">Ya tengo una cuenta</p>
+                      <p class="text-muted mt-2">{{ 'IHaveAccount' | translate }}</p>
                   </div>
                 </form>
               </div>

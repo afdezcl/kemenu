@@ -3,16 +3,14 @@
   <div class="container mb-5">
     <div class="row align-items-center">
       <div class="col-lg-6">
-        <h1 class="hero-heading mb-0">Make your digital menu FREE!</h1>
+        <h1 class="hero-heading mb-0">{{ 'SloganTitle' | translate }}</h1>
         <div class="row">
           <div class="col-lg-10">
-            <p class="lead text-muted mt-4 mb-4">Register now for free and make your digital menu. 
-              Then share your QR code or your link in your restaurant. It's easy!
-            </p>
+            <p class="lead text-muted mt-4 mb-4">{{ 'SloganText' | translate }}</p>
           </div>
         </div>
         <div class="form-group">
-          <button type="submit" [routerLink]="['/register']" class="btn btn-primary">Get Started FREE!</button>
+          <button type="submit" [routerLink]="['/register']" class="btn btn-primary">{{ 'GetStarted' | translate }}</button>
         </div>
       </div>
       <div class="col-lg-6"><img src="../../../assets/images/people-eating.svg" alt="people-eating"
