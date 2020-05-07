@@ -16,7 +16,7 @@ spring.profiles: prod
 
 server:
   port: 8085
-  address: 0.0.0.0
+  address: 127.0.0.1
 
 app:
   version: @project.version@
@@ -24,4 +24,4 @@ app:
 spring:
   data:
     mongodb:
-      uri: mongodb://admin:password@morcilla:27017/kemenudb
+      uri: mongodb://${MONGO_DB_USER_KEMENU}:${MONGO_DB_PWD_KEMENU}@localhost:27017/${MONGO_DB_NAME_KEMENU}
