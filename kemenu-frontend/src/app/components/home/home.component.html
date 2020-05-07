@@ -22,9 +22,9 @@
 <section>
   <div class="container">
     <div class="text-center">
-      <h2>Track projects from start to finish </h2>
-      <p class="lead text-muted mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p><a
-        href="#" class="btn btn-primary">Learn More</a>
+      <h2>{{ 'Home-No installations title' | translate }}</h2>
+      <p class="lead text-muted mt-2">{{ 'Home-No installations description' | translate }}</p><a
+        href="#howWorks" class="btn btn-primary">{{ 'Learn More' | translate }}</a>
     </div>
     <div class="row">
       <div class="col-lg-7 mx-auto mt-5"><img src="../../../assets/images/list-menu.svg" alt="list-menu"
@@ -36,24 +36,23 @@
 <section class="bg-primary text-white">
   <div class="container">
     <div class="text-center">
-      <h2>Do great things together</h2>
+      <h2>{{ 'Home-Demo title' | translate }}</h2>
       <div class="row">
         <div class="col-lg-9 mx-auto">
-          <p class="lead text-white mt-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor. eiusmod tempor incididunt ut labore et dolore.</p>
+          <p class="lead text-white mt-2">{{ 'Home-Demo description' | translate }}</p>
         </div>
-      </div><a href="#" class="btn btn-outline-light">Learn More</a>
+      </div><a href="#" class="btn btn-outline-light">{{ 'Home-Demo button' | translate }}</a>
     </div>
   </div>
 </section>
 <!-- Integrations Section-->
-<section>
+<section id="howWorks">
   <div class="container">
     <div class="text-center">
-      <h2>How works?</h2>
+      <h2>{{ 'Home-How Work title' | translate }}</h2>
       <div class="row">
         <div class="col-lg-8 mx-auto">
-          <p class="lead text-muted mt-2">You do not have install anything. Follow the next steps: </p>
+          <p class="lead text-muted mt-2">{{ 'Home-How Work description' | translate }}</p>
         </div>
       </div>
     </div>
@@ -63,26 +62,24 @@
           <div class="box text-center">
             <div class="icon d-flex align-items-end"><img src="../../../assets/images/monitor.svg" alt="monitor"
                 class="img-fluid"></div>
-            <h3 class="h4">Register</h3>
-            <p class="text-small font-weight-light">First of all, you have to register in the application with your
-              restaurant's name, email and password.</p>
+            <h3 class="h4">{{ 'SignUp' | translate }}</h3>
+            <p class="text-small font-weight-light">{{ 'Home-Step one' | translate }}</p>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="box text-center">
             <div class="icon d-flex align-items-end"><img src="../../../assets/images/coffee-cup.svg" alt="coffee-cup"
                 class="img-fluid"></div>
-            <h3 class="h4">Make menu</h3>
-            <p class="text-small font-weight-light">Make the letter of menu with all types of foods delicious.</p>
+            <h3 class="h4">{{ 'Create menu' | translate }}</h3>
+            <p class="text-small font-weight-light">{{ 'Home-Step two' | translate }}</p>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="box text-center">
             <div class="icon d-flex align-items-end"><img src="../../../assets/images/chat.svg" alt="chat"
                 class="img-fluid"></div>
-            <h3 class="h4">Share</h3>
-            <p class="text-small font-weight-light">Save and print QR code to your clients can visit the menu in his
-              phone or tablet.</p>
+            <h3 class="h4">{{ 'Share' | translate }}</h3>
+            <p class="text-small font-weight-light">{{ 'Home-Step three' | translate }}</p>
           </div>
         </div>
       </div>
@@ -95,13 +92,12 @@
   <div class="container text-center text-lg-left">
     <div class="row align-items-center">
       <div class="col-lg-7">
-        <h2 class="divider-heading">Curious how Appton <br>works for large</h2>
+        <h2 class="divider-heading">{{ 'Home-Advice title' | translate }}</h2>
         <div class="row">
           <div class="col-lg-10">
-            <p class="lead divider-subtitle mt-2 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing.
-              Vitae animi mollitia cumque sunt soluta. consectetur adipisicing.</p>
+            <p class="lead divider-subtitle mt-2 text-muted">{{ 'Home-Advice description' | translate }}</p>
           </div>
-        </div><a href="#" class="btn btn-primary">Learn More</a>
+        </div><a [routerLink]="['/register']" class="btn btn-primary">{{ 'GetStarted' | translate }}</a>
       </div>
       <div class="col-lg-5 mt-5 mt-lg-0"><img src="../../../assets/images/restaurant.svg" alt=""
           class="divider-image img-fluid"></div>
