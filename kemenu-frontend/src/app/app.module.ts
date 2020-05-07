@@ -8,6 +8,8 @@ import { LoginModule } from './components/login/login.module';
 import { FooterModule } from './components/footer/footer.module';
 import { NavbarModule } from './components/navbar/navbar.module';
 import { HomeModule } from './components/home/home.module';
+import { MenuModule } from './components/menu/menu.module';
+import { CustomerModule } from './components/customer/customer.module';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
@@ -16,6 +18,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 //Translation
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -48,9 +51,12 @@ export function createTranslateLoader(http: HttpClient) {
     NavbarModule,
     FooterModule,
     HomeModule,
+    MenuModule,
+    CustomerModule, 
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
+    AccordionModule.forRoot(),
     BrowserAnimationsModule,
   ],
   providers: [],
