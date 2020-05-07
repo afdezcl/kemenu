@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.kemenu</groupId>
         <artifactId>kemenu</artifactId>
-        <version>0.0.3-SNAPSHOT</version>
+        <version>0.0.10-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -80,9 +80,7 @@
                                 <resource>
                                     <directory>${project.parent.basedir}/kemenu-frontend/target/dist/kemenu-frontend
                                     </directory>
-                                    <includes>
-                                        <include>*</include>
-                                    </includes>
+                                    <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>
