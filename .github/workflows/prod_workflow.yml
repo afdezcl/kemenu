@@ -48,7 +48,7 @@ jobs:
           scp -P ${{ secrets.PORT }} ${{ github.workspace }}/kemenu-backend/target/$JAR_NAME ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~
       - name: Launch app
         run: |
-          ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "$JAVA_CMD_PATH -Dspring.profiles.active=prod -Xms64M -Xmx256M -jar $JAR_NAME &"
+          ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "source /home/${{ secrets.USERNAME }}/.bashrc; $JAVA_CMD_PATH -Dspring.profiles.active=prod -Xms64M -Xmx256M -jar $JAR_NAME &"
       - name: Commit version
         run: |
           git config --global user.name 'Nicolas Vargas Ortega'
