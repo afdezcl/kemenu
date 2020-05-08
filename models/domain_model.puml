@@ -1,6 +1,7 @@
 @startuml
 class Customer {
   String id;
+  String email;
   List<Business> businesses;
 
   String createBusiness(Business business);
@@ -9,6 +10,7 @@ class Customer {
 
 class Business {
   String id;
+  String name;
   Customer customer;
   List<Menu> menus;
 
@@ -17,9 +19,13 @@ class Business {
 
 class Menu {
   Business business;
-  List<Dish> dishes;
+  List<MenuSection> sections;
 
   String createDish(Dish dish);
+}
+
+class MenuSection {
+  List<Dish> dishes;
 }
 
 class Dish {
@@ -27,12 +33,13 @@ class Dish {
   List<Intolerance> intolerances;
 }
 
-class Intolerance {
+class Allergen {
   String name;
 }
 
 Customer *-- Business
 Business *-- Menu
-Menu *-- Dish
-Dish *-- Intolerance
+Menu *-- MenuSection
+MenuSection *-- Dish
+Dish *-- Allergen
 @enduml
