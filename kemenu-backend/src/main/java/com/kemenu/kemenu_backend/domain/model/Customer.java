@@ -29,6 +29,11 @@ public class Customer {
         this(UUID.randomUUID(), email, password, new ArrayList<>());
     }
 
+    public Customer(String email, String password, String businessName) {
+        this(UUID.randomUUID(), email, password, new ArrayList<>());
+        businesses.add(new Business(businessName));
+    }
+
     public void createMenu(Business business, Menu menu) {
         businesses.stream()
                 .filter(b -> b.equals(business))
