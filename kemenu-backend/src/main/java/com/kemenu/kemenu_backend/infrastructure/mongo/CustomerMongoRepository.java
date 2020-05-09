@@ -15,9 +15,4 @@ class CustomerMongoRepository implements CustomerRepository {
     public String create(Customer customer) {
         return springMongoRepository.save(customer).getId();
     }
-
-    @Override
-    public boolean exists(Customer customer) {
-        return springMongoRepository.existsByEmail(customer.getEmail());
-    }
 }
