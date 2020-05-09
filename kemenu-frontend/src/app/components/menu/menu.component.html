@@ -7,12 +7,18 @@
         <h5 class="font-weight-bold">Secciones de la carta</h5>
         <span class="text-muted">No hay ninguna sección de platos creada</span>
         <br>
-        <button type="submit" class="btn btn-primary mt-1">Crear sección</button>
+        <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()">Crear sección</button>
       </div>
     </div>
   
-    <div class="row">
-  
+    <div class="row text-center mt-5">
+      <accordion [isAnimated]="true">
+        <div *ngFor="let name of menu.sections">
+          <accordion-group heading="{{name}}">
+            <p> This content is straight in the template.</p>
+          </accordion-group>          
+        </div>
+      </accordion>
     </div>
   
   </div>
