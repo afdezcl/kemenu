@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @AllArgsConstructor
-public class CustomerMongoRepository implements CustomerRepository {
+class CustomerMongoRepository implements CustomerRepository {
 
     private final CustomerSpringMongoRepository springMongoRepository;
 
