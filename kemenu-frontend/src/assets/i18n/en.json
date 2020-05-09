@@ -1,9 +1,11 @@
 {
 	"All rights reserved": "All rights reserved",
+	"Create Section": "Create section",
 	"Create menu": "Create the menu",
 	"Design by": "Design by",
 	"Email": "Email",
 	"English": "English",
+	"Examples of sections": "Fishes, meals, hamburguers...",
 	"GetStarted": "Get started FREE!",
 	"Home": "Home",
 	"Home-Advice description": "You can print your QR code and leave it on the tables of your restaurant or wherever you want",
@@ -31,10 +33,13 @@
 	"RequiredEmail": "Email required",
 	"RequiredNameRestaurant": "Name of the restaurant required",
 	"RequiredPassword": "Password required",
+	"Section name": "Section name",
+	"Sections menu": "Sections menu",
 	"Share": "Share it",
 	"SignIn": "Sign in",
 	"SignUp": "Sign up",
 	"SloganText": "Register now for free and make your digital menu. Then share your QR code or your link to customers. It's easy!",
 	"SloganTitle": "Make your digital menu FREE!",
-	"Spanish": "Spanish"
+	"Spanish": "Spanish",
+	"Warning no dishes": "There is no section of dishes created"
 }
