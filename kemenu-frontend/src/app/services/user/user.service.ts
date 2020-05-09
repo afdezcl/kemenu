@@ -12,8 +12,8 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
-  registerBand(user) {
-    return this.httpClient.post(environment.apiBaseUrl + '/register', user);
+  registerCustomer(customer) {
+    return this.httpClient.post(environment.apiBaseUrl + '/customers', customer);
   }
 
   login(email, digest) {

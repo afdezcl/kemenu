@@ -2,6 +2,7 @@ package com.kemenu.kemenu_backend.domain.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class Customer {
 
     @Id
+    @Getter
     private UUID id;
     @Indexed(unique = true)
     private String email;
