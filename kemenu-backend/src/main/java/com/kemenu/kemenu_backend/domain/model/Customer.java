@@ -19,7 +19,7 @@ public class Customer {
 
     @Id
     @Getter
-    private UUID id;
+    private String id;
     @Indexed(unique = true)
     private String email;
     private String password;
@@ -28,11 +28,11 @@ public class Customer {
     private List<Business> businesses;
 
     public Customer(String email, String password) {
-        this(UUID.randomUUID(), email, password, new ArrayList<>());
+        this(UUID.randomUUID().toString(), email, password, new ArrayList<>());
     }
 
     public Customer(String email, String password, String businessName) {
-        this(UUID.randomUUID(), email, password, new ArrayList<>());
+        this(UUID.randomUUID().toString(), email, password, new ArrayList<>());
         businesses.add(new Business(businessName));
     }
 

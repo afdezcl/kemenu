@@ -15,9 +15,9 @@ import java.util.UUID;
 public class Menu {
 
     @Id
-    private UUID id;
+    private String id;
 
     public Menu() {
-        this(UUID.randomUUID());
+        this(UUID.randomUUID().toString());
     }
 }

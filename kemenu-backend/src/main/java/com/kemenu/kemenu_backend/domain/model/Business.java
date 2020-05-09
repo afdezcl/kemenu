@@ -20,13 +20,13 @@ public class Business {
 
     @Id
     @EqualsAndHashCode.Include
-    private UUID id;
+    private String id;
     private String name;
     @DBRef
     private List<Menu> menus;
 
     public Business(String name) {
-        this(UUID.randomUUID(), name, new ArrayList<>());
+        this(UUID.randomUUID().toString(), name, new ArrayList<>());
     }
 
     public void createMenu(Menu menu) {
