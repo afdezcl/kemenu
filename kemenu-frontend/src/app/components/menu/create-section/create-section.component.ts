@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '@services/user/user.service';
+import { MenuService } from '@services/menu/menu.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -12,30 +12,27 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class CreateSectionComponent implements OnInit {
 
  
-  login: FormGroup;  
+  section: FormGroup;  
 
   constructor(
     private formBuilder: FormBuilder,
     public bsModalRef: BsModalRef,
-    private _userService: UserService,
+    private _menuService: MenuService,
     private router : Router,
   ) { }
 
   ngOnInit() {
-    this.login = this.formBuilder.group({
-      email: ['', Validators.required],
-      digest: ['', Validators.required]
+    this.section = this.formBuilder.group({
+      name: ['', Validators.required]      
     });
   }
 
-  get form() { return this.login.controls; }
+  get form() { return this.section.controls; }
 
   onSubmit() {
-    
-    this._userService.login(this.form.email.value, this.form.digest.value)
+    this._menuService.createSection(this.form.name.value)
       .subscribe(
-        result => { 
-          this.bsModalRef.hide();            
+        result => {    
           this.router.navigateByUrl('')
       });
   }
