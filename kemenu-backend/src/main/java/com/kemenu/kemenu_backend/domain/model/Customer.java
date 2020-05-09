@@ -23,6 +23,7 @@ public class Customer {
     @Getter
     @EqualsAndHashCode.Include
     private String id;
+    @Getter
     @Indexed(unique = true)
     private String email;
     private String password;

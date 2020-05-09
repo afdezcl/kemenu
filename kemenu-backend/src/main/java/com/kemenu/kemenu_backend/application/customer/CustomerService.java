@@ -13,6 +13,10 @@ public class CustomerService {
     private final BusinessRepository businessRepository;
     private final CustomerRepository customerRepository;
 
+    public boolean exists(Customer customer) {
+        return customerRepository.exists(customer);
+    }
+
     public String create(Customer customer) {
         businessRepository.create(customer.getFirstBusiness());
         return customerRepository.create(customer); // TODO: Send event to send email
