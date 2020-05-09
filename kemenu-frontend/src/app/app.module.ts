@@ -10,8 +10,9 @@ import { NavbarModule } from './components/navbar/navbar.module';
 import { HomeModule } from './components/home/home.module';
 import { MenuModule } from './components/menu/menu.module';
 import { CustomerModule } from './components/customer/customer.module';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AuthInterceptor } from './ui-controls/interceptor/auth.interceptor';
 
 // NGX-BOOTSTRAP
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -59,7 +60,11 @@ export function createTranslateLoader(http: HttpClient) {
     AccordionModule.forRoot(),
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

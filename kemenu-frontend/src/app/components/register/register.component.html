@@ -17,11 +17,11 @@
                     <span class="icon-input">
                       <i class="fas fa-user"></i>
                     </span>
-                    <input type="email" class="form-control" id="restaurantName" aria-describedby="restaurantName"
-                      placeholder="{{ 'PlaceholderNameRestaurant' | translate }}" formControlName="restaurantName" required>
+                    <input type="email" class="form-control" id="businessName" aria-describedby="businessName"
+                      placeholder="{{ 'PlaceholderNameRestaurant' | translate }}" formControlName="businessName" required>
                       <div
-                      *ngIf="registerForm.get('restaurantName').errors && (registerForm.get('restaurantName').dirty || registerForm.get('restaurantName').touched)">
-                      <small *ngIf="registerForm.get('restaurantName').hasError('required')" class="text-muted ml-2 mt-1">
+                      *ngIf="registerForm.get('businessName').errors && (registerForm.get('businessName').dirty || registerForm.get('businessName').touched)">
+                      <small *ngIf="registerForm.get('businessName').hasError('required')" class="text-muted ml-2 mt-1">
                         {{ 'RequiredNameRestaurant' | translate }}
                       </small>
                     </div>
@@ -47,9 +47,9 @@
                       <i class="fas fa-lock"></i>
                     </span>
                     <input type="password" class="form-control" id="password" placeholder="{{ 'Password' | translate }}"
-                      formControlName="digepasswordst" required>
+                      formControlName="password" required>
                       <div
-                      *ngIf="registerForm.get('digpasswordest').errors && (registerForm.get('password').dirty || registerForm.get('password').touched)">
+                      *ngIf="registerForm.get('password').errors && (registerForm.get('password').dirty || registerForm.get('password').touched)">
                       <small *ngIf="registerForm.get('password').hasError('minlength')" class="text-muted ml-2 mt-1">
                         {{ 'PlaceholderPassword' | translate }}
                       </small>
