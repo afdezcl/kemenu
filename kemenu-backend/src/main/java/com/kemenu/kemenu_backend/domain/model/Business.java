@@ -3,6 +3,7 @@ package com.kemenu.kemenu_backend.domain.model;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -19,14 +20,15 @@ import java.util.UUID;
 public class Business {
 
     @Id
+    @Getter
     @EqualsAndHashCode.Include
-    private UUID id;
+    private String id;
     private String name;
     @DBRef
     private List<Menu> menus;
 
     public Business(String name) {
-        this(UUID.randomUUID(), name, new ArrayList<>());
+        this(UUID.randomUUID().toString(), name, new ArrayList<>());
     }
 
     public void createMenu(Menu menu) {

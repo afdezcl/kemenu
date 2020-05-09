@@ -13,10 +13,10 @@ import java.util.UUID;
 public class Allergen {
 
     @Id
-    private UUID id;
+    private String id;
     private String name;
 
     public Allergen(String name) {
-        this(UUID.randomUUID(), name);
+        this(UUID.randomUUID().toString(), name);
     }
 }

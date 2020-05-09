@@ -19,6 +19,6 @@ public class CustomerController {
 
     @PostMapping("/customers")
     public @ResponseBody UUID create(@RequestBody CustomerRequest customerRequest) {
-        return customerService.create(customerMapper.from(customerRequest));
+        return UUID.fromString(customerService.create(customerMapper.from(customerRequest)));
     }
 }

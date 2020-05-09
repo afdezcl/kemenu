@@ -2,6 +2,7 @@ package com.kemenu.kemenu_backend.domain.model;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
@@ -14,12 +15,14 @@ import java.util.List;
 import java.util.UUID;
 
 @Document
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__(@PersistenceConstructor))
 public class Customer {
 
     @Id
     @Getter
-    private UUID id;
+    @EqualsAndHashCode.Include
+    private String id;
     @Indexed(unique = true)
     private String email;
     private String password;
@@ -28,11 +31,11 @@ public class Customer {
     private List<Business> businesses;
 
     public Customer(String email, String password) {
-        this(UUID.randomUUID(), email, password, new ArrayList<>());
+        this(UUID.randomUUID().toString(), email, password, new ArrayList<>());
     }
 
     public Customer(String email, String password, String businessName) {
-        this(UUID.randomUUID(), email, password, new ArrayList<>());
+        this(UUID.randomUUID().toString(), email, password, new ArrayList<>());
         businesses.add(new Business(businessName));
     }
 
@@ -55,5 +58,9 @@ public class Customer {
                 .findFirst()
                 .map(Business::menuList)
                 .orElse(List.of());
+    }
+
+    public Business getFirstBusiness() {
+        return businesses.get(0);
     }
 }
