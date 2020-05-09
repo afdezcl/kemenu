@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm: FormGroup;
+  registerForm: FormGroup  
 
   constructor(
     private _userService: UserService,
@@ -26,18 +26,32 @@ export class RegisterComponent implements OnInit {
     }, { validators: this.checkPasswords });
   }
 
-  onSubmit(registerForm: FormGroup) {
-    console.log(registerForm.value);
-    this._userService.register(registerForm.value)
+  onSubmit(registerForm: FormGroup) {    
+    let newBusiness = this.buildFormWithoutConfirmPassword(registerForm)
+    console.log(newBusiness.value);
+    this._userService.register(newBusiness.value)
       .subscribe(result => {
         console.log(result);
-      })
+      }, 
+        err => {
+          console.log('Usuario ya registrado')
+        }
+      )
+  }
+
+  buildFormWithoutConfirmPassword(form: FormGroup): FormGroup{
+    let newBusiness = new FormGroup({
+      businessName: form.controls.businessName,
+      email: form.controls.email,
+      password: form.controls.password
+    })
+    return newBusiness;
   }
 
   checkPasswords(form: FormGroup) {
-    const pass = form.controls.password.value;
-    const confirmPass = form.controls.confirmPassword.value;
+    const password = form.controls.password.value;
+    const confirmPassword = form.controls.confirmPassword.value;
 
-    return pass === confirmPass ? null : { notSame: true };
+    return password === confirmPassword ? null : { notSame: true };
   }
 }

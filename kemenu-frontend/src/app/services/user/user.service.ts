@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { RegisterBusiness } from '../../models/register.interface'
 
 @Injectable({
   providedIn: 'root'
@@ -9,14 +10,14 @@ export class UserService {
 
   private noAuthHeader = { headers: new HttpHeaders({ NoAuth: 'True' }) };
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private _httpClient: HttpClient) {
   }
 
-  register(business) {
-    return this.httpClient.post(environment.apiBaseUrl + '/customers', business);
+  register(business: RegisterBusiness) {
+    return this._httpClient.post(environment.apiBaseUrl + '/customers', business , this.noAuthHeader);
   }
 
   login(email: string, digest: string) {
-    return this.httpClient.post(environment.apiBaseUrl + '/login', { email, digest });
+    return this._httpClient.post(environment.apiBaseUrl + '/login', { email, digest });
   }
 }

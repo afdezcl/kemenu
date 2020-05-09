@@ -16,11 +16,11 @@ export class LocalStorageService {
     return localStorage.getItem('token');
   }
 
-  setUserId(id: string) {
+  setBusinessId(id: string) {
     localStorage.setItem('id', id);
   }
 
-  getUserId() {
+  getBusinessId() {
     return localStorage.getItem('id');
   }
 
