@@ -46,14 +46,14 @@
                     <span class="icon-input">
                       <i class="fas fa-lock"></i>
                     </span>
-                    <input type="password" class="form-control" id="digest" placeholder="{{ 'Password' | translate }}"
-                      formControlName="digest" required>
+                    <input type="password" class="form-control" id="password" placeholder="{{ 'Password' | translate }}"
+                      formControlName="digepasswordst" required>
                       <div
-                      *ngIf="registerForm.get('digest').errors && (registerForm.get('digest').dirty || registerForm.get('digest').touched)">
-                      <small *ngIf="registerForm.get('digest').hasError('minlength')" class="text-muted ml-2 mt-1">
+                      *ngIf="registerForm.get('digpasswordest').errors && (registerForm.get('password').dirty || registerForm.get('password').touched)">
+                      <small *ngIf="registerForm.get('password').hasError('minlength')" class="text-muted ml-2 mt-1">
                         {{ 'PlaceholderPassword' | translate }}
                       </small>
-                      <small *ngIf="registerForm.get('digest').hasError('required')" class="text-muted ml-2 mt-1">
+                      <small *ngIf="registerForm.get('password').hasError('required')" class="text-muted ml-2 mt-1">
                         {{ 'RequiredPassword' | translate }}
                       </small>
                     </div>  
@@ -62,8 +62,8 @@
                     <span class="icon-input">
                       <i class="fas fa-unlock"></i>
                     </span>
-                    <input type="password" class="form-control" id="confirmDigest" placeholder="{{ 'PlaceholderConfirmPasword' | translate }}"
-                      formControlName="confirmDigest" required>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="{{ 'PlaceholderConfirmPasword' | translate }}"
+                      formControlName="confirmPassword" required>
                       <small *ngIf="registerForm.hasError('notSame')" class="text-muted ml-2 mt-1">
                         {{ 'PasswordCoincidence' | translate }}
                       </small>

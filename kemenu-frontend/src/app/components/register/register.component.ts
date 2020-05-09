@@ -17,8 +17,8 @@ export class RegisterComponent implements OnInit {
     this.registerForm = new FormGroup({
       restaurantName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      digest: new FormControl('', [Validators.required, Validators.minLength(8)]),
-      confirmDigest: new FormControl('')
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      confirmPassword: new FormControl('')
     }, {validators: this.checkPasswords});
   }
 
@@ -27,8 +27,8 @@ export class RegisterComponent implements OnInit {
   }
 
   checkPasswords(form: FormGroup) {
-    const pass = form.controls.digest.value;
-    const confirmPass = form.controls.confirmDigest.value;
+    const pass = form.controls.password.value;
+    const confirmPass = form.controls.confirmPassword.value;
 
     return pass === confirmPass ? null : {notSame: true};
   }
