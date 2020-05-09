@@ -13,5 +13,9 @@ export class AppComponent {
     translate.setDefaultLang('es');
     translate.use('es');
   }
+  
+  onActivate() {
+    window.scroll(0,0);
+  }
 
 }
