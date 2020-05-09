@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { AlertModule } from 'ngx-bootstrap/alert';
-import { DialogModule } from '../../ui-controls/dialogs/dialog.module'
+import { DialogModule } from '@ui-controls/dialogs/dialog.module'
 
 @NgModule({
   imports: [

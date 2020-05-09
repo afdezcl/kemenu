@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user/user.service';
+import { UserService } from '@services/user/user.service';
 import { Router } from '@angular/router';
 
 @Component({
