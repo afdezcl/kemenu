@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:8085'
+  apiBaseUrl: 'http://localhost:8085',
+  recaptchaToken: '6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM'
 };
 
 /*

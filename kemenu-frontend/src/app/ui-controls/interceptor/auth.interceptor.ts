@@ -2,12 +2,13 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from "@angular/c
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { Router } from "@angular/router";
-import { LocalStorageService } from "../../services/localStorage/localStorage.service";
+import { AuthenticationService } from '@services/authentication/authentication.service';
+
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    constructor(private _localStorage: LocalStorageService, private router: Router) { }
+    constructor(private _authService: AuthenticationService, private router: Router) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
 
@@ -16,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
         } else {
 
             const clonedreq = req.clone({
-                headers: req.headers.set("Authorization", "Bearer " + this._localStorage.getToken())
+                headers: req.headers.set("Authorization", "Bearer " + this._authService.getJwtToken())
             });
             return next.handle(clonedreq).pipe(
                 tap(

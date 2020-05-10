@@ -4,7 +4,7 @@
       <span aria-hidden="true">×</span></button>
   </div>
   <div class="modal-body p-4 p-lg-5">
-    <form [formGroup]="login" (ngSubmit)="onSubmit()" class="login-form text-left">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form text-left">
       <div class="form-group mb-4">
         <label>{{ 'Email' | translate }}</label>
         <span class="icon-input">
@@ -17,10 +17,12 @@
         <span class="icon-input">
           <i class="fas fa-lock"></i>
         </span>
-          <input type="password" name="password" placeholder="{{ 'PlaceholderPassword' | translate }}" class="form-control" formControlName="digest">
+          <input type="password" name="password" placeholder="{{ 'PlaceholderPassword' | translate }}" class="form-control" formControlName="password">
+      </div>
+      <div class="form-froup mb-4">
       </div>
       <div class="form-group text-center">
-        <input type="submit" value="{{ 'SignIn' | translate }}" class="btn btn-primary">
+        <input type="submit" value="{{ 'SignIn' | translate }}" class="btn btn-primary" [disabled]="login.invalid">
       </div>
       <div class="text-center">
         <a class="text-muted mt-2 pointer-cursor" [routerLink]="['/register']" (click)="bsModalRef.hide()">{{ 'NoHaveAccount' | translate }}</a>

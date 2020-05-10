@@ -13,6 +13,7 @@ import { CustomerModule } from './components/customer/customer.module';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './ui-controls/interceptor/auth.interceptor';
+import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 
 // NGX-BOOTSTRAP
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -24,6 +25,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 //Translation
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { environment } from '@environments/environment';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -38,6 +40,7 @@ export function createTranslateLoader(http: HttpClient) {
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    RecaptchaV3Module,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -64,7 +67,9 @@ export function createTranslateLoader(http: HttpClient) {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+  },
+    { provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.recaptchaToken }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
