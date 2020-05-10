@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { RegisterBusiness } from '../../models/register.interface'
+import { RegisterBusiness } from '@models/register.interface'
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class UserService {
   }
 
   register(business: RegisterBusiness) {
-    return this._httpClient.post(environment.apiBaseUrl + '/customers', business , this.noAuthHeader);
+    return this._httpClient.post(environment.apiBaseUrl + '/register', business , this.noAuthHeader);
   }
 
   login(email: string, digest: string) {
