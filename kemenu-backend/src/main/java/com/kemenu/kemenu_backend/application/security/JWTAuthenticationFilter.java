@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -26,8 +27,9 @@ class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private static final int FIFTEEN_MIN = 900000;
     private static final int THIRTY_MIN = 1800000;
 
-    private final AuthenticationManager authenticationManager;
     private final ObjectMapper mapper;
+    private final Recaptcha recaptcha;
+    private final AuthenticationManager authenticationManager;
     private final String appSecret;
     private final String refreshSecret;
 
@@ -37,11 +39,15 @@ class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             JsonNode requestJson = mapper.readTree(request.getInputStream());
             String username = requestJson.get("username").asText();
             String password = requestJson.get("password").asText();
-//            String recaptchaToken = requestJson.get("recaptchaToken").asText();
+            String recaptchaToken = requestJson.get("recaptchaToken").asText();
 
-            return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            if (recaptcha.isValid(recaptchaToken)) {
+                return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            } else {
+                throw new InsufficientAuthenticationException("Incorrect captcha");
+            }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new InsufficientAuthenticationException("Error while authentication", e);
         }
     }
 
