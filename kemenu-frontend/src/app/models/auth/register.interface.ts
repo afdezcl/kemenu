@@ -1,5 +1,6 @@
-export interface RegisterBusiness {
+export interface Register {
     businessName: string,
     email: string,
-    password: string
+    password: string,
+    recaptchaToken: string
 }

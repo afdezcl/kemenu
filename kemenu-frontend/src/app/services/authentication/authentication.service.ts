@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, mapTo, catchError } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Tokens } from '@models/auth/tokens.model';
 import { Login } from '@models/auth/login.interface';
+import { Register } from '@models/auth/register.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,26 +14,31 @@ export class AuthenticationService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-  private noAuthHeader = { headers: new HttpHeaders({ NoAuth: 'True' }) };
-  private loggedUser: string;
 
   constructor(
     private _httpClient: HttpClient
   ) { }
 
-  login(user: Login): Observable<boolean> {
-    return this._httpClient.post<any>(environment.apiBaseUrl + '/login', user, this.noAuthHeader)
-      .pipe(
-        tap(tokens => this.doLoginUser(user.email, tokens)),
-        mapTo(true),
-        catchError(error => {
-          alert(error.error);
-          return of(false);
-        }));
+  register(user: Register) {
+    console.log(user)
+    return this._httpClient
+      .post(environment.apiBaseUrl + '/register', user)      
+  }
+
+  login(user: Login){
+    return this._httpClient
+      .post<any>(environment.apiBaseUrl + '/login', user, {observe: 'response'})
+      .pipe(tap(response => {
+        //console.log(response.headers.get('JWT-Refresh-Token: Bearer'))
+        const tokens: Tokens = {
+          jwt: response.headers.get('Authorization'),
+          refreshToken: response.headers.get('JWT-Refresh-Token')
+        }        
+        this.storeTokens(tokens)              
+      }));
   }
 
   logout() {
-    this.loggedUser = null;
     this.removeTokens();
   }
 
@@ -52,11 +58,6 @@ export class AuthenticationService {
     return localStorage.getItem(this.JWT_TOKEN);
   }
 
-  private doLoginUser(username: string, tokens: Tokens) {
-    this.loggedUser = username;
-    this.storeTokens(tokens);
-  }
-
   private getRefreshToken() {
     return localStorage.getItem(this.REFRESH_TOKEN);
   }
@@ -74,5 +75,5 @@ export class AuthenticationService {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
   }
-
+  
 }
