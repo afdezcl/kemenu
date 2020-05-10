@@ -9,6 +9,7 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,25 +18,28 @@ import java.util.UUID;
 @Document
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__(@PersistenceConstructor))
-public class Customer {
+public class Customer implements GrantedAuthority {
 
     @Id
     @Getter
     @EqualsAndHashCode.Include
     private String id;
+    @Getter
     @Indexed(unique = true)
     private String email;
+    @Getter
     private String password;
 
     @DBRef
     private List<Business> businesses;
+    private Role role;
 
     public Customer(String email, String password) {
-        this(UUID.randomUUID().toString(), email, password, new ArrayList<>());
+        this(UUID.randomUUID().toString(), email, password, new ArrayList<>(), Role.USER);
     }
 
     public Customer(String email, String password, String businessName) {
-        this(UUID.randomUUID().toString(), email, password, new ArrayList<>());
+        this(UUID.randomUUID().toString(), email, password, new ArrayList<>(), Role.USER);
         businesses.add(new Business(businessName));
     }
 
@@ -62,5 +66,14 @@ public class Customer {
 
     public Business getFirstBusiness() {
         return businesses.get(0);
+    }
+
+    @Override
+    public String getAuthority() {
+        return "ROLE_" + role;
+    }
+
+    public enum Role {
+        ADMIN, USER
     }
 }

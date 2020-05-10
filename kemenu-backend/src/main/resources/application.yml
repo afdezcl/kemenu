@@ -6,6 +6,8 @@ server:
 
 app:
   version: @project.version@
+  secret: secret
+  refresh: refresh
 
 spring:
   data:
@@ -20,6 +22,8 @@ server:
 
 app:
   version: @project.version@
+  secret: ${JWT_SECRET}
+  refresh: ${JWT_SECRET_REFRESH}
 
 spring:
   data:

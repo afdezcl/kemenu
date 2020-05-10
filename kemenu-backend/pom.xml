@@ -11,6 +11,8 @@
 
     <properties>
         <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
+        <java-jwt.version>3.10.3</java-jwt.version>
+        <okhttp.version>3.14.8</okhttp.version>
     </properties>
 
     <dependencies>
@@ -39,6 +41,18 @@
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>
             <version>${logstash-logback-encoder.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>${java-jwt.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
         </dependency>
 
         <dependency>
