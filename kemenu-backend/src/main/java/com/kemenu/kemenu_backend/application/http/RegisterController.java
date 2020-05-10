@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RestController
@@ -21,7 +22,7 @@ public class RegisterController {
     private final CustomerService customerService;
 
     @PostMapping("/register")
-    public ResponseEntity<UUID> create(@RequestBody CustomerRequest customerRequest) {
+    public ResponseEntity<UUID> create(@RequestBody @Valid CustomerRequest customerRequest) {
         try {
             return ResponseEntity.ok(UUID.fromString(customerService.create(customerMapper.from(customerRequest))));
         } catch (DuplicateKeyException e) {
