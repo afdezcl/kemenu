@@ -2,6 +2,7 @@ package com.kemenu.kemenu_backend.application.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,9 +43,13 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             return;
         }
 
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(authorizationHeader);
+        try {
+            UsernamePasswordAuthenticationToken authentication = getAuthentication(authorizationHeader);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (TokenExpiredException e) {
+            // Continue with the chain without authentication context, this will return a 403 HTTP error.
+        }
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(request, response);
     }
 
