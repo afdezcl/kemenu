@@ -72,6 +72,6 @@ class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                 .sign(HMAC512(refreshSecret.getBytes()));
 
         response.addHeader("Authorization", "Bearer " + accessToken);
-        response.addHeader("JWT Refresh Token", "Bearer " + refreshToken);
+        response.addHeader("JWT-Refresh-Token", "Bearer " + refreshToken);
     }
 }
