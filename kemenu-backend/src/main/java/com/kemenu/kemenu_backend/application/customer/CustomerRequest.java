@@ -21,4 +21,6 @@ public class CustomerRequest {
     @NotBlank
     @Size(min = 8, max = 255)
     String password;
+    @NotBlank
+    String recaptchaToken;
 }
