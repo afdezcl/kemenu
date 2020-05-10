@@ -23,6 +23,9 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 @AllArgsConstructor
 class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+    private static final int FIFTEEN_MIN = 900000;
+    private static final int THIRTY_MIN = 1800000;
+
     private final AuthenticationManager authenticationManager;
     private final ObjectMapper mapper;
     private final String appSecret;
@@ -52,13 +55,13 @@ class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         String accessToken = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 900000)) // 15 mins
+                .withExpiresAt(new Date(System.currentTimeMillis() + FIFTEEN_MIN))
                 .withArrayClaim("role", roles)
                 .sign(HMAC512(appSecret.getBytes()));
 
         String refreshToken = JWT.create()
                 .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1800000)) // 30 mins
+                .withExpiresAt(new Date(System.currentTimeMillis() + THIRTY_MIN))
                 .withArrayClaim("role", roles)
                 .sign(HMAC512(refreshSecret.getBytes()));
 
