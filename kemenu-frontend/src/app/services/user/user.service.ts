@@ -9,8 +9,6 @@ import { RegisterBusiness } from '@models/auth/register.interface'
 
 export class UserService {
 
-  private noAuthHeader = { headers: new HttpHeaders({ NoAuth: 'True' }) };
-
   constructor(
     private _httpClient: HttpClient
   ) {}
@@ -18,12 +16,8 @@ export class UserService {
   register(business: RegisterBusiness) {
     console.log(business)
     return this._httpClient
-      .post(environment.apiBaseUrl + '/register', business, this.noAuthHeader)
+      .post(environment.apiBaseUrl + '/register', business)
 
   }
 
-  login(email: string, digest: string) {
-    return this._httpClient
-      .post(environment.apiBaseUrl + '/login', { email, digest }, this.noAuthHeader);
-  }
 }

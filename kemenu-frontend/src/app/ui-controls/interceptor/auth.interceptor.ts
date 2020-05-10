@@ -1,35 +1,63 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from "@angular/common/http";
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { tap } from 'rxjs/operators';
+import { catchError, switchMap, filter, take } from 'rxjs/operators';
 import { Router } from "@angular/router";
 import { AuthenticationService } from '@services/authentication/authentication.service';
+import { throwError, BehaviorSubject } from 'rxjs';
 
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+    
+    private isRefreshing = false;
+    private refreshTokenSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
     constructor(private _authService: AuthenticationService, private router: Router) { }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler) {
-
-        if (req.headers.get('NoAuth')) {
-            return next.handle(req.clone());
-        } else {
-
-            const clonedreq = req.clone({
-                headers: req.headers.set("Authorization", "Bearer " + this._authService.getJwtToken())
-            });
-            return next.handle(clonedreq).pipe(
-                tap(
-                    event => { },
-                    err => {
-                        if (err.error.auth == false) {
-                            this.router.navigateByUrl('');
-                        }
-                    })
-            );
+    intercept(request: HttpRequest<any>, next: HttpHandler) {
+        if (this._authService.getJwtToken()) {
+            request = this.addToken(request, this._authService.getJwtToken());
         }
 
-
+        return next.handle(request).pipe(catchError(error => {
+            if (error instanceof HttpErrorResponse && error.status === 401) {
+                return this.handle401Error(request, next);
+            } else {
+                return throwError(error);
+            }
+        }));
     }
+
+    private addToken(request: HttpRequest<any>, token: string) {
+        return request.clone({
+            setHeaders: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+    }
+
+
+    private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
+        if (!this.isRefreshing) {
+            this.isRefreshing = true;
+            this.refreshTokenSubject.next(null);
+
+            return this._authService.refreshToken().pipe(
+                switchMap((token: any) => {
+                    this.isRefreshing = false;
+                    this.refreshTokenSubject.next(token.jwt);
+                    return next.handle(this.addToken(request, token.jwt));
+                }));
+
+        } else {
+            return this.refreshTokenSubject.pipe(
+                filter(token => token != null),
+                take(1),
+                switchMap(jwt => {
+                    return next.handle(this.addToken(request, jwt));
+                }));
+        }
+    }
+
+
 }

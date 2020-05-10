@@ -20,10 +20,10 @@ export class AuthenticationService {
     private _httpClient: HttpClient
   ) { }
 
-  login(business: Login): Observable<boolean> {
-    return this._httpClient.post<any>(environment.apiBaseUrl + '/login', business, this.noAuthHeader)
+  login(user: Login): Observable<boolean> {
+    return this._httpClient.post<any>(environment.apiBaseUrl + '/login', user, this.noAuthHeader)
       .pipe(
-        tap(tokens => this.doLoginUser(business.email, tokens)),
+        tap(tokens => this.doLoginUser(user.email, tokens)),
         mapTo(true),
         catchError(error => {
           alert(error.error);
