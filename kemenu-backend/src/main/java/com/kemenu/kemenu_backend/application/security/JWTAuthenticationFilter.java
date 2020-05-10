@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -43,10 +44,10 @@ class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             if (recaptcha.isValid(recaptchaToken)) {
                 return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             } else {
-                throw new RuntimeException("Incorrect captcha");
+                throw new InsufficientAuthenticationException("Incorrect captcha");
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new InsufficientAuthenticationException("Error while authentication", e);
         }
     }
 
