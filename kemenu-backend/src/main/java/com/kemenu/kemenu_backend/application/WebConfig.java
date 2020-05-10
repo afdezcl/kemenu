@@ -46,6 +46,6 @@ public class WebConfig implements WebMvcConfigurer {
                         "https://kemenu.com",
                         "https://www.kemenu.com"
                 )
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH");
     }
 }

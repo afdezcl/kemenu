@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,12 +14,13 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
@@ -31,41 +31,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${app.refresh}")
     private String appRefresh;
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .cors()
                 .and()
-                .httpBasic().disable()
                 .csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint())
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/register", "/app/version", "/login").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/v1/**").authenticated()
+                .anyRequest().permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/")
-                .and()
-                .addFilterBefore(new JWTAuthenticationFilter(authenticationManager(), mapper, appSecret, appRefresh), UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/v2/api-docs")
-                .antMatchers("/swagger-resources/**")
-                .antMatchers("/swagger-ui.html")
-                .antMatchers("/configuration/**")
-                .antMatchers("/webjars/**")
-                .antMatchers("/css/**")
-                .antMatchers("/js/**")
-                .antMatchers("/index.html")
-                .antMatchers("/public");
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+                .addFilterBefore(new JWTAuthenticationFilter(authenticationManager(), mapper, appSecret, appRefresh), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JWTAuthorizationFilter(authenticationManager(), appSecret), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
