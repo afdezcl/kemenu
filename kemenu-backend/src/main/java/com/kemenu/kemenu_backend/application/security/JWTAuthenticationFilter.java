@@ -37,7 +37,7 @@ class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
             JsonNode requestJson = mapper.readTree(request.getInputStream());
-            String username = requestJson.get("username").asText();
+            String username = requestJson.get("email").asText();
             String password = requestJson.get("password").asText();
             String recaptchaToken = requestJson.get("recaptchaToken").asText();
 
