@@ -8,6 +8,9 @@ app:
   version: @project.version@
   secret: secret
   refresh: refresh
+  recaptcha:
+    public: 6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM
+    secret: ${RECAPTCHA_TOKEN}
 
 spring:
   data:
@@ -24,6 +27,9 @@ app:
   version: @project.version@
   secret: ${JWT_SECRET}
   refresh: ${JWT_SECRET_REFRESH}
+  recaptcha:
+    public: 6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM
+    secret: ${RECAPTCHA_TOKEN}
 
 spring:
   data:

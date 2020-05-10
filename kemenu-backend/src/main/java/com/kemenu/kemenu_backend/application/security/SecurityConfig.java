@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
     private final ObjectMapper mapper;
+    private final Recaptcha recaptcha;
 
     @Value("${app.secret}")
     private String appSecret;
@@ -47,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v1/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
-                .addFilter(new JWTAuthenticationFilter(authenticationManager(), mapper, appSecret, appRefresh))
+                .addFilter(new JWTAuthenticationFilter(mapper, recaptcha, authenticationManager(), appSecret, appRefresh))
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(), appSecret));
     }
 

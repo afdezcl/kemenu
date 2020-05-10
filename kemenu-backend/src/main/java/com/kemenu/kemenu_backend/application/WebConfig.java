@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import okhttp3.OkHttpClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -35,6 +36,11 @@ public class WebConfig implements WebMvcConfigurer {
         });
 
         return mapper;
+    }
+
+    @Bean
+    public OkHttpClient okHttpClient() {
+        return new OkHttpClient();
     }
 
     @Override
