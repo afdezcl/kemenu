@@ -12,6 +12,14 @@
 *     GENERAL
 * =====================================================
 */
+
+.tipography-kemenu {
+  color: black;
+  font-family: 'DM Mono', monospace;
+  font-size: 27px !important;
+  
+}
+
 .pointer-cursor:hover {
   cursor: pointer;
 }
@@ -52,7 +60,8 @@
   }
   
   .modal {
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(94, 93, 93, 0.85);
+    margin-top: 150px;
   }
   
   .modal-content {
@@ -76,6 +85,7 @@
     opacity: 1;
     padding: 0;
     outline: none;
+
   }
   
   .modal-content .close span {

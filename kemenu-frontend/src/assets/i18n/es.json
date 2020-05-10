@@ -1,9 +1,11 @@
 {
 	"All rights reserved": "Todos los derechos reservados",
+	"Create Section": "Crear sección",
 	"Create menu": "Crea el menú",
 	"Design by": "Diseñado por",
 	"Email": "Email",
 	"English": "Inglés",
+	"Examples of sections": "Pescados, carnes, hamburguesas...",
 	"GetStarted": "Empieza ahora ¡GRATIS!",
 	"Home": "Inicio",
 	"Home-Advice description": "Puedes imprimir tu código QR y dejarlo en las mesas de tu restaurante o dónde quieras",
@@ -31,10 +33,13 @@
 	"RequiredEmail": "Email requerido",
 	"RequiredNameRestaurant": "Nombre del restaurante requerido",
 	"RequiredPassword": "Contraseña requerida",
+	"Section name": "Nombre de la sección",
+	"Sections menu": "Secciones de la carta",
 	"Share": "Compártelo",
 	"SignIn": "Iniciar sesión",
 	"SignUp": "Registrarse",
 	"SloganText": "Registrate ahora gratis y crea tu menú digital. Luego comparte tu código QR o tu enlace a los clientes. ¡Es fácil!",
 	"SloganTitle": "Crea tu menú de forma digital GRATIS!",
-	"Spanish": "Español"
+	"Spanish": "Español",
+	"Warning no dishes": "No hay ninguna sección de platos creada"
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UserService } from 'src/app/services/user/user.service';
+import { UserService } from '@services/user/user.service';
 import { Router } from '@angular/router';
-import { AlertsService } from 'src/app/services/alerts/alerts.service';
+import { AlertsService } from '@services/alerts/alerts.service';
 
 @Component({
   selector: 'app-register',

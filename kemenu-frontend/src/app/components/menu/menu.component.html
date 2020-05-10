@@ -1,18 +1,31 @@
 <section class="create-menu">
   <div class="container">
-    <div class="row text-center mt-5">
+    <div class="row text-center mt-5" *ngIf="menu.sections.length === 0">
       <div class="col mt-5">
         <img src="../../../assets/images/no-sections.svg" alt="no-sections" class="img-fluid no-sections-image">
         <br>
-        <h5 class="font-weight-bold">Secciones de la carta</h5>
-        <span class="text-muted">No hay ninguna sección de platos creada</span>
+        <h5 class="font-weight-bold">{{ 'Sections menu' | translate }}</h5>
+        <span class="text-muted">{{ 'Warning no dishes' | translate }}</span>
         <br>
-        <button type="submit" class="btn btn-primary mt-1">Crear sección</button>
+      </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col">        
+        <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()">{{ 'Create Section' | translate }}</button>
       </div>
     </div>
   
-    <div class="row">
-  
+    <div class="row" *ngIf="menu.sections">
+      <div class="col mt-5">
+        <accordion [isAnimated]="true">
+          <div *ngFor="let section of menu.sections">
+            <accordion-group heading="{{section.name}}">
+              <p> This content is straight in the template.</p>
+            </accordion-group>          
+          </div>
+        </accordion>
+      </div>      
     </div>
   
   </div>
