@@ -4,14 +4,14 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@services/authentication/authentication.service';
 import { Login } from '@models/auth/login.interface';
-import { ReCaptchaV3Service, RecaptchaComponent, RecaptchaLoaderService } from 'ng-recaptcha';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [AuthenticationService, ReCaptchaV3Service, RecaptchaComponent, RecaptchaLoaderService]
+  providers: [AuthenticationService, ReCaptchaV3Service]
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   get form() { return this.loginForm.controls; }
 
   public onSubmit() {
-    this.login()
+    this.login();
   }
 
   private login(): void {    
