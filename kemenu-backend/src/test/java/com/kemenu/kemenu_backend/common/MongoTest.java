@@ -14,10 +14,8 @@ public class MongoTest {
 
     @AfterEach
     void tearDown() {
-        for (String collectionName : mongoTemplate.getCollectionNames()) {
-            if (!collectionName.startsWith("system.")) {
-                mongoTemplate.getCollection(collectionName).deleteOne(new BasicDBObject());
-            }
-        }
+        mongoTemplate.getCollectionNames().stream()
+                .filter(collection -> !collection.startsWith("system."))
+                .forEach(collection -> mongoTemplate.getCollection(collection).deleteOne(new BasicDBObject()));
     }
 }
