@@ -7,14 +7,12 @@ import { environment } from 'src/environments/environment';
 })
 export class AppVersionService {
 
-  private noAuthHeader = { headers: new HttpHeaders({ NoAuth: 'True' }) };
-
   constructor(
     private _httpClient: HttpClient
   ) {}
 
   getVersionApp() {
-    return this._httpClient.get(environment.apiBaseUrl + '/app/version', {});
+    return this._httpClient.get(environment.apiBaseUrl + '/app/version');
   }
 
 
