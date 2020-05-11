@@ -14,7 +14,7 @@ export class AppVersionService {
   ) {}
 
   getVersionApp() {
-    return this._httpClient.get(environment.apiBaseUrl + '/app/version', this.noAuthHeader);
+    return this._httpClient.get(environment.apiBaseUrl + '/app/version', {});
   }
 
 
