@@ -23,7 +23,10 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger pointer-cursor" (click)="onLogout()" *ngIf="isLogged">Cerrar Sesión</a>
+            <a class="nav-link pointer-cursor" *ngIf="isLogged" [routerLink]="['menu']" >{{ 'My menu' | translate }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link pointer-cursor" (click)="onLogout()" *ngIf="isLogged">{{ 'Log out' | translate }}</a>
           </li>
                 
         </ul><a style="color: white;" (click)="openModalLogIn()" class="btn btn-primary navbar-btn ml-0 ml-lg-3" *ngIf="!isLogged">{{ 'SignIn' | translate }} </a>
