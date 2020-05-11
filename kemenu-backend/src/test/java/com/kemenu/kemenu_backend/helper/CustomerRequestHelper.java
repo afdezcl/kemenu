@@ -19,6 +19,6 @@ public class CustomerRequestHelper {
     }
 
     public static CustomerRequest withWrongEmail() {
-        return randomRequest().toBuilder().email("asd@").build();
+        return randomRequest().toBuilder().email("asd@asd").build();
     }
 }
