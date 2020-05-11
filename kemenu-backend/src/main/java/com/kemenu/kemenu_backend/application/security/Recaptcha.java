@@ -3,6 +3,7 @@ package com.kemenu.kemenu_backend.application.security;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -10,7 +11,6 @@ import okhttp3.RequestBody;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 
 @Service
@@ -23,7 +23,8 @@ public class Recaptcha {
     @Value("${app.recaptcha.secret}")
     private String recaptchaSecret;
 
-    public boolean isValid(String recaptchaToken) throws IOException {
+    @SneakyThrows
+    public boolean isValid(String recaptchaToken) {
         JsonNode responseRecaptcha = mapper.readTree(verifyRecaptcha(recaptchaToken));
         boolean success = responseRecaptcha.get("success").asBoolean();
         BigDecimal score = new BigDecimal(responseRecaptcha.get("score").asText());
@@ -32,7 +33,8 @@ public class Recaptcha {
         return success && score.compareTo(new BigDecimal("0.8")) >= 0 && action.equals("login");
     }
 
-    private String verifyRecaptcha(String recaptchaToken) throws IOException {
+    @SneakyThrows
+    private String verifyRecaptcha(String recaptchaToken) {
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("secret", recaptchaSecret)

@@ -15,7 +15,7 @@ public class CustomerRequest {
     @NotBlank
     @Size(max = 255)
     String businessName;
-    @Email
+    @Email(regexp = ".+@.+\\..+")
     @NotBlank
     String email;
     @NotBlank
