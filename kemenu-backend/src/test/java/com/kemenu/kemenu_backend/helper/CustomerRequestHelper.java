@@ -17,4 +17,8 @@ public class CustomerRequestHelper {
                 .recaptchaToken(UUID.randomUUID().toString())
                 .build();
     }
+
+    public static CustomerRequest withWrongEmail() {
+        return randomRequest().toBuilder().email("asd@").build();
+    }
 }
