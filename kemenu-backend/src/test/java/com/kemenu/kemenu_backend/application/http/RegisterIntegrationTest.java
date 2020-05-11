@@ -2,7 +2,7 @@ package com.kemenu.kemenu_backend.application.http;
 
 import com.kemenu.kemenu_backend.application.customer.CustomerRequest;
 import com.kemenu.kemenu_backend.application.security.Recaptcha;
-import com.kemenu.kemenu_backend.common.MongoTest;
+import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.helper.CustomerRequestHelper;
@@ -11,23 +11,19 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
-import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class RegisterIntegrationTest extends MongoTest {
+class RegisterIntegrationTest extends KemenuIntegrationTest {
 
     @MockBean
     private Recaptcha recaptchaMock;
 
     @Autowired
     private CustomerRepository customerRepository;
-
-    @Autowired
-    private WebTestClient webTestClient;
 
     @Test
     void aCustomerCanRegisterInTheApplication() {
