@@ -11,6 +11,7 @@ app:
   recaptcha:
     public: 6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM
     secret: ${RECAPTCHA_TOKEN}
+  cors: http://localhost:8085, http://localhost:4200
 
 spring:
   data:
@@ -30,6 +31,7 @@ app:
   recaptcha:
     public: 6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM
     secret: ${RECAPTCHA_TOKEN}
+  cors: https://kemenu.com, https://www.kemenu.com
 
 spring:
   data:
