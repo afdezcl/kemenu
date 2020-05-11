@@ -6,6 +6,7 @@ import { AuthenticationService } from '@services/authentication/authentication.s
 import { Login } from '@models/auth/login.interface';
 import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { Subscription } from 'rxjs';
+import { AlertsService } from '@services/alerts/alerts.service';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _authService: AuthenticationService,
     private router : Router,
     private recaptchaV3Service: ReCaptchaV3Service,
+    private _alertService: AlertsService
   ) { }
 
   ngOnInit() {  
@@ -51,10 +53,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       recaptchaToken: token
     }
     this._authService.login(user)
-      .subscribe(result => {
-        console.log(result)
+      .subscribe(result => {        
+        this.bsModalRef.hide();      
         this.router.navigateByUrl('menu');
-      });
+      },
+        err => {
+          this._alertService.error('Email o contraseña incorrecta')
+        }
+      
+      );
   }
 
 

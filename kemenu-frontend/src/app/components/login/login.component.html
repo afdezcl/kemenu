@@ -5,6 +5,7 @@
   </div>
   <div class="modal-body p-4 p-lg-5">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form text-left">
+      <app-alert></app-alert>
       <div class="form-group mb-4">
         <label>{{ 'Email' | translate }}</label>
         <span class="icon-input">

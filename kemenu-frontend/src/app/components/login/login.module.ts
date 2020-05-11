@@ -4,6 +4,7 @@ import { LoginComponent } from './login.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { DialogModule } from '@ui-controls/dialogs/dialog.module'
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     TranslateModule,
     RouterModule,
+    DialogModule
   ],
   declarations: [LoginComponent],
   

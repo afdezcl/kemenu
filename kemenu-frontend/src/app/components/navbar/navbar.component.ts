@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { LoginComponent } from '../login/login.component';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationService } from '@services/authentication/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,13 +14,22 @@ export class NavbarComponent implements OnInit {
   
   isCollapsed = true;
   bsModalRef: BsModalRef;
+  isLogged: boolean = false;
 
   constructor(
     private modalService: BsModalService,
-    private translate: TranslateService
-  ) { }
+    private translate: TranslateService,
+    private _authService: AuthenticationService,
+    private router: Router
+  ) { 
+    this.modalService.onHide.subscribe(() => {
+      this.isLogged = this._authService.isLoggedIn();  
+    });
+  }
 
   ngOnInit() {
+    if(this._authService.isLoggedIn()) this.isLogged = true     
+    else this.isLogged = false    
   }
 
   openModalLogIn() {
@@ -27,6 +38,12 @@ export class NavbarComponent implements OnInit {
   
   changeLanguage(language: string) {
     this.translate.use(language);
+  }
+
+  onLogout(){
+    this._authService.logout();
+    this.router.navigateByUrl('');
+    this.ngOnInit();
   }
 
 }

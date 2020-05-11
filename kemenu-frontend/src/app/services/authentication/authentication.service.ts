@@ -29,9 +29,6 @@ export class AuthenticationService {
     return this._httpClient
       .post(environment.apiBaseUrl + '/login', user, {observe: 'response'})
       .pipe(map(response => {
-        console.log("RESPONSE: ");
-        console.log(response.headers.get('Authorization'));
-        //console.log(response.headers.get('JWT-Refresh-Token: Bearer'))
         const tokens: Tokens = {
           jwt: response.headers.get('Authorization'),
           refreshToken: response.headers.get('JWT-Refresh-Token')
