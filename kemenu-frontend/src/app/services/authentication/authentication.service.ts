@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { tap, mapTo, catchError } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Tokens } from '@models/auth/tokens.model';
@@ -22,19 +22,21 @@ export class AuthenticationService {
   register(user: Register) {
     console.log(user)
     return this._httpClient
-      .post(environment.apiBaseUrl + '/register', user)      
+      .post(environment.apiBaseUrl + '/register', user)
   }
 
   login(user: Login){
     return this._httpClient
-      .post<any>(environment.apiBaseUrl + '/login', user, {observe: 'response'})
-      .pipe(tap(response => {
+      .post(environment.apiBaseUrl + '/login', user, {observe: 'response'})
+      .pipe(map(response => {
+        console.log("RESPONSE: ");
+        console.log(response.headers.get('Authorization'));
         //console.log(response.headers.get('JWT-Refresh-Token: Bearer'))
         const tokens: Tokens = {
           jwt: response.headers.get('Authorization'),
           refreshToken: response.headers.get('JWT-Refresh-Token')
-        }        
-        this.storeTokens(tokens)              
+        }
+        this.storeTokens(tokens)
       }));
   }
 
@@ -75,5 +77,5 @@ export class AuthenticationService {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
   }
-  
+
 }
