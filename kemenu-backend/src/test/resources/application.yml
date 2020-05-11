@@ -1,0 +1,19 @@
+spring.profiles: test
+
+server:
+  port: 8085
+  address: 127.0.0.1
+
+app:
+  version: test
+  secret: secret
+  refresh: refresh
+  recaptcha:
+    public: 6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM
+    secret: recaptcha
+  cors: http://localhost:8085, http://localhost:4200
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://admin:password@localhost:27017/kemenudb
