@@ -19,7 +19,8 @@ export class CreateDishComponent implements OnInit {
 
   ngOnInit() {
     this.dishForm = this.formBuilder.group({
-      name: ['', Validators.required]      
+      name: ['', Validators.required],
+      price: ['', Validators.required]      
     });
   }
 
