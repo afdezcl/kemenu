@@ -21,7 +21,7 @@
         <accordion [isAnimated]="true">
           <div *ngFor="let section of menu.sections">
             <accordion-group heading="{{section.name}}">
-              <p> This content is straight in the template.</p>
+              <button type="submit" class="btn btn-primary mt-3" (click)="openCreateDish()">{{ 'Create dish' | translate }}</button>
             </accordion-group>          
           </div>
         </accordion>

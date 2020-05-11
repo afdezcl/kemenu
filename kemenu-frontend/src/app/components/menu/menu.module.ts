@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { CreateSectionComponent } from './create-section/create-section.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateDishComponent } from './create-dish/create-dish.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [
     MenuComponent,
-    CreateSectionComponent
+    CreateSectionComponent,
+    CreateDishComponent
   ]
 })
 export class MenuModule { }

@@ -3,6 +3,7 @@ import { Menu } from '@models/menu/menu.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CreateSectionComponent } from './create-section/create-section.component'
 import { Section } from '@models/menu/section.model';
+import { CreateDishComponent } from './create-dish/create-dish.component';
 
 @Component({
   selector: 'app-menu',
@@ -40,6 +41,13 @@ export class MenuComponent implements OnInit {
       []
     )
     this.menu.sections.push(section)
+  }
+
+  openCreateDish() {
+    this.modalReference = this.modalService.show(CreateDishComponent);
+    this.modalReference.content.messageEvent.subscribe(data => {
+      //create dish 
+    });
   }
 
 
