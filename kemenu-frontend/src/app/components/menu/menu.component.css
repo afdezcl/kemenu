@@ -7,3 +7,22 @@
     margin-top: 10px;
     margin-bottom: 200px;
 }
+
+.dishes {
+    background-color: #e7475e;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.dish-price {
+    font-size: 17px !important;
+}
+.add-dish {
+    border-radius: 25px !important;
+    color: white;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}

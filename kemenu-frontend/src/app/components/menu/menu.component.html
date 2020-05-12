@@ -29,11 +29,17 @@
         <accordion [isAnimated]="true">
           <div *ngFor="let section of menu.sections; let counter = index;">
             <accordion-group heading="{{section.name}}">
-              <div class="dishes" *ngFor="let dish of section.dishes; let counter = index;">
-                <span class="dish-title">{{dish.name}}</span>
-                <span class="dish-title">{{dish.price}}</span>
+              <div class="dishes mt-2" *ngFor="let dish of section.dishes; let counter = index;">
+                <div class="row">
+                  <div class="col text-left">
+                    <h5 class="dish-title">{{dish.name}}</h5>
+                  </div>
+                  <div class="col text-right">
+                    <span class="dish-price">{{dish.price}}€</span>
+                  </div>
+                </div>
               </div>
-              <button type="submit" class="btn btn-primary mt-3" (click)="openCreateDish(counter)">{{ 'Create dish' | translate }}</button>
+              <button type="submit" class="btn btn-primary mt-3 add-dish" (click)="openCreateDish(counter)"><i class="fas fa-plus"></i></button>
             </accordion-group>          
           </div>
         </accordion>
