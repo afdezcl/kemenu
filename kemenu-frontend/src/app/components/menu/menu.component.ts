@@ -33,8 +33,8 @@ export class MenuComponent implements OnInit {
 
   openCreateSection() {
     this.modalReference = this.modalService.show(CreateSectionComponent);
-    this.modalReference.content.messageEvent.subscribe(data => {
-      this.addNewSection(data)
+    this.modalReference.content.messageEvent.subscribe(name => {
+      this.addNewSection(name)
     });
   }
 
@@ -67,10 +67,20 @@ export class MenuComponent implements OnInit {
 
     this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
     this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
-      if(canDelete){
+      if(canDelete) {
         this.menu.sections = this.menu.sections.filter(section => section !== sectionToRemove)
       }
     })
+  }
+
+  editSection(sectionToEdit: Section, indexSection: number){
+    const initialState = {
+      name: sectionToEdit.name      
+    };
+    this.modalReference = this.modalService.show(CreateSectionComponent, { initialState });
+    this.modalReference.content.messageEvent.subscribe(data => {
+      this.menu.sections[indexSection].name = data
+    });
   }
 
 

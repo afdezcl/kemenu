@@ -10,7 +10,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 export class CreateSectionComponent implements OnInit {
 
   @Output() messageEvent = new EventEmitter<string>();
-  section: FormGroup;  
+  public section: FormGroup;  
+  public name: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,7 +20,7 @@ export class CreateSectionComponent implements OnInit {
 
   ngOnInit() {
     this.section = this.formBuilder.group({
-      name: ['', Validators.required]      
+      name: [this.name, Validators.required]      
     });
   }
 
