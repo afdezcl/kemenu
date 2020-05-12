@@ -30,3 +30,11 @@
     padding-left: 15px !important;
     padding-right: 15px !important;
 }
+.delete-section {
+    border-radius: 25px !important;
+    color: #e7475e;
+    padding-top: 7px !important;
+    padding-bottom: 10px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+}
