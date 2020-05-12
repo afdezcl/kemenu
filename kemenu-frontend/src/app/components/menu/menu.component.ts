@@ -24,6 +24,7 @@ export class MenuComponent implements OnInit {
 
   loadMenu(){
     this.menu = new Menu(
+      '',
       []      
     )  
   }
