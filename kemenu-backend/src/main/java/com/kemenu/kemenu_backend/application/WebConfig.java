@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Slf4j
@@ -54,12 +55,12 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    CommandLineRunner initAdminUser(CustomerRepository repository) {
+    CommandLineRunner initAdminUser(CustomerRepository repository, PasswordEncoder passwordEncoder) {
         return args -> repository.findByEmail(adminUsername)
                 .ifPresentOrElse(
                         c -> log.info("Admin user already created"),
                         () -> {
-                            repository.create(new Customer(adminUsername, adminPassword, Customer.Role.ADMIN));
+                            repository.create(new Customer(adminUsername, passwordEncoder.encode(adminPassword), Customer.Role.ADMIN, "adminBusiness"));
                             log.info("Admin user created");
                         }
                 );

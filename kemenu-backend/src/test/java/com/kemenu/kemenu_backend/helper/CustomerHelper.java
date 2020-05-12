@@ -10,6 +10,6 @@ import java.util.UUID;
 public class CustomerHelper {
 
     public static Customer randomCustomer() {
-        return new Customer(UUID.randomUUID().toString(), UUID.randomUUID().toString());
+        return new Customer(UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString());
     }
 }
