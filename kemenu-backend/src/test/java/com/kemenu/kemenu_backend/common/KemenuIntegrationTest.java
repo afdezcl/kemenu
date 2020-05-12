@@ -31,7 +31,7 @@ public class KemenuIntegrationTest {
     void tearDown() {
         mongoTemplate.getCollectionNames().stream()
                 .filter(collection -> !collection.startsWith("system."))
-                .forEach(collection -> mongoTemplate.getCollection(collection).deleteOne(new BasicDBObject()));
+                .forEach(collection -> mongoTemplate.getCollection(collection).deleteOne(new BasicDBObject("email", "admin")));
     }
 
     protected String generateAccessToken() {

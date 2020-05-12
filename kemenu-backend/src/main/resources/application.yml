@@ -12,6 +12,9 @@ app:
     public: 6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM
     secret: ${RECAPTCHA_TOKEN}
   cors: http://localhost:8085, http://localhost:4200
+  admin:
+    username: admin
+    password: admin
 
 spring:
   data:
@@ -32,6 +35,9 @@ app:
     public: 6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM
     secret: ${RECAPTCHA_TOKEN}
   cors: https://kemenu.com, https://www.kemenu.com
+  admin:
+    username: admin
+    password: ${KEMENU_ADMIN_PWD}
 
 spring:
   data:

@@ -12,6 +12,9 @@ app:
     public: 6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM
     secret: recaptcha
   cors: http://localhost:8085, http://localhost:4200
+  admin:
+    username: admin
+    password: admin
 
 spring:
   data:

@@ -41,8 +41,9 @@ class CustomerTest {
         menu.addNewDish("Desserts", DishHelper.randomDish());
         menu.addNewDish("Desserts", DishHelper.randomDish());
 
-        customer.createMenu(business, menu);
+        String menuId = customer.createMenu(business, menu);
 
+        assertEquals(menu.getId(), menuId);
         assertEquals(1, customer.menuList(business).size());
         assertEquals(5, menu.numberOfSections());
         assertEquals(3, menu.numberOfDishes("Starters"));

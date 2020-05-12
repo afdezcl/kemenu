@@ -17,4 +17,12 @@ public class LoginRequestHelper {
         loginRequest.put("recaptchaToken", customerRequest.getRecaptchaToken());
         return loginRequest;
     }
+
+    public static JsonNode adminLogin(String adminUsername, String adminPassword, ObjectMapper mapper) {
+        ObjectNode loginRequest = mapper.createObjectNode();
+        loginRequest.put("email", adminUsername);
+        loginRequest.put("password", adminPassword);
+        loginRequest.put("recaptchaToken", "admin");
+        return loginRequest;
+    }
 }

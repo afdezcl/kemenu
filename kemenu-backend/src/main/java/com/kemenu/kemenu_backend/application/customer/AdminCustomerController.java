@@ -10,8 +10,8 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/v1")
-public class CustomerController {
+@RequestMapping("/admin/v1")
+public class AdminCustomerController {
 
     private final CustomerService customerService;
 

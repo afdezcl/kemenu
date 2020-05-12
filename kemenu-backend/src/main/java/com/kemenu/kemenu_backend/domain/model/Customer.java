@@ -35,15 +35,19 @@ public class Customer implements GrantedAuthority {
     private Role role;
 
     public Customer(String email, String password) {
-        this(UUID.randomUUID().toString(), email, password, new ArrayList<>(), Role.USER);
+        this(email, password, Role.USER);
     }
 
     public Customer(String email, String password, String businessName) {
-        this(UUID.randomUUID().toString(), email, password, new ArrayList<>(), Role.USER);
+        this(email, password, Role.USER);
         businesses.add(new Business(businessName));
     }
 
-    public void createMenu(Business business, Menu menu) {
+    public Customer(String email, String password, Role role) {
+        this(UUID.randomUUID().toString(), email, password, new ArrayList<>(), role);
+    }
+
+    public String createMenu(Business business, Menu menu) {
         businesses.stream()
                 .filter(b -> b.equals(business))
                 .findFirst()
@@ -54,6 +58,7 @@ public class Customer implements GrantedAuthority {
                             businesses.add(business);
                         }
                 );
+        return menu.getId();
     }
 
     public List<Menu> menuList(Business business) {
