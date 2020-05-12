@@ -9,7 +9,7 @@
                 <img src="../../../assets/images/options-mobile.svg" alt="" class="img-fluid">
               </div>
               <div class="col-sm-6">
-                
+
                 <app-alert></app-alert>
 
                 <div class="text-center">
@@ -59,13 +59,13 @@
                       <small *ngIf="registerForm.get('password').hasError('required')" class="text-muted ml-2 mt-1">
                         {{ 'RequiredPassword' | translate }}
                       </small>
-                    </div>  
+                    </div>
                   </div>
                   <div class="form-group">
                     <span class="icon-input">
                       <i class="fas fa-unlock"></i>
                     </span>
-                    <input type="password" class="form-control" id="confirmPassword" placeholder="{{ 'PlaceholderConfirmPasword' | translate }}"
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="{{ 'PlaceholderConfirmPassword' | translate }}"
                       formControlName="confirmPassword" required>
                       <small *ngIf="registerForm.hasError('notSame')" class="text-muted ml-2 mt-1">
                         {{ 'PasswordCoincidence' | translate }}
@@ -73,7 +73,7 @@
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">{{ 'SignUp' | translate }} <i
-                      class="fas fa-sign-in-alt pl-2"></i></button>                     
+                      class="fas fa-sign-in-alt pl-2"></i></button>
                   </div>
                 </form>
               </div>
