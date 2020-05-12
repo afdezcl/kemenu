@@ -52,6 +52,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
                 .header("Authorization", accessToken)
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(String.class).isEqualTo("Hola");
+                .expectBody()
+                .jsonPath("$[0].email").isEqualTo(customerRequest.getEmail());
     }
 }

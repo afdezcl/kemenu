@@ -6,6 +6,8 @@ import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class CustomerService {
@@ -16,5 +18,9 @@ public class CustomerService {
     public String create(Customer customer) {
         businessRepository.create(customer.getFirstBusiness());
         return customerRepository.create(customer); // TODO: Send event to send email
+    }
+
+    public List<Customer> all() {
+        return customerRepository.all();
     }
 }

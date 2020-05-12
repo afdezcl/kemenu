@@ -5,6 +5,7 @@ import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -21,5 +22,10 @@ class CustomerMongoRepository implements CustomerRepository {
     @Override
     public Optional<Customer> findByEmail(String email) {
         return springMongoRepository.findByEmail(email);
+    }
+
+    @Override
+    public List<Customer> all() {
+        return springMongoRepository.findAll();
     }
 }
