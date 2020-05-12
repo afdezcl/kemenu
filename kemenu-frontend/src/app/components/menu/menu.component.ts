@@ -5,6 +5,7 @@ import { CreateSectionComponent } from './create-section/create-section.componen
 import { Section } from '@models/menu/section.model';
 import { CreateDishComponent } from './create-dish/create-dish.component';
 import { Dish } from '@models/menu/dish.model';
+import { ConfirmDialogComponent } from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 
 @Component({
   selector: 'app-menu',
@@ -56,6 +57,20 @@ export class MenuComponent implements OnInit {
     this.menu
         .sections[indexSection]
         .dishes.push(dish)
+  }
+
+  deleteSection(sectionToRemove: Section){
+    const initialState = {
+      title: 'Eliminar sección',
+      message: '¿Está seguro que desea eliminar esta sección?'
+    };
+
+    this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
+    this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
+      if(canDelete){
+        this.menu.sections = this.menu.sections.filter(section => section !== sectionToRemove)
+      }
+    })
   }
 
 
