@@ -57,6 +57,9 @@
                     <small class="dish-description text-muted">{{dish.description}}</small>
                   </div>
                   <div class="col-3 text-right">
+                    <button type="submit" class="btn btn-link delete-section" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">                
+                      <i class="fas fa-edit"></i>            
+                    </button>
                     <button type="submit" class="btn btn-link delete-section" accordion-heading (click)="deleteDish(dish, sectionCounter)">                
                       <i class="fas fa-trash"></i>            
                     </button>

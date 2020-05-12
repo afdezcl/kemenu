@@ -46,25 +46,13 @@ export class MenuComponent implements OnInit {
     this.menu.sections.push(section)
   }
 
-  openCreateDish(sectionIndex: number) {
-    this.modalReference = this.modalService.show(CreateDishComponent);
-    this.modalReference.content.messageEvent.subscribe(dish => {      
-      this.addNewDish(dish, sectionIndex)
-    });
-  }
-
-  private addNewDish(dish: Dish, indexSection: number){
-    this.menu
-        .sections[indexSection]
-        .dishes.push(dish)
-  }
-
+  
   deleteSection(sectionToRemove: Section){
     const initialState = {
       title: 'Eliminar sección',
       message: '¿Está seguro que desea eliminar esta sección?'
     };
-
+    
     this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
     this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
       if(canDelete) {
@@ -72,7 +60,7 @@ export class MenuComponent implements OnInit {
       }
     })
   }
-
+  
   editSection(sectionToEdit: Section, sectionIndex: number){
     const initialState = {
       name: sectionToEdit.name      
@@ -81,6 +69,19 @@ export class MenuComponent implements OnInit {
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].name = data
     });
+  }
+  
+  openCreateDish(sectionIndex: number) {
+    this.modalReference = this.modalService.show(CreateDishComponent);
+    this.modalReference.content.messageEvent.subscribe(dish => {      
+      this.addNewDish(dish, sectionIndex)
+    });
+  }
+                  
+  private addNewDish(dish: Dish, sectionIndex: number){
+     this.menu
+         .sections[sectionIndex]
+         .dishes.push(dish)
   }
 
   deleteDish(dishToRemove: Dish, sectionIndex: number){
@@ -96,6 +97,18 @@ export class MenuComponent implements OnInit {
         this.menu.sections[sectionIndex].dishes.filter(dish => dish !== dishToRemove)
       }
     })
+  }
+
+  editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number){
+    const initialState = {
+      name: dishToEdit.name,
+      description: dishToEdit.description,
+      price: dishToEdit.price
+    };
+    this.modalReference = this.modalService.show(CreateDishComponent, { initialState });
+    this.modalReference.content.messageEvent.subscribe(data => {
+      this.menu.sections[sectionIndex].dishes[dishIndex] = data
+    });
   }
 
 

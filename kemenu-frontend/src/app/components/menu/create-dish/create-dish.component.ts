@@ -11,7 +11,10 @@ import { Dish } from '@models/menu/dish.model';
 export class CreateDishComponent implements OnInit {
 
   @Output() messageEvent = new EventEmitter<Dish>();
-  dishForm: FormGroup;
+  public dishForm: FormGroup;
+  public name: string;
+  public description: string;
+  public price: number;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,9 +23,9 @@ export class CreateDishComponent implements OnInit {
 
   ngOnInit() {
     this.dishForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      description: [''],   
-      price: ['', Validators.required]      
+      name: [this.name, Validators.required],
+      description: [this.description],   
+      price: [this.price, Validators.required]      
     });
   }
 
