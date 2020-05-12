@@ -3,10 +3,12 @@ package com.kemenu.kemenu_backend.application.http;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kemenu.kemenu_backend.application.customer.CustomerRequest;
+import com.kemenu.kemenu_backend.application.menu.MenuRequest;
 import com.kemenu.kemenu_backend.application.security.Recaptcha;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.helper.CustomerRequestHelper;
 import com.kemenu.kemenu_backend.helper.LoginRequestHelper;
+import com.kemenu.kemenu_backend.helper.MenuRequestHelper;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,21 +57,29 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
         String accessToken = responseHeaders.get("Authorization").get(0);
 
         webTestClient
-                .get().uri("/web/v1/customers")
+                .post().uri("/web/v1/menus")
+                .body(Mono.just(MenuRequestHelper.randomRequest(customerRequest.getEmail())), MenuRequest.class)
                 .header("Authorization", accessToken)
                 .exchange()
-                .expectStatus().isOk()
-                .expectBody()
-                .jsonPath("$[0].email").isEqualTo(customerRequest.getEmail());
+                .expectStatus().isOk();
+    }
+
+    @Test
+    void aCustomerRequestSomeResourceWithoutAuthorizationHeader() {
+        webTestClient
+                .get().uri("/web/v1/menus")
+                .exchange()
+                .expectStatus().isForbidden();
     }
 
     @Test
     void anAdminLoginThenCanUseProtectedResources() {
-        Mockito.when(recaptchaMock.isValid("admin")).thenReturn(true);
+        JsonNode loginRequest = LoginRequestHelper.adminLogin(adminUsername, adminPassword, mapper);
+        Mockito.when(recaptchaMock.isValid(loginRequest.get("recaptchaToken").asText())).thenReturn(true);
 
         HttpHeaders responseHeaders = webTestClient
                 .post().uri("/login")
-                .body(Mono.just(LoginRequestHelper.adminLogin(adminUsername, adminPassword, mapper)), JsonNode.class)
+                .body(Mono.just(loginRequest), JsonNode.class)
                 .exchange()
                 .expectStatus().isOk()
                 .expectHeader().exists("Authorization")

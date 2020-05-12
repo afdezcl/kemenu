@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/admin/v1")
-public class AdminCustomerController {
+public class CustomerAdminController {
 
     private final CustomerService customerService;
 

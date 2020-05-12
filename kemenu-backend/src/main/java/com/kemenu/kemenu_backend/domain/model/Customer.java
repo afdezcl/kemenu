@@ -34,17 +34,13 @@ public class Customer implements GrantedAuthority {
     private List<Business> businesses;
     private Role role;
 
-    public Customer(String email, String password) {
-        this(email, password, Role.USER);
-    }
-
     public Customer(String email, String password, String businessName) {
-        this(email, password, Role.USER);
-        businesses.add(new Business(businessName));
+        this(email, password, Role.USER, businessName);
     }
 
-    public Customer(String email, String password, Role role) {
+    public Customer(String email, String password, Role role, String businessName) {
         this(UUID.randomUUID().toString(), email, password, new ArrayList<>(), role);
+        businesses.add(new Business(businessName));
     }
 
     public String createMenu(Business business, Menu menu) {
