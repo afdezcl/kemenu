@@ -29,7 +29,7 @@
     <div class="row" *ngIf="menu.sections.length > 0">
       <div class="col mt-5">
         <accordion [isAnimated]="true">
-          <div *ngFor="let section of menu.sections; let counter = index;">
+          <div *ngFor="let section of menu.sections; let sectionCounter = index;">
             
             <accordion-group>
               <button type="submit" class="btn btn-link clearfix" accordion-heading>                
@@ -38,12 +38,12 @@
               <button type="submit" class="btn btn-link clearfix float-right pull-right delete-section" accordion-heading (click)="deleteSection(section)">                
                 <i class="fas fa-trash"></i>            
               </button>
-              <button type="submit" class="btn btn-link clearfix float-right pull-right delete-section" accordion-heading (click)="editSection(section, counter)">                
+              <button type="submit" class="btn btn-link clearfix float-right pull-right delete-section" accordion-heading (click)="editSection(section, sectionCounter)">                
                 <i class="fas fa-edit"></i>            
               </button>
 
 
-              <div class="dishes mt-2" *ngFor="let dish of section.dishes; let counter = index;">
+              <div class="dishes mt-2" *ngFor="let dish of section.dishes; let dishCounter = index;">
                 <div class="row">
                   <div class="col-9 text-left">
                     <span class="dish-title">{{dish.name}}</span>                    
@@ -53,12 +53,17 @@
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col">
+                  <div class="col-9">
                     <small class="dish-description text-muted">{{dish.description}}</small>
+                  </div>
+                  <div class="col-3 text-right">
+                    <button type="submit" class="btn btn-link delete-section" accordion-heading (click)="deleteDish(dish, sectionCounter)">                
+                      <i class="fas fa-trash"></i>            
+                    </button>
                   </div>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary mt-3 add-dish" (click)="openCreateDish(counter)"><i class="fas fa-plus"></i></button>
+              <button type="submit" class="btn btn-primary mt-3 add-dish" (click)="openCreateDish(sectionCounter)"><i class="fas fa-plus"></i></button>
             </accordion-group>      
             
             

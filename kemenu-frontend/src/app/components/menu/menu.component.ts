@@ -46,10 +46,10 @@ export class MenuComponent implements OnInit {
     this.menu.sections.push(section)
   }
 
-  openCreateDish(indexSection: number) {
+  openCreateDish(sectionIndex: number) {
     this.modalReference = this.modalService.show(CreateDishComponent);
     this.modalReference.content.messageEvent.subscribe(dish => {      
-      this.addNewDish(dish, indexSection)
+      this.addNewDish(dish, sectionIndex)
     });
   }
 
@@ -73,14 +73,29 @@ export class MenuComponent implements OnInit {
     })
   }
 
-  editSection(sectionToEdit: Section, indexSection: number){
+  editSection(sectionToEdit: Section, sectionIndex: number){
     const initialState = {
       name: sectionToEdit.name      
     };
     this.modalReference = this.modalService.show(CreateSectionComponent, { initialState });
     this.modalReference.content.messageEvent.subscribe(data => {
-      this.menu.sections[indexSection].name = data
+      this.menu.sections[sectionIndex].name = data
     });
+  }
+
+  deleteDish(dishToRemove: Dish, sectionIndex: number){
+    const initialState = {
+      title: 'Eliminar plato',
+      message: '¿Está seguro que desea eliminar este plato?'
+    };
+
+    this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
+    this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
+      if(canDelete) {
+        this.menu.sections[sectionIndex].dishes = 
+        this.menu.sections[sectionIndex].dishes.filter(dish => dish !== dishToRemove)
+      }
+    })
   }
 
 
