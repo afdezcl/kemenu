@@ -62,3 +62,7 @@
 .radio label input[type="radio"]:disabled + .cr {
     opacity: .5;
 }
+
+.modal {
+    margin-top: 100px !important;
+}

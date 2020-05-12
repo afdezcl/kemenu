@@ -12,15 +12,17 @@
     </div>
 
     <div class="row" *ngIf="menu.sections.length > 0">
-      <div class="col-sm-4 text-left">        
-        <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()">{{ 'Create Section' | translate }}</button>
+      <div class="col-sm-4 text-lg-left text-center">        
+        <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()">
+          {{ 'Create Section' | translate }}<i class="fas fa-list pl-2"></i></button>
       </div>
       <div class="col-sm-4 text-center">
-        <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()" [disabled]="true">{{ 'Obtener QR y compartir' | translate }}</button>
+        <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()" [disabled]="true">
+          {{ 'Get QR and share' | translate }}<i class="fas fa-qrcode pl-2"></i></button>
       </div>
-      <div class="col-sm-4 text-right">
+      <div class="col-sm-4 text-lg-right text-center">
         <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()">
-          {{ 'Guardar' | translate }} <i class="fas fa-save pl-1"></i></button>
+          {{ 'Save' | translate }} <i class="fas fa-save pl-1"></i></button>
       </div>
     </div>
   
@@ -31,11 +33,16 @@
             <accordion-group heading="{{section.name}}">
               <div class="dishes mt-2" *ngFor="let dish of section.dishes; let counter = index;">
                 <div class="row">
-                  <div class="col text-left">
-                    <h5 class="dish-title">{{dish.name}}</h5>
+                  <div class="col-9 text-left">
+                    <span class="dish-title">{{dish.name}}</span>                    
                   </div>
-                  <div class="col text-right">
+                  <div class="col-3 text-right">
                     <span class="dish-price">{{dish.price}}€</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <small class="dish-description text-muted">{{dish.description}}</small>
                   </div>
                 </div>
               </div>

@@ -47,18 +47,12 @@ export class MenuComponent implements OnInit {
 
   openCreateDish(indexSection: number) {
     this.modalReference = this.modalService.show(CreateDishComponent);
-    this.modalReference.content.messageEvent.subscribe(data => {      
-      this.addNewDish(data, indexSection)
+    this.modalReference.content.messageEvent.subscribe(dish => {      
+      this.addNewDish(dish, indexSection)
     });
   }
 
-  private addNewDish(data, indexSection: number){
-    const dish = new Dish(
-      data.name,
-      '',
-      data.price,
-      []
-    )
+  private addNewDish(dish: Dish, indexSection: number){
     this.menu
         .sections[indexSection]
         .dishes.push(dish)

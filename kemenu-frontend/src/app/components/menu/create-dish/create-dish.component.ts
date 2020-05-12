@@ -21,6 +21,7 @@ export class CreateDishComponent implements OnInit {
   ngOnInit() {
     this.dishForm = this.formBuilder.group({
       name: ['', Validators.required],
+      description: [''],   
       price: ['', Validators.required]      
     });
   }
@@ -30,7 +31,7 @@ export class CreateDishComponent implements OnInit {
   onSubmit() {
     const dish = new Dish (
       this.form.name.value,
-      '',
+      this.form.description.value,
       this.form.price.value,
       []
     )

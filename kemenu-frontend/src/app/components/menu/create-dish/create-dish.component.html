@@ -1,90 +1,100 @@
-<div class="modal-content">
-  <div class="modal-header border-bottom-0">
-    <button type="button" data-dismiss="modal" aria-label="Close" class="close" (click)="bsModalRef.hide()">
-      <span aria-hidden="true">×</span></button>
+  <div class="modal-content">
+    <div class="modal-header border-bottom-0">
+      <button type="button" data-dismiss="modal" aria-label="Close" class="close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">×</span></button>
+    </div>
+    <div class="modal-body p-4 p-lg-5">
+      <form [formGroup]="dishForm" (ngSubmit)="onSubmit()" class="login-form text-left">
+        <div class="row">
+          <div class="col">
+            <div class="form-group mb-4">
+              <label>{{ 'Dish name' | translate }}</label>
+              <span class="icon-input">
+                <i class="fas fa-hamburger"></i>
+              </span>
+              <input type="text" name="name" placeholder="{{ 'Examples of dishes' | translate }}" class="form-control"
+                formControlName="name">
+            </div>
+            <div class="form-group mb-4">
+              <label>{{ 'Dish description (Optional)' | translate }} </label>
+              <span class="icon-input">
+                <i class="fas fa-list"></i>
+              </span>
+              <input type="text" name="name" placeholder="{{ 'Dish Description' | translate }}" class="form-control"
+                formControlName="description">
+            </div>
+            <div class="form-group mb-4">
+              <label>{{ 'Price' | translate }}</label>
+              <span class="icon-input">
+                <i class="fas fa-money-bill-alt"></i>
+              </span>
+              <input type="number" name="price" placeholder="{{ 'Dish price' | translate }}" class="form-control"
+                formControlName="price">
+            </div>
+          </div>
+        </div>
+  
+        <div class="row mb-3">
+          <div class="col text-center">
+            <h5>{{ 'Allergens' | translate }}</h5>
+            <small class="text-muted">{{ 'Allergens description' | translate }}</small>
+          </div>
+        </div>
+  
+        <div class="row mb-4">
+          <div class="col">
+            <div class="form-check">
+              <div class="checkbox">
+                <label style="font-size: 1em">
+                  <input type="checkbox" value="">
+                  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                  <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
+                  Default
+                </label>
+              </div>
+            </div>
+            <div class="form-check">
+              <div class="checkbox">
+                <label style="font-size: 1em">
+                  <input type="checkbox" value="">
+                  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                  <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
+                  Default
+                </label>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col">
+            <div class="form-check">
+              <div class="checkbox">
+                <label style="font-size: 1em">
+                  <input type="checkbox" value="">
+                  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                  <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
+                  Default
+                </label>
+              </div>
+            </div>
+            <div class="form-check">
+              <div class="checkbox">
+                <label style="font-size: 1em">
+                  <input type="checkbox" value="">
+                  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                  <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
+                  Default
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="form-group text-center">
+          <input type="submit" value="{{ 'Create dish' | translate }}" class="btn btn-primary"
+            [disabled]="dishForm.invalid">
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="modal-body p-4 p-lg-5">
-    <form [formGroup]="dishForm" (ngSubmit)="onSubmit()" class="login-form text-left">
-      <div class="row">
-        <div class="col">
-          <div class="form-group mb-4">
-            <label>{{ 'Dish name' | translate }}</label>
-            <span class="icon-input">
-              <i class="fas fa-hamburger"></i>
-            </span>
-            <input type="text" name="name" placeholder="{{ 'Examples of dishes' | translate }}" class="form-control"
-              formControlName="name">
-          </div>
-          <div class="form-group mb-4">
-            <label>{{ 'Price' | translate }}</label>
-            <span class="icon-input">
-              <i class="fas fa-money-bill-alt"></i>
-            </span>
-            <input type="number" name="price" placeholder="{{ 'Dish price' | translate }}" class="form-control"
-              formControlName="price">
-          </div>
-        </div>
-      </div>
 
-      <div class="row mb-3">
-        <div class="col text-center">
-          <h5>{{ 'Allergens' | translate }}</h5>
-          <small class="text-muted">{{ 'Allergens description' | translate }}</small>
-        </div>
-      </div>
 
-      <div class="row mb-4">
-        <div class="col">
-          <div class="form-check">
-            <div class="checkbox">
-              <label style="font-size: 1em">
-                <input type="checkbox" value="">
-                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
-                Default
-              </label>
-            </div>
-          </div>
-          <div class="form-check">
-            <div class="checkbox">
-              <label style="font-size: 1em">
-                <input type="checkbox" value="">
-                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
-                Default
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="form-check">
-            <div class="checkbox">
-              <label style="font-size: 1em">
-                <input type="checkbox" value="">
-                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
-                Default
-              </label>
-            </div>
-          </div>
-          <div class="form-check">
-            <div class="checkbox">
-              <label style="font-size: 1em">
-                <input type="checkbox" value="">
-                <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
-                Default
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-group text-center">
-        <input type="submit" value="{{ 'Create dish' | translate }}" class="btn btn-primary"
-          [disabled]="dishForm.invalid">
-      </div>
-    </form>
-  </div>
-</div>
