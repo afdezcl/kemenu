@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Dish } from '@models/menu/dish.model';
 
 @Component({
   selector: 'app-create-dish',
@@ -9,7 +10,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class CreateDishComponent implements OnInit {
 
-  @Output() messageEvent = new EventEmitter<string>();
+  @Output() messageEvent = new EventEmitter<Dish>();
   dishForm: FormGroup;
 
   constructor(
@@ -27,7 +28,13 @@ export class CreateDishComponent implements OnInit {
   get form() { return this.dishForm.controls; }
 
   onSubmit() {
-    this.messageEvent.emit(this.form.name.value)
+    const dish = new Dish (
+      this.form.name.value,
+      '',
+      this.form.price.value,
+      []
+    )
+    this.messageEvent.emit(dish)
     this.bsModalRef.hide()
   }
 
