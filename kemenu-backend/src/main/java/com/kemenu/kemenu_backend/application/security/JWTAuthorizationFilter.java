@@ -35,8 +35,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         if (Objects.isNull(authorizationHeader)
                 || authorizationHeader.isEmpty()
-                || !authorizationHeader.startsWith("Bearer ")
-                || authorizationHeader.replace("Bearer ", "").equals("null")) {
+                || !authorizationHeader.startsWith("Bearer ")) {
             chain.doFilter(request, response);
             return;
         }
