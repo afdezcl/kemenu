@@ -28,8 +28,16 @@ public class JWTService {
         return generate(username, FIFTEEN_MIN, roles, appSecret);
     }
 
+    public String generateAccessToken(String username, int expirationInMillis, String[] roles) {
+        return generate(username, expirationInMillis, roles, appSecret);
+    }
+
     public String generateRefreshToken(String username, String[] roles) {
         return generate(username, THIRTY_MIN, roles, appRefresh);
+    }
+
+    public String generateRefreshToken(String username, int expirationInMillis, String[] roles) {
+        return generate(username, expirationInMillis, roles, appRefresh);
     }
 
     public DecodedJWT decodeAccessToken(String accessToken) {
