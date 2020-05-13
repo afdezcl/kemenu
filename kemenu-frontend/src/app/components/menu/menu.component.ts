@@ -8,6 +8,8 @@ import { Dish } from '@models/menu/dish.model';
 import { ConfirmDialogComponent } from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { ShareQrComponent } from './share-qr/share-qr.component';
+import { MenuService } from '@services/menu/menu.service';
+import { AuthenticationService } from '@services/authentication/authentication.service';
 
 @Component({
   selector: 'app-menu',
@@ -20,7 +22,9 @@ export class MenuComponent implements OnInit {
   modalReference: BsModalRef;
   constructor(
     private modalService: BsModalService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private _menuService: MenuService,
+    private _authService: AuthenticationService
   ) { }
 
   ngOnInit() {        
@@ -119,5 +123,15 @@ export class MenuComponent implements OnInit {
     this.modalReference = this.modalService.show(ShareQrComponent);
   }
 
+  onSaveMenu(){
+    const menuToSave = {
+      customerEmail: this._authService.getUserEmail(),
+      sections: this.menu.sections      
+    }
+    this._menuService.createMenu(menuToSave)
+      .subscribe(response => {
+        console.log(response)
+      })
+  }
 
 }

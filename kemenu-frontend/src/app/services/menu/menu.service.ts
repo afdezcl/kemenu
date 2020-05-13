@@ -12,8 +12,12 @@ export class MenuService {
   ) { }
 
 
-  createSection(name: string){
-    return this._httpClient.post(environment.apiBaseUrl + '/createSection', name);
+  createMenu(menuToSave) {
+    return this._httpClient.post(environment.apiBaseUrl + '/web/v1/menus', menuToSave);
+  }
+
+  updateMenu(){
+
   }
 
 }
