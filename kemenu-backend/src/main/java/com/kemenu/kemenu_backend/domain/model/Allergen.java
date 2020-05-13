@@ -16,8 +16,9 @@ public class Allergen {
     private String id;
     private String name;
     private String description;
+    private String imageUrl;
 
-    public Allergen(String name, String description) {
-        this(UUID.randomUUID().toString(), name, description);
+    public Allergen(String name, String description, String imageUrl) {
+        this(UUID.randomUUID().toString(), name, description, imageUrl);
     }
 }

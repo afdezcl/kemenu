@@ -15,8 +15,11 @@ import java.util.UUID;
 @RequestMapping("/web/v1")
 public class MenuWebController {
 
+    private final MenuService menuService;
+    private final MenuMapper menuMapper;
+
     @PostMapping("/menus")
     public ResponseEntity<UUID> create(@RequestBody @Valid MenuRequest menuRequest) {
-        return null; // TODO: create menu
+        return ResponseEntity.ok(UUID.fromString(menuService.create(menuMapper.from(menuRequest))));
     }
 }

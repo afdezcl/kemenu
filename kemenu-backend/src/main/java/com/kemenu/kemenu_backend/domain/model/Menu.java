@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -34,6 +35,10 @@ public class Menu {
             addNewSection(sectionName);
         }
         sections.get(sectionName).addNewDish(dish);
+    }
+
+    public void addDishes(String sectionName, List<Dish> dishes) {
+        dishes.forEach(d -> addNewDish(sectionName, d));
     }
 
     public int numberOfSections() {

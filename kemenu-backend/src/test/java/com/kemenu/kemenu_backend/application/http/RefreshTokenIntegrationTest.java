@@ -28,8 +28,8 @@ class RefreshTokenIntegrationTest extends KemenuIntegrationTest {
         DecodedJWT decodedAccessToken = jwtService.decodeAccessToken(newAccessToken);
         DecodedJWT decodedRefreshToken = jwtService.decodeRefreshToken(newRefreshToken);
 
-        assertEquals("testusername", decodedAccessToken.getSubject());
-        assertEquals("testusername", decodedRefreshToken.getSubject());
+        assertEquals(randomCustomer.getEmail(), decodedAccessToken.getSubject());
+        assertEquals(randomCustomer.getEmail(), decodedRefreshToken.getSubject());
     }
 
     @Test
