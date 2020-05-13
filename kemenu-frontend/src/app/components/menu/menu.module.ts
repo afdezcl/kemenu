@@ -6,6 +6,7 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { CreateSectionComponent } from './create-section/create-section.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateDishComponent } from './create-dish/create-dish.component';
+import { ShareQrComponent } from './share-qr/share-qr.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { CreateDishComponent } from './create-dish/create-dish.component';
   declarations: [
     MenuComponent,
     CreateSectionComponent,
-    CreateDishComponent
+    CreateDishComponent,
+    ShareQrComponent
   ]
 })
 export class MenuModule { }

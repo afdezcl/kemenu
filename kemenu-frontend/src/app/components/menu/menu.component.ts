@@ -7,6 +7,7 @@ import { CreateDishComponent } from './create-dish/create-dish.component';
 import { Dish } from '@models/menu/dish.model';
 import { ConfirmDialogComponent } from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ShareQrComponent } from './share-qr/share-qr.component';
 
 @Component({
   selector: 'app-menu',
@@ -112,6 +113,10 @@ export class MenuComponent implements OnInit {
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].dishes[dishIndex] = data
     });
+  }
+
+  openShareQR(){
+    this.modalReference = this.modalService.show(ShareQrComponent);
   }
 
 
