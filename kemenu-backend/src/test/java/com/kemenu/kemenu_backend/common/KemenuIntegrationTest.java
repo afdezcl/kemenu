@@ -35,11 +35,19 @@ public class KemenuIntegrationTest {
     }
 
     protected String generateAccessToken() {
+        return generateToken(900000);
+    }
+
+    protected String generateExpiredAccessToken() {
+        return generateToken(-900000);
+    }
+
+    private String generateToken(int expirationMillis) {
         String[] roles = {"ROLE_USER"};
 
         return "Bearer " + JWT.create()
                 .withSubject("testusername")
-                .withExpiresAt(new Date(System.currentTimeMillis() + 900000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + expirationMillis))
                 .withArrayClaim("role", roles)
                 .sign(HMAC512(appSecret.getBytes()));
     }

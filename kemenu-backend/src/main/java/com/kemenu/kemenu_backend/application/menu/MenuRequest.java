@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Builder;
 import lombok.Value;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public class MenuRequest {
     @NotBlank
     @Size(max = 255)
+    @Email(regexp = ".+@.+\\..+")
     String customerEmail;
     List<MenuSectionRequest> sections;
 }

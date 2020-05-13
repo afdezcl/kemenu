@@ -44,7 +44,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             UsernamePasswordAuthenticationToken authentication = getAuthentication(authorizationHeader);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (TokenExpiredException e) {
-            log.error("TOKEN EXPIRED");
+            // Security context is not init and the client receives a 401
         }
 
         chain.doFilter(request, response);

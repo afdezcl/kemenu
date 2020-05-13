@@ -67,9 +67,20 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
     @Test
     void aCustomerRequestSomeResourceWithoutAuthorizationHeader() {
         webTestClient
-                .get().uri("/web/v1/menus")
+                .post().uri("/web/v1/menus")
+                .body(Mono.just(MenuRequestHelper.randomRequest("test@test.com")), MenuRequest.class)
                 .exchange()
-                .expectStatus().isForbidden();
+                .expectStatus().isUnauthorized();
+    }
+
+    @Test
+    void aCustomerWithExpiredTokenReceiveA401HTTPError() {
+        webTestClient
+                .post().uri("/web/v1/menus")
+                .body(Mono.just(MenuRequestHelper.randomRequest("test@test.com")), MenuRequest.class)
+                .header("Authorization", generateExpiredAccessToken())
+                .exchange()
+                .expectStatus().isUnauthorized();
     }
 
     @Test
@@ -95,5 +106,14 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
                 .expectStatus().isOk()
                 .expectBody()
                 .jsonPath("$[0].email").isEqualTo(adminUsername);
+    }
+
+    @Test
+    void aCustomerWithUserRoleTryToUseAdminResourceAndGetAnUnauthorizedResponse() {
+        webTestClient
+                .get().uri("/admin/v1/customers")
+                .header("Authorization", generateAccessToken())
+                .exchange()
+                .expectStatus().isForbidden();
     }
 }

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -14,7 +15,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -47,8 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .cors(withDefaults())
                 .csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint())
-                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
@@ -57,7 +56,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/app/version").permitAll()
+                .antMatchers("/error").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 .and()
                 .addFilterBefore(new JWTAuthenticationFilter(mapper, recaptcha, authenticationManager(), jwtService), UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(new JWTAuthorizationFilter(authenticationManager(), jwtService), UsernamePasswordAuthenticationFilter.class);
