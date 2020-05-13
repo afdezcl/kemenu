@@ -50,8 +50,13 @@ export class AuthenticationService {
 
   refreshToken() {
     return this._httpClient.post<any>(environment.apiBaseUrl + '/refresh', {
-      'refreshToken': this.getRefreshToken()
-    }).pipe(tap((tokens: Tokens) => {
+      'refreshToken': this.getRefreshToken(),
+      observe: 'response'
+    }).pipe(map(response => {
+      const tokens: Tokens = {
+        jwt: response.headers.get('Authorization'),
+        refreshToken: response.headers.get('JWT-Refresh-Token')
+      }
       this.storeTokens(tokens);
     }));
   }
