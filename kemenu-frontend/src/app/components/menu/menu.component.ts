@@ -20,6 +20,8 @@ export class MenuComponent implements OnInit {
 
   menu: Menu;
   modalReference: BsModalRef;
+  menuCopyToDetectChanges: Menu;
+
   constructor(
     private modalService: BsModalService,
     private translate: TranslateService,
@@ -36,7 +38,8 @@ export class MenuComponent implements OnInit {
     this.menu = new Menu(
       '',
       []      
-    )  
+    )
+    this.menuCopyToDetectChanges = JSON.parse(JSON.stringify(this.menu))  
   }
 
   openCreateSection() {
@@ -129,9 +132,14 @@ export class MenuComponent implements OnInit {
       sections: this.menu.sections      
     }
     this._menuService.createMenu(menuToSave)
-      .subscribe(response => {
-        console.log(response)
+      .subscribe((response: string) => {
+        this.menu.id = response
+        this.menuCopyToDetectChanges = JSON.parse(JSON.stringify(this.menu))
       })
+  }
+
+  thereAreChanges(): boolean{
+    return !Object.is(this.menu, this.menuCopyToDetectChanges)
   }
 
 }
