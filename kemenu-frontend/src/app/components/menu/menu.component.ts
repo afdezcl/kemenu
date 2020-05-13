@@ -6,6 +6,7 @@ import { Section } from '@models/menu/section.model';
 import { CreateDishComponent } from './create-dish/create-dish.component';
 import { Dish } from '@models/menu/dish.model';
 import { ConfirmDialogComponent } from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-menu',
@@ -18,10 +19,12 @@ export class MenuComponent implements OnInit {
   modalReference: BsModalRef;
   constructor(
     private modalService: BsModalService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {        
-    this.loadMenu();      
+    this.loadMenu();   
+       
   }
 
   loadMenu(){
@@ -49,8 +52,8 @@ export class MenuComponent implements OnInit {
   
   deleteSection(sectionToRemove: Section){
     const initialState = {
-      title: 'Eliminar sección',
-      message: '¿Está seguro que desea eliminar esta sección?'
+      title: this.translate.instant('Delete Section title'),
+      message: this.translate.instant('Delete Section description')
     };
     
     this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
@@ -86,8 +89,8 @@ export class MenuComponent implements OnInit {
 
   deleteDish(dishToRemove: Dish, sectionIndex: number){
     const initialState = {
-      title: 'Eliminar plato',
-      message: '¿Está seguro que desea eliminar este plato?'
+      title: this.translate.instant('Delete Dish title'),
+      message: this.translate.instant('Delete Dish description'),
     };
 
     this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });

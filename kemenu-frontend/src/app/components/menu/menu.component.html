@@ -43,24 +43,24 @@
               </button>
 
 
-              <div class="dishes mt-2" *ngFor="let dish of section.dishes; let dishCounter = index;">
+              <div class="dishes mt-2" *ngFor="let dish of section.dishes; let dishCounter = index;" >
                 <div class="row">
-                  <div class="col-9 text-left">
+                  <div class="col-sm-8 col-8 text-left">
                     <span class="dish-title">{{dish.name}}</span>                    
                   </div>
-                  <div class="col-3 text-right">
+                  <div class="col-sm-4 col-4 text-right">
                     <span class="dish-price">{{dish.price}}€</span>
                   </div>
                 </div>
                 <div class="row">
-                  <div class="col-9">
+                  <div class="col-7">
                     <small class="dish-description text-muted">{{dish.description}}</small>
                   </div>
-                  <div class="col-3 text-right">
-                    <button type="submit" class="btn btn-link delete-section" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">                
+                  <div class="col-5 text-right">
+                    <button type="submit" class="btn btn-link delete-dish" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">                
                       <i class="fas fa-edit"></i>            
                     </button>
-                    <button type="submit" class="btn btn-link delete-section" accordion-heading (click)="deleteDish(dish, sectionCounter)">                
+                    <button type="submit" class="btn btn-link delete-dish" accordion-heading (click)="deleteDish(dish, sectionCounter)">                
                       <i class="fas fa-trash"></i>            
                     </button>
                   </div>
