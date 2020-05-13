@@ -30,11 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final ObjectMapper mapper;
     private final Recaptcha recaptcha;
+    private final JWTService jwtService;
 
-    @Value("${app.secret}")
-    private String appSecret;
-    @Value("${app.refresh}")
-    private String appRefresh;
     @Value("${app.cors}")
     private List<String> allowedOrigins;
 
@@ -57,8 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/web/v1/**").hasAnyRole("ADMIN", "USER")
                 .anyRequest().permitAll()
                 .and()
-                .addFilter(new JWTAuthenticationFilter(mapper, recaptcha, authenticationManager(), appSecret, appRefresh))
-                .addFilter(new JWTAuthorizationFilter(authenticationManager(), appSecret));
+                .addFilter(new JWTAuthenticationFilter(mapper, recaptcha, authenticationManager(), jwtService))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtService));
     }
 
     @Bean

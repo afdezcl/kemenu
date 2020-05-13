@@ -1,6 +1,5 @@
 package com.kemenu.kemenu_backend.application.security;
 
-import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
@@ -17,21 +16,14 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
-
-import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
 @AllArgsConstructor
 class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private static final int FIFTEEN_MIN = 900000;
-    private static final int THIRTY_MIN = 1800000;
-
     private final ObjectMapper mapper;
     private final Recaptcha recaptcha;
     private final AuthenticationManager authenticationManager;
-    private final String appSecret;
-    private final String refreshSecret;
+    private final JWTService jwtService;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -59,17 +51,8 @@ class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         User user = (User) auth.getPrincipal();
         String[] roles = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toArray(String[]::new);
 
-        String accessToken = JWT.create()
-                .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + FIFTEEN_MIN))
-                .withArrayClaim("role", roles)
-                .sign(HMAC512(appSecret.getBytes()));
-
-        String refreshToken = JWT.create()
-                .withSubject(user.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + THIRTY_MIN))
-                .withArrayClaim("role", roles)
-                .sign(HMAC512(refreshSecret.getBytes()));
+        String accessToken = jwtService.generateAccessToken(user.getUsername(), roles);
+        String refreshToken = jwtService.generateRefreshToken(user.getUsername(), roles);
 
         response.addHeader("Authorization", "Bearer " + accessToken);
         response.addHeader("JWT-Refresh-Token", "Bearer " + refreshToken);
