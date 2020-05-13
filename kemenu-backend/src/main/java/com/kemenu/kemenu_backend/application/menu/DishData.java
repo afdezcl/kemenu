@@ -13,8 +13,8 @@ import java.util.List;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = DishRequest.DishRequestBuilder.class)
-public class DishRequest {
+@JsonDeserialize(builder = DishData.DishDataBuilder.class)
+public class DishData {
     @NotBlank
     @Size(max = 255)
     String name;

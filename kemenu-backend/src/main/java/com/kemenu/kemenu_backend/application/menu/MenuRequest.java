@@ -17,5 +17,5 @@ public class MenuRequest {
     @Size(max = 255)
     @Email(regexp = ".+@.+\\..+")
     String customerEmail;
-    List<MenuSectionRequest> sections;
+    List<MenuSectionData> sections;
 }
