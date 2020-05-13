@@ -5,6 +5,8 @@ import { environment } from '@environments/environment';
 import { Tokens } from '@models/auth/tokens.model';
 import { Login } from '@models/auth/login.interface';
 import { Register } from '@models/auth/register.interface';
+import * as jwt_decode from 'jwt-decode';
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,8 @@ export class AuthenticationService {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
+  private readonly USER_EMAIL = 'USER_EMAIL';
+  private readonly USER_ROLE = 'USER_ROLE';
 
   constructor(
     private _httpClient: HttpClient
@@ -37,7 +41,7 @@ export class AuthenticationService {
   }
 
   logout() {
-    this.removeTokens();
+    localStorage.clear();
   }
 
   isLoggedIn() {
@@ -48,12 +52,20 @@ export class AuthenticationService {
     return this._httpClient.post<any>(environment.apiBaseUrl + '/refresh', {
       'refreshToken': this.getRefreshToken()
     }).pipe(tap((tokens: Tokens) => {
-      this.storeJwtToken(tokens.jwt);
+      this.storeTokens(tokens);
     }));
   }
 
   getJwtToken() {
     return localStorage.getItem(this.JWT_TOKEN);
+  }
+
+  getUserEmail(){
+    return localStorage.getItem(this.USER_EMAIL)
+  }
+
+  getUserRole(){
+    return localStorage.getItem(this.USER_ROLE)
   }
 
   private getRefreshToken() {
@@ -65,6 +77,9 @@ export class AuthenticationService {
   }
 
   private storeTokens(tokens: Tokens) {
+    const jwtDecoded = jwt_decode(tokens.jwt)    
+    this.storeUserEmail(jwtDecoded.sub)
+    this.storeUserRole(jwtDecoded.role[0])
     localStorage.setItem(this.JWT_TOKEN, tokens.jwt);
     localStorage.setItem(this.REFRESH_TOKEN, tokens.refreshToken);
   }
@@ -72,6 +87,14 @@ export class AuthenticationService {
   private removeTokens() {
     localStorage.removeItem(this.JWT_TOKEN);
     localStorage.removeItem(this.REFRESH_TOKEN);
+  }
+
+  private storeUserEmail(email: string){
+    localStorage.setItem(this.USER_EMAIL, email);
+  }
+
+  private storeUserRole(role: string){
+    localStorage.setItem(this.USER_ROLE, role);
   }
 
 }
