@@ -25,7 +25,7 @@ export class CreateDishComponent implements OnInit {
     this.dishForm = this.formBuilder.group({
       name: [this.name, Validators.required],
       description: [this.description],   
-      price: [this.price, Validators.required]      
+      price: [this.price, [Validators.required, Validators.min(0)]]      
     });
   }
 
