@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+
+
 @Component({
   selector: 'app-share-qr',
   templateUrl: './share-qr.component.html',
@@ -9,7 +11,8 @@ export class ShareQrComponent implements OnInit {
 
   
   constructor(
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    
   ) { }
 
   ngOnInit() {

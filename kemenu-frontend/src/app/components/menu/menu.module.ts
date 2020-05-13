@@ -7,14 +7,22 @@ import { CreateSectionComponent } from './create-section/create-section.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateDishComponent } from './create-dish/create-dish.component';
 import { ShareQrComponent } from './share-qr/share-qr.component';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
+    HttpClientModule,
     CommonModule,
     TranslateModule,
     AccordionModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ShareButtonsModule.withConfig({
+      debug: true
+    }),
+    ShareIconsModule.forRoot()
   ],
   declarations: [
     MenuComponent,

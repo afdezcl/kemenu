@@ -9,7 +9,7 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png"
          alt="qr-code" class="img-fluid qr-code">
          <br>
-         <button type="submit" class="btn btn-primary mt-3" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">                
+         <button type="submit" class="btn btn-primary mt-3">                
           Descargar QR<i class="fas fa-download ml-2"></i>            
         </button>
       </div>
@@ -17,6 +17,18 @@
     <div class="row">
       <div class="col text-center mt-2">
         <small class="text-muted">Tu carta: https://kemenu.com/bargaleon</small>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col tex-center mt-3">
+        <share-buttons [theme]="'modern-dark'"
+        [include]="['facebook','twitter','reddit','whatsapp','copy']"
+        [show]="5"
+        [url]="'https://kemenu.com'"
+        [title]="'Compartir datos'"
+        [autoSetMeta]="false"
+       ></share-buttons>        
       </div>
     </div>
   </div>
