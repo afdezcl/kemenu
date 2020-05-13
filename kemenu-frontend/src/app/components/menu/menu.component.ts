@@ -19,8 +19,7 @@ import { AuthenticationService } from '@services/authentication/authentication.s
 export class MenuComponent implements OnInit {
 
   menu: Menu;
-  modalReference: BsModalRef;
-  menuCopyToDetectChanges: Menu;
+  modalReference: BsModalRef;  
 
   constructor(
     private modalService: BsModalService,
@@ -30,8 +29,7 @@ export class MenuComponent implements OnInit {
   ) { }
 
   ngOnInit() {        
-    this.loadMenu();   
-       
+    this.loadMenu();         
   }
 
   loadMenu(){
@@ -39,7 +37,6 @@ export class MenuComponent implements OnInit {
       '',
       []      
     )
-    this.menuCopyToDetectChanges = JSON.parse(JSON.stringify(this.menu))  
   }
 
   openCreateSection() {
@@ -133,13 +130,8 @@ export class MenuComponent implements OnInit {
     }
     this._menuService.createMenu(menuToSave)
       .subscribe((response: string) => {
-        this.menu.id = response
-        this.menuCopyToDetectChanges = JSON.parse(JSON.stringify(this.menu))
+        this.menu.id = response        
       })
-  }
-
-  thereAreChanges(): boolean{
-    return !Object.is(this.menu, this.menuCopyToDetectChanges)
   }
 
 }

@@ -58,6 +58,7 @@ export class AuthenticationService {
         refreshToken: response.headers.get('JWT-Refresh-Token')
       }      
       this.storeTokens(tokens);
+      return tokens;
     }));
   }
 
