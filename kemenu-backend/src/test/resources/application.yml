@@ -13,7 +13,7 @@ app:
     secret: recaptcha
   cors: http://localhost:8085, http://localhost:4200
   admin:
-    username: admin
+    username: admin@example.com
     password: admin
 
 spring:

@@ -13,7 +13,7 @@ app:
     secret: ${RECAPTCHA_TOKEN}
   cors: http://localhost:8085, http://localhost:4200
   admin:
-    username: admin
+    username: admin@example.com
     password: admin
 
 spring:
@@ -36,7 +36,7 @@ app:
     secret: ${RECAPTCHA_TOKEN}
   cors: https://kemenu.com, https://www.kemenu.com
   admin:
-    username: admin
+    username: admin@kemenu.com
     password: ${KEMENU_ADMIN_PWD}
 
 spring:

@@ -1,6 +1,8 @@
 package com.kemenu.kemenu_backend.common;
 
 import com.kemenu.kemenu_backend.application.security.JWTService;
+import com.kemenu.kemenu_backend.domain.model.Customer;
+import com.kemenu.kemenu_backend.helper.CustomerHelper;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +15,8 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 @ActiveProfiles(profiles = "test")
 public class KemenuIntegrationTest {
 
-    private static final String[] USER_ROLE = {"ROLE_USER"};
+    protected static final Customer randomCustomer = CustomerHelper.randomCustomer();
+    protected static final String[] customerRole = {randomCustomer.getAuthority()};
 
     @Autowired
     protected WebTestClient webTestClient;
@@ -32,18 +35,18 @@ public class KemenuIntegrationTest {
     }
 
     protected String generateAccessToken() {
-        return "Bearer " + jwtService.generateAccessToken("testusername", USER_ROLE);
+        return "Bearer " + jwtService.generateAccessToken(randomCustomer.getEmail(), customerRole);
     }
 
     protected String generateExpiredAccessToken() {
-        return "Bearer " + jwtService.generateAccessToken("testusername", -9000, USER_ROLE);
+        return "Bearer " + jwtService.generateAccessToken(randomCustomer.getEmail(), -9000, customerRole);
     }
 
     protected String generateRefreshToken() {
-        return "Bearer " + jwtService.generateRefreshToken("testusername", USER_ROLE);
+        return "Bearer " + jwtService.generateRefreshToken(randomCustomer.getEmail(), customerRole);
     }
 
     protected String generateExpiredRefreshToken() {
-        return "Bearer " + jwtService.generateRefreshToken("testusername", -9000, USER_ROLE);
+        return "Bearer " + jwtService.generateRefreshToken(randomCustomer.getEmail(), -9000, customerRole);
     }
 }

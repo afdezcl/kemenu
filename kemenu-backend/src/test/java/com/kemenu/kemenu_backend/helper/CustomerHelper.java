@@ -10,6 +10,15 @@ import java.util.UUID;
 public class CustomerHelper {
 
     public static Customer randomCustomer() {
-        return new Customer(UUID.randomUUID().toString(), UUID.randomUUID().toString(), UUID.randomUUID().toString());
+        return new Customer(UUID.randomUUID().toString() + "@example.com", UUID.randomUUID().toString(), UUID.randomUUID().toString());
+    }
+
+    public static Customer randomAdmin() {
+        return new Customer(
+                "admin@example.com",
+                "admin",
+                Customer.Role.ADMIN,
+                "adminBusiness"
+        );
     }
 }
