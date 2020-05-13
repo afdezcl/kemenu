@@ -31,4 +31,26 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
 
         assertEquals(menuId.toString(), createdMenu.getId());
     }
+
+    @Test
+    void aCustomerCouldSeeAMenu() {
+        MenuRequest menuRequest = MenuRequestHelper.randomRequest(randomCustomer.getEmail());
+
+        UUID menuId = webTestClient
+                .post().uri("/web/v1/menus")
+                .body(Mono.just(menuRequest), MenuRequest.class)
+                .header("Authorization", generateAccessToken())
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(UUID.class).returnResult().getResponseBody();
+
+        MenuResponse menuResponse = webTestClient
+                .get().uri("/web/v1/menus/" + menuId)
+                .header("Authorization", generateAccessToken())
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(MenuResponse.class).returnResult().getResponseBody();
+
+        assertEquals(menuRequest.getSections().get(0).getName(), menuResponse.getSections().get(0).getName());
+    }
 }

@@ -10,10 +10,10 @@ import java.util.List;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = MenuSectionRequest.MenuSectionRequestBuilder.class)
-public class MenuSectionRequest {
+@JsonDeserialize(builder = MenuSectionData.MenuSectionDataBuilder.class)
+public class MenuSectionData {
     @NotBlank
     @Size(max = 255)
     String name;
-    List<DishRequest> dishes;
+    List<DishData> dishes;
 }
