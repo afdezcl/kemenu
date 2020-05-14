@@ -5,6 +5,8 @@ import com.kemenu.kemenu_backend.domain.model.BusinessRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 @AllArgsConstructor
 class BusinessMongoRepository implements BusinessRepository {
@@ -14,5 +16,10 @@ class BusinessMongoRepository implements BusinessRepository {
     @Override
     public String create(Business business) {
         return springMongoRepository.save(business).getId();
+    }
+
+    @Override
+    public Optional<Business> read(String id) {
+        return springMongoRepository.findById(id);
     }
 }

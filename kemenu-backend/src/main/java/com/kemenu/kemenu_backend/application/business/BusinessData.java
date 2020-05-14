@@ -11,6 +11,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 @JsonDeserialize(builder = BusinessData.BusinessDataBuilder.class)
 public class BusinessData {
+    String id;
     String name;
     List<MenuResponse> menus;
 }

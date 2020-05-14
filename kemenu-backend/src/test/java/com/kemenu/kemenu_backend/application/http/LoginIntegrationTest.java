@@ -6,6 +6,8 @@ import com.kemenu.kemenu_backend.application.customer.CustomerRequest;
 import com.kemenu.kemenu_backend.application.menu.MenuRequest;
 import com.kemenu.kemenu_backend.application.security.Recaptcha;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
+import com.kemenu.kemenu_backend.domain.model.Customer;
+import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.helper.CustomerRequestHelper;
 import com.kemenu.kemenu_backend.helper.LoginRequestHelper;
 import com.kemenu.kemenu_backend.helper.MenuRequestHelper;
@@ -23,6 +25,9 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
 
     @MockBean
     private Recaptcha recaptchaMock;
+
+    @Autowired
+    private CustomerRepository customerRepository;
 
     @Autowired
     private ObjectMapper mapper;
@@ -45,6 +50,8 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
                 .expectStatus().isOk()
                 .expectBody(UUID.class);
 
+        Customer customer = customerRepository.findByEmail(customerRequest.getEmail()).get();
+
         HttpHeaders responseHeaders = webTestClient
                 .post().uri("/login")
                 .body(Mono.just(LoginRequestHelper.createLoginRequest(customerRequest, mapper)), JsonNode.class)
@@ -58,7 +65,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
 
         webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest(customerRequest.getEmail())), MenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.randomRequest(customer.getFirstBusiness().getId())), MenuRequest.class)
                 .header("Authorization", accessToken)
                 .exchange()
                 .expectStatus().isOk();
@@ -68,7 +75,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
     void aCustomerRequestSomeResourceWithoutAuthorizationHeader() {
         webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest("test@test.com")), MenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.randomRequest()), MenuRequest.class)
                 .exchange()
                 .expectStatus().isUnauthorized();
     }
@@ -77,7 +84,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
     void aCustomerWithExpiredTokenReceiveA401HTTPError() {
         webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest("test@test.com")), MenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.randomRequest()), MenuRequest.class)
                 .header("Authorization", generateExpiredAccessToken())
                 .exchange()
                 .expectStatus().isUnauthorized();

@@ -2,8 +2,6 @@ package com.kemenu.kemenu_backend.application.menu;
 
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
-import com.kemenu.kemenu_backend.domain.model.Menu;
-import com.kemenu.kemenu_backend.domain.model.MenuRepository;
 import com.kemenu.kemenu_backend.helper.MenuRequestHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,28 +11,31 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MenuWebIntegrationTest extends KemenuIntegrationTest {
+class MenuPublicIntegrationTest extends KemenuIntegrationTest {
 
     @Autowired
     private CustomerRepository customerRepository;
 
-    @Autowired
-    private MenuRepository menuRepository;
-
     @Test
-    void aCustomerCouldCreateAMenu() {
+    void anUnauthorizedUserCouldSeeAMenu() {
         customerRepository.create(randomCustomer);
+        MenuRequest menuRequest = MenuRequestHelper.randomRequest(randomCustomer.getFirstBusiness().getId());
 
         UUID menuId = webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest(randomCustomer.getFirstBusiness().getId())), MenuRequest.class)
+                .body(Mono.just(menuRequest), MenuRequest.class)
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(UUID.class).returnResult().getResponseBody();
 
-        Menu createdMenu = menuRepository.findById(menuId.toString()).get();
+        MenuResponse menuResponse = webTestClient
+                .get().uri("/menus/" + menuId)
+                .header("Authorization", generateAccessToken())
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(MenuResponse.class).returnResult().getResponseBody();
 
-        assertEquals(menuId.toString(), createdMenu.getId());
+        assertEquals(menuRequest.getSections().get(0).getName(), menuResponse.getSections().get(0).getName());
     }
 }
