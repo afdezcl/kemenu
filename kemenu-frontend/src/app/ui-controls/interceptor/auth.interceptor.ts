@@ -52,8 +52,7 @@ export class AuthInterceptor implements HttpInterceptor {
                         console.log("Request new token")
                         this.isRefreshing = false;
                         this.refreshTokenSubject.next(token);
-                        return next.handle(this.addToken(request, token.jwt))
-                    
+                        return next.handle(this.addToken(request, this._authService.getJwtToken()))                                            
                     }));
 
         } else {
