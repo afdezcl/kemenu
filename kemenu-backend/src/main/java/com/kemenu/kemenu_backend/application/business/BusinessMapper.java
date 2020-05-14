@@ -21,6 +21,7 @@ public class BusinessMapper {
 
     public BusinessData from(Business business) {
         return BusinessData.builder()
+                .id(business.getId())
                 .name(business.getName())
                 .menus(menuMapper.from(business.getMenus()))
                 .build();

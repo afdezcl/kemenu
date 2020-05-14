@@ -14,9 +14,13 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MenuRequestHelper {
 
-    public static MenuRequest randomRequest(String customerEmail) {
+    public static MenuRequest randomRequest() {
+        return randomRequest(UUID.randomUUID().toString());
+    }
+
+    public static MenuRequest randomRequest(String businessId) {
         return MenuRequest.builder()
-                .customerEmail(customerEmail)
+                .businessId(businessId)
                 .sections(List.of(MenuSectionData.builder()
                         .name(UUID.randomUUID().toString())
                         .dishes(List.of(DishData.builder()

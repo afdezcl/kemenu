@@ -1,11 +1,12 @@
 package com.kemenu.kemenu_backend.application.menu;
 
+import com.kemenu.kemenu_backend.application.security.JWTService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,16 +18,23 @@ import java.util.UUID;
 @RequestMapping("/web/v1")
 public class MenuWebController {
 
+    private final JWTService jwtService;
     private final MenuService menuService;
     private final MenuMapper menuMapper;
 
     @PostMapping("/menus")
-    ResponseEntity<UUID> create(@RequestBody @Valid MenuRequest menuRequest) {
-        return ResponseEntity.ok(UUID.fromString(menuService.create(menuMapper.from(menuRequest))));
+    ResponseEntity<UUID> create(@RequestHeader(value = "Authorization") String token, @RequestBody @Valid MenuRequest menuRequest) {
+        String customerEmail = jwtService.decodeAccessToken(token).getSubject();
+        return menuService.create(customerEmail, menuRequest.getBusinessId(), menuMapper.from(menuRequest))
+                .map(menuId -> ResponseEntity.ok(UUID.fromString(menuId)))
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/menus/{id}")
-    MenuResponse read(@PathVariable String id) {
-        return menuService.read(id);
+    @PutMapping("/menus")
+    ResponseEntity<UUID> update(@RequestHeader(value = "Authorization") String token, @RequestBody @Valid MenuRequest menuRequest) {
+        String customerEmail = jwtService.decodeAccessToken(token).getSubject();
+        return menuService.create(customerEmail, menuRequest.getBusinessId(), menuMapper.from(menuRequest))
+                .map(menuId -> ResponseEntity.ok(UUID.fromString(menuId)))
+                .orElse(ResponseEntity.notFound().build());
     }
 }
