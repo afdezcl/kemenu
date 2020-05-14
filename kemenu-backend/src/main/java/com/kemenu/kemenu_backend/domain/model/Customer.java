@@ -15,21 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
 @Document
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__(@PersistenceConstructor))
 public class Customer implements GrantedAuthority {
 
     @Id
-    @Getter
     @EqualsAndHashCode.Include
     private String id;
-    @Getter
     @Indexed(unique = true)
     private String email;
-    @Getter
     private String password;
-
     @DBRef
     private List<Business> businesses;
     private Role role;

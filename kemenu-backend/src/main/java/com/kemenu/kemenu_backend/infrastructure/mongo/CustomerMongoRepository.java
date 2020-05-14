@@ -12,10 +12,16 @@ import java.util.Optional;
 @AllArgsConstructor
 class CustomerMongoRepository implements CustomerRepository {
 
+    private final MenuSpringMongoRepository menuSpringMongoRepository;
+    private final BusinessSpringMongoRepository businessSpringMongoRepository;
     private final CustomerSpringMongoRepository springMongoRepository;
 
     @Override
     public String create(Customer customer) {
+        customer.getBusinesses().forEach(b -> {
+            menuSpringMongoRepository.saveAll(b.getMenus());
+            businessSpringMongoRepository.save(b);
+        });
         return springMongoRepository.save(customer).getId();
     }
 

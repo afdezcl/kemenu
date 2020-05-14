@@ -14,13 +14,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
 @Document
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__(@PersistenceConstructor))
 public class Business {
 
     @Id
-    @Getter
     @EqualsAndHashCode.Include
     private String id;
     private String name;
