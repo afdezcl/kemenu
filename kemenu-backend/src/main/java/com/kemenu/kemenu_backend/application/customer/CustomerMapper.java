@@ -1,5 +1,6 @@
 package com.kemenu.kemenu_backend.application.customer;
 
+import com.kemenu.kemenu_backend.application.business.BusinessMapper;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class CustomerMapper {
 
     private final PasswordEncoder passwordEncoder;
+    private final BusinessMapper businessMapper;
 
     public Customer from(CustomerRequest customerRequest) {
         return new Customer(
@@ -17,5 +19,11 @@ public class CustomerMapper {
                 passwordEncoder.encode(customerRequest.getPassword()),
                 customerRequest.getBusinessName()
         );
+    }
+
+    public CustomerResponse from(Customer customer) {
+        return CustomerResponse.builder()
+                .businesses(businessMapper.from(customer.getBusinesses()))
+                .build();
     }
 }

@@ -4,6 +4,8 @@ import com.kemenu.kemenu_backend.domain.model.Menu;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
@@ -19,6 +21,10 @@ public class MenuMapper {
                 .collect(toMap(MenuSectionData::getName, dishMapper::from))
                 .forEach(menu::addDishes);
         return menu;
+    }
+
+    public List<MenuResponse> from(List<Menu> menus) {
+        return menus.stream().map(this::from).collect(toList());
     }
 
     public MenuResponse from(Menu menu) {

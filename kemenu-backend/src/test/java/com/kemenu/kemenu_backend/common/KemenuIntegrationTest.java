@@ -38,6 +38,10 @@ public class KemenuIntegrationTest {
         return "Bearer " + jwtService.generateAccessToken(randomCustomer.getEmail(), customerRole);
     }
 
+    protected String generateAccessToken(String email) {
+        return "Bearer " + jwtService.generateAccessToken(email, customerRole);
+    }
+
     protected String generateExpiredAccessToken() {
         return "Bearer " + jwtService.generateAccessToken(randomCustomer.getEmail(), -9000, customerRole);
     }
