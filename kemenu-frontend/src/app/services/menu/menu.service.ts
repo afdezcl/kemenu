@@ -20,5 +20,9 @@ export class MenuService {
 
   }
 
+  getMenu(customerEmail: string) {
+    return this._httpClient.get(environment.apiBaseUrl + `/web/v1/menus/${customerEmail}`);
+  }
+
 }
 

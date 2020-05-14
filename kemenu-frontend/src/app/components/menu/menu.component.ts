@@ -20,6 +20,7 @@ export class MenuComponent implements OnInit {
 
   menu: Menu;
   modalReference: BsModalRef;  
+  businessId: string;
 
   constructor(
     private modalService: BsModalService,
@@ -37,6 +38,10 @@ export class MenuComponent implements OnInit {
       '',
       []      
     )
+    this._menuService.getMenu(this._authService.getUserEmail())
+      .subscribe(response => {
+        console.log(response)
+      })
   }
 
   openCreateSection() {
@@ -125,7 +130,7 @@ export class MenuComponent implements OnInit {
 
   onSaveMenu(){
     const menuToSave = {
-      customerEmail: this._authService.getUserEmail(),
+      businessId: this.businessId,    
       sections: this.menu.sections      
     }
     this._menuService.createMenu(menuToSave)

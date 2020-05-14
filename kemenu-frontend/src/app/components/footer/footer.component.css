@@ -3,7 +3,9 @@
 *     FOOTER
 * =====================================================
 */
-footer.main-footer {
+footer.main-footer {       
+    width: 100%;
+    bottom: 0;
     padding: 7rem 0;
     background: #E7475E;
     color: #fff;
