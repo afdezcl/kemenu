@@ -43,4 +43,8 @@ public class MenuService {
                 .map(menuMapper::from)
                 .orElse(MenuResponse.builder().sections(List.of()).build());
     }
+
+    public Optional<String> update(String customerEmail, UpdateMenuRequest updateMenuRequest) {
+        return null;
+    }
 }

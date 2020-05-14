@@ -15,9 +15,9 @@ public class MenuMapper {
 
     private final DishMapper dishMapper;
 
-    public Menu from(MenuRequest menuRequest) {
+    public Menu from(CreateMenuRequest createMenuRequest) {
         Menu menu = new Menu();
-        menuRequest.getSections().stream()
+        createMenuRequest.getSections().stream()
                 .collect(toMap(MenuSectionData::getName, dishMapper::from))
                 .forEach(menu::addDishes);
         return menu;

@@ -53,4 +53,15 @@ class CustomerTest {
         assertEquals(5, menu.numberOfDishes("Desserts"));
         assertEquals(0, menu.numberOfDishes("Non existing section"));
     }
+
+    @Test
+    void aCustomerCouldChangeAMenu() {
+        Customer customer = CustomerHelper.randomCustomer();
+        Business business = BusinessHelper.randomBusiness();
+        Menu oldMenu = MenuHelper.randomMenu();
+
+        String oldMenuId = customer.createMenu(business, oldMenu);
+
+        Menu newMenu = MenuHelper.randomMenu();
+    }
 }

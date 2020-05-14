@@ -27,7 +27,7 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
 
         UUID menuId = webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest(randomCustomer.getFirstBusiness().getId())), MenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.randomRequest(randomCustomer.getFirstBusiness().getId())), CreateMenuRequest.class)
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isOk()

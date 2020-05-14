@@ -3,7 +3,7 @@ package com.kemenu.kemenu_backend.application.http;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kemenu.kemenu_backend.application.customer.CustomerRequest;
-import com.kemenu.kemenu_backend.application.menu.MenuRequest;
+import com.kemenu.kemenu_backend.application.menu.CreateMenuRequest;
 import com.kemenu.kemenu_backend.application.security.Recaptcha;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.Customer;
@@ -65,7 +65,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
 
         webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest(customer.getFirstBusiness().getId())), MenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.randomRequest(customer.getFirstBusiness().getId())), CreateMenuRequest.class)
                 .header("Authorization", accessToken)
                 .exchange()
                 .expectStatus().isOk();
@@ -75,7 +75,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
     void aCustomerRequestSomeResourceWithoutAuthorizationHeader() {
         webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest()), MenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.randomRequest()), CreateMenuRequest.class)
                 .exchange()
                 .expectStatus().isUnauthorized();
     }
@@ -84,7 +84,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
     void aCustomerWithExpiredTokenReceiveA401HTTPError() {
         webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest()), MenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.randomRequest()), CreateMenuRequest.class)
                 .header("Authorization", generateExpiredAccessToken())
                 .exchange()
                 .expectStatus().isUnauthorized();

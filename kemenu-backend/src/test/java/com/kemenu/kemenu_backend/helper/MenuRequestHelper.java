@@ -2,7 +2,7 @@ package com.kemenu.kemenu_backend.helper;
 
 import com.kemenu.kemenu_backend.application.allergen.AllergenData;
 import com.kemenu.kemenu_backend.application.menu.DishData;
-import com.kemenu.kemenu_backend.application.menu.MenuRequest;
+import com.kemenu.kemenu_backend.application.menu.CreateMenuRequest;
 import com.kemenu.kemenu_backend.application.menu.MenuSectionData;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -14,12 +14,12 @@ import java.util.UUID;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MenuRequestHelper {
 
-    public static MenuRequest randomRequest() {
+    public static CreateMenuRequest randomRequest() {
         return randomRequest(UUID.randomUUID().toString());
     }
 
-    public static MenuRequest randomRequest(String businessId) {
-        return MenuRequest.builder()
+    public static CreateMenuRequest randomRequest(String businessId) {
+        return CreateMenuRequest.builder()
                 .businessId(businessId)
                 .sections(List.of(MenuSectionData.builder()
                         .name(UUID.randomUUID().toString())
