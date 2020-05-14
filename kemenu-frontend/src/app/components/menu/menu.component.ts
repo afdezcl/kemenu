@@ -20,7 +20,7 @@ export class MenuComponent implements OnInit {
 
   menu: Menu;
   modalReference: BsModalRef;  
-  businessName: string;
+  businessId: string;
 
   constructor(
     private modalService: BsModalService,
@@ -130,7 +130,7 @@ export class MenuComponent implements OnInit {
 
   onSaveMenu(){
     const menuToSave = {
-      businessName: this.businessName,      
+      businessId: this.businessId,    
       sections: this.menu.sections      
     }
     this._menuService.createMenu(menuToSave)
