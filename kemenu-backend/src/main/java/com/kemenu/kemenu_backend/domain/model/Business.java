@@ -35,6 +35,15 @@ public class Business {
         menus.add(menu);
     }
 
+    public void changeMenu(Menu newMenu) {
+        for (int i = 0; i < menus.size(); i++) {
+            if (menus.get(i).equals(newMenu)) {
+                menus.set(i, newMenu);
+                return;
+            }
+        }
+    }
+
     public List<Menu> menuList() {
         return Collections.unmodifiableList(menus);
     }

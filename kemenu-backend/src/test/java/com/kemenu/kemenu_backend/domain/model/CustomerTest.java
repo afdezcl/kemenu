@@ -7,6 +7,7 @@ import com.kemenu.kemenu_backend.helper.MenuHelper;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class CustomerTest {
 
@@ -57,11 +58,18 @@ class CustomerTest {
     @Test
     void aCustomerCouldChangeAMenu() {
         Customer customer = CustomerHelper.randomCustomer();
-        Business business = BusinessHelper.randomBusiness();
         Menu oldMenu = MenuHelper.randomMenu();
+        oldMenu.addNewDish("Starters", DishHelper.randomDish());
 
-        String oldMenuId = customer.createMenu(business, oldMenu);
+        String oldMenuId = customer.createMenu(customer.getFirstBusiness(), oldMenu);
 
-        Menu newMenu = MenuHelper.randomMenu();
+        Menu newMenu = MenuHelper.from(oldMenuId, MenuHelper.randomMenu().getSections());
+        newMenu.addNewDish("Starters", DishHelper.randomDish());
+
+        customer.changeMenu(customer.getFirstBusiness(), newMenu);
+
+        assertEquals(1, customer.getBusinesses().size());
+        assertEquals(1, customer.menuList(customer.getFirstBusiness()).size());
+        assertNotEquals(oldMenu.getSections().get("Starters").getDishes().get(0), customer.getFirstBusiness().getMenus().get(0).getSections().get("Starters").getDishes().get(0));
     }
 }

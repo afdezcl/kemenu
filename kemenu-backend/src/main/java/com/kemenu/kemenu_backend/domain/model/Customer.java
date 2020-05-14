@@ -62,6 +62,13 @@ public class Customer implements GrantedAuthority {
                 .orElse(List.of());
     }
 
+    public void changeMenu(Business business, Menu newMenu) {
+        businesses.stream()
+                .filter(b -> b.equals(business))
+                .findFirst()
+                .ifPresent(b -> b.changeMenu(newMenu));
+    }
+
     public Business getFirstBusiness() {
         return businesses.get(0);
     }
