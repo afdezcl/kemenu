@@ -33,15 +33,23 @@ export class MenuComponent implements OnInit {
     this.loadMenu();         
   }
 
-  loadMenu(){
+  loadMenu(){  
+    const customerEmail = this._authService.getUserEmail();   
     this.menu = new Menu(
-      '',
-      []      
+      customerEmail,
+      [] 
     )
-    this._menuService.getMenu(this._authService.getUserEmail())
-      .subscribe(response => {
+    this._menuService.getMenu(customerEmail)
+      .subscribe((response: any) => {
         console.log(response)
+        this.businessId = response.businesses[0].id
+        this.createMenu(response)
       })
+    }
+    
+  createMenu(response){
+    if(response.businesses[0].menus.length !== 0)
+      this.menu.sections = response.businesses[0].menus[0].sections  
   }
 
   openCreateSection() {

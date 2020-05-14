@@ -52,13 +52,12 @@ export class AuthenticationService {
     return this._httpClient.post<any>(environment.apiBaseUrl + '/refresh', {
       'refreshToken': this.getRefreshToken()
     }, {observe: 'response'})
-    .pipe(map(response => {
+    .pipe(tap(response => {
       const tokens: Tokens = {
         jwt: response.headers.get('Authorization'),
         refreshToken: response.headers.get('JWT-Refresh-Token')
       }      
       this.storeTokens(tokens);
-      return tokens;
     }));
   }
 

@@ -16,12 +16,12 @@ export class MenuService {
     return this._httpClient.post(environment.apiBaseUrl + '/web/v1/menus', menuToSave);
   }
 
-  updateMenu(){
-
+  updateMenu(menuToUpdate){
+    return this._httpClient.put(environment.apiBaseUrl + '', menuToUpdate);
   }
 
   getMenu(customerEmail: string) {
-    return this._httpClient.get(environment.apiBaseUrl + `/web/v1/menus/${customerEmail}`);
+    return this._httpClient.get(environment.apiBaseUrl + `/web/v1/customer/${customerEmail}`);
   }
 
 }
