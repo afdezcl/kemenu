@@ -10,8 +10,8 @@ import java.util.List;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = MenuRequest.MenuRequestBuilder.class)
-public class MenuRequest {
+@JsonDeserialize(builder = CreateMenuRequest.CreateMenuRequestBuilder.class)
+public class CreateMenuRequest {
     @NotBlank
     @Size(max = 255)
     String businessId;

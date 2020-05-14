@@ -7,6 +7,7 @@ import com.kemenu.kemenu_backend.helper.MenuHelper;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class CustomerTest {
 
@@ -52,5 +53,23 @@ class CustomerTest {
         assertEquals(1, menu.numberOfDishes("Wines"));
         assertEquals(5, menu.numberOfDishes("Desserts"));
         assertEquals(0, menu.numberOfDishes("Non existing section"));
+    }
+
+    @Test
+    void aCustomerCouldChangeAMenu() {
+        Customer customer = CustomerHelper.randomCustomer();
+        Menu oldMenu = MenuHelper.randomMenu();
+        oldMenu.addNewDish("Starters", DishHelper.randomDish());
+
+        String oldMenuId = customer.createMenu(customer.getFirstBusiness(), oldMenu);
+
+        Menu newMenu = MenuHelper.from(oldMenuId, MenuHelper.randomMenu().getSections());
+        newMenu.addNewDish("Starters", DishHelper.randomDish());
+
+        customer.changeMenu(customer.getFirstBusiness(), newMenu);
+
+        assertEquals(1, customer.getBusinesses().size());
+        assertEquals(1, customer.menuList(customer.getFirstBusiness()).size());
+        assertNotEquals(oldMenu.getSections().get("Starters").getDishes().get(0), customer.getFirstBusiness().getMenus().get(0).getSections().get("Starters").getDishes().get(0));
     }
 }

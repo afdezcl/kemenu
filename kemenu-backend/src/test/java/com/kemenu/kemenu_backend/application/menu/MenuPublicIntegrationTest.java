@@ -19,11 +19,11 @@ class MenuPublicIntegrationTest extends KemenuIntegrationTest {
     @Test
     void anUnauthorizedUserCouldSeeAMenu() {
         customerRepository.create(randomCustomer);
-        MenuRequest menuRequest = MenuRequestHelper.randomRequest(randomCustomer.getFirstBusiness().getId());
+        CreateMenuRequest createMenuRequest = MenuRequestHelper.randomRequest(randomCustomer.getFirstBusiness().getId());
 
         UUID menuId = webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(menuRequest), MenuRequest.class)
+                .body(Mono.just(createMenuRequest), CreateMenuRequest.class)
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isOk()
@@ -36,6 +36,6 @@ class MenuPublicIntegrationTest extends KemenuIntegrationTest {
                 .expectStatus().isOk()
                 .expectBody(MenuResponse.class).returnResult().getResponseBody();
 
-        assertEquals(menuRequest.getSections().get(0).getName(), menuResponse.getSections().get(0).getName());
+        assertEquals(createMenuRequest.getSections().get(0).getName(), menuResponse.getSections().get(0).getName());
     }
 }
