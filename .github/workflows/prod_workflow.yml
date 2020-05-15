@@ -14,7 +14,7 @@ jobs:
     services:
       mongodb:
         image: mongo:4-bionic
-        environment:
+        env:
           MONGO_INITDB_ROOT_USERNAME: admin
           MONGO_INITDB_ROOT_PASSWORD: password
           MONGO_INITDB_DATABASE: kemenudb
