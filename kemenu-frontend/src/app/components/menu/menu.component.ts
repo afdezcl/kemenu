@@ -21,7 +21,7 @@ export class MenuComponent implements OnInit {
   menu: Menu;
   modalReference: BsModalRef;  
   businessId: string;
-  thereIsChange: boolean = true;
+  thereIsChange: boolean = false;
 
   constructor(
     private modalService: BsModalService,
