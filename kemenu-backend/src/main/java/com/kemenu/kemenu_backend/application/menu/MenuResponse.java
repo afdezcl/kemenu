@@ -10,5 +10,6 @@ import java.util.List;
 @Builder(toBuilder = true)
 @JsonDeserialize(builder = MenuResponse.MenuResponseBuilder.class)
 public class MenuResponse {
+    String id;
     List<MenuSectionData> sections;
 }

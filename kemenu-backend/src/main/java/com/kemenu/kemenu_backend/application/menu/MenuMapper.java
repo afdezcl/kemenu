@@ -40,6 +40,7 @@ public class MenuMapper {
 
     public MenuResponse from(Menu menu) {
         return MenuResponse.builder()
+                .id(menu.getId())
                 .sections(menu.getSections().entrySet().stream()
                         .map(e -> MenuSectionData.builder()
                                 .name(e.getKey())
