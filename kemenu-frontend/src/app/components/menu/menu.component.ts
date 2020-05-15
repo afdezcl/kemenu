@@ -76,8 +76,8 @@ export class MenuComponent implements OnInit {
       if(canDelete) {
         this.menu.sections = this.menu.sections.filter(section => section !== sectionToRemove)
       }
+      this.thereIsChange = true
     })
-    this.thereIsChange = true
   }
   
   editSection(sectionToEdit: Section, sectionIndex: number){
@@ -87,8 +87,8 @@ export class MenuComponent implements OnInit {
     this.modalReference = this.modalService.show(CreateSectionComponent, { initialState });
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].name = data
+      this.thereIsChange = true
     });
-    this.thereIsChange = true
   }
   
   openCreateDish(sectionIndex: number) {
@@ -117,8 +117,8 @@ export class MenuComponent implements OnInit {
         this.menu.sections[sectionIndex].dishes = 
         this.menu.sections[sectionIndex].dishes.filter(dish => dish !== dishToRemove)
       }
+      this.thereIsChange = true
     })
-    this.thereIsChange = true
   }
 
   editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number){
@@ -130,8 +130,8 @@ export class MenuComponent implements OnInit {
     this.modalReference = this.modalService.show(CreateDishComponent, { initialState });
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].dishes[dishIndex] = data
+      this.thereIsChange = true
     });
-    this.thereIsChange = true
   }
 
   openShareQR(){
