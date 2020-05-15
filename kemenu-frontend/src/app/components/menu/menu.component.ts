@@ -21,6 +21,7 @@ export class MenuComponent implements OnInit {
   menu: Menu;
   modalReference: BsModalRef;  
   businessId: string;
+  thereIsChange: boolean = true;
 
   constructor(
     private modalService: BsModalService,
@@ -41,16 +42,11 @@ export class MenuComponent implements OnInit {
     )
     this._menuService.getMenu(customerEmail)
       .subscribe((response: any) => {
-        console.log(response)
-        this.businessId = response.businesses[0].id
-        this.createMenu(response)
+        this.businessId = response.businesses[0].id        
+        if(response.businesses[0].menus.length !== 0)
+          this.menu.sections = response.businesses[0].menus[0].sections  
       })
     }
-    
-  createMenu(response){
-    if(response.businesses[0].menus.length !== 0)
-      this.menu.sections = response.businesses[0].menus[0].sections  
-  }
 
   openCreateSection() {
     this.modalReference = this.modalService.show(CreateSectionComponent);
@@ -65,6 +61,7 @@ export class MenuComponent implements OnInit {
       []
     )
     this.menu.sections.push(section)
+    this.thereIsChange = true
   }
 
   
@@ -80,6 +77,7 @@ export class MenuComponent implements OnInit {
         this.menu.sections = this.menu.sections.filter(section => section !== sectionToRemove)
       }
     })
+    this.thereIsChange = true
   }
   
   editSection(sectionToEdit: Section, sectionIndex: number){
@@ -90,6 +88,7 @@ export class MenuComponent implements OnInit {
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].name = data
     });
+    this.thereIsChange = true
   }
   
   openCreateDish(sectionIndex: number) {
@@ -100,9 +99,10 @@ export class MenuComponent implements OnInit {
   }
                   
   private addNewDish(dish: Dish, sectionIndex: number){
-     this.menu
-         .sections[sectionIndex]
-         .dishes.push(dish)
+    this.menu
+        .sections[sectionIndex]
+        .dishes.push(dish)
+    this.thereIsChange = true    
   }
 
   deleteDish(dishToRemove: Dish, sectionIndex: number){
@@ -118,6 +118,7 @@ export class MenuComponent implements OnInit {
         this.menu.sections[sectionIndex].dishes.filter(dish => dish !== dishToRemove)
       }
     })
+    this.thereIsChange = true
   }
 
   editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number){
@@ -130,6 +131,7 @@ export class MenuComponent implements OnInit {
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].dishes[dishIndex] = data
     });
+    this.thereIsChange = true
   }
 
   openShareQR(){
@@ -141,10 +143,26 @@ export class MenuComponent implements OnInit {
       businessId: this.businessId,    
       sections: this.menu.sections      
     }
+    if(this.menu.id){
+      this.updateMenu(menuToSave)
+    } else {
+      this.createMenu(menuToSave)
+    }
+    this.thereIsChange = false
+  }
+  
+  private createMenu(menuToSave){
     this._menuService.createMenu(menuToSave)
       .subscribe((response: string) => {
         this.menu.id = response        
       })
+  }
+
+  private updateMenu(menuToSave){
+    this._menuService.updateMenu(menuToSave)
+      .subscribe(response => {
+        console.log(response)     
+    })
   }
 
 }
