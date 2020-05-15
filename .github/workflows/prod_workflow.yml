@@ -11,6 +11,15 @@ jobs:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
       JAVA_CMD_PATH: ~/jdk/bin/java
       JAR_NAME: kemenu-backend-
+    services:
+      mongodb:
+        image: mongo:4-bionic
+        environment:
+          MONGO_INITDB_ROOT_USERNAME: admin
+          MONGO_INITDB_ROOT_PASSWORD: password
+          MONGO_INITDB_DATABASE: kemenudb
+        ports:
+          - 27017:27017
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
