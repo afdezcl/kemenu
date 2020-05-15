@@ -1,5 +1,6 @@
 package com.kemenu.kemenu_backend.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -69,10 +70,12 @@ public class Customer implements GrantedAuthority {
         return newMenu.getId();
     }
 
+    @JsonIgnore
     public Menu getFirstMenu() {
         return getFirstBusiness().getMenus().get(0);
     }
 
+    @JsonIgnore
     public Business getFirstBusiness() {
         return businesses.get(0);
     }

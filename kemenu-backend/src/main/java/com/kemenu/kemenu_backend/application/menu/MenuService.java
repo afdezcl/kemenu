@@ -25,10 +25,6 @@ public class MenuService {
         );
     }
 
-    public MenuResponse read(String customerEmail, String businessId, String menuId) {
-        return null;
-    }
-
     public Optional<String> update(String customerEmail, UpdateMenuRequest updateMenuRequest) {
         return save(
                 customerEmail,

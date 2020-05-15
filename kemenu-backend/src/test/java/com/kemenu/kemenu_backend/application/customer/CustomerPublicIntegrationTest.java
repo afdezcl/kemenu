@@ -1,5 +1,7 @@
-package com.kemenu.kemenu_backend.application.menu;
+package com.kemenu.kemenu_backend.application.customer;
 
+import com.kemenu.kemenu_backend.application.menu.CreateMenuRequest;
+import com.kemenu.kemenu_backend.application.menu.MenuResponse;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.helper.MenuRequestHelper;
@@ -11,7 +13,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MenuPublicIntegrationTest extends KemenuIntegrationTest {
+class CustomerPublicIntegrationTest extends KemenuIntegrationTest {
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -19,7 +21,8 @@ class MenuPublicIntegrationTest extends KemenuIntegrationTest {
     @Test
     void anUnauthorizedUserCouldSeeAMenu() {
         customerRepository.save(randomCustomer);
-        CreateMenuRequest createMenuRequest = MenuRequestHelper.randomRequest(randomCustomer.getFirstBusiness().getId());
+        String businessId = randomCustomer.getFirstBusiness().getId();
+        CreateMenuRequest createMenuRequest = MenuRequestHelper.randomRequest(businessId);
 
         UUID menuId = webTestClient
                 .post().uri("/web/v1/menus")
@@ -30,8 +33,7 @@ class MenuPublicIntegrationTest extends KemenuIntegrationTest {
                 .expectBody(UUID.class).returnResult().getResponseBody();
 
         MenuResponse menuResponse = webTestClient
-                .get().uri("/menus/" + menuId)
-                .header("Authorization", generateAccessToken())
+                .get().uri("/customers/" + randomCustomer.getId() + "/businesses/" + businessId + "/menus/" + menuId)
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(MenuResponse.class).returnResult().getResponseBody();

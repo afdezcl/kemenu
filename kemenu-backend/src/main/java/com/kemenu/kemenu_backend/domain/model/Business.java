@@ -10,6 +10,7 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Getter
@@ -42,5 +43,9 @@ public class Business {
 
     public List<Menu> menuList() {
         return Collections.unmodifiableList(menus);
+    }
+
+    public Optional<Menu> findMenu(String menuId) {
+        return menus.stream().filter(m -> m.getId().equals(menuId)).findFirst();
     }
 }
