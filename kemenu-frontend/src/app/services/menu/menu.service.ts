@@ -17,7 +17,7 @@ export class MenuService {
   }
 
   updateMenu(menuToUpdate){
-    return this._httpClient.put(environment.apiBaseUrl + '', menuToUpdate);
+    return this._httpClient.put(environment.apiBaseUrl + '/web/v1/menus', menuToUpdate);
   }
 
   getMenu(customerEmail: string) {

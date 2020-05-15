@@ -139,29 +139,34 @@ export class MenuComponent implements OnInit {
   }
 
   onSaveMenu(){
-    const menuToSave = {
-      businessId: this.businessId,    
-      sections: this.menu.sections      
-    }
     if(this.menu.id){
-      this.updateMenu(menuToSave)
+      this.updateMenu()
     } else {
-      this.createMenu(menuToSave)
+      this.createMenu()
     }
     this.thereIsChange = false
   }
   
-  private createMenu(menuToSave){
+  private createMenu(){
+    const menuToSave = {
+      businessId: this.businessId,    
+      sections: this.menu.sections      
+    }
     this._menuService.createMenu(menuToSave)
       .subscribe((response: string) => {
         this.menu.id = response        
       })
   }
 
-  private updateMenu(menuToSave){
-    this._menuService.updateMenu(menuToSave)
-      .subscribe(response => {
-        console.log(response)     
+  private updateMenu(){
+    const menuToUpdate = {
+      businessId: this.businessId,
+      menuId: this.menu.id,    
+      sections: this.menu.sections      
+    }
+    this._menuService.updateMenu(menuToUpdate)
+      .subscribe((response: string) => {
+        this.menu.id = response         
     })
   }
 
