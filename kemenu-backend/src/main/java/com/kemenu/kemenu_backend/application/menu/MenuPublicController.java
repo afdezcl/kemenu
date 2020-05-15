@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/menus")
-public class MenuPublicController {
+class MenuPublicController {
 
     private final MenuService menuService;
 
     @GetMapping("/{id}")
     MenuResponse read(@PathVariable String id) {
-        return menuService.read(id);
+        return menuService.read(null, null, id);
     }
 }

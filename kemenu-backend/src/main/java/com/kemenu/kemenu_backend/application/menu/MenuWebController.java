@@ -16,7 +16,7 @@ import java.util.UUID;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/web/v1")
-public class MenuWebController {
+class MenuWebController {
 
     private final JWTService jwtService;
     private final MenuService menuService;

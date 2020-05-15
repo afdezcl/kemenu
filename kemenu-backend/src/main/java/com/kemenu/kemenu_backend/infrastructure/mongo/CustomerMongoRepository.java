@@ -12,22 +12,21 @@ import java.util.Optional;
 @AllArgsConstructor
 class CustomerMongoRepository implements CustomerRepository {
 
-    private final MenuSpringMongoRepository menuSpringMongoRepository;
-    private final BusinessSpringMongoRepository businessSpringMongoRepository;
     private final CustomerSpringMongoRepository springMongoRepository;
 
     @Override
-    public String create(Customer customer) {
-        customer.getBusinesses().forEach(b -> {
-            menuSpringMongoRepository.saveAll(b.getMenus());
-            businessSpringMongoRepository.save(b);
-        });
+    public String save(Customer customer) {
         return springMongoRepository.save(customer).getId();
     }
 
     @Override
     public Optional<Customer> findByEmail(String email) {
         return springMongoRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<Customer> findById(String id) {
+        return springMongoRepository.findById(id);
     }
 
     @Override

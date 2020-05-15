@@ -15,7 +15,7 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
 
     public String create(Customer customer) {
-        return customerRepository.create(customer); // TODO: Send event to send email
+        return customerRepository.save(customer); // TODO: Send event to send email
     }
 
     public Optional<Customer> read(String email) {

@@ -7,12 +7,12 @@ import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Getter
@@ -27,7 +27,6 @@ public class Customer implements GrantedAuthority {
     @Indexed(unique = true)
     private String email;
     private String password;
-    @DBRef
     private List<Business> businesses;
     private Role role;
 
@@ -62,15 +61,24 @@ public class Customer implements GrantedAuthority {
                 .orElse(List.of());
     }
 
-    public void changeMenu(Business business, Menu newMenu) {
+    public String changeMenu(Business business, Menu newMenu) {
         businesses.stream()
                 .filter(b -> b.equals(business))
                 .findFirst()
                 .ifPresent(b -> b.changeMenu(newMenu));
+        return newMenu.getId();
+    }
+
+    public Menu getFirstMenu() {
+        return getFirstBusiness().getMenus().get(0);
     }
 
     public Business getFirstBusiness() {
         return businesses.get(0);
+    }
+
+    public Optional<Business> findBusiness(String businessId) {
+        return businesses.stream().filter(b -> b.getId().equals(businessId)).findFirst();
     }
 
     @Override

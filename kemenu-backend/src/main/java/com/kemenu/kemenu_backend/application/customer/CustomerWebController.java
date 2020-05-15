@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/web/v1")
-public class CustomerWebController {
+class CustomerWebController {
 
     private final JWTService jwtService;
     private final CustomerService customerService;

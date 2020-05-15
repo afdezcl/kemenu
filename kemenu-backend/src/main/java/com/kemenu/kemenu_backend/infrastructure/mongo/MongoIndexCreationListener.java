@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class MongoIndexCreationListener {
+class MongoIndexCreationListener {
 
     private final MongoTemplate mongoTemplate;
 

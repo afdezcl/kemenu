@@ -60,7 +60,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .ifPresentOrElse(
                         c -> log.info("Admin user already created"),
                         () -> {
-                            repository.create(new Customer(adminUsername, passwordEncoder.encode(adminPassword), Customer.Role.ADMIN, "adminBusiness"));
+                            repository.save(new Customer(adminUsername, passwordEncoder.encode(adminPassword), Customer.Role.ADMIN, "adminBusiness"));
                             log.info("Admin user created");
                         }
                 );

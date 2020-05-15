@@ -5,7 +5,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +13,6 @@ import java.util.Map;
 import java.util.UUID;
 
 @Getter
-@Document
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor(onConstructor = @__(@PersistenceConstructor))
 public class Menu {
@@ -41,6 +39,10 @@ public class Menu {
 
     public void addDishes(String sectionName, List<Dish> dishes) {
         dishes.forEach(d -> addNewDish(sectionName, d));
+    }
+
+    public MenuSection getFirstSection() {
+        return sections.entrySet().iterator().next().getValue();
     }
 
     public int numberOfSections() {

@@ -1,70 +1,62 @@
 package com.kemenu.kemenu_backend.application.menu;
 
 import com.kemenu.kemenu_backend.domain.model.Business;
-import com.kemenu.kemenu_backend.domain.model.BusinessRepository;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.domain.model.Menu;
-import com.kemenu.kemenu_backend.domain.model.MenuRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 @Service
 @AllArgsConstructor
 public class MenuService {
 
-    private final BusinessRepository businessRepository;
     private final CustomerRepository customerRepository;
-    private final MenuRepository menuRepository;
     private final MenuMapper menuMapper;
 
     public Optional<String> create(String customerEmail, String businessId, Menu menu) {
-        Optional<Customer> optionalCustomer = customerRepository.findByEmail(customerEmail);
-        Optional<Business> optionalBusiness = businessRepository.read(businessId);
-
-        if (optionalCustomer.isEmpty() || optionalBusiness.isEmpty()) {
-            return Optional.empty();
-        }
-
-        Customer customer = optionalCustomer.get();
-        Business business = optionalBusiness.get();
-
-        String menuId = customer.createMenu(business, menu);
-        customerRepository.create(customer);
-
-        return Optional.of(menuId);
+        return save(
+                customerEmail,
+                businessId,
+                (c, b) -> c.createMenu(b, menu)
+        );
     }
 
-    public MenuResponse read(String menuId) {
-        return menuRepository.findById(menuId)
-                .map(menuMapper::from)
-                .orElse(MenuResponse.builder().sections(List.of()).build());
+    public MenuResponse read(String customerEmail, String businessId, String menuId) {
+        return null;
     }
 
     public Optional<String> update(String customerEmail, UpdateMenuRequest updateMenuRequest) {
-        Optional<Customer> optionalCustomer = customerRepository.findByEmail(customerEmail);
-        Optional<Business> optionalBusiness = businessRepository.read(updateMenuRequest.getBusinessId());
+        return save(
+                customerEmail,
+                updateMenuRequest.getBusinessId(),
+                (c, b) -> c.changeMenu(b, menuMapper.from(updateMenuRequest))
+        );
+    }
 
-        if (optionalCustomer.isEmpty() || optionalBusiness.isEmpty()) {
+    private Optional<String> save(String customerEmail,
+                                  String businessId,
+                                  BiFunction<Customer, Business, String> action) {
+        Optional<Customer> optionalCustomer = customerRepository.findByEmail(customerEmail);
+
+        if (optionalCustomer.isEmpty()) {
             return Optional.empty();
         }
 
         Customer customer = optionalCustomer.get();
-        Business business = optionalBusiness.get();
+        Optional<Business> optionalBusiness = customer.findBusiness(businessId);
 
-        Menu newMenuWithoutId = menuMapper.from(
-                CreateMenuRequest.builder()
-                        .businessId(updateMenuRequest.getBusinessId())
-                        .sections(updateMenuRequest.getSections())
-                        .build()
-        );
+        if (optionalBusiness.isEmpty()) {
+            return Optional.empty();
+        }
 
-        customer.changeMenu(business, new Menu(updateMenuRequest.getMenuId(), newMenuWithoutId.getSections()));
-        customerRepository.create(customer);
+        String menuId = action.apply(customer, optionalBusiness.get());
 
-        return Optional.of(updateMenuRequest.getMenuId());
+        customerRepository.save(customer);
+
+        return Optional.of(menuId);
     }
 }

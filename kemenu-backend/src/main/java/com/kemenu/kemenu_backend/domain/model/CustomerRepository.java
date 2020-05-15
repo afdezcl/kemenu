@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CustomerRepository {
-    String create(Customer customer);
+    String save(Customer customer);
 
     Optional<Customer> findByEmail(String email);
+
+    Optional<Customer> findById(String id);
 
     List<Customer> all();
 }

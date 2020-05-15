@@ -4,6 +4,7 @@ import com.kemenu.kemenu_backend.application.allergen.AllergenData;
 import com.kemenu.kemenu_backend.application.menu.CreateMenuRequest;
 import com.kemenu.kemenu_backend.application.menu.DishData;
 import com.kemenu.kemenu_backend.application.menu.MenuSectionData;
+import com.kemenu.kemenu_backend.application.menu.UpdateMenuRequest;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,15 @@ public class MenuRequestHelper {
 
     public static CreateMenuRequest randomRequest() {
         return randomRequest(UUID.randomUUID().toString());
+    }
+
+    public static UpdateMenuRequest updateMenuRequest(String businessId, String menuId) {
+        CreateMenuRequest createMenuRequest = randomRequest(businessId);
+        return UpdateMenuRequest.builder()
+                .menuId(menuId)
+                .businessId(businessId)
+                .sections(createMenuRequest.getSections())
+                .build();
     }
 
     public static CreateMenuRequest randomRequest(String businessId) {

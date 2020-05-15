@@ -11,12 +11,12 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/admin/v1")
-public class CustomerAdminController {
+class CustomerAdminController {
 
     private final CustomerService customerService;
 
     @GetMapping("/customers")
-    public List<Customer> listAllCustomers() {
+    List<Customer> listAllCustomers() {
         return customerService.all();
     }
 }

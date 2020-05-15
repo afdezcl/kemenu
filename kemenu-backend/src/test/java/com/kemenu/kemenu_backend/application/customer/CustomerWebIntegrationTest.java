@@ -17,7 +17,7 @@ class CustomerWebIntegrationTest extends KemenuIntegrationTest {
     @Test
     void aCustomerCanFindHimself() {
         Customer customer = CustomerHelper.withMenu();
-        customerRepository.create(customer);
+        customerRepository.save(customer);
 
         CustomerResponse customerResponse = webTestClient
                 .get().uri("/web/v1/customer/" + customer.getEmail())

@@ -11,7 +11,16 @@ jobs:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
       JAVA_CMD_PATH: ~/jdk/bin/java
       JAR_NAME: kemenu-backend-
+    services:
+      mongodb:
+        image: mongo:4-bionic
+        ports:
+          - 27017:27017
+        volumes:
+          - ${{ github.workspace }}/data/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js
     steps:
+      - name: Add permissions for mongo
+        run: sudo chown -R $USER:$USER /home/github/actions-runner/_work/kemenu
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Set up JDK 14

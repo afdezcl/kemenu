@@ -23,6 +23,17 @@ public class MenuMapper {
         return menu;
     }
 
+    public Menu from(UpdateMenuRequest updateMenuRequest) {
+        Menu menuWithoutId = from(
+                CreateMenuRequest.builder()
+                        .businessId(updateMenuRequest.getBusinessId())
+                        .sections(updateMenuRequest.getSections())
+                        .build()
+        );
+
+        return new Menu(updateMenuRequest.getMenuId(), menuWithoutId.getSections());
+    }
+
     public List<MenuResponse> from(List<Menu> menus) {
         return menus.stream().map(this::from).collect(toList());
     }
