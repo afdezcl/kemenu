@@ -1,8 +1,8 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from '@angular/core';
-import { catchError, switchMap, filter, take } from 'rxjs/operators';
+import { catchError, switchMap, filter, take, finalize } from 'rxjs/operators';
 import { AuthenticationService } from '@services/authentication/authentication.service';
-import { throwError, BehaviorSubject } from 'rxjs';
+import { throwError, BehaviorSubject, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 
@@ -19,11 +19,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler) {
         if (this._authService.getJwtToken()) {
-            request = this.addToken(request, this._authService.getJwtToken());
+            request = this.addToken(request, this._authService.getJwtToken());            
         }
 
         return next.handle(request).pipe(catchError(error => {
             if (error instanceof HttpErrorResponse && error.status === 401) {
+                if(request.url.endsWith('refresh')) this.logout()               
                 return this.handle401Error(request, next);
             } else {
                 return throwError(error);
@@ -45,25 +46,29 @@ export class AuthInterceptor implements HttpInterceptor {
             this.isRefreshing = true;
             this.refreshTokenSubject.next(null);
 
-            
             return this._authService
-                    .refreshToken().pipe(
-                    switchMap((token: any) => {
-                        console.log("Request new token")
-                        this.isRefreshing = false;
-                        this.refreshTokenSubject.next(token);
-                        return next.handle(this.addToken(request, this._authService.getJwtToken()))                                            
-                    }));
+                    .refreshToken()
+                    .pipe(                    
+                        switchMap((token: any) => {
+                            this.isRefreshing = false;
+                            this.refreshTokenSubject.next(token);
+                            return next.handle(this.addToken(request, this._authService.getJwtToken()))
+                        })
+                    );
 
         } else {
             return this.refreshTokenSubject
                     .pipe(filter(token => token != null),
                           take(1),
                           switchMap(jwt => {
-                          return next.handle(this.addToken(request, jwt));
+                          return next.handle(this.addToken(request, jwt))
                     }));
         }
     }
 
+    private logout(){
+        this._authService.logout()
+        this.router.navigateByUrl('')
+    }
 
 }

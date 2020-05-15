@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
 import { Tokens } from '@models/auth/tokens.model';
@@ -57,8 +57,9 @@ export class AuthenticationService {
         jwt: response.headers.get('Authorization'),
         refreshToken: response.headers.get('JWT-Refresh-Token')
       }      
-      this.storeTokens(tokens);
-    }));
+      this.storeTokens(tokens);     
+
+    }))
   }
 
   getJwtToken() {

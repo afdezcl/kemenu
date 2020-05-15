@@ -23,13 +23,13 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link pointer-cursor" *ngIf="isLogged" [routerLink]="['menu']" >{{ 'My menu' | translate }}</a>
+            <a class="nav-link pointer-cursor" *ngIf="_authService.isLoggedIn()" [routerLink]="['menu']" >{{ 'My menu' | translate }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link pointer-cursor" (click)="onLogout()" *ngIf="isLogged">{{ 'Log out' | translate }}</a>
+            <a class="nav-link pointer-cursor" (click)="onLogout()" *ngIf="_authService.isLoggedIn()">{{ 'Log out' | translate }}</a>
           </li>
                 
-        </ul><a style="color: white;" (click)="openModalLogIn()" class="btn btn-primary navbar-btn ml-0 ml-lg-3" *ngIf="!isLogged">{{ 'SignIn' | translate }} </a>
+        </ul><a style="color: white;" (click)="openModalLogIn()" class="btn btn-primary navbar-btn ml-0 ml-lg-3" *ngIf="!_authService.isLoggedIn()">{{ 'SignIn' | translate }} </a>
       </div>
     </div>
   </nav>

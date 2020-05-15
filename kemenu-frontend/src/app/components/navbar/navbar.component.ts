@@ -14,23 +14,15 @@ export class NavbarComponent implements OnInit {
   
   isCollapsed = true;
   bsModalRef: BsModalRef;
-  isLogged: boolean = false;
 
   constructor(
     private modalService: BsModalService,
     private translate: TranslateService,
     private _authService: AuthenticationService,
     private router: Router
-  ) { 
-    this.modalService.onHide.subscribe(() => {
-      this.isLogged = this._authService.isLoggedIn();  
-    });
-  }
+  ) { }
 
-  ngOnInit() {
-    if(this._authService.isLoggedIn()) this.isLogged = true     
-    else this.isLogged = false    
-  }
+  ngOnInit() {}
 
   openModalLogIn() {
     this.bsModalRef = this.modalService.show(LoginComponent);
