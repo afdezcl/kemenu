@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private translate: TranslateService,
-    private _authService: AuthenticationService,
+    public _authService: AuthenticationService,
     private router: Router
   ) { }
 
