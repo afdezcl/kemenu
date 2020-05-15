@@ -16,8 +16,8 @@ import static java.util.stream.Collectors.toList;
 @Service
 public class JWTService {
 
-    private static final int FIFTEEN_MIN = 10000; // 900000;
-    private static final int THIRTY_MIN = 60000; // 1800000;
+    private static final int FIFTEEN_MIN = 900000;
+    private static final int THIRTY_MIN = 1800000;
 
     @Value("${app.secret}")
     private String appSecret;
