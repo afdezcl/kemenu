@@ -20,7 +20,7 @@ jobs:
           - ${{ github.workspace }}/data/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js
     steps:
       - name: Add permissions for mongo
-        run: sudo chown -R $USER:$USER /home/github/actions-runner/_work/kemenu
+        run: sudo chown -R $USER:$USER ${{ github.workspace }}
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Set up JDK 14
