@@ -1,20 +1,20 @@
 package com.kemenu.kemenu_backend.application.customer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kemenu.kemenu_backend.application.menu.MenuResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.Optional;
 
-@RestController
+@Controller
 @AllArgsConstructor
 @RequestMapping("/customers")
 class CustomerPublicController {
@@ -23,22 +23,19 @@ class CustomerPublicController {
     private final ObjectMapper mapper;
 
     @GetMapping("/{customerId}/businesses/{businessId}/menus/{menuId}")
-    ResponseEntity<MenuResponse> readMenu(@PathVariable String customerId,
-                                          @PathVariable String businessId,
-                                          @PathVariable String menuId,
-                                          HttpServletResponse response) throws JsonProcessingException {
+    String readMenu(@PathVariable String customerId,
+                    @PathVariable String businessId,
+                    @PathVariable String menuId,
+                    HttpServletResponse response) throws IOException {
         Optional<MenuResponse> optionalMenuResponse = customerService.readMenu(customerId, businessId, menuId);
 
         if (optionalMenuResponse.isEmpty()) {
-            return ResponseEntity.notFound().build();
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return "";
         }
 
-        Cookie cookie = new Cookie("show_menu", mapper.writeValueAsString(optionalMenuResponse.get()));
+        Cookie cookie = new Cookie("show_menu", Base64.getEncoder().encodeToString(mapper.writeValueAsString(optionalMenuResponse.get()).getBytes()));
         response.addCookie(cookie);
-        // TODO: redirect user to /show/menu
-
-        return optionalMenuResponse
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+        return "forward:/index.html";
     }
 }
