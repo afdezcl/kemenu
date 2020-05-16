@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.kemenu</groupId>
         <artifactId>kemenu</artifactId>
-        <version>0.0.82-SNAPSHOT</version>
+        <version>0.0.83-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -87,12 +87,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>de.flapdoodle.embed</groupId>-->
-<!--            <artifactId>de.flapdoodle.embed.mongo</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.security</groupId>

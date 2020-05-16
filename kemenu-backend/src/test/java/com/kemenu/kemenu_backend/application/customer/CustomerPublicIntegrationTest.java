@@ -38,6 +38,7 @@ class CustomerPublicIntegrationTest extends KemenuIntegrationTest {
                 .expectStatus().isOk()
                 .expectBody(MenuResponse.class).returnResult().getResponseBody();
 
+        assertEquals(randomCustomer.firstBusiness().getName(), menuResponse.getBusinessName());
         assertEquals(createMenuRequest.getSections().get(0).getName(), menuResponse.getSections().get(0).getName());
     }
 }

@@ -37,13 +37,14 @@ public class MenuMapper {
         return new Menu(updateMenuRequest.getMenuId(), menuWithoutId.getSections());
     }
 
-    public List<MenuResponse> from(List<Menu> menus) {
-        return menus.stream().map(this::from).collect(toList());
+    public List<MenuResponse> from(String businessName, List<Menu> menus) {
+        return menus.stream().map(m -> from(businessName, m)).collect(toList());
     }
 
-    public MenuResponse from(Menu menu) {
+    public MenuResponse from(String businessName, Menu menu) {
         return MenuResponse.builder()
                 .id(menu.getId())
+                .businessName(businessName)
                 .sections(menu.getSections().stream()
                         .map(ms -> MenuSectionData.builder()
                                 .name(ms.getName())
