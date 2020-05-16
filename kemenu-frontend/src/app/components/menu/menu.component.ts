@@ -44,7 +44,9 @@ export class MenuComponent implements OnInit {
       .subscribe((response: any) => {
         this.businessId = response.businesses[0].id        
         if(response.businesses[0].menus.length !== 0)
-          this.menu.sections = response.businesses[0].menus[0].sections  
+          this.menu.sections = response.businesses[0].menus[0].sections
+        if(response.businesses[0].menus[0].id)    
+          this.menu.id = response.businesses[0].menus[0].id
       })
     }
 

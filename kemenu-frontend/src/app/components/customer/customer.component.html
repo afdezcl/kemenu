@@ -1,24 +1,29 @@
 <div class="container">
   <div class="letter">
     <div class="text-center mb-3">
-      <h3 class="font-weight-bold">Bienvenid@ a Bar Galeón!</h3>
-      <span class="text-muted">Aquí puedes ver nuestra carta</span>
+      <h3 class="font-weight-bold">{{ 'Welcome to' | translate}} Bar Demo</h3>
+      <span class="text-muted">{{ 'Here you can see our menu' | translate}}</span>
     </div>
     
     <div class="row mt-4">
       <div class="col">
         <accordion [isAnimated]="true">
-          <accordion-group heading="Pescados">
-            This content is straight in the template.
-          </accordion-group>
-          <accordion-group heading="Carnes">
-            <p>Some content</p>
-          </accordion-group>
-          <accordion-group heading="Postres">
-            <p>Some content</p>
-          </accordion-group>
-          <accordion-group heading="Bebidas">
-            <p>Some content</p>
+          <accordion-group *ngFor="let section of menuDemo.sections" heading="{{section.name}}">
+            <div class="dishes mt-2" *ngFor="let dish of section.dishes; let dishCounter = index;" >
+              <div class="row">
+                <div class="col-sm-8 col-8 text-left">
+                  <span class="dish-title">{{dish.name}}</span>                    
+                </div>
+                <div class="col-sm-4 col-4 text-right">
+                  <span class="dish-price">{{dish.price}}€</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <small class="dish-description text-muted">{{dish.description}}</small>
+                </div>
+              </div>
+            </div>
           </accordion-group>
         </accordion>
       </div>

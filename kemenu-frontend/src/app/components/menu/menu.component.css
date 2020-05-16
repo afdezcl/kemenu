@@ -8,22 +8,6 @@
     margin-bottom: 200px !important;
 }
 
-.dishes {
-    background-color: #f5f5f5;
-    color: #e7475e;
-    padding: 15px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    cursor: pointer;    
-}
-.dish-title {
-    font-size: 15px !important;
-    font-family: "Poppins", sans-serif;
-}
-.dish-price {
-    font-size: 16px !important;
-    font-family: "Poppins", sans-serif;
-}
 .add-dish {
     border-radius: 25px !important;
     color: white;

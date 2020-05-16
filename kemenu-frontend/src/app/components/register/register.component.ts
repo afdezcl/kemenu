@@ -53,8 +53,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
     this._alertService.clear();
     this._authService.register(user)
-      .subscribe(result => {
-        console.log(result);
+      .subscribe(() => {        
         this.registerForm.reset();
         this._alertService.success('Registrado con éxito, puedes iniciar sesión');
       },
