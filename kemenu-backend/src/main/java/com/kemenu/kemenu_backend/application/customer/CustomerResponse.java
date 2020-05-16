@@ -11,5 +11,6 @@ import java.util.List;
 @Builder(toBuilder = true)
 @JsonDeserialize(builder = CustomerResponse.CustomerResponseBuilder.class)
 public class CustomerResponse {
+    String id;
     List<BusinessData> businesses;
 }
