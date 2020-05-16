@@ -28,6 +28,8 @@ jobs:
           APP_RELEASE_VERSION="${APP_RELEASE_VERSION_ARRAY[0]}.${APP_RELEASE_VERSION_ARRAY[1]}.${APP_RELEASE_VERSION_ARRAY[2]}"
           echo "::set-env name=JAR_NAME::$JAR_NAME$APP_RELEASE_VERSION-SNAPSHOT.jar"
           mvn -B --batch-mode release:update-versions -DdevelopmentVersion=$APP_RELEASE_VERSION-SNAPSHOT
+      - name: Run docker-compose
+        run: docker-compose up -d
       - name: Test & Package backend
         run: mvn -B clean test package -pl :kemenu-backend
       - name: Prepare SSH Keys
