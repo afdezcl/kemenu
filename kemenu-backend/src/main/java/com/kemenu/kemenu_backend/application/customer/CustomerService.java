@@ -42,7 +42,7 @@ public class CustomerService {
         }
 
         ShortUrl shortUrl = optionalShortUrl.get();
-        Optional<Customer> optionalCustomer = customerRepository.findById(shortUrl.getCustomerId());
+        Optional<Customer> optionalCustomer = customerRepository.findByEmail(shortUrl.getCustomerEmail());
 
         if (optionalCustomer.isEmpty()) {
             return Optional.empty();
@@ -63,6 +63,6 @@ public class CustomerService {
             return Optional.empty();
         }
 
-        return Optional.of(menuMapper.from(business.getName(), optionalMenu.get()));
+        return Optional.of(menuMapper.from(customer.getEmail(), business.getName(), optionalMenu.get()));
     }
 }

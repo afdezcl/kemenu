@@ -15,15 +15,15 @@ public class BusinessMapper {
 
     private final MenuMapper menuMapper;
 
-    public List<BusinessData> from(List<Business> businesses) {
-        return businesses.stream().map(this::from).collect(toList());
+    public List<BusinessData> from(String customerEmail, List<Business> businesses) {
+        return businesses.stream().map(b -> from(customerEmail, b)).collect(toList());
     }
 
-    public BusinessData from(Business business) {
+    public BusinessData from(String customerEmail, Business business) {
         return BusinessData.builder()
                 .id(business.getId())
                 .name(business.getName())
-                .menus(menuMapper.from(business.getName(), business.getMenus()))
+                .menus(menuMapper.from(customerEmail, business.getName(), business.getMenus()))
                 .build();
     }
 }

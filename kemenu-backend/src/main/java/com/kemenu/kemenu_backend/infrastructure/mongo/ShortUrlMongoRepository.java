@@ -22,4 +22,9 @@ class ShortUrlMongoRepository implements ShortUrlRepository {
     public Optional<ShortUrl> findById(String id) {
         return springMongoRepository.findById(id);
     }
+
+    @Override
+    public Optional<ShortUrl> findByCustomerEmail(String customerEmail) {
+        return Optional.empty();
+    }
 }
