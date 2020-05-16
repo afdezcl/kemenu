@@ -16,18 +16,15 @@ import java.util.Optional;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/customers")
+@RequestMapping("/show")
 class CustomerPublicController {
 
     private final CustomerService customerService;
     private final ObjectMapper mapper;
 
-    @GetMapping("/{customerId}/businesses/{businessId}/menus/{menuId}")
-    String readMenu(@PathVariable String customerId,
-                    @PathVariable String businessId,
-                    @PathVariable String menuId,
-                    HttpServletResponse response) throws IOException {
-        Optional<MenuResponse> optionalMenuResponse = customerService.readMenu(customerId, businessId, menuId);
+    @GetMapping("/{shortUrlId}")
+    String readMenu(@PathVariable String shortUrlId, HttpServletResponse response) throws IOException {
+        Optional<MenuResponse> optionalMenuResponse = customerService.readMenu(shortUrlId);
 
         if (optionalMenuResponse.isEmpty()) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);

@@ -6,6 +6,8 @@ import com.kemenu.kemenu_backend.domain.model.Business;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.domain.model.Menu;
+import com.kemenu.kemenu_backend.domain.model.ShortUrl;
+import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final ShortUrlRepository shortUrlRepository;
     private final MenuMapper menuMapper;
 
     public String create(Customer customer) {
@@ -31,15 +34,22 @@ public class CustomerService {
         return customerRepository.all();
     }
 
-    public Optional<MenuResponse> readMenu(String customerId, String businessId, String menuId) {
-        Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
+    public Optional<MenuResponse> readMenu(String shortUrlId) {
+        Optional<ShortUrl> optionalShortUrl = shortUrlRepository.findById(shortUrlId);
+
+        if (optionalShortUrl.isEmpty()) {
+            return Optional.empty();
+        }
+
+        ShortUrl shortUrl = optionalShortUrl.get();
+        Optional<Customer> optionalCustomer = customerRepository.findById(shortUrl.getCustomerId());
 
         if (optionalCustomer.isEmpty()) {
             return Optional.empty();
         }
 
         Customer customer = optionalCustomer.get();
-        Optional<Business> optionalBusiness = customer.findBusiness(businessId);
+        Optional<Business> optionalBusiness = customer.findBusiness(shortUrl.getBusinessId());
 
         if (optionalBusiness.isEmpty()) {
             return Optional.empty();
@@ -47,7 +57,7 @@ public class CustomerService {
 
         Business business = optionalBusiness.get();
 
-        Optional<Menu> optionalMenu = business.findMenu(menuId);
+        Optional<Menu> optionalMenu = business.findMenu(shortUrl.getMenuId());
 
         if (optionalMenu.isEmpty()) {
             return Optional.empty();

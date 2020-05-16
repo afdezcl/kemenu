@@ -31,7 +31,7 @@ class CustomerPublicIntegrationTest extends KemenuIntegrationTest {
         String businessId = randomCustomer.firstBusiness().getId();
         CreateMenuRequest createMenuRequest = MenuRequestHelper.randomRequest(businessId);
 
-        UUID menuId = webTestClient
+        UUID shortUrlId = webTestClient
                 .post().uri("/web/v1/menus")
                 .body(Mono.just(createMenuRequest), CreateMenuRequest.class)
                 .header("Authorization", generateAccessToken())
@@ -39,7 +39,7 @@ class CustomerPublicIntegrationTest extends KemenuIntegrationTest {
                 .expectStatus().isOk()
                 .expectBody(UUID.class).returnResult().getResponseBody();
 
-        String uri = "/customers/" + randomCustomer.getId() + "/businesses/" + businessId + "/menus/" + menuId;
+        String uri = "/show/" + shortUrlId;
         HttpHeaders headers = webTestClient
                 .get().uri(uri)
                 .exchange()

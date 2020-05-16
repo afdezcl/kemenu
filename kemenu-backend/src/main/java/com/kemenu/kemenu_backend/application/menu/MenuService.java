@@ -4,6 +4,8 @@ import com.kemenu.kemenu_backend.domain.model.Business;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.domain.model.Menu;
+import com.kemenu.kemenu_backend.domain.model.ShortUrl;
+import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +16,16 @@ import java.util.function.BiFunction;
 @AllArgsConstructor
 public class MenuService {
 
-    private final CustomerRepository customerRepository;
     private final MenuMapper menuMapper;
+    private final CustomerRepository customerRepository;
+    private final ShortUrlRepository shortUrlRepository;
 
     public Optional<String> create(String customerEmail, String businessId, Menu menu) {
         return save(
                 customerEmail,
                 businessId,
-                (c, b) -> c.createMenu(b, menu)
+                (c, b) -> c.createMenu(b, menu),
+                true
         );
     }
 
@@ -29,13 +33,18 @@ public class MenuService {
         return save(
                 customerEmail,
                 updateMenuRequest.getBusinessId(),
-                (c, b) -> c.changeMenu(b, menuMapper.from(updateMenuRequest))
+                (c, b) -> {
+                    c.changeMenu(b, menuMapper.from(updateMenuRequest));
+                    return updateMenuRequest.getShortUrlId();
+                },
+                false
         );
     }
 
     private Optional<String> save(String customerEmail,
                                   String businessId,
-                                  BiFunction<Customer, Business, String> action) {
+                                  BiFunction<Customer, Business, String> action,
+                                  boolean saveShortUrl) {
         Optional<Customer> optionalCustomer = customerRepository.findByEmail(customerEmail);
 
         if (optionalCustomer.isEmpty()) {
@@ -49,9 +58,16 @@ public class MenuService {
             return Optional.empty();
         }
 
-        String menuId = action.apply(customer, optionalBusiness.get());
+        Business business = optionalBusiness.get();
+        String menuId = action.apply(customer, business);
 
         customerRepository.save(customer);
+
+        if (saveShortUrl) {
+            ShortUrl shortUrl = new ShortUrl(customer.getId(), business.getId(), menuId);
+            String shortUrlId = shortUrlRepository.save(shortUrl);
+            return Optional.of(shortUrlId);
+        }
 
         return Optional.of(menuId);
     }

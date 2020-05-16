@@ -17,6 +17,9 @@ public class UpdateMenuRequest {
     String menuId;
     @NotBlank
     @Size(max = 255)
+    String shortUrlId;
+    @NotBlank
+    @Size(max = 255)
     String businessId;
     List<MenuSectionData> sections;
 }

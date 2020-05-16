@@ -19,10 +19,11 @@ public class MenuRequestHelper {
         return randomRequest(UUID.randomUUID().toString());
     }
 
-    public static UpdateMenuRequest updateMenuRequest(String businessId, String menuId) {
+    public static UpdateMenuRequest updateMenuRequest(String businessId, String menuId, String shortUrlId) {
         CreateMenuRequest createMenuRequest = randomRequest(businessId);
         return UpdateMenuRequest.builder()
                 .menuId(menuId)
+                .shortUrlId(shortUrlId)
                 .businessId(businessId)
                 .sections(createMenuRequest.getSections())
                 .build();
