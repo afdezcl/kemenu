@@ -70,7 +70,7 @@ public class MenuService {
         customerRepository.save(customer);
 
         if (saveShortUrl) {
-            ShortUrl shortUrl = new ShortUrl(customer.getId(), business.getId(), menuId);
+            ShortUrl shortUrl = new ShortUrl(customer.getEmail(), business.getId(), menuId);
             String shortUrlId = shortUrlRepository.save(shortUrl);
             return Optional.of(shortUrlId);
         }

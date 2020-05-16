@@ -2,6 +2,7 @@ package com.kemenu.kemenu_backend.application.customer;
 
 import com.kemenu.kemenu_backend.application.business.BusinessMapper;
 import com.kemenu.kemenu_backend.domain.model.Customer;
+import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class CustomerMapper {
 
     private final PasswordEncoder passwordEncoder;
+    private final ShortUrlRepository shortUrlRepository;
     private final BusinessMapper businessMapper;
 
     public Customer from(CustomerRequest customerRequest) {
@@ -24,7 +26,7 @@ public class CustomerMapper {
     public CustomerResponse from(Customer customer) {
         return CustomerResponse.builder()
                 .id(customer.getId())
-                .businesses(businessMapper.from(customer.getBusinesses()))
+                .businesses(businessMapper.from(customer.getEmail(), customer.getBusinesses()))
                 .build();
     }
 }

@@ -12,5 +12,6 @@ import java.util.List;
 public class MenuResponse {
     String id;
     String businessName;
+    String shortUrlId;
     List<MenuSectionData> sections;
 }

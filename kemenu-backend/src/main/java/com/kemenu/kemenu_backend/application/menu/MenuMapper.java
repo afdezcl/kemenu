@@ -2,6 +2,8 @@ package com.kemenu.kemenu_backend.application.menu;
 
 import com.kemenu.kemenu_backend.domain.model.Menu;
 import com.kemenu.kemenu_backend.domain.model.MenuSection;
+import com.kemenu.kemenu_backend.domain.model.ShortUrl;
+import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +16,7 @@ import static java.util.stream.Collectors.toList;
 public class MenuMapper {
 
     private final DishMapper dishMapper;
+    private final ShortUrlRepository shortUrlRepository;
 
     public Menu from(CreateMenuRequest createMenuRequest) {
         List<MenuSection> sections = createMenuRequest.getSections().stream()
@@ -37,14 +40,18 @@ public class MenuMapper {
         return new Menu(menuId, menuWithoutId.getSections());
     }
 
-    public List<MenuResponse> from(String businessName, List<Menu> menus) {
-        return menus.stream().map(m -> from(businessName, m)).collect(toList());
+    public List<MenuResponse> from(String customerEmail, String businessName, List<Menu> menus) {
+        return menus.stream().map(m -> from(customerEmail, businessName, m)).collect(toList());
     }
 
-    public MenuResponse from(String businessName, Menu menu) {
+    public MenuResponse from(String customerEmail, String businessName, Menu menu) {
+        String shortUrlId = shortUrlRepository.findByCustomerEmail(customerEmail)
+                .map(ShortUrl::getId)
+                .orElse("");
         return MenuResponse.builder()
                 .id(menu.getId())
                 .businessName(businessName)
+                .shortUrlId(shortUrlId)
                 .sections(menu.getSections().stream()
                         .map(ms -> MenuSectionData.builder()
                                 .name(ms.getName())
