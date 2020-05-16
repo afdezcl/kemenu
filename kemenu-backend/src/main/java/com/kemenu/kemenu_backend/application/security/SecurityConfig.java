@@ -77,6 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/*.js")
                 .antMatchers("/*.css")
                 .antMatchers("/error")
+                .antMatchers("/demo")
                 .antMatchers("/");
     }
 
