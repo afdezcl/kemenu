@@ -34,7 +34,7 @@ public class Business {
 
     public void changeMenu(Menu newMenu) {
         for (int i = 0; i < menus.size(); i++) {
-            if (menus.get(i).equals(newMenu)) {
+            if (menus.get(i).getId().equals(newMenu.getId())) {
                 menus.set(i, newMenu);
                 return;
             }

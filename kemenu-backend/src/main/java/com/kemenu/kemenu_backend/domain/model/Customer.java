@@ -1,6 +1,5 @@
 package com.kemenu.kemenu_backend.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -54,14 +53,6 @@ public class Customer implements GrantedAuthority {
         return menu.getId();
     }
 
-    public List<Menu> menuList(Business business) {
-        return businesses.stream()
-                .filter(b -> b.equals(business))
-                .findFirst()
-                .map(Business::menuList)
-                .orElse(List.of());
-    }
-
     public String changeMenu(Business business, Menu newMenu) {
         businesses.stream()
                 .filter(b -> b.equals(business))
@@ -70,18 +61,24 @@ public class Customer implements GrantedAuthority {
         return newMenu.getId();
     }
 
-    @JsonIgnore
-    public Menu getFirstMenu() {
-        return getFirstBusiness().getMenus().get(0);
-    }
+    public Optional<Menu> findMenu(String businessId, String menuId) {
+        Optional<Business> optionalBusiness = findBusiness(businessId);
 
-    @JsonIgnore
-    public Business getFirstBusiness() {
-        return businesses.get(0);
+        if (optionalBusiness.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return optionalBusiness.get().findMenu(menuId);
     }
 
     public Optional<Business> findBusiness(String businessId) {
-        return businesses.stream().filter(b -> b.getId().equals(businessId)).findFirst();
+        return businesses.stream()
+                .filter(b -> b.getId().equals(businessId))
+                .findFirst();
+    }
+
+    public Business firstBusiness() {
+        return businesses.get(0);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.kemenu.kemenu_backend.helper;
 
 import com.kemenu.kemenu_backend.domain.model.Customer;
-import com.kemenu.kemenu_backend.domain.model.Menu;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -15,21 +14,8 @@ public class CustomerHelper {
     }
 
     public static Customer withMenu() {
-        Menu menu = MenuHelper.randomMenu();
-        menu.addNewDish(UUID.randomUUID().toString(), DishHelper.randomDish());
-        menu.addNewDish(UUID.randomUUID().toString(), DishHelper.randomDish());
-        menu.addNewDish(UUID.randomUUID().toString(), DishHelper.randomDish());
         Customer customer = randomCustomer();
-        customer.createMenu(customer.getFirstBusiness(), menu);
+        customer.createMenu(customer.firstBusiness(), MenuHelper.randomMenu());
         return customer;
-    }
-
-    public static Customer randomAdmin() {
-        return new Customer(
-                "admin@example.com",
-                "admin",
-                Customer.Role.ADMIN,
-                "adminBusiness"
-        );
     }
 }

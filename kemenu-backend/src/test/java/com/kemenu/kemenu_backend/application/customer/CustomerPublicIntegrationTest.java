@@ -21,7 +21,7 @@ class CustomerPublicIntegrationTest extends KemenuIntegrationTest {
     @Test
     void anUnauthorizedUserCouldSeeAMenu() {
         customerRepository.save(randomCustomer);
-        String businessId = randomCustomer.getFirstBusiness().getId();
+        String businessId = randomCustomer.firstBusiness().getId();
         CreateMenuRequest createMenuRequest = MenuRequestHelper.randomRequest(businessId);
 
         UUID menuId = webTestClient

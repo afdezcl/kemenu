@@ -26,7 +26,7 @@ class CustomerWebIntegrationTest extends KemenuIntegrationTest {
                 .expectStatus().isOk()
                 .expectBody(CustomerResponse.class).returnResult().getResponseBody();
 
-        assertEquals(customer.getFirstBusiness().getName(), customerResponse.getBusinesses().get(0).getName());
+        assertEquals(customer.firstBusiness().getName(), customerResponse.getBusinesses().get(0).getName());
     }
 
     @Test

@@ -1,48 +1,32 @@
 package com.kemenu.kemenu_backend.domain.model;
 
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import org.springframework.data.annotation.Id;
+import lombok.Builder;
+import lombok.Value;
 import org.springframework.data.annotation.PersistenceConstructor;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
-@Getter
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Value
+@Builder(toBuilder = true)
 @AllArgsConstructor(onConstructor = @__(@PersistenceConstructor))
 public class Menu {
 
-    @Id
-    @EqualsAndHashCode.Include
-    private String id;
-    private Map<String, MenuSection> sections;
+    String id;
+    List<MenuSection> sections;
 
     public Menu() {
-        this(UUID.randomUUID().toString(), new HashMap<>());
+        this(UUID.randomUUID().toString(), new ArrayList<>());
     }
 
-    public void addNewSection(String sectionName) {
-        sections.put(sectionName, MenuSection.builder().name(sectionName).dishes(new ArrayList<>()).build());
+    public Menu(List<MenuSection> sections) {
+        this(UUID.randomUUID().toString(), sections);
     }
 
-    public void addNewDish(String sectionName, Dish dish) {
-        if (!sections.containsKey(sectionName)) {
-            addNewSection(sectionName);
-        }
-        sections.get(sectionName).addNewDish(dish);
-    }
-
-    public void addDishes(String sectionName, List<Dish> dishes) {
-        dishes.forEach(d -> addNewDish(sectionName, d));
-    }
-
-    public MenuSection getFirstSection() {
-        return sections.entrySet().iterator().next().getValue();
+    public MenuSection firstSection() {
+        return sections.get(0);
     }
 
     public int numberOfSections() {
@@ -50,10 +34,10 @@ public class Menu {
     }
 
     public int numberOfDishes(String sectionName) {
-        if (sections.containsKey(sectionName)) {
-            return sections.get(sectionName).numberOfDishes();
-        } else {
-            return 0;
-        }
+        return sections.stream()
+                .filter(s -> s.getName().equals(sectionName))
+                .findFirst()
+                .map(MenuSection::numberOfDishes)
+                .orElse(0);
     }
 }

@@ -22,45 +22,49 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
     @Test
     void aCustomerCouldCreateAMenu() {
         customerRepository.save(randomCustomer);
+        String businessId = randomCustomer.firstBusiness().getId();
 
         UUID menuId = webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest(randomCustomer.getFirstBusiness().getId())), CreateMenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.randomRequest(businessId)), CreateMenuRequest.class)
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(UUID.class).returnResult().getResponseBody();
 
-        Menu createdMenu = customerRepository.findById(randomCustomer.getId()).get().getFirstMenu();
+        Customer customer = customerRepository.findById(randomCustomer.getId()).get();
 
-        assertEquals(menuId.toString(), createdMenu.getId());
+        assertEquals(menuId.toString(), customer.findMenu(businessId, menuId.toString()).get().getId());
     }
 
     @Test
     void aCustomerCouldChangeAMenu() {
         customerRepository.save(randomCustomer);
+        String businessId = randomCustomer.firstBusiness().getId();
 
-        UUID menuId = webTestClient
+        UUID createdMenuId = webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest(randomCustomer.getFirstBusiness().getId())), CreateMenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.randomRequest(businessId)), CreateMenuRequest.class)
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(UUID.class).returnResult().getResponseBody();
 
         Customer customerWithCreatedMenu = customerRepository.findById(randomCustomer.getId()).get();
+        Menu createdMenu = customerWithCreatedMenu.findMenu(businessId, createdMenuId.toString()).get();
 
-        webTestClient
+        UUID updatedMenuId = webTestClient
                 .put().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.updateMenuRequest(randomCustomer.getFirstBusiness().getId(), menuId.toString())), UpdateMenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.updateMenuRequest(businessId, createdMenuId.toString())), UpdateMenuRequest.class)
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(UUID.class).returnResult().getResponseBody();
 
         Customer customerWithUpdatedMenu = customerRepository.findById(randomCustomer.getId()).get();
+        Menu updatedMenu = customerWithUpdatedMenu.findMenu(businessId, updatedMenuId.toString()).get();
 
-        assertEquals(customerWithCreatedMenu.getFirstMenu().getId(), customerWithUpdatedMenu.getFirstMenu().getId());
-        assertNotEquals(customerWithCreatedMenu.getFirstMenu().getFirstSection().getName(), customerWithUpdatedMenu.getFirstMenu().getFirstSection().getName());
+        assertEquals(createdMenu.getId(), updatedMenu.getId());
+        assertNotEquals(createdMenu, updatedMenu);
     }
 }

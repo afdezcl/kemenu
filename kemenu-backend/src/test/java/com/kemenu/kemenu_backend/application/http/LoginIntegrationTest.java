@@ -65,7 +65,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
 
         webTestClient
                 .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest(customer.getFirstBusiness().getId())), CreateMenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.randomRequest(customer.firstBusiness().getId())), CreateMenuRequest.class)
                 .header("Authorization", accessToken)
                 .exchange()
                 .expectStatus().isOk();

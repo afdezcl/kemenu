@@ -1,6 +1,7 @@
 package com.kemenu.kemenu_backend.infrastructure.mongo;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -10,6 +11,7 @@ import org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexRes
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 class MongoIndexCreationListener {
@@ -28,5 +30,6 @@ class MongoIndexCreationListener {
                     IndexOperations indexOps = mongoTemplate.indexOps(it.getType());
                     resolver.resolveIndexFor(it.getType()).forEach(indexOps::ensureIndex);
                 });
+        log.info("Mongo Automatic Index creation executed");
     }
 }
