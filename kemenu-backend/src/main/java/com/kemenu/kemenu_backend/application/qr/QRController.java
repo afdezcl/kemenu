@@ -17,11 +17,11 @@ class QRController {
     private final QRService qrService;
 
     @GetMapping("/qr/customers/{customerId}/businesses/{businessId}/menus/{menuId}")
-    ResponseEntity<String> readMenu(@PathVariable String customerId,
+    ResponseEntity<QRResponse> readMenu(@PathVariable String customerId,
                                     @PathVariable String businessId,
                                     @PathVariable String menuId) {
         byte[] qrCode = qrService.generateQRCode(customerId, businessId, menuId);
         String base64QRCode = Base64.getEncoder().encodeToString(qrCode);
-        return ResponseEntity.ok(base64QRCode);
+        return ResponseEntity.ok(QRResponse.builder().qr(base64QRCode).build());
     }
 }
