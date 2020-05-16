@@ -22,8 +22,7 @@ export class AuthenticationService {
     private _httpClient: HttpClient
   ) { }
 
-  register(user: Register) {
-    console.log(user)
+  register(user: Register) {    
     return this._httpClient
       .post(environment.apiBaseUrl + '/register', user)
   }
