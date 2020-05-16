@@ -1,5 +1,7 @@
 package com.kemenu.kemenu_backend.application.customer;
 
+import com.kemenu.kemenu_backend.application.menu.MenuMapper;
+import com.kemenu.kemenu_backend.application.menu.MenuResponse;
 import com.kemenu.kemenu_backend.domain.model.Business;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
@@ -15,6 +17,7 @@ import java.util.Optional;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final MenuMapper menuMapper;
 
     public String create(Customer customer) {
         return customerRepository.save(customer); // TODO: Send event to send email
@@ -28,7 +31,7 @@ public class CustomerService {
         return customerRepository.all();
     }
 
-    public Optional<Menu> readMenu(String customerId, String businessId, String menuId) {
+    public Optional<MenuResponse> readMenu(String customerId, String businessId, String menuId) {
         Optional<Customer> optionalCustomer = customerRepository.findById(customerId);
 
         if (optionalCustomer.isEmpty()) {
@@ -44,6 +47,12 @@ public class CustomerService {
 
         Business business = optionalBusiness.get();
 
-        return business.findMenu(menuId);
+        Optional<Menu> optionalMenu = business.findMenu(menuId);
+
+        if (optionalMenu.isEmpty()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(menuMapper.from(business.getName(), optionalMenu.get()));
     }
 }

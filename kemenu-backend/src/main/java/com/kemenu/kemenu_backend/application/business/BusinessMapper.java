@@ -23,7 +23,7 @@ public class BusinessMapper {
         return BusinessData.builder()
                 .id(business.getId())
                 .name(business.getName())
-                .menus(menuMapper.from(business.getMenus()))
+                .menus(menuMapper.from(business.getName(), business.getMenus()))
                 .build();
     }
 }
