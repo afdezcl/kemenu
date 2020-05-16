@@ -23,6 +23,7 @@ export class MenuComponent implements OnInit {
   businessId: string;
   customerId: string;
   thereIsChange: boolean = false;  
+  menuId: string;
 
   constructor(
     private modalService: BsModalService,
@@ -45,8 +46,10 @@ export class MenuComponent implements OnInit {
       .subscribe((response: any) => {
         this.customerId = response.id
         this.businessId = response.businesses[0].id               
-        if(response.businesses[0].menus.length !== 0)
-          this.menu.sections = response.businesses[0].menus[0].sections
+        if(response.businesses[0].menus.length !== 0){
+          this.menu.sections = response.businesses[0].menus[0].sections   
+          this.menu.id = response.businesses[0].menus[0].id
+        }  
       })
     }
 
@@ -144,7 +147,7 @@ export class MenuComponent implements OnInit {
   }
 
   onSaveMenu(){
-    if(this.menu.shortUrlId){
+    if(this.menu.id){
       this.updateMenu()
     } else {
       this.createMenu()

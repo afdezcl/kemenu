@@ -17,7 +17,7 @@
           {{ 'Create Section' | translate }}<i class="fas fa-list pl-2"></i></button>
       </div>
       <div class="col-sm-4 text-center">
-        <button type="submit" class="btn btn-primary mt-3" (click)="openShareQR()" [disabled]="!menu.shortUrlId || thereIsChange">
+        <button type="submit" class="btn btn-primary mt-3" (click)="openShareQR()" [disabled]="!menu.id || thereIsChange">
           {{ 'Get QR and share' | translate }}<i class="fas fa-qrcode pl-2"></i></button>
       </div>
       <div class="col-sm-4 text-lg-right text-center">

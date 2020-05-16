@@ -4,6 +4,7 @@ export class Menu {
     constructor(
         public customerEmail: string,
         public sections: Section[],
-        public shortUrlId?: string
+        public shortUrlId?: string,
+        public id?: string
     ) {}
 }
