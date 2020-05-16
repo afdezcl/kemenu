@@ -10,10 +10,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./share-qr.component.css']  
 })
 export class ShareQrComponent implements OnInit {
-  
-  @Input() customerId: string
-  @Input() businessId: string
-  @Input() menuId: string
+
+  @Input() shortUrlId: string
 
   imageQRcode;
   url: string;
@@ -26,17 +24,11 @@ export class ShareQrComponent implements OnInit {
 
   ngOnInit() {
     this.getQRcode();
-    this.url = `https://kemenu.com/customers/`+this.customerId+`/businesses/`+
-                this.businessId+`/menus/`+this.menuId
+    this.url = `https://kemenu.com/show/`+this.shortUrlId
   }
 
   getQRcode() {
-    const params = {
-      customerId: this.customerId,
-      businessId: this.businessId,
-      menuId: this.menuId
-    }
-    this._menuService.getQRcode(params)
+    this._menuService.getQRcode(this.shortUrlId)
       .subscribe((response: any) => {      
         this.imageQRcode = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' + response.qr);                        
       })

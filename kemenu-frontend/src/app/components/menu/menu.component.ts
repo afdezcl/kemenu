@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
   modalReference: BsModalRef;  
   businessId: string;
   customerId: string;
-  thereIsChange: boolean = false;
+  thereIsChange: boolean = false;  
 
   constructor(
     private modalService: BsModalService,
@@ -47,8 +47,6 @@ export class MenuComponent implements OnInit {
         this.businessId = response.businesses[0].id               
         if(response.businesses[0].menus.length !== 0)
           this.menu.sections = response.businesses[0].menus[0].sections
-        if(response.businesses[0].menus[0].id)    
-          this.menu.id = response.businesses[0].menus[0].id
       })
     }
 
@@ -140,15 +138,13 @@ export class MenuComponent implements OnInit {
 
   openShareQR(){
     const initialState = {
-      customerId: this.customerId,
-      businessId: this.businessId,
-      menuId: this.menu.id
+      shortUrlId: this.menu.shortUrlId
     }
     this.modalReference = this.modalService.show(ShareQrComponent, {initialState});
   }
 
   onSaveMenu(){
-    if(this.menu.id){
+    if(this.menu.shortUrlId){
       this.updateMenu()
     } else {
       this.createMenu()
@@ -163,19 +159,19 @@ export class MenuComponent implements OnInit {
     }
     this._menuService.createMenu(menuToSave)
       .subscribe((response: string) => {
-        this.menu.id = response        
+        this.menu.shortUrlId = response
       })
   }
 
   private updateMenu(){
     const menuToUpdate = {
-      businessId: this.businessId,
-      menuId: this.menu.id,    
-      sections: this.menu.sections      
+      businessId: this.businessId,          
+      sections: this.menu.sections,
+      shortUrlId: this.menu.shortUrlId  
     }
     this._menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
-        this.menu.id = response         
+        this.menu.shortUrlId = response         
     })
   }
 
