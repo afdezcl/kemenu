@@ -1,7 +1,8 @@
-import { Menu } from "@models/menu/menu.model"
 
-export const Demo: Menu = {
-    customerEmail: 'demo@demo.com',
+import { ShowMenu } from '@models/menu/showMenu.model'
+
+export const Demo: ShowMenu = {
+    businessName: 'Bar Demo',
     sections: [{
         name: 'Para picar',
         dishes: [{

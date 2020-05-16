@@ -12,6 +12,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard]  },
   { path: 'demo', component: CustomerComponent },
+  { path: 'show', component: CustomerComponent },
   { path: '**', redirectTo: '' }
 
 ];

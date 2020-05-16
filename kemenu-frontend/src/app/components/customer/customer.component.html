@@ -1,14 +1,14 @@
 <div class="container">
   <div class="letter">
     <div class="text-center mb-3">
-      <h3 class="font-weight-bold">{{ 'Welcome to' | translate}} Bar Demo</h3>
+      <h3 class="font-weight-bold">{{ 'Welcome to' | translate}} {{menu.businessName}}</h3>
       <span class="text-muted">{{ 'Here you can see our menu' | translate}}</span>
     </div>
     
     <div class="row mt-4">
       <div class="col">
         <accordion [isAnimated]="true">
-          <accordion-group *ngFor="let section of menuDemo.sections" heading="{{section.name}}">
+          <accordion-group *ngFor="let section of menu.sections" heading="{{section.name}}">
             <div class="dishes mt-2" *ngFor="let dish of section.dishes; let dishCounter = index;" >
               <div class="row">
                 <div class="col-sm-8 col-8 text-left">

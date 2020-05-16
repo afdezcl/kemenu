@@ -14,6 +14,7 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './ui-controls/interceptor/auth.interceptor';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
+import { CookieService } from 'ngx-cookie-service';
 
 // NGX-BOOTSTRAP
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -63,7 +64,8 @@ export function createTranslateLoader(http: HttpClient) {
     AccordionModule.forRoot(),
     BrowserAnimationsModule,
   ],
-  providers: [    {
+  providers: [  CookieService,
+  {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
