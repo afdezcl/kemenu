@@ -37,12 +37,8 @@ export class ShareQrComponent implements OnInit {
       menuId: this.menuId
     }
     this._menuService.getQRcode(params)
-      .subscribe((response: any) => {
-        //this.imageQRcode = response.qr
-        this.imageQRcode = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' 
-                 + response.qr);
-        console.log(response);
-                
+      .subscribe((response: any) => {      
+        this.imageQRcode = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/png;base64,' + response.qr);                        
       })
   }
 
