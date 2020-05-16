@@ -4,6 +4,10 @@ Kemenu web app, for menu management written in Java and Angular.
 
 ## IMPORTANT:exclamation:: Use npm as follows
 
+:warning: Before running the frontend you have to compile the frontend:
+
+`mvn -U clean install -pl :kemenu-frontend`
+
 1. Hot reloading to work with frontend:
 
 `bash kemenu-frontend/npm --prefix kemenu-frontend run start`
