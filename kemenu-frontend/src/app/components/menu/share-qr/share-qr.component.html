@@ -16,7 +16,7 @@
     </div>
     <div class="row">
       <div class="col text-center mt-2">
-        <small class="text-muted">Tu carta: https://kemenu.com/customers/{{customerId}}/businesses/{{businessId}}/menus/{{menuId}}</small>
+        <small class="text-muted">Tu carta: {{url}}</small>
       </div>
     </div>
 
@@ -25,8 +25,10 @@
         <share-buttons [theme]="'modern-dark'"
         [include]="['facebook','twitter','reddit','whatsapp','copy']"
         [show]="5"
-        [url]="'https://kemenu.com'"
+        [title]="'Nuestra carta en KEMENU'"
+        [description]="'En este enlace puedes ver nuestra carta de forma digital'"
         [autoSetMeta]="false"
+        [url]="url"
        ></share-buttons>        
       </div>
     </div>

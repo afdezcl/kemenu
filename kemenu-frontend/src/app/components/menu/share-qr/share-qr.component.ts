@@ -16,7 +16,8 @@ export class ShareQrComponent implements OnInit {
   @Input() menuId: string
 
   imageQRcode;
-  
+  url: string;
+
   constructor(
     public bsModalRef: BsModalRef,
     public _menuService: MenuService,
@@ -25,6 +26,8 @@ export class ShareQrComponent implements OnInit {
 
   ngOnInit() {
     this.getQRcode();
+    this.url = `https://kemenu.com/customers/`+this.customerId+`/businesses/`+
+                this.businessId+`/menus/`+this.menuId
   }
 
   getQRcode() {
