@@ -23,6 +23,7 @@ public class CustomerMapper {
 
     public CustomerResponse from(Customer customer) {
         return CustomerResponse.builder()
+                .id(customer.getId())
                 .businesses(businessMapper.from(customer.getBusinesses()))
                 .build();
     }
