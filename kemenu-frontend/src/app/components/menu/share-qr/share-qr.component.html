@@ -6,7 +6,7 @@
   <div class="modal-body p-4 p-lg-5">
     <div class="row">
       <div class="col text-center">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Commons_QR_code.png"
+        <img [src]="imageQRcode"
          alt="qr-code" class="img-fluid qr-code">
          <br>
          <button type="submit" class="btn btn-primary mt-3">                
@@ -16,7 +16,7 @@
     </div>
     <div class="row">
       <div class="col text-center mt-2">
-        <small class="text-muted">Tu carta: https://kemenu.com/bargaleon</small>
+        <small class="text-muted">Tu carta: https://kemenu.com/customers/{{customerId}}/businesses/{{businessId}}/menus/{{menuId}}</small>
       </div>
     </div>
 

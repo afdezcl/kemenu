@@ -24,5 +24,8 @@ export class MenuService {
     return this._httpClient.get(environment.apiBaseUrl + `/web/v1/customer/${customerEmail}`);
   }
 
+  getQRcode(params){
+    return this._httpClient.get(environment.apiBaseUrl + `/web/v1/qr/customers/${params.customerId}/businesses/${params.businessId}/menus/${params.menuId}`);
+  }
 }
 

@@ -21,6 +21,7 @@ export class MenuComponent implements OnInit {
   menu: Menu;
   modalReference: BsModalRef;  
   businessId: string;
+  customerId: string;
   thereIsChange: boolean = false;
 
   constructor(
@@ -42,7 +43,8 @@ export class MenuComponent implements OnInit {
     )
     this._menuService.getMenu(customerEmail)
       .subscribe((response: any) => {
-        this.businessId = response.businesses[0].id        
+        this.customerId = response.id
+        this.businessId = response.businesses[0].id               
         if(response.businesses[0].menus.length !== 0)
           this.menu.sections = response.businesses[0].menus[0].sections
         if(response.businesses[0].menus[0].id)    
@@ -137,7 +139,12 @@ export class MenuComponent implements OnInit {
   }
 
   openShareQR(){
-    this.modalReference = this.modalService.show(ShareQrComponent);
+    const initialState = {
+      customerId: this.customerId,
+      businessId: this.businessId,
+      menuId: this.menu.id
+    }
+    this.modalReference = this.modalService.show(ShareQrComponent, {initialState});
   }
 
   onSaveMenu(){
