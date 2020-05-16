@@ -14,9 +14,6 @@ import java.util.List;
 public class UpdateMenuRequest {
     @NotBlank
     @Size(max = 255)
-    String menuId;
-    @NotBlank
-    @Size(max = 255)
     String shortUrlId;
     @NotBlank
     @Size(max = 255)

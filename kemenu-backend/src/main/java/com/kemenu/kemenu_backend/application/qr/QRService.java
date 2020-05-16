@@ -20,18 +20,15 @@ public class QRService {
     private List<String> allowedOrigins;
 
     @SneakyThrows
-    public byte[] generateQRCode(String customerId, String businessId, String menuId) {
+    public byte[] generateQRCode(String shortUrlId) {
         QRCodeWriter writer = new QRCodeWriter();
-        BitMatrix matrix = writer.encode(generateShowMenuUrl(customerId, businessId, menuId), BarcodeFormat.QR_CODE, 350, 350);
+        BitMatrix matrix = writer.encode(generateShowMenuUrl(shortUrlId), BarcodeFormat.QR_CODE, 350, 350);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         MatrixToImageWriter.writeToStream(matrix, "PNG", stream);
         return stream.toByteArray();
     }
 
-    private String generateShowMenuUrl(String customerId, String businessId, String menuId) {
-        return allowedOrigins.get(0)
-                + "/customers/" + customerId
-                + "/businesses/" + businessId
-                + "/menus/" + menuId;
+    private String generateShowMenuUrl(String shortUrlId) {
+        return allowedOrigins.get(0) + "/show/" + shortUrlId;
     }
 }

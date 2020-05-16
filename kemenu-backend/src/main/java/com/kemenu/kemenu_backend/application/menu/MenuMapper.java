@@ -26,7 +26,7 @@ public class MenuMapper {
         return new Menu(sections);
     }
 
-    public Menu from(UpdateMenuRequest updateMenuRequest) {
+    public Menu from(String menuId, UpdateMenuRequest updateMenuRequest) {
         Menu menuWithoutId = from(
                 CreateMenuRequest.builder()
                         .businessId(updateMenuRequest.getBusinessId())
@@ -34,7 +34,7 @@ public class MenuMapper {
                         .build()
         );
 
-        return new Menu(updateMenuRequest.getMenuId(), menuWithoutId.getSections());
+        return new Menu(menuId, menuWithoutId.getSections());
     }
 
     public List<MenuResponse> from(String businessName, List<Menu> menus) {

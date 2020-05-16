@@ -16,11 +16,9 @@ class QRController {
 
     private final QRService qrService;
 
-    @GetMapping("/qr/customers/{customerId}/businesses/{businessId}/menus/{menuId}")
-    ResponseEntity<QRResponse> readMenu(@PathVariable String customerId,
-                                    @PathVariable String businessId,
-                                    @PathVariable String menuId) {
-        byte[] qrCode = qrService.generateQRCode(customerId, businessId, menuId);
+    @GetMapping("/qr/{shortUrlId}")
+    ResponseEntity<QRResponse> readMenu(@PathVariable String shortUrlId) {
+        byte[] qrCode = qrService.generateQRCode(shortUrlId);
         String base64QRCode = Base64.getEncoder().encodeToString(qrCode);
         return ResponseEntity.ok(QRResponse.builder().qr(base64QRCode).build());
     }

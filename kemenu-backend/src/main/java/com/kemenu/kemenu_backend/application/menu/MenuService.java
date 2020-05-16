@@ -30,11 +30,17 @@ public class MenuService {
     }
 
     public Optional<String> update(String customerEmail, UpdateMenuRequest updateMenuRequest) {
+        Optional<ShortUrl> optionalShortUrl = shortUrlRepository.findById(updateMenuRequest.getShortUrlId());
+
+        if (optionalShortUrl.isEmpty()) {
+            return Optional.empty();
+        }
+
         return save(
                 customerEmail,
                 updateMenuRequest.getBusinessId(),
                 (c, b) -> {
-                    c.changeMenu(b, menuMapper.from(updateMenuRequest));
+                    c.changeMenu(b, menuMapper.from(optionalShortUrl.get().getMenuId(), updateMenuRequest));
                     return updateMenuRequest.getShortUrlId();
                 },
                 false
