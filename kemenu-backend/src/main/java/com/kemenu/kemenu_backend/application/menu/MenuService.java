@@ -17,7 +17,7 @@ public class MenuService {
     private final CustomerRepository customerRepository;
     private final ShortUrlRepository shortUrlRepository;
 
-    public Optional<String> create(String customerEmail, String businessId, Menu menu) {
+    public Optional<CreateMenuResponse> create(String customerEmail, String businessId, Menu menu) {
         return customerRepository.findByEmail(customerEmail)
                 .flatMap(customer -> customer.createMenu(businessId, menu)
                         .flatMap(menuId -> {
@@ -28,7 +28,7 @@ public class MenuService {
                 .flatMap(menuId -> {
                     ShortUrl shortUrl = new ShortUrl(customerEmail, businessId, menuId);
                     String shortUrlId = shortUrlRepository.save(shortUrl);
-                    return Optional.of(shortUrlId);
+                    return Optional.of(CreateMenuResponse.builder().menuId(menuId).shortUrlId(shortUrlId).build());
                 });
     }
 

@@ -23,10 +23,10 @@ class MenuWebController {
     private final MenuMapper menuMapper;
 
     @PostMapping("/menus")
-    ResponseEntity<UUID> create(@RequestHeader(value = "Authorization") String token, @RequestBody @Valid CreateMenuRequest createMenuRequest) {
+    ResponseEntity<CreateMenuResponse> create(@RequestHeader(value = "Authorization") String token, @RequestBody @Valid CreateMenuRequest createMenuRequest) {
         String customerEmail = jwtService.decodeAccessToken(token).getSubject();
         return menuService.create(customerEmail, createMenuRequest.getBusinessId(), menuMapper.from(createMenuRequest))
-                .map(menuId -> ResponseEntity.ok(UUID.fromString(menuId)))
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 

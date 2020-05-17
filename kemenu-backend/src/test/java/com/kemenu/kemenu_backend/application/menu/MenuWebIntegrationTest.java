@@ -30,16 +30,16 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
         customerRepository.save(randomCustomer);
         String businessId = randomCustomer.firstBusiness().getId();
 
-        UUID shortUrlId = webTestClient
+        CreateMenuResponse createMenuResponse = webTestClient
                 .post().uri("/web/v1/menus")
                 .body(Mono.just(MenuRequestHelper.randomRequest(businessId)), CreateMenuRequest.class)
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(UUID.class).returnResult().getResponseBody();
+                .expectBody(CreateMenuResponse.class).returnResult().getResponseBody();
 
         Customer customer = customerRepository.findById(randomCustomer.getId()).get();
-        ShortUrl shortUrl = shortUrlRepository.findById(shortUrlId.toString()).get();
+        ShortUrl shortUrl = shortUrlRepository.findById(createMenuResponse.getShortUrlId()).get();
 
         assertTrue(customer.findMenu(businessId, shortUrl.getMenuId()).isPresent());
     }
@@ -49,16 +49,16 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
         customerRepository.save(randomCustomer);
         String businessId = randomCustomer.firstBusiness().getId();
 
-        UUID createdShortUrlId = webTestClient
+        CreateMenuResponse createMenuResponse = webTestClient
                 .post().uri("/web/v1/menus")
                 .body(Mono.just(MenuRequestHelper.randomRequest(businessId)), CreateMenuRequest.class)
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(UUID.class).returnResult().getResponseBody();
+                .expectBody(CreateMenuResponse.class).returnResult().getResponseBody();
 
         Customer customerWithCreatedMenu = customerRepository.findById(randomCustomer.getId()).get();
-        ShortUrl createdShortUrl = shortUrlRepository.findById(createdShortUrlId.toString()).get();
+        ShortUrl createdShortUrl = shortUrlRepository.findById(createMenuResponse.getShortUrlId()).get();
         Menu createdMenu = customerWithCreatedMenu.findMenu(businessId, createdShortUrl.getMenuId()).get();
 
         UUID updatedMenuId = webTestClient
