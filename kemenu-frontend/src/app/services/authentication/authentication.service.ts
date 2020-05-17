@@ -103,7 +103,7 @@ export class AuthenticationService {
   }
 
   refreshTokenHasExpirated(tokens: Tokens): boolean{
-    const jwtDecoded = jwt_decode(tokens.jwt)
+    const jwtDecoded = jwt_decode(tokens.refreshToken)
     return jwtDecoded.exp < new Date()
   }
 
