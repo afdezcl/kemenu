@@ -39,36 +39,16 @@ public class Customer implements GrantedAuthority {
         businesses.add(new Business(businessName));
     }
 
-    public String createMenu(Business business, Menu menu) {
-        businesses.stream()
-                .filter(b -> b.equals(business))
-                .findFirst()
-                .ifPresentOrElse(
-                        b -> b.createMenu(menu),
-                        () -> {
-                            business.createMenu(menu);
-                            businesses.add(business);
-                        }
-                );
-        return menu.getId();
+    public Optional<String> createMenu(String businessId, Menu menu) {
+        return findBusiness(businessId).map(b -> b.createMenu(menu));
     }
 
-    public String changeMenu(Business business, Menu newMenu) {
-        businesses.stream()
-                .filter(b -> b.equals(business))
-                .findFirst()
-                .ifPresent(b -> b.changeMenu(newMenu));
-        return newMenu.getId();
+    public Optional<String> changeMenu(String businessId, Menu newMenu) {
+        return findBusiness(businessId).flatMap(b -> b.changeMenu(newMenu));
     }
 
     public Optional<Menu> findMenu(String businessId, String menuId) {
-        Optional<Business> optionalBusiness = findBusiness(businessId);
-
-        if (optionalBusiness.isEmpty()) {
-            return Optional.empty();
-        }
-
-        return optionalBusiness.get().findMenu(menuId);
+        return findBusiness(businessId).flatMap(b -> b.findMenu(menuId));
     }
 
     public Optional<Business> findBusiness(String businessId) {

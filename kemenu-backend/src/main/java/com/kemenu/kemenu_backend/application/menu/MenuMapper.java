@@ -2,7 +2,6 @@ package com.kemenu.kemenu_backend.application.menu;
 
 import com.kemenu.kemenu_backend.domain.model.Menu;
 import com.kemenu.kemenu_backend.domain.model.MenuSection;
-import com.kemenu.kemenu_backend.domain.model.ShortUrl;
 import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -29,7 +28,7 @@ public class MenuMapper {
         return new Menu(sections);
     }
 
-    public Menu from(String menuId, UpdateMenuRequest updateMenuRequest) {
+    public Menu from(UpdateMenuRequest updateMenuRequest) {
         Menu menuWithoutId = from(
                 CreateMenuRequest.builder()
                         .businessId(updateMenuRequest.getBusinessId())
@@ -37,17 +36,14 @@ public class MenuMapper {
                         .build()
         );
 
-        return new Menu(menuId, menuWithoutId.getSections());
+        return new Menu(updateMenuRequest.getMenuId(), menuWithoutId.getSections());
     }
 
-    public List<MenuResponse> from(String customerEmail, String businessName, List<Menu> menus) {
-        return menus.stream().map(m -> from(customerEmail, businessName, m)).collect(toList());
+    public List<MenuResponse> from(String shortUrlId, String businessName, List<Menu> menus) {
+        return menus.stream().map(m -> from(shortUrlId, businessName, m)).collect(toList());
     }
 
-    public MenuResponse from(String customerEmail, String businessName, Menu menu) {
-        String shortUrlId = shortUrlRepository.findByCustomerEmail(customerEmail)
-                .map(ShortUrl::getId)
-                .orElse("");
+    public MenuResponse from(String shortUrlId, String businessName, Menu menu) {
         return MenuResponse.builder()
                 .id(menu.getId())
                 .businessName(businessName)

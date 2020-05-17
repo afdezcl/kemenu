@@ -24,20 +24,4 @@ public class Menu {
     public Menu(List<MenuSection> sections) {
         this(UUID.randomUUID().toString(), sections);
     }
-
-    public MenuSection firstSection() {
-        return sections.get(0);
-    }
-
-    public int numberOfSections() {
-        return sections.size();
-    }
-
-    public int numberOfDishes(String sectionName) {
-        return sections.stream()
-                .filter(s -> s.getName().equals(sectionName))
-                .findFirst()
-                .map(MenuSection::numberOfDishes)
-                .orElse(0);
-    }
 }

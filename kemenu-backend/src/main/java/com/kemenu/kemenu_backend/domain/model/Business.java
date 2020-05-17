@@ -8,7 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,21 +27,20 @@ public class Business {
         this(UUID.randomUUID().toString(), name, new ArrayList<>());
     }
 
-    public void createMenu(Menu menu) {
+    public String createMenu(Menu menu) {
         menus.add(menu);
+        return menu.getId();
     }
 
-    public void changeMenu(Menu newMenu) {
+    public Optional<String> changeMenu(Menu newMenu) {
         for (int i = 0; i < menus.size(); i++) {
             if (menus.get(i).getId().equals(newMenu.getId())) {
                 menus.set(i, newMenu);
-                return;
+                return Optional.of(newMenu.getId());
             }
         }
-    }
 
-    public List<Menu> menuList() {
-        return Collections.unmodifiableList(menus);
+        return Optional.empty();
     }
 
     public Optional<Menu> findMenu(String menuId) {
