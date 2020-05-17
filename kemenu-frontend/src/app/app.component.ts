@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { filter } from 'rxjs/operators';
-import { Router, NavigationEnd } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
-import { AuthenticationService } from '@services/authentication/authentication.service';
-import { Tokens } from '@models/auth/tokens.model';
+import {Component, OnInit} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {filter} from 'rxjs/operators';
+import {Router, NavigationEnd} from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
+import {AuthenticationService} from '@services/authentication/authentication.service';
+import {Tokens} from '@models/auth/tokens.model';
 
 declare var gtag;
 
@@ -13,7 +13,7 @@ declare var gtag;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit  {  
+export class AppComponent implements OnInit {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
@@ -25,8 +25,8 @@ export class AppComponent implements OnInit  {
     private cookieService: CookieService,
     private _authService: AuthenticationService
   ) {
-    translate.setDefaultLang('es');
-    translate.use('es');
+    translate.setDefaultLang(this.getBrowserLang());
+    translate.use(this.getBrowserLang());
 
     const navEndEvents$ = this.router.events
       .pipe(
@@ -38,15 +38,15 @@ export class AppComponent implements OnInit  {
       });
     });
   }
-  
+
   ngOnInit() {
-    if(this.cookieService.get('show_menu')){
+    if (this.cookieService.get('show_menu')) {
       //this.refrestCookie()
-      localStorage.setItem('COOKIE-SHOW-MENU', this.cookieService.get('show_menu'))      
+      localStorage.setItem('COOKIE-SHOW-MENU', this.cookieService.get('show_menu'))
       this.router.navigateByUrl('/show')
     }
 
-    if(localStorage.getItem(this.JWT_TOKEN)){
+    if (localStorage.getItem(this.JWT_TOKEN)) {
       this.checkExpirationToken()
     }
   }
@@ -55,25 +55,33 @@ export class AppComponent implements OnInit  {
     window.scroll(0, 0);
   }
 
-  private refrestCookie(){
-    if(localStorage.getItem('COOKIE-SHOW-MENU')){
+  private refrestCookie() {
+    if (localStorage.getItem('COOKIE-SHOW-MENU')) {
       this.cookieBASE64 = localStorage.getItem('COOKIE-SHOW-MENU')
       const json = JSON.parse(atob(this.cookieBASE64))
       console.log(json)
-      const shortUrlId = json.shortUrlId 
-      console.log(shortUrlId)  
+      const shortUrlId = json.shortUrlId
+      console.log(shortUrlId)
       this._authService.getRefreshCookie(shortUrlId)
-        .subscribe(response => console.log(response))  
-    }  
+        .subscribe(response => console.log(response))
+    }
   }
 
-  checkExpirationToken(){
+  checkExpirationToken() {
     const tokens: Tokens = {
       jwt: localStorage.getItem(this.JWT_TOKEN),
       refreshToken: localStorage.getItem(this.REFRESH_TOKEN)
     }
-    if(this._authService.refreshTokenHasExpirated(tokens)){
+    if (this._authService.refreshTokenHasExpirated(tokens)) {
       this._authService.logout()
+    }
+  }
+
+  private getBrowserLang(): string {
+    if (window.navigator.language.includes('es')) {
+      return 'es'
+    } else {
+      return 'en'
     }
   }
 }

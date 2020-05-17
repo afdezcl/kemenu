@@ -55,3 +55,4 @@ node/
 node_modules/
 kemenu-backend/src/main/resources/public/
 dist/
+*.log
