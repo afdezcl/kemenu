@@ -110,7 +110,7 @@ export class AuthenticationService {
   }
 
   getRefreshCookie(shortUrlId: string){
-    return this._httpClient.get(environment.apiBaseUrl + '/show' + shortUrlId);
+    return this._httpClient.get(environment.apiBaseUrl + '/show/' + shortUrlId);
   }
 
 }

@@ -162,8 +162,9 @@ export class MenuComponent implements OnInit {
       sections: this.menu.sections      
     }
     this._menuService.createMenu(menuToSave)
-      .subscribe((response: string) => {
-        this.menu.shortUrlId = response
+      .subscribe((response: any) => {
+        this.menu.shortUrlId = response.shortUrlId
+        this.menu.id = response.menuId
       })
   }
 

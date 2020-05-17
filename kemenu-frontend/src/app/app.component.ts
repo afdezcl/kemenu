@@ -14,8 +14,10 @@ declare var gtag;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit  {  
+
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
+  cookieBASE64: string;
 
   constructor(
     translate: TranslateService,
@@ -37,8 +39,9 @@ export class AppComponent implements OnInit  {
     });
   }
   
-  ngOnInit() {        
-    if(this.cookieService.get('show_menu')){      
+  ngOnInit() {
+    if(this.cookieService.get('show_menu')){
+      //this.refrestCookie()
       localStorage.setItem('COOKIE-SHOW-MENU', this.cookieService.get('show_menu'))      
       this.router.navigateByUrl('/show')
     }
@@ -50,6 +53,18 @@ export class AppComponent implements OnInit  {
 
   onActivate() {
     window.scroll(0, 0);
+  }
+
+  private refrestCookie(){
+    if(localStorage.getItem('COOKIE-SHOW-MENU')){
+      this.cookieBASE64 = localStorage.getItem('COOKIE-SHOW-MENU')
+      const json = JSON.parse(atob(this.cookieBASE64))
+      console.log(json)
+      const shortUrlId = json.shortUrlId 
+      console.log(shortUrlId)  
+      this._authService.getRefreshCookie(shortUrlId)
+        .subscribe(response => console.log(response))  
+    }  
   }
 
   checkExpirationToken(){

@@ -27,5 +27,9 @@ export class MenuService {
   getQRcode(shortUrlId){
     return this._httpClient.get(environment.apiBaseUrl + `/web/v1/qr/${shortUrlId}`);
   }
+
+  getMenuById(shortUrlId: string){
+    return this._httpClient.get(environment.apiBaseUrl + `/public/short/${shortUrlId}`);
+  }
 }
 

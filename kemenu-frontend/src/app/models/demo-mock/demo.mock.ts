@@ -78,5 +78,6 @@ export const Demo: ShowMenu = {
             price: 7,
             allergens: []
         }]
-    }]
+    }],
+    shortUrlId: ''
 }
