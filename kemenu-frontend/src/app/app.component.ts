@@ -13,13 +13,12 @@ declare var gtag;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit  {
-  title = 'kemenu-frontend';
+export class AppComponent implements OnInit  {  
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
 
   constructor(
-    private translate: TranslateService,
+    translate: TranslateService,
     private router: Router,
     private cookieService: CookieService,
     private _authService: AuthenticationService
@@ -39,8 +38,10 @@ export class AppComponent implements OnInit  {
   }
   
   ngOnInit() {        
+    
+
     if(this.cookieService.get('show_menu')){      
-      localStorage.setItem('COOKIE-SHOW-MENU', this.cookieService.get('show_menu'))
+      localStorage.setItem('COOKIE-SHOW-MENU', this.cookieService.get('show_menu'))      
       this.router.navigateByUrl('/show')
     }
 

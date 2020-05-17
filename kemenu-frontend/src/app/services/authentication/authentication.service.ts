@@ -107,4 +107,8 @@ export class AuthenticationService {
     return jwtDecoded.exp < new Date()
   }
 
+  getRefreshCookie(shortUrlId: string){
+    return this._httpClient.get(environment.apiBaseUrl + '/show' + shortUrlId);
+  }
+
 }
