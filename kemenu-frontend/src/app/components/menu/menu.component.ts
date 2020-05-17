@@ -48,6 +48,7 @@ export class MenuComponent implements OnInit {
         this.businessId = response.businesses[0].id               
         if(response.businesses[0].menus.length !== 0){
           this.menu.sections = response.businesses[0].menus[0].sections   
+          this.menu.shortUrlId = response.businesses[0].menus[0].shortUrlId
           this.menu.id = response.businesses[0].menus[0].id
         }  
       })
@@ -169,12 +170,12 @@ export class MenuComponent implements OnInit {
   private updateMenu(){
     const menuToUpdate = {
       businessId: this.businessId,          
-      sections: this.menu.sections,
-      shortUrlId: this.menu.shortUrlId  
+      menuId: this.menu.id,
+      sections: this.menu.sections
     }
     this._menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
-        this.menu.shortUrlId = response         
+        this.menu.id = response         
     })
   }
 
