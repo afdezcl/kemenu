@@ -102,4 +102,9 @@ export class AuthenticationService {
     localStorage.setItem(this.USER_ROLE, role);
   }
 
+  refreshTokenHasExpirated(tokens: Tokens): boolean{
+    const jwtDecoded = jwt_decode(tokens.jwt)
+    return jwtDecoded.exp < new Date()
+  }
+
 }
