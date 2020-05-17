@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/app/version").permitAll()
                 .antMatchers("/refresh").permitAll()
                 .antMatchers("/show/**").permitAll()
+                .antMatchers("/public/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
