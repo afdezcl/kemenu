@@ -104,7 +104,9 @@ export class AuthenticationService {
 
   refreshTokenHasExpirated(tokens: Tokens): boolean{
     const jwtDecoded = jwt_decode(tokens.refreshToken)
-    return jwtDecoded.exp < new Date()
+    const experationDate = new Date(jwtDecoded.exp * 1000)
+    const now = new Date()
+    return experationDate < now
   }
 
   getRefreshCookie(shortUrlId: string){

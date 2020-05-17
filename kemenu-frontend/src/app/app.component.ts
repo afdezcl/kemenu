@@ -38,8 +38,6 @@ export class AppComponent implements OnInit  {
   }
   
   ngOnInit() {        
-    
-
     if(this.cookieService.get('show_menu')){      
       localStorage.setItem('COOKIE-SHOW-MENU', this.cookieService.get('show_menu'))      
       this.router.navigateByUrl('/show')
