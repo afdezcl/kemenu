@@ -25,6 +25,6 @@ class ShortUrlMongoRepository implements ShortUrlRepository {
 
     @Override
     public Optional<ShortUrl> findByCustomerEmail(String customerEmail) {
-        return Optional.empty();
+        return springMongoRepository.findByCustomerEmail(customerEmail);
     }
 }
