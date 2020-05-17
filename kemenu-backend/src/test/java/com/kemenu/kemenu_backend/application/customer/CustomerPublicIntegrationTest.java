@@ -3,6 +3,7 @@ package com.kemenu.kemenu_backend.application.customer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kemenu.kemenu_backend.application.menu.CreateMenuRequest;
+import com.kemenu.kemenu_backend.application.menu.CreateMenuResponse;
 import com.kemenu.kemenu_backend.application.menu.MenuResponse;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
@@ -13,7 +14,6 @@ import org.springframework.http.HttpHeaders;
 import reactor.core.publisher.Mono;
 
 import java.util.Base64;
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,15 +31,15 @@ class CustomerPublicIntegrationTest extends KemenuIntegrationTest {
         String businessId = randomCustomer.firstBusiness().getId();
         CreateMenuRequest createMenuRequest = MenuRequestHelper.randomRequest(businessId);
 
-        UUID shortUrlId = webTestClient
+        CreateMenuResponse createMenuResponse = webTestClient
                 .post().uri("/web/v1/menus")
                 .body(Mono.just(createMenuRequest), CreateMenuRequest.class)
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(UUID.class).returnResult().getResponseBody();
+                .expectBody(CreateMenuResponse.class).returnResult().getResponseBody();
 
-        String uri = "/show/" + shortUrlId;
+        String uri = "/show/" + createMenuResponse.getShortUrlId();
         HttpHeaders headers = webTestClient
                 .get().uri(uri)
                 .exchange()
