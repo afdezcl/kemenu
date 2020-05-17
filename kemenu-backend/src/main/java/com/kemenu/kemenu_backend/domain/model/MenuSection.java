@@ -14,12 +14,4 @@ import java.util.List;
 public class MenuSection {
     String name;
     List<Dish> dishes;
-
-    public void addNewDish(Dish dish) {
-        dishes.add(dish);
-    }
-
-    public int numberOfDishes() {
-        return dishes.size();
-    }
 }

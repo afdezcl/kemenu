@@ -15,7 +15,7 @@ public class CustomerHelper {
 
     public static Customer withMenu() {
         Customer customer = randomCustomer();
-        customer.createMenu(customer.firstBusiness(), MenuHelper.randomMenu());
+        customer.createMenu(customer.firstBusiness().getId(), MenuHelper.randomMenu());
         return customer;
     }
 }

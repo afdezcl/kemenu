@@ -2,11 +2,8 @@ package com.kemenu.kemenu_backend.application.customer;
 
 import com.kemenu.kemenu_backend.application.menu.MenuMapper;
 import com.kemenu.kemenu_backend.application.menu.MenuResponse;
-import com.kemenu.kemenu_backend.domain.model.Business;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
-import com.kemenu.kemenu_backend.domain.model.Menu;
-import com.kemenu.kemenu_backend.domain.model.ShortUrl;
 import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -35,34 +32,13 @@ public class CustomerService {
     }
 
     public Optional<MenuResponse> readMenu(String shortUrlId) {
-        Optional<ShortUrl> optionalShortUrl = shortUrlRepository.findById(shortUrlId);
-
-        if (optionalShortUrl.isEmpty()) {
-            return Optional.empty();
-        }
-
-        ShortUrl shortUrl = optionalShortUrl.get();
-        Optional<Customer> optionalCustomer = customerRepository.findByEmail(shortUrl.getCustomerEmail());
-
-        if (optionalCustomer.isEmpty()) {
-            return Optional.empty();
-        }
-
-        Customer customer = optionalCustomer.get();
-        Optional<Business> optionalBusiness = customer.findBusiness(shortUrl.getBusinessId());
-
-        if (optionalBusiness.isEmpty()) {
-            return Optional.empty();
-        }
-
-        Business business = optionalBusiness.get();
-
-        Optional<Menu> optionalMenu = business.findMenu(shortUrl.getMenuId());
-
-        if (optionalMenu.isEmpty()) {
-            return Optional.empty();
-        }
-
-        return Optional.of(menuMapper.from(customer.getEmail(), business.getName(), optionalMenu.get()));
+        return shortUrlRepository.findById(shortUrlId)
+                .flatMap(shortUrl -> customerRepository.findByEmail(shortUrl.getCustomerEmail())
+                        .flatMap(customer -> customer.findBusiness(shortUrl.getBusinessId())
+                                .flatMap(business -> business.findMenu(shortUrl.getMenuId())
+                                        .flatMap(menu -> Optional.of(menuMapper.from(shortUrl.getId(), business.getName(), menu)))
+                                )
+                        )
+                );
     }
 }
