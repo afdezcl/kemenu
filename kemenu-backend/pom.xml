@@ -15,6 +15,7 @@
         <zxing.version>3.4.0</zxing.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <sentry.version>1.7.30</sentry.version>
+        <sendgrid.version>4.5.0</sendgrid.version>
     </properties>
 
     <dependencies>
@@ -94,6 +95,12 @@
             <groupId>io.sentry</groupId>
             <artifactId>sentry-logback</artifactId>
             <version>${sentry.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sendgrid</groupId>
+            <artifactId>sendgrid-java</artifactId>
+            <version>${sendgrid.version}</version>
         </dependency>
 
         <dependency>
