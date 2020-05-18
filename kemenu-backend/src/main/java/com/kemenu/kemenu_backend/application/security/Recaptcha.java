@@ -27,10 +27,15 @@ public class Recaptcha {
     public boolean isValid(String recaptchaToken) {
         JsonNode responseRecaptcha = mapper.readTree(verifyRecaptcha(recaptchaToken));
         boolean success = responseRecaptcha.get("success").asBoolean();
+
+        if (!success) {
+            return false;
+        }
+
         BigDecimal score = new BigDecimal(responseRecaptcha.get("score").asText());
         String action = responseRecaptcha.get("action").asText();
 
-        return success && score.compareTo(new BigDecimal("0.8")) >= 0 && action.equals("login");
+        return score.compareTo(new BigDecimal("0.8")) >= 0 && action.equals("login");
     }
 
     @SneakyThrows
