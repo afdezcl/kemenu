@@ -14,6 +14,7 @@
         <java-jwt.version>3.10.3</java-jwt.version>
         <zxing.version>3.4.0</zxing.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <sentry.version>1.7.30</sentry.version>
     </properties>
 
     <dependencies>
@@ -87,6 +88,12 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${springfox-swagger2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.sentry</groupId>
+            <artifactId>sentry-logback</artifactId>
+            <version>${sentry.version}</version>
         </dependency>
 
         <dependency>
