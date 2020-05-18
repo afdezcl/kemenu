@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Router, NavigationStart} from '@angular/router';
+import {Observable, Subject} from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AlertsService {
   private subject = new Subject<any>();
   private keepAfterRouteChange = false;
@@ -25,12 +25,12 @@ export class AlertsService {
 
   success(message: string, keepAfterRouteChange = false) {
     this.keepAfterRouteChange = keepAfterRouteChange;
-    this.subject.next({ type: 'success', text: message });
+    this.subject.next({type: 'success', text: message});
   }
 
   error(message: string, keepAfterRouteChange = false) {
-    this.keepAfterRouteChange = keepAfterRouteChange;    
-    this.subject.next({ type: 'danger', text: message });
+    this.keepAfterRouteChange = keepAfterRouteChange;
+    this.subject.next({type: 'danger', text: message});
   }
 
   clear() {

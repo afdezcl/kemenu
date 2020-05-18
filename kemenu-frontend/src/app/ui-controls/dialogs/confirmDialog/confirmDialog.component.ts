@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Subject } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {BsModalRef} from 'ngx-bootstrap/modal';
+import {Subject} from 'rxjs';
 
 @Component({
-  selector: 'app-confirmDialog',
+  selector: 'app-confirm-dialog',
   templateUrl: './confirmDialog.component.html',
   styleUrls: ['./confirmDialog.component.css']
 })
@@ -16,7 +16,8 @@ export class ConfirmDialogComponent implements OnInit {
 
   constructor(
     public bsModalRef: BsModalRef,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.onClose = new Subject();
@@ -31,5 +32,4 @@ export class ConfirmDialogComponent implements OnInit {
     this.onClose.next(true);
     this.bsModalRef.hide();
   }
-
 }

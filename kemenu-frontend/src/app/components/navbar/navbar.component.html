@@ -2,13 +2,13 @@
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a [routerLink]="['']" class="navbar-brand tipography-kemenu">KEMENU</a>
-      
-      
+
+
       <button type="button" (click)="isCollapsed = !isCollapsed"
         aria-controls="collapseBasic" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation"
         class="navbar-toggler navbar-toggler-right">Menu<i class="fa fa-bars ml-2"></i></button>
-      
-      
+
+
         <div id="collapseBasic" class="collapse navbar-collapse" [collapse]="isCollapsed" [isAnimated]="true">
         <ul class="navbar-nav ml-auto">
           <!-- Link-->
@@ -23,13 +23,13 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link pointer-cursor" *ngIf="_authService.isLoggedIn()" [routerLink]="['menu']" >{{ 'My menu' | translate }}</a>
+            <a class="nav-link pointer-cursor" *ngIf="authService.isLoggedIn()" [routerLink]="['menu']" >{{ 'My menu' | translate }}</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link pointer-cursor" (click)="onLogout()" *ngIf="_authService.isLoggedIn()">{{ 'Log out' | translate }}</a>
+            <a class="nav-link pointer-cursor" (click)="onLogout()" *ngIf="authService.isLoggedIn()">{{ 'Log out' | translate }}</a>
           </li>
-                
-        </ul><a style="color: white;" (click)="openModalLogIn()" class="btn btn-primary navbar-btn ml-0 ml-lg-3" *ngIf="!_authService.isLoggedIn()">{{ 'SignIn' | translate }} </a>
+
+        </ul><a style="color: white;" (click)="openModalLogIn()" class="btn btn-primary navbar-btn ml-0 ml-lg-3" *ngIf="!authService.isLoggedIn()">{{ 'SignIn' | translate }} </a>
       </div>
     </div>
   </nav>

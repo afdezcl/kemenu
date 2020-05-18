@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '@services/authentication/authentication.service';
-import { Login } from '@models/auth/login.interface';
-import { ReCaptchaV3Service } from 'ng-recaptcha';
-import { Subscription } from 'rxjs';
-import { AlertsService } from '@services/alerts/alerts.service';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {BsModalRef} from 'ngx-bootstrap/modal';
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthenticationService} from '@services/authentication/authentication.service';
+import {Login} from '@models/auth/login.interface';
+import {ReCaptchaV3Service} from 'ng-recaptcha';
+import {Subscription} from 'rxjs';
+import {AlertsService} from '@services/alerts/alerts.service';
 
 @Component({
   selector: 'app-login',
@@ -22,45 +22,47 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     public bsModalRef: BsModalRef,
-    private _authService: AuthenticationService,
-    private router : Router,
+    private authService: AuthenticationService,
+    private router: Router,
     private recaptchaV3Service: ReCaptchaV3Service,
-    private _alertService: AlertsService
-  ) { }
+    private alertService: AlertsService
+  ) {
+  }
 
-  ngOnInit() {  
+  ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
-      password: ['', Validators.required]      
+      password: ['', Validators.required]
     });
   }
 
-  get form() { return this.loginForm.controls; }
+  get form() {
+    return this.loginForm.controls;
+  }
 
   public onSubmit() {
     this.login();
   }
 
-  private login(): void {    
+  private login(): void {
     this.subscription = this.recaptchaV3Service.execute('login')
-    .subscribe((token) => this.loginAttempt(token));
+      .subscribe((token) => this.loginAttempt(token));
   }
 
-  private loginAttempt(token: string) {    
-    const user: Login = { 
-      email: this.form.email.value, 
-      password: this.form.password.value, 
+  private loginAttempt(token: string) {
+    const user: Login = {
+      email: this.form.email.value,
+      password: this.form.password.value,
       recaptchaToken: token
-    }
-    this._authService.login(user)
-      .subscribe(result => {        
-        this.bsModalRef.hide();      
-        this.router.navigateByUrl('menu');
-      },
+    };
+    this.authService.login(user)
+      .subscribe(result => {
+          this.bsModalRef.hide();
+          this.router.navigateByUrl('menu');
+        },
         err => {
-          this._alertService.error('Email o contraseña incorrecta')
+          this.alertService.error('Email o contraseña incorrecta');
         }
-      
       );
   }
 
@@ -70,6 +72,4 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
     }
   }
-
-
 }

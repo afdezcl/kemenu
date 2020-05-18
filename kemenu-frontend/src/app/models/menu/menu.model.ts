@@ -1,10 +1,11 @@
-import { Section } from './section.model'
+import {Section} from './section.model';
 
 export class Menu {
-    constructor(
-        public customerEmail: string,
-        public sections: Section[],
-        public shortUrlId?: string,
-        public id?: string        
-    ) {}
+  constructor(
+    public customerEmail: string,
+    public sections: Section[],
+    public shortUrlId?: string,
+    public id?: string
+  ) {
+  }
 }

@@ -53,7 +53,6 @@
           </execution>
 
           <!-- Run Lint -->
-          <!--
           <execution>
             <id>npm run lint</id>
             <goals>
@@ -63,7 +62,6 @@
               <arguments>run lint</arguments>
             </configuration>
           </execution>
-          -->
 
           <!-- Run Unit tests with Jest -->
           <!--

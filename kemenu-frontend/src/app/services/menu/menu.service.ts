@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,28 +8,29 @@ import { environment } from 'src/environments/environment';
 export class MenuService {
 
   constructor(
-    private _httpClient: HttpClient
-  ) { }
+    private httpClient: HttpClient
+  ) {
+  }
 
 
   createMenu(menuToSave) {
-    return this._httpClient.post(environment.apiBaseUrl + '/web/v1/menus', menuToSave);
+    return this.httpClient.post(environment.apiBaseUrl + '/web/v1/menus', menuToSave);
   }
 
-  updateMenu(menuToUpdate){
-    return this._httpClient.put(environment.apiBaseUrl + '/web/v1/menus', menuToUpdate);
+  updateMenu(menuToUpdate) {
+    return this.httpClient.put(environment.apiBaseUrl + '/web/v1/menus', menuToUpdate);
   }
 
   getMenu(customerEmail: string) {
-    return this._httpClient.get(environment.apiBaseUrl + `/web/v1/customer/${customerEmail}`);
+    return this.httpClient.get(environment.apiBaseUrl + `/web/v1/customer/${customerEmail}`);
   }
 
-  getQRcode(shortUrlId){
-    return this._httpClient.get(environment.apiBaseUrl + `/web/v1/qr/${shortUrlId}`);
+  getQRcode(shortUrlId) {
+    return this.httpClient.get(environment.apiBaseUrl + `/web/v1/qr/${shortUrlId}`);
   }
 
-  getMenuById(shortUrlId: string){
-    return this._httpClient.get(environment.apiBaseUrl + `/public/short/${shortUrlId}`);
+  getMenuById(shortUrlId: string) {
+    return this.httpClient.get(environment.apiBaseUrl + `/public/short/${shortUrlId}`);
   }
 }
 

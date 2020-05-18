@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AppVersionService } from '@services/app-version/app-version.service';
-import { AppVersion } from '@models/appVersion.interface';
+import {Component, OnInit} from '@angular/core';
+import {AppVersionService} from '@services/app-version/app-version.service';
+import {AppVersion} from '@models/appVersion.interface';
+
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -12,14 +13,14 @@ export class FooterComponent implements OnInit {
   appVersion;
 
   constructor(
-    private _appVersion: AppVersionService
-  ) { }
-
-  ngOnInit() {
-    this._appVersion.getVersionApp()
-      .subscribe((result: AppVersion) => {
-        this.appVersion = result.version
-      })
+    private appVersionService: AppVersionService
+  ) {
   }
 
+  ngOnInit() {
+    this.appVersionService.getVersionApp()
+      .subscribe((result: AppVersion) => {
+        this.appVersion = result.version;
+      });
+  }
 }

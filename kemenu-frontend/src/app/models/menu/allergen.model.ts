@@ -1,6 +1,7 @@
 export class Allergen {
-    constructor(
-        public name: string,
-        public imageUrl: string
-    ){}
+  constructor(
+    public name: string,
+    public imageUrl: string
+  ) {
+  }
 }

@@ -1,8 +1,9 @@
-import { Dish } from './dish.model'
+import {Dish} from './dish.model';
 
-export class Section {    
-    constructor(
-       public name: string,
-       public dishes: Dish[]
-    ){}
+export class Section {
+  constructor(
+    public name: string,
+    public dishes: Dish[]
+  ) {
+  }
 }
