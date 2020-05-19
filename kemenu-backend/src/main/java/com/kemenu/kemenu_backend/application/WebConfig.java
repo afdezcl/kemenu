@@ -21,7 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Slf4j
 @Configuration
-public class WebConfig implements WebMvcConfigurer {
+class WebConfig implements WebMvcConfigurer {
 
     @Value("${app.admin.username}")
     private String adminUsername;
@@ -29,7 +29,7 @@ public class WebConfig implements WebMvcConfigurer {
     private String adminPassword;
 
     @Bean
-    public ObjectMapper objectMapper() {
+    ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
 
         mapper.registerModule(new JavaTimeModule());
@@ -50,7 +50,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    public OkHttpClient okHttpClient() {
+    OkHttpClient okHttpClient() {
         return new OkHttpClient();
     }
 
