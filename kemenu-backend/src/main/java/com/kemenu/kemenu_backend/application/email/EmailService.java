@@ -24,7 +24,7 @@ public class EmailService {
 
     @EventListener(ApplicationReadyEvent.class)
     public void sendMail() throws IOException {
-        Email from = new Email("test@example.com");
+        Email from = new Email("noreply@kemenu.com");
         String subject = "Sending with SendGrid is Fun";
         Email to = new Email("nvortega92@gmail.com");
         Content content = new Content("text/plain", "and easy to do anywhere, even with Java");
