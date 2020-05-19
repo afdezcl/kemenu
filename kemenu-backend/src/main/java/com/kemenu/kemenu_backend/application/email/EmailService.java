@@ -7,6 +7,7 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+@Slf4j
 @Service
 public class EmailService {
 
@@ -35,8 +37,6 @@ public class EmailService {
         request.setEndpoint("mail/send");
         request.setBody(mail.build());
         Response response = sg.api(request);
-        System.out.println(response.getStatusCode());
-        System.out.println(response.getBody());
-        System.out.println(response.getHeaders());
+        log.info("Email sent with status code {} and body {} and headers {}", response.getStatusCode(), response.getBody(), response.getHeaders());
     }
 }
