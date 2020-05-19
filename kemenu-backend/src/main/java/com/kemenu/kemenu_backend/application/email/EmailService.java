@@ -22,7 +22,7 @@ public class EmailService {
     @Value("${app.sendgrid}")
     private String sendgridApiKey;
 
-    @EventListener(ApplicationReadyEvent.class)
+    // @EventListener(ApplicationReadyEvent.class)
     public void sendMail() throws IOException {
         Email from = new Email("noreply@kemenu.com");
         String subject = "Sending with SendGrid is Fun";
