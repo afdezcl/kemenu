@@ -34,58 +34,40 @@
           </div>
         </div>
   
-        <div class="row mb-3" *ngIf="false">
+        <div class="row mb-3">
           <div class="col text-center">
             <h5>{{ 'Allergens' | translate }}</h5>
             <small class="text-muted">{{ 'Allergens description' | translate }}</small>
           </div>
         </div>
   
-        <div class="row mb-4" *ngIf="false">
+        <div class="row mb-4">
+          <!-- LEFT COLUMN -->
           <div class="col">
-            <div class="form-check">
+            <div class="form-check" *ngFor="let allergen of allergensListToShowOnLeft">
               <div class="checkbox">
                 <label style="font-size: 1em">
                   <input type="checkbox" value="">
                   <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                   <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
-                  Default
-                </label>
-              </div>
-            </div>
-            <div class="form-check">
-              <div class="checkbox">
-                <label style="font-size: 1em">
-                  <input type="checkbox" value="">
-                  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                  <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
-                  Default
+                  {{allergen.name}}
                 </label>
               </div>
             </div>
           </div>
-  
+          
+          <!-- RIGHT COLUMN -->
           <div class="col">
-            <div class="form-check">
+            <div class="form-check" *ngFor="let allergen of allergensListToShowOnRight">
               <div class="checkbox">
                 <label style="font-size: 1em">
                   <input type="checkbox" value="">
                   <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                   <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
-                  Default
+                  {{allergen.name}}
                 </label>
               </div>
-            </div>
-            <div class="form-check">
-              <div class="checkbox">
-                <label style="font-size: 1em">
-                  <input type="checkbox" value="">
-                  <span class="cr"><i class="cr-icon fa fa-check"></i></span>
-                  <img src="../../../../assets/icons-allergens/fish_red_50x50.png" alt="" class="icons-allergens">
-                  Default
-                </label>
-              </div>
-            </div>
+            </div>          
           </div>
         </div>
   

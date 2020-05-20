@@ -2,6 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {Dish} from '@models/menu/dish.model';
+import { Allergen, AllAllergens } from '@models/menu/allergen.model';
 
 @Component({
   selector: 'app-create-dish',
@@ -15,6 +16,9 @@ export class CreateDishComponent implements OnInit {
   public name: string;
   public description: string;
   public price: number;
+  public allergens: Allergen[] = AllAllergens;
+  public allergensListToShowOnLeft: Allergen[];
+  public allergensListToShowOnRight: Allergen[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,10 +32,19 @@ export class CreateDishComponent implements OnInit {
       description: [this.description],
       price: [this.price, [Validators.required, Validators.min(0)]]
     });
+    
+    this.divideAllergensList();
+
   }
 
   get form() {
     return this.dishForm.controls;
+  }
+
+  private divideAllergensList(){
+    let half_length = Math.ceil(this.allergens.length / 2);
+    this.allergensListToShowOnLeft = this.allergens.slice(0, half_length);
+    this.allergensListToShowOnRight = this.allergens.slice(half_length, this.allergens.length)    
   }
 
   onSubmit() {

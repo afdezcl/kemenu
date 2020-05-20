@@ -24,6 +24,23 @@
     padding-left: 10px !important;
     padding-right: 5px !important;
 }
+
+.edit-section {
+    border-radius: 25px !important;
+    color: #e7475e;
+    padding-top: 7px !important;
+    padding-bottom: 10px !important;
+    padding-left: 10px !important;
+    padding-right: 5px !important;
+    margin-right: 40px;
+}
+
+@media (max-width: 380px) {
+    .edit-section {
+        margin-right: 10px;
+    }
+}
+
 .delete-dish{
     border-radius: 25px !important;
     color: #e7475e;
