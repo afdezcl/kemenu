@@ -8,8 +8,8 @@ import java.util.UUID;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = EmailSendingEvent.EmailSendingEventBuilder.class)
-public class EmailSendingEvent implements Event {
+@JsonDeserialize(builder = SendEmailEvent.SendEmailEventBuilder.class)
+public class SendEmailEvent implements Event {
 
     private static final String NO_REPLAY_EMAIL = "noreply@kemenu.com";
 
@@ -20,8 +20,8 @@ public class EmailSendingEvent implements Event {
     String subject;
     String content;
 
-    public static EmailSendingEvent emailConfirmation(String to, String subject, String content) {
-        return EmailSendingEvent.builder()
+    public static SendEmailEvent noReplyEmail(String to, String subject, String content) {
+        return SendEmailEvent.builder()
                 .from(NO_REPLAY_EMAIL)
                 .to(to)
                 .subject(subject)

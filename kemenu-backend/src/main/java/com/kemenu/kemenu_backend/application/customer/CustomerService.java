@@ -2,6 +2,8 @@ package com.kemenu.kemenu_backend.application.customer;
 
 import com.kemenu.kemenu_backend.application.menu.MenuMapper;
 import com.kemenu.kemenu_backend.application.menu.MenuResponse;
+import com.kemenu.kemenu_backend.domain.event.EventPublisher;
+import com.kemenu.kemenu_backend.domain.event.SendEmailEvent;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
@@ -16,11 +18,14 @@ import java.util.Optional;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final EventPublisher eventPublisher;
     private final ShortUrlRepository shortUrlRepository;
     private final MenuMapper menuMapper;
 
     public String create(Customer customer) {
-        return customerRepository.save(customer); // TODO: Send event to send email
+        String customerId = customerRepository.save(customer);
+        eventPublisher.publish(SendEmailEvent.noReplyEmail(customer.getEmail(), "sub", "asd"));
+        return customerId;
     }
 
     public Optional<Customer> read(String email) {

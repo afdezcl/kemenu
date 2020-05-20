@@ -9,7 +9,7 @@ import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.UUID;
 
 @Getter
@@ -18,19 +18,21 @@ import java.util.UUID;
 @AllArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__(@PersistenceConstructor))
 public class ConfirmedEmail {
 
+    private static final int ONE_DAY_IN_SECONDS = 86400;
+
     @Id
     @EqualsAndHashCode.Include
     private String id;
     @Indexed
     private String email;
     private boolean confirmed;
-    private LocalDate expiration;
+    private Instant expiration;
 
     public ConfirmedEmail(String email) {
-        this(email, LocalDate.now().plusDays(1));
+        this(email, Instant.now().plusSeconds(ONE_DAY_IN_SECONDS));
     }
 
-    public ConfirmedEmail(String email, LocalDate expiration) {
+    public ConfirmedEmail(String email, Instant expiration) {
         this(UUID.randomUUID().toString(), email, false, expiration);
     }
 
@@ -41,7 +43,7 @@ public class ConfirmedEmail {
     }
 
     public boolean isExpired() {
-        return LocalDate.now().isAfter(expiration);
+        return Instant.now().isAfter(expiration);
     }
 
     public boolean canReConfirm() {
@@ -50,7 +52,7 @@ public class ConfirmedEmail {
 
     public void addOneMoreDayOfExpiration() {
         if (canReConfirm()) {
-            expiration = LocalDate.now().plusDays(1);
+            expiration = Instant.now().plusSeconds(ONE_DAY_IN_SECONDS);
         }
     }
 }
