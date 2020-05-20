@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.kemenu</groupId>
         <artifactId>kemenu</artifactId>
-        <version>0.0.114-SNAPSHOT</version>
+        <version>0.0.120-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -16,6 +16,7 @@
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <sentry.version>1.7.30</sentry.version>
         <sendgrid.version>4.5.0</sendgrid.version>
+        <vertx.version>3.9.1</vertx.version>
     </properties>
 
     <dependencies>
@@ -101,6 +102,12 @@
             <groupId>com.sendgrid</groupId>
             <artifactId>sendgrid-java</artifactId>
             <version>${sendgrid.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-core</artifactId>
+            <version>${vertx.version}</version>
         </dependency>
 
         <dependency>
