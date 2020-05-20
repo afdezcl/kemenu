@@ -38,6 +38,7 @@ public class MenuRequestHelper {
                                 .description(UUID.randomUUID().toString())
                                 .price(BigDecimal.TEN)
                                 .allergens(List.of(AllergenData.builder()
+                                        .id(UUID.randomUUID().toString().substring(0, 18))
                                         .name(UUID.randomUUID().toString())
                                         .build()))
                                 .build()))

@@ -21,7 +21,7 @@ public class DishMapper {
                         .name(d.getName())
                         .description(d.getDescription())
                         .price(d.getPrice())
-                        .allergens(d.getAllergens().stream().map(a -> new Allergen(a.getName(), "", a.getImageUrl())).collect(toList()))
+                        .allergens(d.getAllergens().stream().map(a -> Allergen.builder().id(a.getId()).name(a.getName()).build()).collect(toList()))
                         .build()
                 )
                 .collect(toList());
@@ -33,7 +33,7 @@ public class DishMapper {
                         .name(d.getName())
                         .description(d.getDescription())
                         .price(d.getPrice())
-                        .allergens(d.getAllergens().stream().map(a -> AllergenData.builder().name(a.getName()).imageUrl(a.getImageUrl()).build()).collect(toList()))
+                        .allergens(d.getAllergens().stream().map(a -> AllergenData.builder().id(a.getId()).name(a.getName()).build()).collect(toList()))
                         .build()
                 )
                 .collect(toList());

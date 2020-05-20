@@ -2,7 +2,6 @@ package com.kemenu.kemenu_backend.application.menu;
 
 import com.kemenu.kemenu_backend.domain.model.Menu;
 import com.kemenu.kemenu_backend.domain.model.MenuSection;
-import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +14,6 @@ import static java.util.stream.Collectors.toList;
 public class MenuMapper {
 
     private final DishMapper dishMapper;
-    private final ShortUrlRepository shortUrlRepository;
 
     public Menu from(CreateMenuRequest createMenuRequest) {
         List<MenuSection> sections = createMenuRequest.getSections().stream()
