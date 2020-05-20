@@ -6,10 +6,7 @@ import com.kemenu.kemenu_backend.domain.model.ConfirmedEmail;
 import com.kemenu.kemenu_backend.domain.model.ConfirmedEmailRepository;
 import com.kemenu.kemenu_backend.infrastructure.vertx.VertxEventSubscriber;
 import io.vertx.core.eventbus.EventBus;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class EmailEventSubscriber extends VertxEventSubscriber<EmailSendingEvent> {
 
     private final ConfirmedEmailRepository confirmedEmailRepository;
@@ -28,7 +25,6 @@ public class EmailEventSubscriber extends VertxEventSubscriber<EmailSendingEvent
     }
 
     @Override
-    @SneakyThrows
     public void subscribe(EmailSendingEvent event) {
         String confirmEmailId = confirmedEmailRepository.save(new ConfirmedEmail(event.getTo()));
         String confirmUrl = kemenuDomain + "/confirm/email/" + confirmEmailId;
