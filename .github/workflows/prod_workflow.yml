@@ -50,7 +50,7 @@ jobs:
           scp -P ${{ secrets.PORT }} ${{ github.workspace }}/kemenu-backend/target/$JAR_NAME ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~
       - name: Launch app
         run: |
-          ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "export MONGO_DB_USER_KEMENU=${{ secrets.MONGO_DB_USER_KEMENU }} && export MONGO_DB_PWD_KEMENU=${{ secrets.MONGO_DB_PWD_KEMENU }} && export MONGO_DB_NAME_KEMENU=${{ secrets.MONGO_DB_NAME_KEMENU }} && export JWT_SECRET=${{ secrets.JWT_SECRET }} && export JWT_SECRET_REFRESH=${{ secrets.JWT_SECRET_REFRESH }} && export RECAPTCHA_TOKEN=${{ secrets.RECAPTCHA_TOKEN }} && export KEMENU_ADMIN_PWD=${{ secrets.KEMENU_ADMIN_PWD }} && export KEMENU_REGISTER_EMAILS=${{ secrets.KEMENU_REGISTER_EMAILS }} && $JAVA_CMD_PATH -Dsentry.dsn=${{ secrets.SENTRY_DSN }} -Dspring.profiles.active=prod -Xms64M -Xmx256M -jar $JAR_NAME &"
+          ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "export MONGO_DB_USER_KEMENU=${{ secrets.MONGO_DB_USER_KEMENU }} && export MONGO_DB_PWD_KEMENU=${{ secrets.MONGO_DB_PWD_KEMENU }} && export MONGO_DB_NAME_KEMENU=${{ secrets.MONGO_DB_NAME_KEMENU }} && export JWT_SECRET=${{ secrets.JWT_SECRET }} && export JWT_SECRET_REFRESH=${{ secrets.JWT_SECRET_REFRESH }} && export RECAPTCHA_TOKEN=${{ secrets.RECAPTCHA_TOKEN }} && export KEMENU_ADMIN_PWD=${{ secrets.KEMENU_ADMIN_PWD }} && export KEMENU_REGISTER_EMAILS=${{ secrets.KEMENU_REGISTER_EMAILS }} && $JAVA_CMD_PATH -Dsentry.dsn=${{ secrets.SENTRY_DSN }} -Dspring.profiles.active=prod -Xms256M -Xmx2G -jar $JAR_NAME &"
       - name: Commit version
         run: |
           git config --global user.name 'Nicolas Vargas Ortega'
