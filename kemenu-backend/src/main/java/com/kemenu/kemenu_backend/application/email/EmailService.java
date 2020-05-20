@@ -1,6 +1,6 @@
 package com.kemenu.kemenu_backend.application.email;
 
-import com.kemenu.kemenu_backend.domain.event.EmailSendingEvent;
+import com.kemenu.kemenu_backend.domain.event.SendEmailEvent;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
@@ -21,7 +21,7 @@ public class EmailService {
     private String sendgridApiKey;
 
     @SneakyThrows
-    public void sendMail(EmailSendingEvent event, String contentWithUrl) {
+    public void sendMail(SendEmailEvent event, String contentWithUrl) {
         Email from = new Email(event.getFrom());
         String subject = event.getSubject();
         Email to = new Email(event.getTo());

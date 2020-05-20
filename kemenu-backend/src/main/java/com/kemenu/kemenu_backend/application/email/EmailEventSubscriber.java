@@ -1,13 +1,13 @@
 package com.kemenu.kemenu_backend.application.email;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kemenu.kemenu_backend.domain.event.EmailSendingEvent;
+import com.kemenu.kemenu_backend.domain.event.SendEmailEvent;
 import com.kemenu.kemenu_backend.domain.model.ConfirmedEmail;
 import com.kemenu.kemenu_backend.domain.model.ConfirmedEmailRepository;
 import com.kemenu.kemenu_backend.infrastructure.vertx.VertxEventSubscriber;
 import io.vertx.core.eventbus.EventBus;
 
-public class EmailEventSubscriber extends VertxEventSubscriber<EmailSendingEvent> {
+public class EmailEventSubscriber extends VertxEventSubscriber<SendEmailEvent> {
 
     private final ConfirmedEmailRepository confirmedEmailRepository;
     private final String kemenuDomain;
@@ -25,15 +25,15 @@ public class EmailEventSubscriber extends VertxEventSubscriber<EmailSendingEvent
     }
 
     @Override
-    public void subscribe(EmailSendingEvent event) {
+    public void subscribe(SendEmailEvent event) {
         String confirmEmailId = confirmedEmailRepository.save(new ConfirmedEmail(event.getTo()));
         String confirmUrl = kemenuDomain + "/confirm/email/" + confirmEmailId;
         emailService.sendMail(event, event.getContent() + " " + confirmUrl);
     }
 
     @Override
-    public Class<EmailSendingEvent> eventType() {
-        return EmailSendingEvent.class;
+    public Class<SendEmailEvent> eventType() {
+        return SendEmailEvent.class;
     }
 
     @Override
