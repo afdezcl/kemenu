@@ -49,7 +49,7 @@
             <div class="form-check" *ngFor="let allergen of allergensListToShowOnLeft">
               <div class="checkbox">
                 <label style="font-size: 1em">
-                  <input type="checkbox" value="" class="button-checkbox">
+                  <input type="checkbox" class="button-checkbox" (change)="selectAllergens(allergen.id)">
                   <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                   <img src="../../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen" class="icons-allergens">
                   {{allergen.name}}
@@ -63,7 +63,7 @@
             <div class="form-check" *ngFor="let allergen of allergensListToShowOnRight">
               <div class="checkbox">
                 <label style="font-size: 1em">
-                  <input type="checkbox" value="">
+                  <input type="checkbox" (change)="selectAllergens(allergen.id)">
                   <span class="cr"><i class="cr-icon fa fa-check"></i></span>
                   <img src="../../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen" class="icons-allergens">
                   {{allergen.name}}

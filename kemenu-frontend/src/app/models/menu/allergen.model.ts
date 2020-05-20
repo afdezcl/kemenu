@@ -6,7 +6,13 @@ export class Allergen {
     public imageName: string
   ) { }
 }
-
+export class AllergenRequestResponse {
+  
+  constructor(
+    public id: string,
+    public name: string,
+  ) { }
+}
 export const AllAllergens: Allergen[] = [
     {
       id: 'kemenu_allergen_1',

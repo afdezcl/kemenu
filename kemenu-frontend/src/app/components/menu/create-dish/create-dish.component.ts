@@ -2,7 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {Dish} from '@models/menu/dish.model';
-import { Allergen, AllAllergens } from '@models/menu/allergen.model';
+import { Allergen, AllAllergens, AllergenRequestResponse } from '@models/menu/allergen.model';
 
 @Component({
   selector: 'app-create-dish',
@@ -20,6 +20,7 @@ export class CreateDishComponent implements OnInit {
   public allergensListToShowOnLeft: Allergen[];
   public allergensListToShowOnRight: Allergen[];
   public showAllergens: boolean = false;
+  public selectedAllergens: AllergenRequestResponse[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,6 +62,17 @@ export class CreateDishComponent implements OnInit {
 
   activeShowAllergens(){
     this.showAllergens = !this.showAllergens;
+  }
+  selectAllergens(idAllergen: string){
+    if(this.selectedAllergens.find(item => item.id === idAllergen)){
+      this.selectedAllergens = this.selectedAllergens.filter(item => item.id !== idAllergen)
+    } else {
+      const allergen: AllergenRequestResponse = {
+        id: idAllergen,
+        name: this.allergens.find(item => item.id === idAllergen).name
+      }
+      this.selectedAllergens.push(allergen)
+    }    
   }
 
 }
