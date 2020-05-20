@@ -19,6 +19,7 @@ export class CreateDishComponent implements OnInit {
   public allergens: Allergen[] = AllAllergens;
   public allergensListToShowOnLeft: Allergen[];
   public allergensListToShowOnRight: Allergen[];
+  public showAllergens: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -57,4 +58,9 @@ export class CreateDishComponent implements OnInit {
     this.messageEvent.emit(dish);
     this.bsModalRef.hide();
   }
+
+  activeShowAllergens(){
+    this.showAllergens = !this.showAllergens;
+  }
+
 }
