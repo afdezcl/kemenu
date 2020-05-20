@@ -54,7 +54,7 @@ export class CreateDishComponent implements OnInit {
       this.form.name.value,
       this.form.description.value,
       this.form.price.value,
-      []
+      this.selectedAllergens
     );
     this.messageEvent.emit(dish);
     this.bsModalRef.hide();
@@ -63,7 +63,8 @@ export class CreateDishComponent implements OnInit {
   activeShowAllergens(){
     this.showAllergens = !this.showAllergens;
   }
-  selectAllergens(idAllergen: string){
+
+  changeAllergens(idAllergen: string){
     if(this.selectedAllergens.find(item => item.id === idAllergen)){
       this.selectedAllergens = this.selectedAllergens.filter(item => item.id !== idAllergen)
     } else {
