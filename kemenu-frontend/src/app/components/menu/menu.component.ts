@@ -10,6 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {ShareQrComponent} from './share-qr/share-qr.component';
 import {MenuService} from '@services/menu/menu.service';
 import {AuthenticationService} from '@services/authentication/authentication.service';
+import { Allergen, AllAllergens } from '@models/menu/allergen.model';
 
 @Component({
   selector: 'app-menu',
@@ -18,12 +19,13 @@ import {AuthenticationService} from '@services/authentication/authentication.ser
 })
 export class MenuComponent implements OnInit {
 
-  menu: Menu;
-  modalReference: BsModalRef;
-  businessId: string;
-  customerId: string;
-  thereIsChange = false;
-  menuId: string;
+  public menu: Menu;
+  public modalReference: BsModalRef;
+  public businessId: string;
+  public customerId: string;
+  public thereIsChange = false;
+  public menuId: string;
+  public allergens: Allergen[] = AllAllergens;
 
   constructor(
     private modalService: BsModalService,
@@ -51,6 +53,7 @@ export class MenuComponent implements OnInit {
           this.menu.sections = response.businesses[0].menus[0].sections;
           this.menu.shortUrlId = response.businesses[0].menus[0].shortUrlId;
           this.menu.id = response.businesses[0].menus[0].id;
+          this.matchAllergens();
         }
       });
   }
@@ -176,5 +179,17 @@ export class MenuComponent implements OnInit {
       .subscribe((response: string) => {
         this.menu.id = response;
       });
+  }
+
+  matchAllergens(){
+    this.menu.sections.map(section => {
+          section.dishes.map(dish => {
+            dish.allergens.map(allergen => {
+              allergen.imageName = this.allergens.find(item => item.id === allergen.id).imageName
+            })
+          })          
+        })
+        
+    console.log(this.menu)
   }
 }

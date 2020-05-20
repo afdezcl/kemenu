@@ -11,6 +11,7 @@ export class AllergenRequestResponse {
   constructor(
     public id: string,
     public name: string,
+    public imageName?: string
   ) { }
 }
 export const AllAllergens: Allergen[] = [

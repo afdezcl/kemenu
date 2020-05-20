@@ -60,5 +60,15 @@
     .edit-dish {
         margin-right: 10px;
     }
+    .icons-allergens{
+        margin-top: 10px;
+
+    }
+}
+
+.icons-allergens{
+    margin-left: 10px;
+    height: 25px !important;
+    width: 25px !important;
 }
 
