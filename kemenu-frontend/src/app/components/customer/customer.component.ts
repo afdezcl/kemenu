@@ -25,10 +25,10 @@ export class CustomerComponent implements OnInit {
     if (!Object.is(this.router.snapshot.url[0].path, 'demo')) {
       this.getDataToBuildMenu();
       this.menuService.getMenuById(this.shortUrlId)
-      .subscribe((response: any) => {
-        this.menu = response;
-      });
-    } else {      
+        .subscribe((response: any) => {
+          this.menu = response;
+        });
+    } else {
       this.menu = Demo;
     }
   }
