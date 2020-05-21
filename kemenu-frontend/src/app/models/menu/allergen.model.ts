@@ -12,8 +12,7 @@ export class AllergenRequestResponse {
 
   constructor(
     public id: string,
-    public name: string,
-    public imageName?: string
+    public name: string
   ) {
   }
 }

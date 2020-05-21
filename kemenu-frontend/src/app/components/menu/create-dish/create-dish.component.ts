@@ -34,7 +34,7 @@ export class CreateDishComponent implements OnInit {
       description: [this.description],
       price: [this.price, [Validators.required, Validators.min(0)]]
     });
-
+    console.log(this.selectedAllergens);
     this.divideAllergensList();
 
   }
@@ -76,4 +76,7 @@ export class CreateDishComponent implements OnInit {
     }
   }
 
+  allergenIsChecked(allergen: AllergenRequestResponse){
+    return this.selectedAllergens.find(item => Object.is(item.id, allergen.id))
+  }
 }
