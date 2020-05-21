@@ -41,7 +41,7 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
         Customer customer = customerRepository.findById(randomCustomer.getId()).get();
         ShortUrl shortUrl = shortUrlRepository.findById(createMenuResponse.getShortUrlId()).get();
 
-        assertTrue(customer.findMenu(businessId, shortUrl.getMenuId()).isPresent());
+        assertTrue(customer.findMenu(businessId, shortUrl.getMenus().get(0)).isPresent());
     }
 
     @Test
@@ -59,11 +59,11 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
 
         Customer customerWithCreatedMenu = customerRepository.findById(randomCustomer.getId()).get();
         ShortUrl createdShortUrl = shortUrlRepository.findById(createMenuResponse.getShortUrlId()).get();
-        Menu createdMenu = customerWithCreatedMenu.findMenu(businessId, createdShortUrl.getMenuId()).get();
+        Menu createdMenu = customerWithCreatedMenu.findMenu(businessId, createdShortUrl.getMenus().get(0)).get();
 
         UUID updatedMenuId = webTestClient
                 .put().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.updateMenuRequest(businessId, createdShortUrl.getMenuId())), UpdateMenuRequest.class)
+                .body(Mono.just(MenuRequestHelper.updateMenuRequest(businessId, createdShortUrl.getMenus().get(0))), UpdateMenuRequest.class)
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isOk()
