@@ -36,11 +36,11 @@ public class CustomerService {
         return customerRepository.all();
     }
 
-    public Optional<MenuResponse> readMenu(String shortUrlId) {
+    public Optional<MenuResponse> readMenu(String shortUrlId) { // TODO: (1) add the menuId you want to read
         return shortUrlRepository.findById(shortUrlId)
                 .flatMap(shortUrl -> customerRepository.findByEmail(shortUrl.getCustomerEmail())
-                        .flatMap(customer -> customer.findBusiness(shortUrl.getBusinessId())
-                                .flatMap(business -> business.findMenu(shortUrl.getMenuId())
+                        .flatMap(customer -> customer.findBusiness(shortUrl.getBusinessId()) // TODO: (2) Change to findMenu method when TODO (1)
+                                .flatMap(business -> business.findMenu(shortUrl.getMenus().get(0)) // TODO: (3) Change to findMenu method when TODO (1)
                                         .flatMap(menu -> Optional.of(menuMapper.from(shortUrl.getId(), business.getName(), menu)))
                                 )
                         )
