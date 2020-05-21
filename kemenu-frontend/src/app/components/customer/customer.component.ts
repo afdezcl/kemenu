@@ -34,9 +34,9 @@ export class CustomerComponent implements OnInit {
 
   getDataToBuildMenu() {
     this.cookieBASE64 = localStorage.getItem('COOKIE-SHOW-MENU');
-    const json = JSON.parse(atob(this.cookieBASE64));
+    const shortUrlId = atob(this.cookieBASE64);
     // this.menu = json
-    this.shortUrlId = json.shortUrlId;
+    this.shortUrlId = shortUrlId;
     localStorage.setItem('shortUrlId', this.shortUrlId);
   }
 
