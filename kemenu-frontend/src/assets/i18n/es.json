@@ -64,48 +64,20 @@
 	"Spanish": "Español",
 	"Warning no dishes": "No hay ninguna sección de platos creada",
 	"Welcome to": "Bienvenid@ a",
-	"Allergens Names": [
-		{
-			"kemenu_allergen_1": "Apio"
-		},
-		{
-			"kemenu_allergen_2": "Crustáceos"
-		},
-		{
-			"kemenu_allergen_3": "Huevos"
-		},
-		{
-			"kemenu_allergen_4": "Pescado"
-		},
-		{
-			"kemenu_allergen_5": "Levadura"
-		},
-		{
-			"kemenu_allergen_6": "Leche"
-		},
-		{
-			"kemenu_allergen_7": "Molluscos"
-		},
-		{
-			"kemenu_allergen_8": "Mostaza"
-		},
-		{
-			"kemenu_allergen_9": "Cacahuete"
-		},
-		{
-			"kemenu_allergen_10": "Sésamo"
-		},
-		{
-			"kemenu_allergen_11": "Soja"
-		},
-		{
-			"kemenu_allergen_12": "Superóxido"
-		},
-		{
-			"kemenu_allergen_13": "Nueces"
-		},
-		{
-			"kemenu_allergen_14": "Trigo"
-		}
-	]
+	"Allergens Names": {
+		"kemenu_allergen_1": "Apio",
+		"kemenu_allergen_2": "Crustáceos",
+		"kemenu_allergen_3": "Huevos",
+		"kemenu_allergen_4": "Pescado",
+		"kemenu_allergen_5": "Levadura",
+		"kemenu_allergen_6": "Leche",
+		"kemenu_allergen_7": "Molluscos",
+		"kemenu_allergen_8": "Mostaza",
+		"kemenu_allergen_9": "Cacahuete",
+		"kemenu_allergen_10": "Sésamo",
+		"kemenu_allergen_11": "Soja",
+		"kemenu_allergen_12": "Superóxido",
+		"kemenu_allergen_13": "Nueces",
+		"kemenu_allergen_14": "Trigo"
+	}
 }

@@ -64,48 +64,20 @@
 	"Spanish": "Spanish",
 	"Warning no dishes": "There is no section of dishes created",
 	"Welcome to": "Welcome to",
-	"Allergens Names": [
-		{
-			"kemenu_allergen_1": "Celery"
-		},
-		{
-			"kemenu_allergen_2": "Crustacena"
-		},
-		{
-			"kemenu_allergen_3": "Eggs"
-		},
-		{
-			"kemenu_allergen_4": "Fish"
-		},
-		{
-			"kemenu_allergen_5": "Lupin"
-		},
-		{
-			"kemenu_allergen_6": "Milk"
-		},
-		{
-			"kemenu_allergen_7": "Molluscs"
-		},
-		{
-			"kemenu_allergen_8": "Mustard"
-		},
-		{
-			"kemenu_allergen_9": "Peanut"
-		},
-		{
-			"kemenu_allergen_10": "Sesame"
-		},
-		{
-			"kemenu_allergen_11": "Soya"
-		},
-		{
-			"kemenu_allergen_12": "Suphurdioxide"
-		},
-		{
-			"kemenu_allergen_13": "Treenut"
-		},
-		{
-			"kemenu_allergen_14": "Wheat"
-		}
-	]
+	"Allergens Names": {
+		"kemenu_allergen_1": "Celery",
+		"kemenu_allergen_2": "Crustacena",
+		"kemenu_allergen_3": "Eggs",
+		"kemenu_allergen_4": "Fish",
+		"kemenu_allergen_5": "Lupin",
+		"kemenu_allergen_6": "Milk",
+		"kemenu_allergen_7": "Molluscs",
+		"kemenu_allergen_8": "Mustard",
+		"kemenu_allergen_9": "Peanut",
+		"kemenu_allergen_10": "Sesame",
+		"kemenu_allergen_11": "Soya",
+		"kemenu_allergen_12": "Suphurdioxide",
+		"kemenu_allergen_13": "Treenut",
+		"kemenu_allergen_14": "Wheat"
+	}
 }
