@@ -2,7 +2,7 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {BsModalRef} from 'ngx-bootstrap/modal';
 import {Dish} from '@models/menu/dish.model';
-import { Allergen, AllAllergens, AllergenRequestResponse } from '@models/menu/allergen.model';
+import {Allergen, AllAllergens, AllergenRequestResponse} from '@models/menu/allergen.model';
 
 @Component({
   selector: 'app-create-dish',
@@ -19,7 +19,7 @@ export class CreateDishComponent implements OnInit {
   public allergens: Allergen[] = AllAllergens;
   public allergensListToShowOnLeft: Allergen[];
   public allergensListToShowOnRight: Allergen[];
-  public showAllergens: boolean = false;
+  public showAllergens = false;
   public selectedAllergens: AllergenRequestResponse[] = [];
 
   constructor(
@@ -34,7 +34,7 @@ export class CreateDishComponent implements OnInit {
       description: [this.description],
       price: [this.price, [Validators.required, Validators.min(0)]]
     });
-    
+
     this.divideAllergensList();
 
   }
@@ -43,10 +43,10 @@ export class CreateDishComponent implements OnInit {
     return this.dishForm.controls;
   }
 
-  private divideAllergensList(){
-    let half_length = Math.ceil(this.allergens.length / 2);
-    this.allergensListToShowOnLeft = this.allergens.slice(0, half_length);
-    this.allergensListToShowOnRight = this.allergens.slice(half_length, this.allergens.length)    
+  private divideAllergensList() {
+    const halfLength = Math.ceil(this.allergens.length / 2);
+    this.allergensListToShowOnLeft = this.allergens.slice(0, halfLength);
+    this.allergensListToShowOnRight = this.allergens.slice(halfLength, this.allergens.length);
   }
 
   onSubmit() {
@@ -60,20 +60,20 @@ export class CreateDishComponent implements OnInit {
     this.bsModalRef.hide();
   }
 
-  activeShowAllergens(){
+  activeShowAllergens() {
     this.showAllergens = !this.showAllergens;
   }
 
-  changeAllergens(idAllergen: string){
-    if(this.selectedAllergens.find(item => item.id === idAllergen)){
-      this.selectedAllergens = this.selectedAllergens.filter(item => item.id !== idAllergen)
+  changeAllergens(idAllergen: string) {
+    if (this.selectedAllergens.find(item => item.id === idAllergen)) {
+      this.selectedAllergens = this.selectedAllergens.filter(item => item.id !== idAllergen);
     } else {
       const allergen: AllergenRequestResponse = {
         id: idAllergen,
         name: this.allergens.find(item => item.id === idAllergen).name
-      }
-      this.selectedAllergens.push(allergen)
-    }    
+      };
+      this.selectedAllergens.push(allergen);
+    }
   }
 
 }

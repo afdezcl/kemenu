@@ -10,7 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {ShareQrComponent} from './share-qr/share-qr.component';
 import {MenuService} from '@services/menu/menu.service';
 import {AuthenticationService} from '@services/authentication/authentication.service';
-import { Allergen, AllAllergens } from '@models/menu/allergen.model';
+import {Allergen, AllAllergens} from '@models/menu/allergen.model';
 
 @Component({
   selector: 'app-menu',
@@ -181,15 +181,15 @@ export class MenuComponent implements OnInit {
       });
   }
 
-  matchAllergens(){
+  matchAllergens() {
     this.menu.sections.map(section => {
-          section.dishes.map(dish => {
-            dish.allergens.map(allergen => {
-              allergen.imageName = this.allergens.find(item => item.id === allergen.id).imageName
-            })
-          })          
-        })
-        
-    console.log(this.menu)
+      section.dishes.map(dish => {
+        dish.allergens.map(allergen => {
+          allergen.imageName = this.allergens.find(item => item.id === allergen.id).imageName;
+        });
+      });
+    });
+
+    console.log(this.menu);
   }
 }
