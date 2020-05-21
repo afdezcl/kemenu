@@ -22,21 +22,22 @@ export class CustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.menu = Demo;
     if (!Object.is(this.router.snapshot.url[0].path, 'demo')) {
       this.getDataToBuildMenu();
       this.menuService.getMenuById(this.shortUrlId)
         .subscribe((response: any) => {
           this.menu = response;
         });
+    } else {
+      this.menu = Demo;
     }
   }
 
   getDataToBuildMenu() {
     this.cookieBASE64 = localStorage.getItem('COOKIE-SHOW-MENU');
-    const json = JSON.parse(atob(this.cookieBASE64));
+    const shortUrlId = atob(this.cookieBASE64);
     // this.menu = json
-    this.shortUrlId = json.shortUrlId;
+    this.shortUrlId = shortUrlId;
     localStorage.setItem('shortUrlId', this.shortUrlId);
   }
 

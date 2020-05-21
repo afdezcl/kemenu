@@ -1,6 +1,11 @@
 .background {
     background-color: #e7475e;
 }
+@media (min-width: 991.98px) {
+  .background {
+    height: 100vh !important;
+  }
+}  
 .container, .row {
     height: 100%;
 }
