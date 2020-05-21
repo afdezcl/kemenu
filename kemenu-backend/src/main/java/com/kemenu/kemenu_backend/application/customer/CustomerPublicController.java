@@ -1,6 +1,5 @@
 package com.kemenu.kemenu_backend.application.customer;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kemenu.kemenu_backend.application.menu.MenuResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +21,6 @@ import java.util.Optional;
 class CustomerPublicController {
 
     private final CustomerService customerService;
-    private final ObjectMapper mapper;
 
     @GetMapping("/{shortUrlId}")
     String readMenu(@PathVariable String shortUrlId, HttpServletResponse response) throws IOException {
@@ -33,11 +31,7 @@ class CustomerPublicController {
             return "";
         }
 
-        String menuResponseJson = mapper.writeValueAsString(optionalMenuResponse.get());
-        log.info("SHOW MENU: {}", menuResponseJson);
-        String menuResponseInBase64 = Base64.getEncoder().encodeToString(menuResponseJson.getBytes());
-        log.info("SHOW MENU COOKIE: {}", menuResponseInBase64);
-        Cookie cookie = new Cookie("show_menu", menuResponseInBase64);
+        Cookie cookie = new Cookie("show_menu", Base64.getEncoder().encodeToString(shortUrlId.getBytes()));
         response.addCookie(cookie);
         return "forward:/index.html";
     }
