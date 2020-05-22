@@ -23,7 +23,7 @@ class ConfirmedEmailController {
                 .map(confirmedEmail -> {
                     confirmedEmail.confirm();
                     confirmedEmailRepository.save(confirmedEmail);
-                    Cookie cookie = new Cookie("confirmed_email", "true");
+                    Cookie cookie = new Cookie("confirmed_email", Boolean.toString(confirmedEmail.isConfirmed()));
                     response.addCookie(cookie);
                     return "forward:/index.html";
                 }).orElse("forward:/index.html");
