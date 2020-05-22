@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 public class JWTService {
 
     private static final int FIFTEEN_MIN = 900000;
-    private static final int THIRTY_MIN = 1800000;
+    private static final int FOUR_HOURS = 1000 * 60 * 60 * 4;
 
     @Value("${app.secret}")
     private String appSecret;
@@ -33,7 +33,7 @@ public class JWTService {
     }
 
     public String generateRefreshToken(String username, String[] roles) {
-        return generate(username, THIRTY_MIN, roles, appRefresh);
+        return generate(username, FOUR_HOURS, roles, appRefresh);
     }
 
     public String generateRefreshToken(String username, int expirationInMillis, String[] roles) {
