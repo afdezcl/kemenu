@@ -76,7 +76,7 @@ export class CreateDishComponent implements OnInit {
     }
   }
 
-  allergenIsChecked(allergen: AllergenRequestResponse){
-    return this.selectedAllergens.find(item => Object.is(item.id, allergen.id))
+  allergenIsChecked(allergen: AllergenRequestResponse) {
+    return this.selectedAllergens.find(item => Object.is(item.id, allergen.id));
   }
 }

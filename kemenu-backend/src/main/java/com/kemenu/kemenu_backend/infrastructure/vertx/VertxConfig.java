@@ -1,8 +1,8 @@
 package com.kemenu.kemenu_backend.infrastructure.vertx;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kemenu.kemenu_backend.application.email.EmailEventSubscriber;
 import com.kemenu.kemenu_backend.application.email.EmailService;
+import com.kemenu.kemenu_backend.application.email.SendEmailEventSubscriber;
 import com.kemenu.kemenu_backend.domain.model.ConfirmedEmailRepository;
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
@@ -33,11 +33,15 @@ class VertxConfig {
     }
 
     @Bean
-    CommandLineRunner initVerticles(Vertx vertx, EventBus eventBus, ObjectMapper mapper, ConfirmedEmailRepository confirmedEmailRepository, EmailService emailService) {
+    CommandLineRunner initVerticles(Vertx vertx,
+                                    EventBus eventBus,
+                                    ObjectMapper mapper,
+                                    ConfirmedEmailRepository confirmedEmailRepository,
+                                    EmailService emailService) {
         return args -> {
             DeploymentOptions workerVerticleOptions = new DeploymentOptions().setWorker(true);
             for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
-                vertx.deployVerticle(new EmailEventSubscriber(eventBus, mapper, confirmedEmailRepository, allowedOrigins.get(0), emailService), workerVerticleOptions);
+                vertx.deployVerticle(new SendEmailEventSubscriber(eventBus, mapper, confirmedEmailRepository, allowedOrigins.get(0), emailService), workerVerticleOptions);
             }
             log.info("Verticles deployed");
         };

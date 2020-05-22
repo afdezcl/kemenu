@@ -23,4 +23,7 @@ public class CustomerRequest {
     String password;
     @NotBlank
     String recaptchaToken;
+    @NotBlank
+    @Size(max = 2)
+    String lang;
 }

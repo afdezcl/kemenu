@@ -15,6 +15,7 @@ public class CustomerRequestHelper {
                 .email("test@example.com")
                 .password(UUID.randomUUID().toString())
                 .recaptchaToken(UUID.randomUUID().toString())
+                .lang("en")
                 .build();
     }
 

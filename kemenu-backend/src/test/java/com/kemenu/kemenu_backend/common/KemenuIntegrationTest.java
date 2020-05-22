@@ -3,11 +3,11 @@ package com.kemenu.kemenu_backend.common;
 import com.kemenu.kemenu_backend.application.security.JWTService;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.helper.CustomerHelper;
+import com.mongodb.BasicDBObject;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
@@ -31,7 +31,7 @@ public class KemenuIntegrationTest {
     void tearDown() {
         mongoTemplate.getCollectionNames().stream()
                 .filter(collection -> !collection.startsWith("system."))
-                .forEach(collection -> mongoTemplate.getCollection(collection).deleteMany(Criteria.where("email").ne("admin@example.com").getCriteriaObject()));
+                .forEach(collection -> mongoTemplate.getCollection(collection).deleteMany(new BasicDBObject()));
     }
 
     protected String generateAccessToken() {

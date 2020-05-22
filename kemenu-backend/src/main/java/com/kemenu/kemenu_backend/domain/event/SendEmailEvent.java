@@ -35,7 +35,7 @@ public class SendEmailEvent implements Event {
     }
 
     @Override
-    public String address() {
-        return "email.send";
+    public DomainEventAddress address() {
+        return DomainEventAddress.EMAIL_SEND;
     }
 }
