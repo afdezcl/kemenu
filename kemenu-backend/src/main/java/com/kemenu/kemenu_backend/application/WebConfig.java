@@ -16,11 +16,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Slf4j
 @Configuration
+@EnableMongoAuditing
 class WebConfig implements WebMvcConfigurer {
 
     @Value("${app.admin.username}")
