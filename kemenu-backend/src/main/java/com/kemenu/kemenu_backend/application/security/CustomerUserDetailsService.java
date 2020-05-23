@@ -28,7 +28,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
                     if (hasConfirmedAccount(email)) {
                         return new User(customer.getEmail(), customer.getPassword(), List.of(customer));
                     } else {
-                        log.info("Customer with email {} is not confirmed", email);
+                        log.info("A customer with email {} is trying to login with a not confirmed email", email);
                         throw new UsernameNotFoundException("Invalid email or password.");
                     }
                 })

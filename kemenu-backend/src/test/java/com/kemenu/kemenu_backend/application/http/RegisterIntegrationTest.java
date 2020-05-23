@@ -4,24 +4,14 @@ import com.kemenu.kemenu_backend.application.customer.CustomerRequest;
 import com.kemenu.kemenu_backend.application.email.EmailService;
 import com.kemenu.kemenu_backend.application.security.Recaptcha;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
-import com.kemenu.kemenu_backend.domain.model.ConfirmedEmail;
-import com.kemenu.kemenu_backend.domain.model.ConfirmedEmailRepository;
-import com.kemenu.kemenu_backend.domain.model.Customer;
-import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.helper.customer.CustomerRequestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import reactor.core.publisher.Mono;
 
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
@@ -35,43 +25,9 @@ class RegisterIntegrationTest extends KemenuIntegrationTest {
     @MockBean
     private EmailService emailService;
 
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    @Autowired
-    private ConfirmedEmailRepository confirmedEmailRepository;
-
     @BeforeEach
     void initAll() {
         Mockito.doNothing().when(emailService).sendMail(any(), anyString());
-    }
-
-    @Test
-    void aCustomerCanRegisterInTheApplication() {
-        CustomerRequest customerRequest = CustomerRequestHelper.randomRequest();
-        Mockito.when(recaptchaMock.isValid(customerRequest.getRecaptchaToken())).thenReturn(true);
-
-        UUID responseCustomerId = webTestClient
-                .post().uri("/register")
-                .body(Mono.just(customerRequest), CustomerRequest.class)
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody(UUID.class).returnResult().getResponseBody();
-        Customer createdCustomer = customerRepository.findByEmail(customerRequest.getEmail()).get();
-        ConfirmedEmail notConfirmedEmail = confirmedEmailRepository.findByEmail(createdCustomer.getEmail()).get();
-
-        assertFalse(notConfirmedEmail.isConfirmed());
-        verify(emailService, times(1)).sendMail(any(), anyString());
-
-        webTestClient
-                .get().uri("/public/confirm/email/" + notConfirmedEmail.getId())
-                .exchange()
-                .expectStatus().isOk();
-
-        ConfirmedEmail confirmedEmail = confirmedEmailRepository.findByEmail(createdCustomer.getEmail()).get();
-        assertTrue(confirmedEmail.isConfirmed());
-
-        assertEquals(responseCustomerId.toString(), createdCustomer.getId());
     }
 
     @Test
