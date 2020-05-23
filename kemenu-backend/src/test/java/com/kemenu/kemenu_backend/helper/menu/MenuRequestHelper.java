@@ -1,4 +1,4 @@
-package com.kemenu.kemenu_backend.helper;
+package com.kemenu.kemenu_backend.helper.menu;
 
 import com.kemenu.kemenu_backend.application.allergen.AllergenData;
 import com.kemenu.kemenu_backend.application.menu.CreateMenuRequest;

@@ -1,4 +1,4 @@
-package com.kemenu.kemenu_backend.helper;
+package com.kemenu.kemenu_backend.helper.customer;
 
 import com.kemenu.kemenu_backend.application.customer.CustomerRequest;
 import lombok.AccessLevel;

@@ -8,7 +8,7 @@ import com.kemenu.kemenu_backend.domain.model.ConfirmedEmail;
 import com.kemenu.kemenu_backend.domain.model.ConfirmedEmailRepository;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
-import com.kemenu.kemenu_backend.helper.CustomerRequestHelper;
+import com.kemenu.kemenu_backend.helper.customer.CustomerRequestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

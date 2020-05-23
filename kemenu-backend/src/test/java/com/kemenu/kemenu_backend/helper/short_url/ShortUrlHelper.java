@@ -1,4 +1,4 @@
-package com.kemenu.kemenu_backend.helper;
+package com.kemenu.kemenu_backend.helper.short_url;
 
 import com.kemenu.kemenu_backend.domain.model.ShortUrl;
 import lombok.AccessLevel;

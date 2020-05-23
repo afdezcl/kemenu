@@ -3,7 +3,7 @@ package com.kemenu.kemenu_backend.application.customer;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
-import com.kemenu.kemenu_backend.helper.CustomerHelper;
+import com.kemenu.kemenu_backend.helper.customer.CustomerHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -1,7 +1,7 @@
 package com.kemenu.kemenu_backend.domain.model;
 
-import com.kemenu.kemenu_backend.helper.CustomerHelper;
-import com.kemenu.kemenu_backend.helper.MenuHelper;
+import com.kemenu.kemenu_backend.helper.customer.CustomerHelper;
+import com.kemenu.kemenu_backend.helper.menu.MenuHelper;
 import org.junit.jupiter.api.Test;
 
 import java.util.Optional;

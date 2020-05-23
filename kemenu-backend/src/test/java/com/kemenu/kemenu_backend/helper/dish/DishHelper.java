@@ -1,12 +1,15 @@
-package com.kemenu.kemenu_backend.helper;
+package com.kemenu.kemenu_backend.helper.dish;
 
 import com.kemenu.kemenu_backend.domain.model.Dish;
+import com.kemenu.kemenu_backend.helper.allergen.AllergenHelper;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.UUID;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toList;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class DishHelper {
@@ -16,7 +19,11 @@ public class DishHelper {
                 .name(UUID.randomUUID().toString())
                 .description(UUID.randomUUID().toString())
                 .price(BigDecimal.TEN)
-                .allergens(List.of())
+                .allergens(
+                        IntStream.rangeClosed(0, 2) // 3 allergens
+                        .mapToObj(i -> AllergenHelper.random())
+                        .collect(toList())
+                )
                 .build();
     }
 }
