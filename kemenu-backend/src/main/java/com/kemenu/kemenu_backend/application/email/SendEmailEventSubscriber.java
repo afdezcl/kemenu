@@ -28,7 +28,7 @@ public class SendEmailEventSubscriber extends VertxEventSubscriber<SendEmailEven
     @Override
     public void subscribe(SendEmailEvent event) {
         String confirmEmailId = confirmedEmailRepository.save(new ConfirmedEmail(event.getTo()));
-        String confirmUrl = kemenuDomain + "/confirm/email/" + confirmEmailId;
+        String confirmUrl = kemenuDomain + "/public/confirm/email/" + confirmEmailId;
         emailService.sendMail(event, event.getContent() + " " + confirmUrl);
     }
 
