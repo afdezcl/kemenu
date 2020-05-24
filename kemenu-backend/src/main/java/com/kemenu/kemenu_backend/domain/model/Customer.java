@@ -46,7 +46,7 @@ public class Customer implements GrantedAuthority {
     }
 
     public Customer(String id, String email, String password, Role role, String businessName) {
-        this(id, email, password, new ArrayList<>(), role, Instant.now(), Instant.now());
+        this(id, email, password, new ArrayList<>(), role);
         businesses.add(new Business(businessName));
     }
 
