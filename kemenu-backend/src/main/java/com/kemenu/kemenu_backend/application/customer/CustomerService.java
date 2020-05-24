@@ -52,6 +52,14 @@ public class CustomerService {
                 );
     }
 
+    public Optional<String> changePassword(String email, String password) {
+        return customerRepository.findByEmail(email)
+                .flatMap(c -> {
+                    c.changePassword(password);
+                    return Optional.of(customerRepository.save(c));
+                });
+    }
+
     private SendEmailEvent generateEmailEvent(CustomerRequest customerRequest) {
         Locale locale = new Locale.Builder().setLanguage(customerRequest.getLang()).build();
         String subject = messageSource.getMessage("email.confirmation.subject", null, locale);

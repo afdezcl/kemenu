@@ -4,10 +4,15 @@ import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.helper.customer.CustomerHelper;
+import com.kemenu.kemenu_backend.helper.customer.PasswordChangeRequestHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import reactor.core.publisher.Mono;
+
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class CustomerWebIntegrationTest extends KemenuIntegrationTest {
 
@@ -36,5 +41,36 @@ class CustomerWebIntegrationTest extends KemenuIntegrationTest {
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isForbidden();
+    }
+
+    @Test
+    void aCustomerCouldChangeHisPassword() {
+        Customer customer = CustomerHelper.withMenu();
+        String oldPassword = customer.getPassword();
+        String customerId = customerRepository.save(customer);
+        PasswordChangeRequest passwordChangeRequest = PasswordChangeRequestHelper.random();
+
+        String customerIdResponse = webTestClient
+                .patch().uri("/web/v1/customer/" + customer.getEmail() + "/password/change")
+                .body(Mono.just(passwordChangeRequest), PasswordChangeRequest.class)
+                .header("Authorization", generateAccessToken(customer.getEmail()))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(UUID.class).returnResult().getResponseBody().toString();
+
+        Customer updatedCustomer = customerRepository.findById(customerIdResponse).get();
+
+        assertEquals(customerId, customerIdResponse);
+        assertNotEquals(oldPassword, updatedCustomer.getPassword());
+    }
+
+    @Test
+    void aCustomerCannotChangeHisPasswordIfThePasswordsDontMatch() {
+        webTestClient
+                .patch().uri("/web/v1/customer/test@example.com/password/change")
+                .body(Mono.just(PasswordChangeRequestHelper.notSamePassword()), PasswordChangeRequest.class)
+                .header("Authorization", generateAccessToken("test@example.com"))
+                .exchange()
+                .expectStatus().isBadRequest();
     }
 }
