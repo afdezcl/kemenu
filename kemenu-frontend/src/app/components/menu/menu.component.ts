@@ -129,7 +129,7 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number) {    
+  editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number) {       
     const initialState = {
       name: dishToEdit.name,
       description: dishToEdit.description,
@@ -139,8 +139,9 @@ export class MenuComponent implements OnInit {
     this.modalReference = this.modalService.show(CreateDishComponent, { initialState });
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].dishes[dishIndex] = data;
-      this.thereIsChange = true;
+      console.log(this.menu.sections)
       this.matchAllergens();
+      this.thereIsChange = true;
     });
   }
 
@@ -161,42 +162,42 @@ export class MenuComponent implements OnInit {
   }
 
   private createMenu() {
+    const menuSections = this.sanitizeAllergensMenuToUpdate() 
     const menuToSave = {
       businessId: this.businessId,
-      sections: this.menu.sections
+      sections: menuSections
     };
     this.menuService.createMenu(menuToSave)
       .subscribe((response: any) => {
         this.menu.shortUrlId = response.shortUrlId;
         this.menu.id = response.menuId;
+        this.matchAllergens();
       });
   }
 
   private updateMenu() {
-    const menuSections = this.sanitizeMenuToUpdate() 
+    this.sanitizeAllergensMenuToUpdate() 
     const menuToUpdate = {
       businessId: this.businessId,
       menuId: this.menu.id,
-      sections: menuSections     
+      sections: this.menu.sections     
     };
-    console.log(this.menu)
+    console.log(this.menu.sections)
     this.menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
         this.menu.id = response;
         this.matchAllergens();
-        console.log(this.menu)
       });
   }
 
-  sanitizeMenuToUpdate(){
-    let sections = this.menu.sections;
-    console.log(this.menu)
-    sections.map((section: Section) => {
+  sanitizeAllergensMenuToUpdate(){
+    //let sections = this.menu.sections;
+    console.log(this.menu.sections)
+    this.menu.sections.map((section: Section) => {
       section.dishes.map((dish: Dish) => {
         dish.allergens.map((allergen: Allergen) => delete allergen.imageName);
       });
     });
-    return sections;
   }
 
   matchAllergens() {

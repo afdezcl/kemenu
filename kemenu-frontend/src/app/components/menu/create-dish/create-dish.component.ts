@@ -16,11 +16,11 @@ export class CreateDishComponent implements OnInit {
   public name: string;
   public description: string;
   public price: number;
+  public selectedAllergens: Allergen[] = [];
   public allergens: Allergen[] = AllAllergens;
   public allergensListToShowOnLeft: Allergen[];
   public allergensListToShowOnRight: Allergen[];
   public showAllergens = false;
-  public selectedAllergens: AllergenRequestResponse[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -68,9 +68,10 @@ export class CreateDishComponent implements OnInit {
     if (this.selectedAllergens.find(item => item.id === idAllergen)) {
       this.selectedAllergens = this.selectedAllergens.filter(item => item.id !== idAllergen);
     } else {
-      const allergen: AllergenRequestResponse = {
+      const allergen: Allergen = {
         id: idAllergen,
-        name: this.allergens.find(item => item.id === idAllergen).name
+        name: this.allergens.find(item => item.id === idAllergen).name,
+        imageName: this.allergens.find(item => item.id === idAllergen).imageName
       };
       this.selectedAllergens.push(allergen);
     }
