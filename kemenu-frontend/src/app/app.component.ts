@@ -41,9 +41,13 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     if (this.cookieService.get('show_menu')) {
-      // this.refrestCookie()
       localStorage.setItem('COOKIE-SHOW-MENU', this.cookieService.get('show_menu'));
       this.router.navigateByUrl('/show');
+    }
+
+    if(this.cookieService.get('confirmed_email')){
+      localStorage.setItem('COOKIE-CONFIRMED-EMAIL', this.cookieService.get('confirmed_email'))
+      this.cookieService.delete('confirmed_email')
     }
 
     if (localStorage.getItem(this.JWT_TOKEN)) {
@@ -53,18 +57,6 @@ export class AppComponent implements OnInit {
 
   onActivate() {
     window.scroll(0, 0);
-  }
-
-  private refrestCookie() {
-    if (localStorage.getItem('COOKIE-SHOW-MENU')) {
-      this.cookieBASE64 = localStorage.getItem('COOKIE-SHOW-MENU');
-      const json = JSON.parse(atob(this.cookieBASE64));
-      console.log(json);
-      const shortUrlId = json.shortUrlId;
-      console.log(shortUrlId);
-      this.authService.getRefreshCookie(shortUrlId)
-        .subscribe(response => console.log(response));
-    }
   }
 
   checkExpirationToken() {

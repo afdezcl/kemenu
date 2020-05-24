@@ -58,7 +58,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.authService.register(user)
       .subscribe(() => {
           this.registerForm.reset();
-          this.alertService.success('Registrado con éxito, puedes iniciar sesión');
+          this.alertService.success('Registrado con éxito. Verifique su correo para confirmar su cuenta.');
         },
         (error) => {
           this.alertService.error('Error al registrar, este usuario ya existe');
