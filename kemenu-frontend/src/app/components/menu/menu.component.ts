@@ -129,11 +129,7 @@ export class MenuComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
-  editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number) {       
-=======
   editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number) {
->>>>>>> eda6ef911bd62cd507cb8996fa92db656fb9922a
     const initialState = {
       name: dishToEdit.name,
       description: dishToEdit.description,
@@ -166,7 +162,7 @@ export class MenuComponent implements OnInit {
   }
 
   private createMenu() {
-    const menuSections = this.sanitizeAllergensMenuToUpdate() 
+    const menuSections = this.sanitizeAllergensMenuToUpdate()
     const menuToSave = {
       businessId: this.businessId,
       sections: menuSections

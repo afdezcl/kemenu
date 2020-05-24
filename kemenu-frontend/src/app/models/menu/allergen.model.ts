@@ -1,5 +1,4 @@
 export class Allergen {
-
   constructor(
     public id: string,
     public name: string,
@@ -9,7 +8,6 @@ export class Allergen {
 }
 
 export class AllergenRequestResponse {
-
   constructor(
     public id: string,
     public name: string
@@ -89,5 +87,3 @@ export const AllAllergens: Allergen[] = [
     imageName: 'wheat.png'
   }
 ];
-
-
