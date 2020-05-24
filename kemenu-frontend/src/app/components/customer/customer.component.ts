@@ -3,6 +3,11 @@ import {Demo} from '@models/demo-mock/demo.mock';
 import {ShowMenu} from '@models/menu/showMenu.model';
 import {ActivatedRoute} from '@angular/router';
 import {MenuService} from '@services/menu/menu.service';
+import {Section} from '@models/menu/section.model';
+import {Dish} from '@models/menu/dish.model';
+import {AllAllergens, Allergen} from '@models/menu/allergen.model';
+import {Observable, of} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-customer',
@@ -11,7 +16,9 @@ import {MenuService} from '@services/menu/menu.service';
 })
 export class CustomerComponent implements OnInit {
 
-  menu: ShowMenu;
+  public allergens: Allergen[] = AllAllergens; // TODO: REFACTOR THIS WHEN MOVE matchAllergens METHOD
+
+  menu: Observable<ShowMenu>;
   cookieBASE64: string;
   shortUrlId: string;
 
@@ -24,12 +31,10 @@ export class CustomerComponent implements OnInit {
   ngOnInit() {
     if (!Object.is(this.router.snapshot.url[0].path, 'demo')) {
       this.getDataToBuildMenu();
-      this.menuService.getMenuById(this.shortUrlId)
-        .subscribe((response: any) => {
-          this.menu = response;
-        });
+      this.menu = this.menuService.getMenuById(this.shortUrlId)
+        .pipe(map(menu => this.matchAllergens(menu)));
     } else {
-      this.menu = Demo;
+      this.menu = of(Demo);
     }
   }
 
@@ -41,4 +46,17 @@ export class CustomerComponent implements OnInit {
     localStorage.setItem('shortUrlId', this.shortUrlId);
   }
 
+  // TODO: THIS SHOULD BE A PARENT > CHILD EVENT EMIT
+  matchAllergens(menu: ShowMenu): ShowMenu {
+    menu.sections.map((section: Section) => {
+      section.dishes.map((dish: Dish) => {
+        dish.allergens.map((allergen: Allergen) => {
+          allergen.imageName = this.allergens.find(item => item.id === allergen.id).imageName;
+        });
+      });
+    });
+    return menu;
+  }
+
+  // TODO: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
