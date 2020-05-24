@@ -1,4 +1,4 @@
-package com.kemenu.kemenu_backend.helper;
+package com.kemenu.kemenu_backend.helper.business;
 
 import com.kemenu.kemenu_backend.domain.model.Business;
 import lombok.AccessLevel;

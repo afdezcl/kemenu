@@ -18,6 +18,6 @@ class VertxEventPublisher implements EventPublisher {
     @Override
     @SneakyThrows
     public <T extends Event> void publish(T event) {
-        eventBus.send(event.address(), mapper.writeValueAsString(event));
+        eventBus.send(event.address().toString(), mapper.writeValueAsString(event));
     }
 }

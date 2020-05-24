@@ -8,12 +8,44 @@ export const Demo: ShowMenu = {
       name: 'Nachos con queso',
       description: 'Nachos con queso cheddar, jalapeños y aceitunas negras',
       price: 7.50,
-      allergens: []
+      allergens: [
+        {
+          id: 'kemenu_allergen_1',
+          name: 'Celery',
+          imageName: 'celery.png'
+        },
+        {
+          id: 'kemenu_allergen_3',
+          name: 'Eggs',
+          imageName: 'eggs.png'
+        },
+        {
+          id: 'kemenu_allergen_10',
+          name: 'Sesame',
+          imageName: 'sesame.png'
+        }
+      ]
     }, {
       name: 'Croquetas',
       description: 'Croquetas de jamón ibérico',
       price: 4.50,
-      allergens: []
+      allergens: [
+        {
+          id: 'kemenu_allergen_3',
+          name: 'Eggs',
+          imageName: 'eggs.png'
+        },
+        {
+          id: 'kemenu_allergen_9',
+          name: 'Peanut',
+          imageName: 'peanut.png'
+        },
+        {
+          id: 'kemenu_allergen_14',
+          name: 'Wheat',
+          imageName: 'wheat.png'
+        }
+      ]
     }]
   }, {
     name: 'Carnes',
@@ -21,7 +53,13 @@ export const Demo: ShowMenu = {
       name: 'Solomillo a la brasa',
       description: 'Con mojo picón y sal de escamas',
       price: 10.20,
-      allergens: []
+      allergens: [
+        {
+          id: 'kemenu_allergen_12',
+          name: 'Suphurdioxide',
+          imageName: 'suphurdioxide.png'
+        },
+      ]
     }]
   }, {
     name: 'Hamburguesas',
@@ -34,7 +72,18 @@ export const Demo: ShowMenu = {
       name: 'Simple',
       description: 'Hamburguesa con mayonesa simple',
       price: 7.80,
-      allergens: []
+      allergens: [
+        {
+          id: 'kemenu_allergen_11',
+          name: 'Soya',
+          imageName: 'soya.png'
+        },
+        {
+          id: 'kemenu_allergen_5',
+          name: 'Lupin',
+          imageName: 'lupin.png'
+        }
+      ]
     }, {
       name: 'Big-Burguer',
       description: 'Hamburguesa doble con beacon',
@@ -70,7 +119,23 @@ export const Demo: ShowMenu = {
       name: 'Natillas',
       description: 'Natillas caseras de la casa',
       price: 4.50,
-      allergens: []
+      allergens: [
+        {
+          id: 'kemenu_allergen_6',
+          name: 'Milk',
+          imageName: 'milk.png'
+        },
+        {
+          id: 'kemenu_allergen_3',
+          name: 'Eggs',
+          imageName: 'eggs.png'
+        },
+        {
+          id: 'kemenu_allergen_10',
+          name: 'Sesame',
+          imageName: 'sesame.png'
+        }
+      ]
     }, {
       name: 'Variado de tartas',
       description: 'Un variado de tartas caseras de la casa',

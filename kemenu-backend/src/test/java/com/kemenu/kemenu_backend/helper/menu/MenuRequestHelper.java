@@ -1,4 +1,4 @@
-package com.kemenu.kemenu_backend.helper;
+package com.kemenu.kemenu_backend.helper.menu;
 
 import com.kemenu.kemenu_backend.application.allergen.AllergenData;
 import com.kemenu.kemenu_backend.application.menu.CreateMenuRequest;
@@ -38,6 +38,7 @@ public class MenuRequestHelper {
                                 .description(UUID.randomUUID().toString())
                                 .price(BigDecimal.TEN)
                                 .allergens(List.of(AllergenData.builder()
+                                        .id(UUID.randomUUID().toString().substring(0, 18))
                                         .name(UUID.randomUUID().toString())
                                         .build()))
                                 .build()))

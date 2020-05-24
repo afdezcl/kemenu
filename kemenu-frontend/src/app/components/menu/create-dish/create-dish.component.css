@@ -1,3 +1,14 @@
+@media (min-width: 940px) {
+    .modal-content{
+        width: 600px !important;
+    }
+    .form-check {
+        font-size: 15px !important;
+        margin-left: 20px !important;
+    }
+}
+
+
 .icons-allergens{
     height: 30px !important;
     width: 30px !important;
@@ -63,6 +74,24 @@
     opacity: .5;
 }
 
-.modal {
-    margin-top: 100px !important;
+@media (max-width: 380px) {
+    .form-check {
+        font-size: 12px;
+        margin-left: -15px;
+    }
+
+    .button-checkbox{
+        margin-top: 85px !important;
+    }
+}
+
+@media (min-width: 413px) {
+    .form-check {
+        font-size: 13px;
+        margin-left: -10px;
+    }
+
+    .button-checkbox{
+        margin-right: 85px !important;
+    }
 }

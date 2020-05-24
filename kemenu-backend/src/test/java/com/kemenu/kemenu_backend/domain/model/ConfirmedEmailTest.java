@@ -2,7 +2,7 @@ package com.kemenu.kemenu_backend.domain.model;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
+import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,7 +22,7 @@ class ConfirmedEmailTest {
 
     @Test
     void ifItIsExpiredAndIsNotConfirmedCanReConfirm() {
-        ConfirmedEmail confirmedEmail = new ConfirmedEmail("test@example.com", LocalDate.now().minusDays(1));
+        ConfirmedEmail confirmedEmail = new ConfirmedEmail("test@example.com", Instant.now().minusSeconds(100));
 
         assertFalse(confirmedEmail.isConfirmed());
         assertTrue(confirmedEmail.isExpired());

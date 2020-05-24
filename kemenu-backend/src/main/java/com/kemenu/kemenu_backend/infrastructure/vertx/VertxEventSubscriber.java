@@ -17,7 +17,7 @@ public abstract class VertxEventSubscriber<T extends Event> extends AbstractVert
 
     @Override
     public void start() throws Exception {
-        eventBus.consumer(address(), (Message<String> message) -> {
+        eventBus.consumer(address().toString(), (Message<String> message) -> {
             try {
                 T event = mapper.readValue(message.body(), eventType());
                 subscribe(event);

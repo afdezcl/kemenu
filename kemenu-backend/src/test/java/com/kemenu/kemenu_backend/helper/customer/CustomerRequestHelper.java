@@ -1,4 +1,4 @@
-package com.kemenu.kemenu_backend.helper;
+package com.kemenu.kemenu_backend.helper.customer;
 
 import com.kemenu.kemenu_backend.application.customer.CustomerRequest;
 import lombok.AccessLevel;
@@ -15,6 +15,7 @@ public class CustomerRequestHelper {
                 .email("test@example.com")
                 .password(UUID.randomUUID().toString())
                 .recaptchaToken(UUID.randomUUID().toString())
+                .lang("en")
                 .build();
     }
 

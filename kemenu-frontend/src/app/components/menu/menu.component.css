@@ -24,6 +24,16 @@
     padding-left: 10px !important;
     padding-right: 5px !important;
 }
+
+.edit-section {
+    border-radius: 25px !important;
+    color: #e7475e;
+    padding-top: 7px !important;
+    padding-bottom: 10px !important;
+    padding-left: 10px !important;
+    padding-right: 5px !important;
+    margin-right: 40px;
+}
 .delete-dish{
     border-radius: 25px !important;
     color: #e7475e;
@@ -32,3 +42,33 @@
     padding-left: 5px !important;
     padding-right: 5px !important;    
 }
+
+.edit-dish{
+    border-radius: 25px !important;
+    color: #e7475e;
+    padding-top: 7px !important;
+    padding-bottom: 10px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+    margin-right: 30px;    
+}
+
+@media (max-width: 380px) {
+    .edit-section {
+        margin-right: 10px;
+    }
+    .edit-dish {
+        margin-right: 10px;
+    }
+    .icons-allergens{
+        margin-top: 10px;
+
+    }
+}
+
+.icons-allergens{
+    margin-left: 10px;
+    height: 25px !important;
+    width: 25px !important;
+}
+

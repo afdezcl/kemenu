@@ -5,7 +5,7 @@ import com.kemenu.kemenu_backend.application.menu.CreateMenuResponse;
 import com.kemenu.kemenu_backend.application.menu.MenuResponse;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
-import com.kemenu.kemenu_backend.helper.MenuRequestHelper;
+import com.kemenu.kemenu_backend.helper.menu.MenuRequestHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

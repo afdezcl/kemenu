@@ -12,7 +12,9 @@ import javax.validation.constraints.Size;
 @JsonDeserialize(builder = AllergenData.AllergenDataBuilder.class)
 public class AllergenData {
     @NotBlank
+    @Size(max = 18)
+    String id;
+    @NotBlank
     @Size(max = 255)
     String name;
-    String imageUrl;
 }

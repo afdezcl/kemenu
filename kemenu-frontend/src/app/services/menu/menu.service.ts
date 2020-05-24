@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
+import {ShowMenu} from '@models/menu/showMenu.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,7 @@ export class MenuService {
   }
 
   getMenuById(shortUrlId: string) {
-    return this.httpClient.get(environment.apiBaseUrl + `/public/short/${shortUrlId}`);
+    return this.httpClient.get<ShowMenu>(environment.apiBaseUrl + `/public/short/${shortUrlId}`);
   }
 }
 

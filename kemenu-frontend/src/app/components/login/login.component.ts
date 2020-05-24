@@ -7,6 +7,7 @@ import {Login} from '@models/auth/login.interface';
 import {ReCaptchaV3Service} from 'ng-recaptcha';
 import {Subscription} from 'rxjs';
 import {AlertsService} from '@services/alerts/alerts.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
+    private translate: TranslateService,
     public bsModalRef: BsModalRef,
     private authService: AuthenticationService,
     private router: Router,
@@ -61,7 +63,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.router.navigateByUrl('menu');
         },
         err => {
-          this.alertService.error('Email o contraseña incorrecta');
+          this.alertService.error(this.translate.instant('Email wrong'));
         }
       );
   }

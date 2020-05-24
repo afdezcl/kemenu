@@ -5,5 +5,5 @@ public interface EventSubscriber<T extends Event> {
 
     Class<T> eventType();
 
-    String address();
+    DomainEventAddress address();
 }

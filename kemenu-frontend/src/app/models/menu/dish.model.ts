@@ -1,4 +1,4 @@
-import {Allergen} from './allergen.model';
+import {AllergenRequestResponse, Allergen} from './allergen.model';
 
 export class Dish {
   constructor(

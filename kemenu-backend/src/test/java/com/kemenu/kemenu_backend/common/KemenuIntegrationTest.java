@@ -2,7 +2,7 @@ package com.kemenu.kemenu_backend.common;
 
 import com.kemenu.kemenu_backend.application.security.JWTService;
 import com.kemenu.kemenu_backend.domain.model.Customer;
-import com.kemenu.kemenu_backend.helper.CustomerHelper;
+import com.kemenu.kemenu_backend.helper.customer.CustomerHelper;
 import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

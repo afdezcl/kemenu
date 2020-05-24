@@ -1,6 +1,7 @@
-package com.kemenu.kemenu_backend.helper;
+package com.kemenu.kemenu_backend.helper.customer;
 
 import com.kemenu.kemenu_backend.domain.model.Customer;
+import com.kemenu.kemenu_backend.helper.menu.MenuHelper;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 

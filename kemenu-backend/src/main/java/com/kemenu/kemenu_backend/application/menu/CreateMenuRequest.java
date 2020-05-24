@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Builder;
 import lombok.Value;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -15,5 +16,6 @@ public class CreateMenuRequest {
     @NotBlank
     @Size(max = 255)
     String businessId;
+    @Valid
     List<MenuSectionData> sections;
 }

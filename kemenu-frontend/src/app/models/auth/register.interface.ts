@@ -3,4 +3,5 @@ export interface Register {
   email: string;
   password: string;
   recaptchaToken: string;
+  lang: string;
 }

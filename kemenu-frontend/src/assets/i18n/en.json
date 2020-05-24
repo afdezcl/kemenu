@@ -1,7 +1,7 @@
 {
 	"Accept": "Accept",
 	"All rights reserved": "All rights reserved",
-	"Allergens": "Allergens",
+	"Show Allergens": "Show allergens",
 	"Allergens description": "If you need you can select the allergens on the dish.",
 	"Contact us": "Contact us",
 	"Create Section": "Create section",
@@ -18,7 +18,9 @@
 	"Dish name": "Dish name",
 	"Dish price": "Dish price",
 	"Email": "Email",
+	"Email wrong": "Email or password wrong.",
 	"English": "English",
+	"Error Register": "Error to register, this user already exists.",
 	"Examples of dishes": "Anchovies, potatoes, salad...",
 	"Examples of sections": "Fishes, meals, hamburgers...",
 	"Get QR and share": "Get QR and share",
@@ -62,6 +64,25 @@
 	"SloganText": "Register now for free and make your digital menu. Then share your QR code or your link to customers. It's easy!",
 	"SloganTitle": "Make your digital menu FREE!",
 	"Spanish": "Spanish",
+	"Success Register": "Register successfully. Please, verify your email to confirm your account.",
+	"Verify Email Error": "Confirmation link has expired.",
+	"Verify Email Success": "Your email has been confirmed successfully, you can sign in.",
 	"Warning no dishes": "There is no section of dishes created",
-	"Welcome to": "Welcome to"
+	"Welcome to": "Welcome to",
+	"Allergens Names": {
+		"kemenu_allergen_1": "Celery",
+		"kemenu_allergen_2": "Crustacean",
+		"kemenu_allergen_3": "Eggs",
+		"kemenu_allergen_4": "Fish",
+		"kemenu_allergen_5": "Lupin",
+		"kemenu_allergen_6": "Milk",
+		"kemenu_allergen_7": "Molluscs",
+		"kemenu_allergen_8": "Mustard",
+		"kemenu_allergen_9": "Peanut",
+		"kemenu_allergen_10": "Sesame",
+		"kemenu_allergen_11": "Soya",
+		"kemenu_allergen_12": "Suphurdioxide",
+		"kemenu_allergen_13": "Treenut",
+		"kemenu_allergen_14": "Wheat"
+	}
 }

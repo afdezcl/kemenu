@@ -1,7 +1,7 @@
 {
 	"Accept": "Aceptar",
 	"All rights reserved": "Todos los derechos reservados",
-	"Allergens": "Alérgenos",
+	"Show Allergens": "Mostrar alérgenos",
 	"Allergens description": "Si lo necesitas puedes seleccionar los alérgenos del plato.",
 	"Contact us": "Contacta con nosotros",
 	"Create Section": "Crear sección",
@@ -18,7 +18,9 @@
 	"Dish name": "Nombre del plato",
 	"Dish price": "Precio del plato",
 	"Email": "Email",
+	"Email wrong": "Email o contraseña incorrecta.",
 	"English": "Inglés",
+	"Error Register": "Error al registrar, este usuario ya existe.",
 	"Examples of dishes": "Boquerones, patatas, ensalada...",
 	"Examples of sections": "Pescados, carnes, hamburguesas...",
 	"Get QR and share": "Obtener QR y compartir",
@@ -62,6 +64,25 @@
 	"SloganText": "Registrate ahora gratis y crea tu menú digital. Luego comparte tu código QR o tu enlace a los clientes. ¡Es fácil!",
 	"SloganTitle": "¡Crea tu menú de forma digital GRATIS!",
 	"Spanish": "Español",
+	"Success Register": "Registrado con éxito. Por favor verifique su correo para confirmar su cuenta.", 
+	"Verify Email Error": "El enlace de confirmación ha expirado.",
+	"Verify Email Success": "Su correo ha sido confirmado con éxito, puede iniciar sesión.",
 	"Warning no dishes": "No hay ninguna sección de platos creada",
-	"Welcome to": "Bienvenid@ a"
+	"Welcome to": "Bienvenid@ a",
+	"Allergens Names": {
+		"kemenu_allergen_1": "Apio",
+		"kemenu_allergen_2": "Crustáceos",
+		"kemenu_allergen_3": "Huevos",
+		"kemenu_allergen_4": "Pescado",
+		"kemenu_allergen_5": "Levadura",
+		"kemenu_allergen_6": "Leche",
+		"kemenu_allergen_7": "Molluscos",
+		"kemenu_allergen_8": "Mostaza",
+		"kemenu_allergen_9": "Cacahuete",
+		"kemenu_allergen_10": "Sésamo",
+		"kemenu_allergen_11": "Soja",
+		"kemenu_allergen_12": "Superóxido",
+		"kemenu_allergen_13": "Nueces",
+		"kemenu_allergen_14": "Trigo"
+	}
 }
