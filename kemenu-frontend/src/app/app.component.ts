@@ -45,9 +45,9 @@ export class AppComponent implements OnInit {
       this.router.navigateByUrl('/show');
     }
 
-    if(this.cookieService.get('confirmed_email')){
-      localStorage.setItem('COOKIE-CONFIRMED-EMAIL', this.cookieService.get('confirmed_email'))
-      this.cookieService.delete('confirmed_email')
+    if (this.cookieService.get('confirmed_email')) {
+      localStorage.setItem('COOKIE-CONFIRMED-EMAIL', this.cookieService.get('confirmed_email'));
+      this.cookieService.delete('confirmed_email');
     }
 
     if (localStorage.getItem(this.JWT_TOKEN)) {

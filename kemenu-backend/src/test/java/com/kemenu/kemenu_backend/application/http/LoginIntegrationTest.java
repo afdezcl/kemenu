@@ -23,6 +23,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -73,7 +74,13 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
                 .expectBody(UUID.class);
 
         Customer customer = customerRepository.findByEmail(customerRequest.getEmail()).get();
-        ConfirmedEmail notConfirmedEmail = confirmedEmailRepository.findByEmail(customer.getEmail()).get();
+        Optional<ConfirmedEmail> optionalConfirmedEmail;
+
+        do {
+            optionalConfirmedEmail = confirmedEmailRepository.findByEmail(customer.getEmail());
+        } while (optionalConfirmedEmail.isEmpty());
+
+        ConfirmedEmail notConfirmedEmail = optionalConfirmedEmail.get();
 
         assertFalse(notConfirmedEmail.isConfirmed());
         verify(emailService, times(1)).sendMail(any(), anyString());
