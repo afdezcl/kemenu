@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.alertService.clear();
     if (Object.is(localStorage.getItem('COOKIE-CONFIRMED-EMAIL'), 'true')) {
       this.alertService.success(this.translate.instant('Verify Email Success'));
-    } else {
+    } else if (Object.is(localStorage.getItem('COOKIE-CONFIRMED-EMAIL'), 'false')) {
       this.alertService.error(this.translate.instant('Verify Email Error'));
     }
     localStorage.removeItem('COOKIE-CONFIRMED-EMAIL');
