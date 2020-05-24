@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertsService } from '@services/alerts/alerts.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private alertService: AlertsService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -19,9 +21,9 @@ export class HomeComponent implements OnInit {
   checkVerifyEmail(){
     this.alertService.clear();
     if(Object.is(localStorage.getItem('COOKIE-CONFIRMED-EMAIL'), 'true')){
-      this.alertService.success('Su correo ha sido confirmado con éxito, puede iniciar sesión.');
+      this.alertService.success(this.translate.instant('Verify Email Success'));
     } else {
-      this.alertService.error('El enlace de confirmación ha expirado.');
+      this.alertService.error(this.translate.instant('Verify Email Error'));
     }
     localStorage.removeItem('COOKIE-CONFIRMED-EMAIL')
   }

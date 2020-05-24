@@ -5,6 +5,7 @@ import {Subscription} from 'rxjs';
 import {ReCaptchaV3Service} from 'ng-recaptcha';
 import {Register} from '@models/auth/register.interface';
 import {AuthenticationService} from '@services/authentication/authentication.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   registerForm: FormGroup;
 
   constructor(
+    private translate: TranslateService,
     private formBuilder: FormBuilder,
     private alertService: AlertsService,
     private authService: AuthenticationService,
@@ -58,10 +60,10 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.authService.register(user)
       .subscribe(() => {
           this.registerForm.reset();
-          this.alertService.success('Registrado con éxito. Verifique su correo para confirmar su cuenta.');
+          this.alertService.success(this.translate.instant('Success Register'));
         },
         (error) => {
-          this.alertService.error('Error al registrar, este usuario ya existe');
+          this.alertService.error(this.translate.instant('Error Register'));
         }
       );
 
