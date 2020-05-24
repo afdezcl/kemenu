@@ -57,6 +57,5 @@ export class CustomerComponent implements OnInit {
     });
     return menu;
   }
-
   // TODO: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 }
