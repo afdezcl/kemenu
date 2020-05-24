@@ -176,7 +176,7 @@ export class MenuComponent implements OnInit {
   }
 
   private updateMenu() {
-    const menuSections = this.sanitizeMenuToUpdate();
+    const menuSections = this.sanitizeAllergensMenuToUpdate();
     const menuToUpdate = {
       businessId: this.businessId,
       menuId: this.menu.id,
@@ -191,7 +191,7 @@ export class MenuComponent implements OnInit {
       });
   }
 
-  sanitizeMenuToUpdate() {
+  sanitizeAllergensMenuToUpdate() {
     const sections = this.menu.sections;
     console.log(this.menu);
     sections.map((section: Section) => {
@@ -199,6 +199,7 @@ export class MenuComponent implements OnInit {
         dish.allergens.map((allergen: Allergen) => delete allergen.imageName);
       });
     });
+    return sections;
   }
 
   matchAllergens() {
