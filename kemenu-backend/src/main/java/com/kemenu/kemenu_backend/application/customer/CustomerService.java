@@ -9,6 +9,7 @@ import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class CustomerService {
     private final EventPublisher eventPublisher;
     private final ShortUrlRepository shortUrlRepository;
     private final MenuMapper menuMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public String create(CustomerRequest customerRequest) {
         Customer customer = customerMapper.from(customerRequest);
@@ -55,7 +57,7 @@ public class CustomerService {
     public Optional<String> changePassword(String email, String password) {
         return customerRepository.findByEmail(email)
                 .flatMap(c -> {
-                    c.changePassword(password);
+                    c.changePassword(passwordEncoder.encode(password));
                     return Optional.of(customerRepository.save(c));
                 });
     }
