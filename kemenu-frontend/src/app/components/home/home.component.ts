@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AlertsService} from '@services/alerts/alerts.service';
 import {TranslateService} from '@ngx-translate/core';
 
@@ -7,7 +7,7 @@ import {TranslateService} from '@ngx-translate/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(
     private alertService: AlertsService,
@@ -16,6 +16,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit(): void {
     this.checkVerifyEmail();
   }
 
