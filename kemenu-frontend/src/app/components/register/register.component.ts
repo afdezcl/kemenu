@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 import {ReCaptchaV3Service} from 'ng-recaptcha';
 import {Register} from '@models/auth/register.interface';
 import {AuthenticationService} from '@services/authentication/authentication.service';
-import { TranslateService } from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-register',
@@ -54,7 +54,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
       businessName: this.form.businessName.value,
       email: this.form.email.value,
       password: this.form.password.value,
-      recaptchaToken: token
+      recaptchaToken: token,
+      lang: this.getBrowserLang()
     };
     this.alertService.clear();
     this.authService.register(user)
@@ -79,6 +80,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
   public ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
+    }
+  }
+
+  private getBrowserLang(): string {
+    if (window.navigator.language.includes('es')) {
+      return 'es';
+    } else {
+      return 'en';
     }
   }
 }

@@ -15,7 +15,7 @@ app:
   admin:
     username: admin@example.com
     password: admin
-  sendgrid: dev_test
+  sendgrid: ${KEMENU_REGISTER_EMAILS}
 
 spring:
   data:
