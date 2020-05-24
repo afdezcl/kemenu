@@ -76,6 +76,10 @@ public class Customer implements GrantedAuthority {
         return businesses.get(0);
     }
 
+    public void changePassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String getAuthority() {
         return "ROLE_" + role;
