@@ -139,7 +139,7 @@ export class MenuComponent implements OnInit {
     this.modalReference = this.modalService.show(CreateDishComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].dishes[dishIndex] = data;
-      console.log(this.menu.sections)
+      console.log(this.menu.sections);
       this.matchAllergens();
       this.thereIsChange = true;
     });
@@ -162,7 +162,7 @@ export class MenuComponent implements OnInit {
   }
 
   private createMenu() {
-    const menuSections = this.sanitizeAllergensMenuToUpdate()
+    const menuSections = this.sanitizeAllergensMenuToUpdate();
     const menuToSave = {
       businessId: this.businessId,
       sections: menuSections
