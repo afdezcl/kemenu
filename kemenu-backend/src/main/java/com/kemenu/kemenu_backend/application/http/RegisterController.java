@@ -1,6 +1,5 @@
 package com.kemenu.kemenu_backend.application.http;
 
-import com.kemenu.kemenu_backend.application.customer.CustomerMapper;
 import com.kemenu.kemenu_backend.application.customer.CustomerRequest;
 import com.kemenu.kemenu_backend.application.customer.CustomerService;
 import com.kemenu.kemenu_backend.application.security.Recaptcha;
@@ -20,14 +19,13 @@ import java.util.UUID;
 public class RegisterController {
 
     private final Recaptcha recaptcha;
-    private final CustomerMapper customerMapper;
     private final CustomerService customerService;
 
     @PostMapping("/register")
     public ResponseEntity<UUID> create(@RequestBody @Valid CustomerRequest customerRequest) {
         try {
             if (recaptcha.isValid(customerRequest.getRecaptchaToken())) {
-                return ResponseEntity.ok(UUID.fromString(customerService.create(customerMapper.from(customerRequest))));
+                return ResponseEntity.ok(UUID.fromString(customerService.create(customerRequest)));
             }
             return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(null);
         } catch (DuplicateKeyException e) {

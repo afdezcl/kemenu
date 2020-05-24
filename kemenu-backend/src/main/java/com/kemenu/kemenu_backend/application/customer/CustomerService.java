@@ -8,23 +8,30 @@ import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.context.MessageSource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class CustomerService {
 
+    private final CustomerMapper customerMapper;
     private final CustomerRepository customerRepository;
+    private final MessageSource messageSource;
     private final EventPublisher eventPublisher;
     private final ShortUrlRepository shortUrlRepository;
     private final MenuMapper menuMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public String create(Customer customer) {
+    public String create(CustomerRequest customerRequest) {
+        Customer customer = customerMapper.from(customerRequest);
         String customerId = customerRepository.save(customer);
-        eventPublisher.publish(SendEmailEvent.noReplyEmail(customer.getEmail(), "sub", "asd"));
+        eventPublisher.publish(generateEmailEvent(customerRequest));
         return customerId;
     }
 
@@ -45,5 +52,20 @@ public class CustomerService {
                                 )
                         )
                 );
+    }
+
+    public Optional<String> changePassword(String email, String password) {
+        return customerRepository.findByEmail(email)
+                .flatMap(c -> {
+                    c.changePassword(passwordEncoder.encode(password));
+                    return Optional.of(customerRepository.save(c));
+                });
+    }
+
+    private SendEmailEvent generateEmailEvent(CustomerRequest customerRequest) {
+        Locale locale = new Locale.Builder().setLanguage(customerRequest.getLang()).build();
+        String subject = messageSource.getMessage("email.confirmation.subject", null, locale);
+        String content = messageSource.getMessage("email.confirmation.content", null, locale);
+        return SendEmailEvent.noReplyEmail(customerRequest.getEmail(), subject, content);
     }
 }

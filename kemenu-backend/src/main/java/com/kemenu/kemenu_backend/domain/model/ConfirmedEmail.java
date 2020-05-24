@@ -4,7 +4,9 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -23,17 +25,21 @@ public class ConfirmedEmail {
     @Id
     @EqualsAndHashCode.Include
     private String id;
-    @Indexed
+    @Indexed(unique = true)
     private String email;
     private boolean confirmed;
     private Instant expiration;
+    @CreatedDate
+    private Instant createdAt;
+    @LastModifiedDate
+    private Instant updatedAt;
 
     public ConfirmedEmail(String email) {
         this(email, Instant.now().plusSeconds(ONE_DAY_IN_SECONDS));
     }
 
     public ConfirmedEmail(String email, Instant expiration) {
-        this(UUID.randomUUID().toString(), email, false, expiration);
+        this(UUID.randomUUID().toString(), email, false, expiration, Instant.now(), Instant.now());
     }
 
     public void confirm() {

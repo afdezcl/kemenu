@@ -3,14 +3,18 @@ package com.kemenu.kemenu_backend.application.http;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kemenu.kemenu_backend.application.customer.CustomerRequest;
+import com.kemenu.kemenu_backend.application.email.EmailService;
 import com.kemenu.kemenu_backend.application.menu.CreateMenuRequest;
 import com.kemenu.kemenu_backend.application.security.Recaptcha;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
+import com.kemenu.kemenu_backend.domain.model.ConfirmedEmail;
+import com.kemenu.kemenu_backend.domain.model.ConfirmedEmailRepository;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
-import com.kemenu.kemenu_backend.helper.CustomerRequestHelper;
 import com.kemenu.kemenu_backend.helper.LoginRequestHelper;
-import com.kemenu.kemenu_backend.helper.MenuRequestHelper;
+import com.kemenu.kemenu_backend.helper.customer.CustomerRequestHelper;
+import com.kemenu.kemenu_backend.helper.menu.MenuRequestHelper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +25,26 @@ import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 class LoginIntegrationTest extends KemenuIntegrationTest {
 
     @MockBean
     private Recaptcha recaptchaMock;
 
+    @MockBean
+    private EmailService emailService;
+
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private ConfirmedEmailRepository confirmedEmailRepository;
 
     @Autowired
     private ObjectMapper mapper;
@@ -37,6 +54,11 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
 
     @Value("${app.admin.password}")
     private String adminPassword;
+
+    @BeforeEach
+    void initAll() {
+        Mockito.doNothing().when(emailService).sendMail(any(), anyString());
+    }
 
     @Test
     void aCustomerRegisterAnAccountAndLoginThenCanUseProtectedResources() {
@@ -51,6 +73,18 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
                 .expectBody(UUID.class);
 
         Customer customer = customerRepository.findByEmail(customerRequest.getEmail()).get();
+        ConfirmedEmail notConfirmedEmail = confirmedEmailRepository.findByEmail(customer.getEmail()).get();
+
+        assertFalse(notConfirmedEmail.isConfirmed());
+        verify(emailService, times(1)).sendMail(any(), anyString());
+
+        webTestClient
+                .get().uri("/public/confirm/email/" + notConfirmedEmail.getId())
+                .exchange()
+                .expectStatus().isOk();
+
+        ConfirmedEmail confirmedEmail = confirmedEmailRepository.findByEmail(customer.getEmail()).get();
+        assertTrue(confirmedEmail.isConfirmed());
 
         HttpHeaders responseHeaders = webTestClient
                 .post().uri("/login")

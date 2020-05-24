@@ -6,7 +6,7 @@ import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.domain.model.Menu;
 import com.kemenu.kemenu_backend.domain.model.ShortUrl;
 import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
-import com.kemenu.kemenu_backend.helper.MenuRequestHelper;
+import com.kemenu.kemenu_backend.helper.menu.MenuRequestHelper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import reactor.core.publisher.Mono;

@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Menu } from '@models/menu/menu.model';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { CreateSectionComponent } from './create-section/create-section.component';
-import { Section } from '@models/menu/section.model';
-import { CreateDishComponent } from './create-dish/create-dish.component';
-import { Dish } from '@models/menu/dish.model';
-import { ConfirmDialogComponent } from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
-import { TranslateService } from '@ngx-translate/core';
-import { ShareQrComponent } from './share-qr/share-qr.component';
-import { MenuService } from '@services/menu/menu.service';
-import { AuthenticationService } from '@services/authentication/authentication.service';
-import { Allergen, AllAllergens, AllergenRequestResponse } from '@models/menu/allergen.model';
+import {Component, OnInit} from '@angular/core';
+import {Menu} from '@models/menu/menu.model';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {CreateSectionComponent} from './create-section/create-section.component';
+import {Section} from '@models/menu/section.model';
+import {CreateDishComponent} from './create-dish/create-dish.component';
+import {Dish} from '@models/menu/dish.model';
+import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
+import {TranslateService} from '@ngx-translate/core';
+import {ShareQrComponent} from './share-qr/share-qr.component';
+import {MenuService} from '@services/menu/menu.service';
+import {AuthenticationService} from '@services/authentication/authentication.service';
+import {Allergen, AllAllergens, AllergenRequestResponse} from '@models/menu/allergen.model';
 
 @Component({
   selector: 'app-menu',
@@ -80,7 +80,7 @@ export class MenuComponent implements OnInit {
       message: this.translate.instant('Delete Section description')
     };
 
-    this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
+    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
     this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
       if (canDelete) {
         this.menu.sections = this.menu.sections.filter(section => section !== sectionToRemove);
@@ -93,7 +93,7 @@ export class MenuComponent implements OnInit {
     const initialState = {
       name: sectionToEdit.name
     };
-    this.modalReference = this.modalService.show(CreateSectionComponent, { initialState });
+    this.modalReference = this.modalService.show(CreateSectionComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].name = data;
       this.thereIsChange = true;
@@ -119,7 +119,7 @@ export class MenuComponent implements OnInit {
       message: this.translate.instant('Delete Dish description'),
     };
 
-    this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
+    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
     this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
       if (canDelete) {
         this.menu.sections[sectionIndex].dishes =
@@ -129,14 +129,18 @@ export class MenuComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number) {       
+=======
+  editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number) {
+>>>>>>> eda6ef911bd62cd507cb8996fa92db656fb9922a
     const initialState = {
       name: dishToEdit.name,
       description: dishToEdit.description,
       price: dishToEdit.price,
       selectedAllergens: dishToEdit.allergens
     };
-    this.modalReference = this.modalService.show(CreateDishComponent, { initialState });
+    this.modalReference = this.modalService.show(CreateDishComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].dishes[dishIndex] = data;
       console.log(this.menu.sections)
@@ -149,7 +153,7 @@ export class MenuComponent implements OnInit {
     const initialState = {
       shortUrlId: this.menu.shortUrlId
     };
-    this.modalReference = this.modalService.show(ShareQrComponent, { initialState });
+    this.modalReference = this.modalService.show(ShareQrComponent, {initialState});
   }
 
   onSaveMenu() {
@@ -176,24 +180,25 @@ export class MenuComponent implements OnInit {
   }
 
   private updateMenu() {
-    this.sanitizeAllergensMenuToUpdate() 
+    const menuSections = this.sanitizeMenuToUpdate();
     const menuToUpdate = {
       businessId: this.businessId,
       menuId: this.menu.id,
-      sections: this.menu.sections     
+      sections: menuSections
     };
-    console.log(this.menu.sections)
+    console.log(this.menu);
     this.menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
         this.menu.id = response;
         this.matchAllergens();
+        console.log(this.menu);
       });
   }
 
-  sanitizeAllergensMenuToUpdate(){
-    //let sections = this.menu.sections;
-    console.log(this.menu.sections)
-    this.menu.sections.map((section: Section) => {
+  sanitizeMenuToUpdate() {
+    const sections = this.menu.sections;
+    console.log(this.menu);
+    sections.map((section: Section) => {
       section.dishes.map((dish: Dish) => {
         dish.allergens.map((allergen: Allergen) => delete allergen.imageName);
       });

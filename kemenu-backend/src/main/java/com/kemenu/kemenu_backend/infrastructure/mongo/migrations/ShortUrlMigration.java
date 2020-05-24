@@ -20,14 +20,4 @@ public class ShortUrlMigration implements AfterConvertCallback<ShortUrl> {
             return shortUrl;
         }
     }
-
-    public Document version0(ShortUrl shortUrl) {
-        Document documentV0 = new Document();
-        documentV0.append("_id", shortUrl.getId());
-        documentV0.append("customerEmail", shortUrl.getCustomerEmail());
-        documentV0.append("businessId", shortUrl.getBusinessId());
-        documentV0.append("menuId", shortUrl.getMenus().get(0));
-        documentV0.append("_class", shortUrl.getClass().getCanonicalName());
-        return documentV0;
-    }
 }

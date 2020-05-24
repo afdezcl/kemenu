@@ -1,29 +1,22 @@
 package com.kemenu.kemenu_backend.application.customer;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.kemenu.kemenu_backend.application.validation.SamePassword;
 import lombok.Builder;
 import lombok.Value;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Value
+@SamePassword
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = CustomerRequest.CustomerRequestBuilder.class)
-public class CustomerRequest {
+@JsonDeserialize(builder = PasswordChangeRequest.PasswordChangeRequestBuilder.class)
+public class PasswordChangeRequest {
     @NotBlank
     @Size(max = 255)
-    String businessName;
-    @Email(regexp = ".+@.+\\..+")
-    @NotBlank
-    String email;
-    @NotBlank
-    @Size(min = 8, max = 255)
     String password;
     @NotBlank
-    String recaptchaToken;
-    @NotBlank
-    @Size(max = 2)
-    String lang;
+    @Size(max = 255)
+    String repeatedPassword;
 }
