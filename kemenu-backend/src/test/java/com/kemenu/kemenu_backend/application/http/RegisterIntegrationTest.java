@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.verify;
 
 class RegisterIntegrationTest extends KemenuIntegrationTest {
@@ -41,7 +41,7 @@ class RegisterIntegrationTest extends KemenuIntegrationTest {
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.TOO_MANY_REQUESTS);
 
-        verify(emailService, times(0)).sendMail(any(), anyString());
+        verify(emailService, timeout(250).times(0)).sendMail(any(), anyString());
     }
 
     @Test
@@ -55,13 +55,17 @@ class RegisterIntegrationTest extends KemenuIntegrationTest {
                 .exchange()
                 .expectStatus().isOk();
 
+        CustomerRequest requestWithUpperCaseEmail = customerRequest.toBuilder()
+                .email(customerRequest.getEmail().toUpperCase())
+                .build();
+
         webTestClient
                 .post().uri("/register")
-                .body(Mono.just(customerRequest), CustomerRequest.class)
+                .body(Mono.just(requestWithUpperCaseEmail), CustomerRequest.class)
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.CONFLICT);
 
-        verify(emailService, times(1)).sendMail(any(), anyString());
+        verify(emailService, timeout(250).times(1)).sendMail(any(), anyString());
     }
 
     @Test
@@ -75,6 +79,6 @@ class RegisterIntegrationTest extends KemenuIntegrationTest {
                 .exchange()
                 .expectStatus().isBadRequest();
 
-        verify(emailService, times(0)).sendMail(any(), anyString());
+        verify(emailService, timeout(250).times(0)).sendMail(any(), anyString());
     }
 }
