@@ -38,7 +38,7 @@ public class Recaptcha {
         BigDecimal score = new BigDecimal(responseRecaptcha.get("score").asText());
         String action = responseRecaptcha.get("action").asText();
 
-        boolean isValid = score.compareTo(new BigDecimal("0.8")) >= 0 && action.equals("login");
+        boolean isValid = score.compareTo(new BigDecimal("0.3")) >= 0 && action.equals("login");
 
         if (!isValid) {
             log.info("Invalid Recaptcha with score {} and action {}", score.toPlainString(), action);
