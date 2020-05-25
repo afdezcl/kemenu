@@ -77,7 +77,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
         Optional<ConfirmedEmail> optionalConfirmedEmail;
 
         do {
-            optionalConfirmedEmail = confirmedEmailRepository.findByEmail(customer.getEmail());
+            optionalConfirmedEmail = confirmedEmailRepository.findByEmail(customer.getEmail().toUpperCase());
         } while (optionalConfirmedEmail.isEmpty());
 
         ConfirmedEmail notConfirmedEmail = optionalConfirmedEmail.get();

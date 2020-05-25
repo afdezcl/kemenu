@@ -6,5 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;
 
 interface ConfirmedEmailSpringMongoRepository extends MongoRepository<ConfirmedEmail, String> {
-    Optional<ConfirmedEmail> findByEmail(String email);
+    Optional<ConfirmedEmail> findByEmailIgnoreCase(String email);
 }

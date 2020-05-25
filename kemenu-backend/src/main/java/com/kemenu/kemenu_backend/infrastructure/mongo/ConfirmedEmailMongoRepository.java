@@ -20,7 +20,7 @@ class ConfirmedEmailMongoRepository implements ConfirmedEmailRepository {
 
     @Override
     public Optional<ConfirmedEmail> findByEmail(String email) {
-        return springMongoRepository.findByEmail(email);
+        return springMongoRepository.findByEmailIgnoreCase(email);
     }
 
     @Override
