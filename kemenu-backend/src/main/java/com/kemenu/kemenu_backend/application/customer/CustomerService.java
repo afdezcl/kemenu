@@ -1,6 +1,6 @@
 package com.kemenu.kemenu_backend.application.customer;
 
-import com.kemenu.kemenu_backend.application.email.EmailService;
+import com.kemenu.kemenu_backend.application.email.EmailEventFactory;
 import com.kemenu.kemenu_backend.application.menu.MenuMapper;
 import com.kemenu.kemenu_backend.application.menu.MenuResponse;
 import com.kemenu.kemenu_backend.domain.event.EventPublisher;
@@ -21,7 +21,7 @@ public class CustomerService {
     private final CustomerMapper customerMapper;
     private final CustomerRepository customerRepository;
     private final EventPublisher eventPublisher;
-    private final EmailService emailService;
+    private final EmailEventFactory emailEventFactory;
     private final ShortUrlRepository shortUrlRepository;
     private final MenuMapper menuMapper;
     private final PasswordEncoder passwordEncoder;
@@ -29,7 +29,7 @@ public class CustomerService {
     public String create(CustomerRequest customerRequest) {
         Customer customer = customerMapper.from(customerRequest);
         String customerId = customerRepository.save(customer);
-        eventPublisher.publish(emailService.confirmationEmailEvent(customerRequest.getLang(), customerRequest.getEmail()));
+        eventPublisher.publish(emailEventFactory.confirmationEmailEvent(customerRequest.getLang(), customerRequest.getEmail()));
         return customerId;
     }
 
