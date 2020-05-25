@@ -27,6 +27,15 @@ public class EmailEventFactory {
                 .build();
     }
 
+    public SendEmailEvent forgotPasswordEmailEvent(String lang, String email) {
+        return createNoReplyEmail(
+                lang,
+                "email.forgot.password.subject",
+                "email.forgot.password.content",
+                email
+        );
+    }
+
     private SendEmailEvent createNoReplyEmail(String lang, String subjectMessage, String contentMessage, String email) {
         Locale locale = new Locale.Builder().setLanguage(lang).build();
         String subject = messageSource.getMessage(subjectMessage, null, locale);
