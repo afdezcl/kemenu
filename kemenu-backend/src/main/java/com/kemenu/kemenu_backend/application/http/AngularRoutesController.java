@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class AngularRoutesController {
-    @RequestMapping(method = {RequestMethod.OPTIONS, RequestMethod.GET}, path = {"/register/**", "/menu/**", "/show", "/demo"})
+    @RequestMapping(
+            method = {RequestMethod.OPTIONS, RequestMethod.GET},
+            path = {"/register/**", "/menu/**", "/show", "/demo", "/forgot/password"})
     public String forwardAngularPaths() {
         return "forward:/index.html";
     }
