@@ -17,7 +17,7 @@ class ForgotPasswordController {
     private final Recaptcha recaptcha;
     private final ForgotPasswordService forgotPasswordService;
 
-    @PostMapping("/forgot/password")
+    @PostMapping("/public/forgot/password")
     ResponseEntity<String> forgotPassword(@RequestBody @Valid ForgotPasswordRequest request) {
         if (recaptcha.isValid(request.getRecaptchaToken())) {
             forgotPasswordService.sendForgotPasswordEmail(request.getEmail(), request.getLang());

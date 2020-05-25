@@ -23,8 +23,8 @@ public class ForgotPasswordService {
 
     public void sendForgotPasswordEmail(String email, String lang) {
         customerService.read(email)
-                .ifPresent(c -> {
-                    String forgotUrl = allowedOrigins.get(0) + "/public/forgot/password/" + c.getId();
+                .ifPresent(customer -> {
+                    String forgotUrl = allowedOrigins.get(0) + "/public/forgot/password/" + customer.getId();
                     SendEmailEvent forgotPasswordEmailEvent = emailEventFactory.forgotPasswordEmailEvent(lang, email);
                     SendEmailEvent emailEvent = forgotPasswordEmailEvent.toBuilder()
                             .content(forgotPasswordEmailEvent.getContent() + " " + forgotUrl)
