@@ -83,7 +83,6 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
         ConfirmedEmail notConfirmedEmail = optionalConfirmedEmail.get();
 
         assertFalse(notConfirmedEmail.isConfirmed());
-
         verify(emailService, times(1)).sendMail(any(), anyString());
 
         webTestClient
