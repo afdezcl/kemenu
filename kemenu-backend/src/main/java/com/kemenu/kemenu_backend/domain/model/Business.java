@@ -27,8 +27,9 @@ public class Business {
         this(UUID.randomUUID().toString(), name, new ArrayList<>());
     }
 
-    public void changeName(String newName) {
+    public Optional<String> changeName(String newName) {
         this.name = newName;
+        return Optional.of(name);
     }
 
     public String createMenu(Menu menu) {
