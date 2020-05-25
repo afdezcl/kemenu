@@ -21,7 +21,7 @@ class CustomerMongoRepository implements CustomerRepository {
 
     @Override
     public Optional<Customer> findByEmail(String email) {
-        return springMongoRepository.findByEmail(email);
+        return springMongoRepository.findByEmailIgnoreCase(email);
     }
 
     @Override

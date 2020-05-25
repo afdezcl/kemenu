@@ -73,7 +73,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
                 .expectStatus().isOk()
                 .expectBody(UUID.class);
 
-        Customer customer = customerRepository.findByEmail(customerRequest.getEmail()).get();
+        Customer customer = customerRepository.findByEmail(customerRequest.getEmail().toUpperCase()).get();
         Optional<ConfirmedEmail> optionalConfirmedEmail;
 
         do {
