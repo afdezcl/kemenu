@@ -30,7 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.timeout;
 import static org.mockito.Mockito.verify;
 
 class LoginIntegrationTest extends KemenuIntegrationTest {
@@ -83,7 +83,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
         ConfirmedEmail notConfirmedEmail = optionalConfirmedEmail.get();
 
         assertFalse(notConfirmedEmail.isConfirmed());
-        verify(emailService, times(1)).sendMail(any(), anyString());
+        verify(emailService, timeout(250).times(1)).sendMail(any(), anyString());
 
         webTestClient
                 .get().uri("/public/confirm/email/" + notConfirmedEmail.getId())

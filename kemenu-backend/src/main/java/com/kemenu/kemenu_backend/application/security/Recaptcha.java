@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class Recaptcha {
@@ -29,13 +31,20 @@ public class Recaptcha {
         boolean success = responseRecaptcha.get("success").asBoolean();
 
         if (!success) {
+            log.info("Recaptcha does not success");
             return false;
         }
 
         BigDecimal score = new BigDecimal(responseRecaptcha.get("score").asText());
         String action = responseRecaptcha.get("action").asText();
 
-        return score.compareTo(new BigDecimal("0.8")) >= 0 && action.equals("login");
+        boolean isValid = score.compareTo(new BigDecimal("0.8")) >= 0 && action.equals("login");
+
+        if (!isValid) {
+            log.info("Invalid Recaptcha with score {} and action {}", score.toPlainString(), action);
+        }
+
+        return isValid;
     }
 
     @SneakyThrows
