@@ -3,6 +3,7 @@ package com.kemenu.kemenu_backend.application.security;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Slf4j
 @AllArgsConstructor
 class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -36,6 +38,7 @@ class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             if (recaptcha.isValid(recaptchaToken)) {
                 return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
             } else {
+                log.info("Incorrect captcha for email {}", username);
                 throw new InsufficientAuthenticationException("Incorrect captcha");
             }
         } catch (IOException e) {
