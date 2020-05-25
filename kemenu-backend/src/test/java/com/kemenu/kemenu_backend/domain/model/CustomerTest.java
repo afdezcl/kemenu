@@ -60,4 +60,26 @@ class CustomerTest {
 
         assertTrue(optionalMenuId.isEmpty());
     }
+
+    @Test
+    void aCustomerCouldChangeTheBusinessName() {
+        Customer customer = CustomerHelper.randomCustomer();
+        Business business = customer.firstBusiness();
+        String newName = "newName";
+
+        Optional<String> optionalNewName = customer.changeBusinessName(business.getId(), newName);
+
+        assertEquals(newName, optionalNewName.get());
+    }
+
+    @Test
+    void aCustomerCannotChangeTheBusinessNameOfUnknown() {
+        Customer customer = CustomerHelper.randomCustomer();
+        String newName = "newName";
+
+        Optional<String> optionalNewName = customer.changeBusinessName(UUID.randomUUID().toString(), newName);
+
+        assertTrue(optionalNewName.isEmpty());
+        assertNotEquals(newName, customer.firstBusiness().getName());
+    }
 }

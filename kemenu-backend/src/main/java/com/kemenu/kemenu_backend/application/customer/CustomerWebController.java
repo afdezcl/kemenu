@@ -1,5 +1,6 @@
 package com.kemenu.kemenu_backend.application.customer;
 
+import com.kemenu.kemenu_backend.application.business.BusinessChangeNameRequest;
 import com.kemenu.kemenu_backend.application.security.JWTService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -48,6 +49,22 @@ class CustomerWebController {
         }
 
         return customerService.changePassword(email, passwordChangeRequest.getPassword())
+                .map(c -> ResponseEntity.ok(UUID.fromString(c)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/customer/{email}/business/{businessId}")
+    ResponseEntity<UUID> changeBusinessName(@RequestHeader(value = "Authorization") String token,
+                                            @PathVariable String email,
+                                            @PathVariable String businessId,
+                                            @RequestBody @Valid BusinessChangeNameRequest request) {
+        String tokenEmail = jwtService.decodeAccessToken(token).getSubject();
+
+        if (!email.equals(tokenEmail)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        return customerService.changeBusinessName(email, businessId, request.getNewName())
                 .map(c -> ResponseEntity.ok(UUID.fromString(c)))
                 .orElse(ResponseEntity.notFound().build());
     }

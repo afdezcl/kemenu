@@ -1,8 +1,11 @@
 package com.kemenu.kemenu_backend.application.customer;
 
+import com.kemenu.kemenu_backend.application.business.BusinessChangeNameRequest;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
+import com.kemenu.kemenu_backend.domain.model.Business;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
+import com.kemenu.kemenu_backend.helper.business.BusinessChangeNameRequestHelper;
 import com.kemenu.kemenu_backend.helper.customer.CustomerHelper;
 import com.kemenu.kemenu_backend.helper.customer.PasswordChangeRequestHelper;
 import org.junit.jupiter.api.Test;
@@ -72,5 +75,40 @@ class CustomerWebIntegrationTest extends KemenuIntegrationTest {
                 .header("Authorization", generateAccessToken("test@example.com"))
                 .exchange()
                 .expectStatus().isBadRequest();
+    }
+
+    @Test
+    void aCustomerCouldChangeTheBusinessName() {
+        Customer customer = CustomerHelper.withMenu();
+        Business business = customer.firstBusiness();
+        String customerId = customerRepository.save(customer);
+        var request = BusinessChangeNameRequestHelper.random();
+
+        String customerIdResponse = webTestClient
+                .patch().uri("/web/v1/customer/" + customer.getEmail() + "/business/" + business.getId())
+                .body(Mono.just(request), BusinessChangeNameRequest.class)
+                .header("Authorization", generateAccessToken(customer.getEmail()))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(UUID.class).returnResult().getResponseBody().toString();
+
+        Customer updatedCustomer = customerRepository.findById(customerIdResponse).get();
+
+        assertEquals(customerId, customerIdResponse);
+        assertNotEquals(business.getName(), updatedCustomer.firstBusiness().getName());
+    }
+
+    @Test
+    void aCustomerCouldNotChangeTheBusinessNameOfUnkown() {
+        Customer customer = CustomerHelper.withMenu();
+        customerRepository.save(customer);
+        var request = BusinessChangeNameRequestHelper.random();
+
+        webTestClient
+                .patch().uri("/web/v1/customer/" + customer.getEmail() + "/business/" + UUID.randomUUID().toString())
+                .body(Mono.just(request), BusinessChangeNameRequest.class)
+                .header("Authorization", generateAccessToken(customer.getEmail()))
+                .exchange()
+                .expectStatus().isNotFound();
     }
 }

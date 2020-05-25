@@ -62,6 +62,13 @@ public class CustomerService {
                 });
     }
 
+    public Optional<String> changeBusinessName(String email, String businessId, String newBusinessName) {
+        return customerRepository.findByEmail(email)
+                .flatMap(c -> c.changeBusinessName(businessId, newBusinessName)
+                        .flatMap(newName -> Optional.of(customerRepository.save(c)))
+                );
+    }
+
     private SendEmailEvent generateEmailEvent(CustomerRequest customerRequest) {
         Locale locale = new Locale.Builder().setLanguage(customerRequest.getLang()).build();
         String subject = messageSource.getMessage("email.confirmation.subject", null, locale);
