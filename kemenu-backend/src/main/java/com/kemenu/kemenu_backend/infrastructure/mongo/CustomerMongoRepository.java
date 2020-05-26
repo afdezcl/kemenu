@@ -16,6 +16,7 @@ class CustomerMongoRepository implements CustomerRepository {
 
     @Override
     public String save(Customer customer) {
+        customer.changeEmail(customer.getEmail().toLowerCase());
         return springMongoRepository.save(customer).getId();
     }
 

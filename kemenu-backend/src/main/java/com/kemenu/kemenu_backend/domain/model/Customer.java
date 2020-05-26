@@ -54,6 +54,10 @@ public class Customer implements GrantedAuthority {
         this(id, email, password, businesses, role, Instant.now(), Instant.now());
     }
 
+    public void changeEmail(String email) {
+        this.email = email;
+    }
+
     public Optional<String> createMenu(String businessId, Menu menu) {
         return findBusiness(businessId).map(b -> b.createMenu(menu));
     }
