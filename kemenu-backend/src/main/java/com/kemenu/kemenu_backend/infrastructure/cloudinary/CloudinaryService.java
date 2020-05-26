@@ -29,7 +29,7 @@ public class CloudinaryService {
 
     @SneakyThrows
     public boolean upload(MultipartFile file) {
-        Map uploadResult = cloudinary.uploader().upload(file.getBytes(), Map.of());
+        Map uploadResult = cloudinary.uploader().upload(file.getBytes(), Map.of("resource_type", "auto"));
         return false;
     }
 }
