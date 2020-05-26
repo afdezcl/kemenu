@@ -16,6 +16,9 @@ app:
     username: admin@example.com
     password: admin
   sendgrid: test_send
+  cloudinary:
+    key: dev_test
+    secret: dev_test
 
 spring:
   data:
