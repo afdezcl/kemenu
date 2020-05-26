@@ -25,3 +25,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://admin:password@localhost:27017/kemenudb
+  servlet:
+    multipart:
+      max-file-size: 7MB
+      max-request-size: 7MB

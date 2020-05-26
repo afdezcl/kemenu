@@ -25,6 +25,10 @@ spring:
   data:
     mongodb:
       uri: mongodb://admin:password@localhost:27017/kemenudb
+  servlet:
+    multipart:
+      max-file-size: 7MB
+      max-request-size: 7MB
 ---
 spring.profiles: prod
 
@@ -53,3 +57,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://${MONGO_DB_USER_KEMENU}:${MONGO_DB_PWD_KEMENU}@localhost:27017/${MONGO_DB_NAME_KEMENU}
+  servlet:
+    multipart:
+      max-file-size: 7MB
+      max-request-size: 7MB
