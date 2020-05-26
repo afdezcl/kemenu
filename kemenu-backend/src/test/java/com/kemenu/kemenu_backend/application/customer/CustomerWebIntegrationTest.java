@@ -99,7 +99,7 @@ class CustomerWebIntegrationTest extends KemenuIntegrationTest {
     }
 
     @Test
-    void aCustomerCouldNotChangeTheBusinessNameOfUnkown() {
+    void aCustomerCouldNotChangeTheBusinessNameOfUnknown() {
         Customer customer = CustomerHelper.withMenu();
         customerRepository.save(customer);
         var request = BusinessChangeNameRequestHelper.random();
