@@ -26,6 +26,9 @@
             <a class="nav-link pointer-cursor" *ngIf="authService.isLoggedIn()" [routerLink]="['menu']" >{{ 'My menu' | translate }}</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link pointer-cursor" *ngIf="authService.isLoggedIn()" [routerLink]="['profile']" >{{ 'My profile' | translate }}</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link pointer-cursor" (click)="onLogout()" *ngIf="authService.isLoggedIn()">{{ 'Log out' | translate }}</a>
           </li>
 

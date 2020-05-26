@@ -1,3 +1,71 @@
-<p>
-  profile works!
-</p>
+<div class="background">
+  <div class="wrapper container">
+    <div class="row justify-content-md-center align-items-center">
+      <div class="col-auto">
+        <div class="card p-5 shadow" style="border-radius: 25px;">
+          <div class="card-body ">
+            <div class="row">
+              <div class="col-sm-6">
+                <img src="../../../assets/images/profile.svg" alt="" class="img-fluid">
+              </div>
+              <div class="col-sm-6">
+
+                <app-alert></app-alert>
+
+                <div class="text-center">
+                  <h4 class="card-title mb-4">{{ 'My profile' | translate }}</h4>
+                </div>
+                <form [formGroup]="registerForm" (submit)="onSubmit()">
+                  <div class="form-group">
+                    <span class="icon-input">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    <input type="email" class="form-control" id="businessName" aria-describedby="businessName"
+                      placeholder="{{ 'PlaceholderNameRestaurant' | translate }}" formControlName="businessName" required>
+                      <div
+                      *ngIf="registerForm.get('businessName').errors && (registerForm.get('businessName').dirty || registerForm.get('businessName').touched)">
+                      <small *ngIf="registerForm.get('businessName').hasError('required')" class="text-muted ml-2 mt-1">
+                        {{ 'RequiredNameRestaurant' | translate }}
+                      </small>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <span class="icon-input">
+                      <i class="fas fa-lock"></i>
+                    </span>
+                    <input type="password" class="form-control" id="password" placeholder="{{ 'Password' | translate }}"
+                      formControlName="password" required>
+                      <div
+                      *ngIf="registerForm.get('password').errors && (registerForm.get('password').dirty || registerForm.get('password').touched)">
+                      <small *ngIf="registerForm.get('password').hasError('minlength')" class="text-muted ml-2 mt-1">
+                        {{ 'PlaceholderPassword' | translate }}
+                      </small>
+                      <small *ngIf="registerForm.get('password').hasError('required')" class="text-muted ml-2 mt-1">
+                        {{ 'RequiredPassword' | translate }}
+                      </small>
+                    </div>
+                  </div> 
+                  <div class="form-group">
+                    <span class="icon-input">
+                      <i class="fas fa-unlock"></i>
+                    </span>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="{{ 'PlaceholderConfirmPassword' | translate }}"
+                      formControlName="confirmPassword" required>
+                      <small *ngIf="registerForm.hasError('notSame')" class="text-muted ml-2 mt-1">
+                        {{ 'PasswordCoincidence' | translate }}
+                      </small>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid">{{ 'Save' | translate }}</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
