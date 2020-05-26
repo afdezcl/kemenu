@@ -1,6 +1,6 @@
 package com.kemenu.kemenu_backend.application.validation;
 
-import com.kemenu.kemenu_backend.application.customer.PasswordChangeRequest;
+import org.springframework.util.ReflectionUtils;
 
 import javax.validation.Constraint;
 import javax.validation.ConstraintValidator;
@@ -10,6 +10,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.lang.reflect.Field;
 
 @Constraint(validatedBy = SamePassword.SamePasswordValidator.class)
 @Target({ElementType.TYPE})
@@ -22,10 +23,17 @@ public @interface SamePassword {
 
     Class<? extends Payload>[] payload() default {};
 
-    class SamePasswordValidator implements ConstraintValidator<SamePassword, PasswordChangeRequest> {
+    class SamePasswordValidator implements ConstraintValidator<SamePassword, Object> {
         @Override
-        public boolean isValid(PasswordChangeRequest request, ConstraintValidatorContext context) {
-            return request.getPassword().equals(request.getRepeatedPassword());
+        public boolean isValid(Object request, ConstraintValidatorContext context) {
+            Field passwordField = ReflectionUtils.findField(request.getClass(), "password");
+            passwordField.setAccessible(true);
+            Field repeatedPasswordField = ReflectionUtils.findField(request.getClass(), "repeatedPassword");
+            repeatedPasswordField.setAccessible(true);
+
+            String password = (String) ReflectionUtils.getField(passwordField, request);
+            String repeatedPassword = (String) ReflectionUtils.getField(repeatedPasswordField, request);
+            return password.equals(repeatedPassword);
         }
     }
 }
