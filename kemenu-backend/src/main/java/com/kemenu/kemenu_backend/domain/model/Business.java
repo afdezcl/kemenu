@@ -53,7 +53,8 @@ public class Business {
         return menus.stream().filter(m -> m.getId().equals(menuId)).findFirst();
     }
 
-    public void changeImageUrl(String imageUrl) {
+    public Optional<String> changeImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return Optional.of(imageUrl);
     }
 }

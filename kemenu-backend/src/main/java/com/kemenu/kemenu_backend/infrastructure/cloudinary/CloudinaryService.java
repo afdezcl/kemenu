@@ -1,12 +1,12 @@
 package com.kemenu.kemenu_backend.infrastructure.cloudinary;
 
 import com.cloudinary.Cloudinary;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Map;
 
 @Slf4j
@@ -27,9 +27,14 @@ public class CloudinaryService {
         );
     }
 
-    @SneakyThrows
-    public boolean upload(MultipartFile file) {
-        Map uploadResult = cloudinary.uploader().upload(file.getBytes(), Map.of("resource_type", "auto"));
-        return false;
+    public String upload(MultipartFile file) {
+        try {
+            Map<String, Object> uploadResult = cloudinary.uploader().upload(file.getBytes(), Map.of("resource_type", "auto"));
+            CloudinaryUploadResponse uploadResponse = CloudinaryUploadResponse.from(uploadResult);
+            return uploadResponse.getSecureUrl();
+        } catch (IOException e) {
+            log.error("Failure while uploading photo to Cloudinary", e);
+            return "";
+        }
     }
 }

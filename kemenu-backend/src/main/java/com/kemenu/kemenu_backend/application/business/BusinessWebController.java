@@ -47,7 +47,14 @@ class BusinessWebController {
                                              @PathVariable String email,
                                              @PathVariable String businessId,
                                              @RequestParam("file") MultipartFile file) {
-        // TODO: Implement
-        return null;
+        String tokenEmail = jwtService.decodeAccessToken(token).getSubject();
+
+        if (!email.equals(tokenEmail)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        return customerService.changeBusinessPhoto(email, businessId, file)
+                .map(c -> ResponseEntity.ok(UUID.fromString(c)))
+                .orElse(ResponseEntity.notFound().build());
     }
 }
