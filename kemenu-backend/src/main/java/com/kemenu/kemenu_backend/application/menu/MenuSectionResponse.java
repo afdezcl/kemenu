@@ -8,10 +8,8 @@ import java.util.List;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = MenuResponse.MenuResponseBuilder.class)
-public class MenuResponse {
-    String id;
-    String businessName;
-    String shortUrlId;
-    List<MenuSectionResponse> sections;
+@JsonDeserialize(builder = MenuSectionResponse.MenuSectionResponseBuilder.class)
+public class MenuSectionResponse {
+    String name;
+    List<DishResponse> dishes;
 }

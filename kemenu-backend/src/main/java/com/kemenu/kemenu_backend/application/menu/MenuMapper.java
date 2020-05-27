@@ -47,7 +47,7 @@ public class MenuMapper {
                 .businessName(businessName)
                 .shortUrlId(shortUrlId)
                 .sections(menu.getSections().stream()
-                        .map(ms -> MenuSectionData.builder()
+                        .map(ms -> MenuSectionResponse.builder()
                                 .name(ms.getName())
                                 .dishes(dishMapper.from(ms))
                                 .build())
