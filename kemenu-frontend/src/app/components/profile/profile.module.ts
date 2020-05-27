@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { DialogModule } from '@ui-controls/dialogs/dialog.module';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ProfileRoutingModule } from './profile-routing.module';
 
 @NgModule({
   imports: [
@@ -15,8 +17,12 @@ import { DialogModule } from '@ui-controls/dialogs/dialog.module';
     AlertModule.forRoot(),
     RouterModule,
     TranslateModule, 
-    DialogModule
+    DialogModule,
+    ProfileRoutingModule
   ],
-  declarations: [ProfileComponent]
+  declarations: [
+    ProfileComponent,
+    ChangePasswordComponent
+  ]
 })
 export class ProfileModule { }
