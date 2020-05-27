@@ -20,5 +20,5 @@ public class UpdateMenuRequest {
     @Size(max = 255)
     String businessId;
     @Valid
-    List<MenuSectionData> sections;
+    List<MenuSectionRequest> sections;
 }

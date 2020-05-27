@@ -17,4 +17,5 @@ public class Dish {
     String description;
     BigDecimal price;
     List<Allergen> allergens;
+    String imageUrl;
 }
