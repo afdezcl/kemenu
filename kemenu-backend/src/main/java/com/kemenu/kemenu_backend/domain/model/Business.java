@@ -22,9 +22,10 @@ public class Business {
     private String id;
     private String name;
     private List<Menu> menus;
+    private String imageUrl;
 
     public Business(String name) {
-        this(UUID.randomUUID().toString(), name, new ArrayList<>());
+        this(UUID.randomUUID().toString(), name, new ArrayList<>(), "");
     }
 
     public Optional<String> changeName(String newName) {
@@ -50,5 +51,10 @@ public class Business {
 
     public Optional<Menu> findMenu(String menuId) {
         return menus.stream().filter(m -> m.getId().equals(menuId)).findFirst();
+    }
+
+    public Optional<String> changeImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return Optional.of(imageUrl);
     }
 }

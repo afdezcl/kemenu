@@ -13,5 +13,6 @@ import java.util.List;
 public class BusinessData {
     String id;
     String name;
+    String imageUrl;
     List<MenuResponse> menus;
 }
