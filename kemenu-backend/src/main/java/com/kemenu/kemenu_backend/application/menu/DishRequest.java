@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.kemenu.kemenu_backend.application.allergen.AllergenData;
 import lombok.Builder;
 import lombok.Value;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -25,5 +24,5 @@ public class DishRequest {
     BigDecimal price;
     @Valid
     List<AllergenData> allergens;
-    MultipartFile photo;
+    String imageUrl;
 }
