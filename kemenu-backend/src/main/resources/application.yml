@@ -36,6 +36,17 @@ server:
   port: 8085
   address: 127.0.0.1
 
+management:
+  endpoints:
+    enabled-by-default: false
+    jmx:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      datadog:
+        api-key: ${DD_API_KEY}
+
 app:
   version: @project.version@
   secret: ${JWT_SECRET}
@@ -54,6 +65,8 @@ app:
     cloudname: ${CLOUDINARY_CLOUDNAME}
 
 spring:
+  jmx:
+    enabled: true
   data:
     mongodb:
       uri: mongodb://${MONGO_DB_USER_KEMENU}:${MONGO_DB_PWD_KEMENU}@localhost:27017/${MONGO_DB_NAME_KEMENU}
