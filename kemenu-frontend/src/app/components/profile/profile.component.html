@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="text-center mt-3">
-                  <button type="submit" class="btn btn-success profile-button" (click)="goToChangePassword()">{{ 'Edit Information' | translate }}
+                  <button type="submit" class="btn btn-success profile-button" [routerLink]="['edit']">{{ 'Edit Information' | translate }}
                     <i class="fas fa-user pl-2"></i>
                   </button>
                 </div>
@@ -25,11 +25,11 @@
                     <i class="fas fa-lock"></i>
                   </button>
                 </div>
-                <div class="text-center mt-4">
-                  <button type="submit" class="btn btn-info profile-button" (click)="goToChangePassword()">{{ 'Customize menu' | translate }}
+                <!--<div class="text-center mt-4">
+                  <button type="submit" class="btn btn-info profile-button" [routerLink]="['customize]">{{ 'Customize menu' | translate }}
                     <i class="fas fa-paint-roller pl-2"></i>
                   </button>
-                </div>
+                </div>-->
 
               </div>
             </div>
