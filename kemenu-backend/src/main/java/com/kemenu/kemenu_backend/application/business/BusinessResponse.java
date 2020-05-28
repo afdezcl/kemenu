@@ -9,10 +9,12 @@ import java.util.List;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = BusinessData.BusinessDataBuilder.class)
-public class BusinessData {
+@JsonDeserialize(builder = BusinessResponse.BusinessResponseBuilder.class)
+public class BusinessResponse {
     String id;
     String name;
-    String imageUrl;
     List<MenuResponse> menus;
+    String imageUrl;
+    String phone;
+    String info;
 }

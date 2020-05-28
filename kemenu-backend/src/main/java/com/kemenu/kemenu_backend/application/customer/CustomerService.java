@@ -1,17 +1,18 @@
 package com.kemenu.kemenu_backend.application.customer;
 
+import com.kemenu.kemenu_backend.application.business.BusinessMapper;
+import com.kemenu.kemenu_backend.application.business.UpdateBusinessRequest;
 import com.kemenu.kemenu_backend.application.email.EmailEventFactory;
 import com.kemenu.kemenu_backend.application.menu.MenuMapper;
 import com.kemenu.kemenu_backend.application.menu.MenuResponse;
 import com.kemenu.kemenu_backend.domain.event.EventPublisher;
+import com.kemenu.kemenu_backend.domain.model.Business;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
-import com.kemenu.kemenu_backend.infrastructure.cloudinary.CloudinaryService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +28,7 @@ public class CustomerService {
     private final ShortUrlRepository shortUrlRepository;
     private final MenuMapper menuMapper;
     private final PasswordEncoder passwordEncoder;
-    private final CloudinaryService cloudinaryService;
+    private final BusinessMapper businessMapper;
 
     public String create(CustomerRequest customerRequest) {
         Customer customer = customerMapper.from(customerRequest);
@@ -63,17 +64,14 @@ public class CustomerService {
                 });
     }
 
-    public Optional<String> changeBusinessName(String email, String businessId, String newBusinessName) {
+    public Optional<String> changeBusiness(String email, String businessId, UpdateBusinessRequest updateBusinessRequest) {
         return customerRepository.findByEmail(email)
-                .flatMap(c -> c.changeBusinessName(businessId, newBusinessName)
-                        .flatMap(newName -> Optional.of(customerRepository.save(c)))
-                );
-    }
-
-    public Optional<String> changeBusinessPhoto(String email, String businessId, MultipartFile photo) {
-        return customerRepository.findByEmail(email)
-                .flatMap(c -> c.changeBusinessPhoto(businessId, cloudinaryService.upload(photo))
-                        .flatMap(newImageUrl -> Optional.of(customerRepository.save(c)))
+                .flatMap(c -> c.findBusiness(businessId)
+                        .flatMap(b -> {
+                            Business newBusiness = businessMapper.from(businessId, b.getMenus(), updateBusinessRequest);
+                            return c.changeBusiness(newBusiness);
+                        })
+                        .flatMap(updatedBusinessId -> Optional.of(customerRepository.save(c)))
                 );
     }
 }
