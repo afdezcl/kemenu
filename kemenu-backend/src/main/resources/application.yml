@@ -3,6 +3,9 @@ spring.profiles: dev
 server:
   port: 8085
   address: 127.0.0.1
+  tomcat:
+    mbeanregistry:
+      enabled: true
 
 app:
   version: @project.version@
@@ -22,6 +25,8 @@ app:
     cloudname: dev_test
 
 spring:
+  jmx:
+    enabled: true
   data:
     mongodb:
       uri: mongodb://admin:password@localhost:27017/kemenudb
@@ -35,6 +40,9 @@ spring.profiles: prod
 server:
   port: 8085
   address: 127.0.0.1
+  tomcat:
+    mbeanregistry:
+      enabled: true
 
 management:
   endpoints:
