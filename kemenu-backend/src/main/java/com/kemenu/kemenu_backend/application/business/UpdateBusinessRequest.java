@@ -9,9 +9,18 @@ import javax.validation.constraints.Size;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = BusinessChangeNameRequest.BusinessChangeNameRequestBuilder.class)
-public class BusinessChangeNameRequest {
+@JsonDeserialize(builder = UpdateBusinessRequest.UpdateBusinessRequestBuilder.class)
+public class UpdateBusinessRequest {
     @NotBlank
     @Size(max = 255)
-    String newName;
+    String name;
+    @NotBlank
+    @Size(max = 4096)
+    String imageUrl;
+    @NotBlank
+    @Size(max = 255)
+    String phone;
+    @NotBlank
+    @Size(max = 4096)
+    String info;
 }

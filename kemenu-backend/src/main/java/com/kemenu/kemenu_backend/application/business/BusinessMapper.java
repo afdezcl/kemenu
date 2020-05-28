@@ -2,6 +2,7 @@ package com.kemenu.kemenu_backend.application.business;
 
 import com.kemenu.kemenu_backend.application.menu.MenuMapper;
 import com.kemenu.kemenu_backend.domain.model.Business;
+import com.kemenu.kemenu_backend.domain.model.Menu;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,16 +16,29 @@ public class BusinessMapper {
 
     private final MenuMapper menuMapper;
 
-    public List<BusinessData> from(String shortUrlId, List<Business> businesses) {
+    public List<BusinessResponse> from(String shortUrlId, List<Business> businesses) {
         return businesses.stream().map(b -> from(shortUrlId, b)).collect(toList());
     }
 
-    public BusinessData from(String shortUrlId, Business business) {
-        return BusinessData.builder()
+    public BusinessResponse from(String shortUrlId, Business business) {
+        return BusinessResponse.builder()
                 .id(business.getId())
                 .name(business.getName())
-                .imageUrl(business.getImageUrl())
                 .menus(menuMapper.from(shortUrlId, business.getName(), business.getMenus()))
+                .imageUrl(business.getImageUrl())
+                .phone(business.getPhone())
+                .info(business.getInfo())
                 .build();
+    }
+
+    public Business from(String businessId, List<Menu> menus, UpdateBusinessRequest updateBusinessRequest) {
+        return new Business(
+                businessId,
+                updateBusinessRequest.getName(),
+                menus,
+                updateBusinessRequest.getImageUrl(),
+                updateBusinessRequest.getPhone(),
+                updateBusinessRequest.getInfo()
+        );
     }
 }

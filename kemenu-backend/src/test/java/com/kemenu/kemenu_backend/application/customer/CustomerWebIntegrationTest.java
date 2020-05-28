@@ -1,11 +1,11 @@
 package com.kemenu.kemenu_backend.application.customer;
 
-import com.kemenu.kemenu_backend.application.business.BusinessChangeNameRequest;
+import com.kemenu.kemenu_backend.application.business.UpdateBusinessRequest;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.Business;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
-import com.kemenu.kemenu_backend.helper.business.BusinessChangeNameRequestHelper;
+import com.kemenu.kemenu_backend.helper.business.UpdateBusinessRequestHelper;
 import com.kemenu.kemenu_backend.helper.customer.CustomerHelper;
 import com.kemenu.kemenu_backend.helper.customer.PasswordChangeRequestHelper;
 import org.junit.jupiter.api.Test;
@@ -78,35 +78,43 @@ class CustomerWebIntegrationTest extends KemenuIntegrationTest {
     }
 
     @Test
-    void aCustomerCouldChangeTheBusinessName() {
+    void aCustomerCouldChangeABusiness() {
         Customer customer = CustomerHelper.withMenu();
         Business business = customer.firstBusiness();
         String customerId = customerRepository.save(customer);
-        var request = BusinessChangeNameRequestHelper.random();
+        var request = UpdateBusinessRequestHelper.random();
 
         String customerIdResponse = webTestClient
-                .patch().uri("/web/v1/customer/" + customer.getEmail() + "/business/" + business.getId())
-                .body(Mono.just(request), BusinessChangeNameRequest.class)
+                .put().uri("/web/v1/customer/" + customer.getEmail() + "/business/" + business.getId())
+                .body(Mono.just(request), UpdateBusinessRequest.class)
                 .header("Authorization", generateAccessToken(customer.getEmail()))
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody(UUID.class).returnResult().getResponseBody().toString();
 
         Customer updatedCustomer = customerRepository.findById(customerIdResponse).get();
+        Business updatedBusiness = updatedCustomer.firstBusiness();
 
         assertEquals(customerId, customerIdResponse);
         assertNotEquals(business.getName(), updatedCustomer.firstBusiness().getName());
+        assertEquals(business.getId(), updatedBusiness.getId());
+        assertEquals(request.getName(), updatedBusiness.getName());
+        assertEquals(request.getImageUrl(), updatedBusiness.getImageUrl());
+        assertEquals(request.getPhone(), updatedBusiness.getPhone());
+        assertEquals(request.getInfo(), updatedBusiness.getInfo());
+        assertEquals(business.getMenus().get(0), updatedBusiness.getMenus().get(0));
+        assertEquals(updatedBusiness.getMenus().size(), business.getMenus().size());
     }
 
     @Test
-    void aCustomerCouldNotChangeTheBusinessNameOfUnknown() {
+    void aCustomerCouldNotChangeAnUnknownBusiness() {
         Customer customer = CustomerHelper.withMenu();
         customerRepository.save(customer);
-        var request = BusinessChangeNameRequestHelper.random();
+        var request = UpdateBusinessRequestHelper.random();
 
         webTestClient
-                .patch().uri("/web/v1/customer/" + customer.getEmail() + "/business/" + UUID.randomUUID().toString())
-                .body(Mono.just(request), BusinessChangeNameRequest.class)
+                .put().uri("/web/v1/customer/" + customer.getEmail() + "/business/" + UUID.randomUUID().toString())
+                .body(Mono.just(request), UpdateBusinessRequest.class)
                 .header("Authorization", generateAccessToken(customer.getEmail()))
                 .exchange()
                 .expectStatus().isNotFound();

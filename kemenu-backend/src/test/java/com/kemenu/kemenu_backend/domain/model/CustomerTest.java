@@ -1,9 +1,11 @@
 package com.kemenu.kemenu_backend.domain.model;
 
+import com.kemenu.kemenu_backend.helper.business.BusinessHelper;
 import com.kemenu.kemenu_backend.helper.customer.CustomerHelper;
 import com.kemenu.kemenu_backend.helper.menu.MenuHelper;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -62,24 +64,31 @@ class CustomerTest {
     }
 
     @Test
-    void aCustomerCouldChangeTheBusinessName() {
-        Customer customer = CustomerHelper.randomCustomer();
+    void aCustomerCouldChangeABusiness() {
+        Customer customer = CustomerHelper.withMenu();
         Business business = customer.firstBusiness();
-        String newName = "newName";
+        Business newBusiness = BusinessHelper.randomFrom(business.getId(), business.getMenus());
 
-        Optional<String> optionalNewName = customer.changeBusinessName(business.getId(), newName);
+        customer.changeBusiness(newBusiness);
+        Business updatedBusiness = customer.findBusiness(newBusiness.getId()).get();
 
-        assertEquals(newName, optionalNewName.get());
+        assertEquals(newBusiness.getName(), updatedBusiness.getName());
+        assertEquals(newBusiness.getImageUrl(), updatedBusiness.getImageUrl());
+        assertEquals(newBusiness.getPhone(), updatedBusiness.getPhone());
+        assertEquals(newBusiness.getInfo(), updatedBusiness.getInfo());
+        assertEquals(business.getMenus().get(0), updatedBusiness.getMenus().get(0));
+        assertEquals(updatedBusiness.getMenus().size(), business.getMenus().size());
     }
 
     @Test
     void aCustomerCannotChangeTheBusinessNameOfUnknown() {
         Customer customer = CustomerHelper.randomCustomer();
-        String newName = "newName";
+        Business business = customer.firstBusiness();
 
-        Optional<String> optionalNewName = customer.changeBusinessName(UUID.randomUUID().toString(), newName);
+        Business unknown = BusinessHelper.randomFrom(UUID.randomUUID().toString(), List.of());
+        Optional<String> optionalBusinessId = customer.changeBusiness(unknown);
 
-        assertTrue(optionalNewName.isEmpty());
-        assertNotEquals(newName, customer.firstBusiness().getName());
+        assertTrue(optionalBusinessId.isEmpty());
+        assertNotEquals(unknown.getName(), business.getName());
     }
 }
