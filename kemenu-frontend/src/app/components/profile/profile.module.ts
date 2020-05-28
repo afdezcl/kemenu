@@ -8,6 +8,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { DialogModule } from '@ui-controls/dialogs/dialog.module';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ProfileRoutingModule } from './profile-routing.module';
+import { EditInformationComponent } from './edit-information/edit-information.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { ProfileRoutingModule } from './profile-routing.module';
   ],
   declarations: [
     ProfileComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    EditInformationComponent
   ]
 })
 export class ProfileModule { }

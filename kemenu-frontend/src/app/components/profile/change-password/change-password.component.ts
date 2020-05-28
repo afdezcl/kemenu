@@ -58,10 +58,9 @@ export class ChangePasswordComponent implements OnInit {
   changePasswordAttempt(changePassword: ChangePassword){
     this.alertService.clear();
     this._editProfile.changePassword(changePassword)
-        .subscribe(result => {
-          this.alertService.success(this.translate.instant('Success Change Password'));
-          console.log(result)
-        })
+        .subscribe(() => {
+          this.alertService.success(this.translate.instant('Success Change Password'));          
+        });
 
     this.changePassword.reset();
   }
