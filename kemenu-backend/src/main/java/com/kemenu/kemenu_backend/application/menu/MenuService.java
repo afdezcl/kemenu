@@ -26,7 +26,16 @@ public class MenuService {
                         })
                 )
                 .flatMap(menuId -> {
-                    ShortUrl shortUrl = new ShortUrl(customerEmail, businessId, menuId);
+                    Optional<ShortUrl> optionalShortUrl = shortUrlRepository.findByCustomerEmail(customerEmail);
+                    ShortUrl shortUrl;
+
+                    if (optionalShortUrl.isPresent()) {
+                        shortUrl = optionalShortUrl.get();
+                        shortUrl.addMenu(menuId);
+                    } else {
+                        shortUrl = new ShortUrl(customerEmail, businessId, menuId);
+                    }
+
                     String shortUrlId = shortUrlRepository.save(shortUrl);
                     return Optional.of(CreateMenuResponse.builder().menuId(menuId).shortUrlId(shortUrlId).build());
                 });

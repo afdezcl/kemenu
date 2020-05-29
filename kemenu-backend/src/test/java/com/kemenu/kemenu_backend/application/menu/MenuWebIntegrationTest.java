@@ -30,13 +30,7 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
         customerRepository.save(randomCustomer);
         String businessId = randomCustomer.firstBusiness().getId();
 
-        CreateMenuResponse createMenuResponse = webTestClient
-                .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest(businessId)), CreateMenuRequest.class)
-                .header("Authorization", generateAccessToken())
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody(CreateMenuResponse.class).returnResult().getResponseBody();
+        CreateMenuResponse createMenuResponse = createMenu(businessId);
 
         Customer customer = customerRepository.findById(randomCustomer.getId()).get();
         ShortUrl shortUrl = shortUrlRepository.findById(createMenuResponse.getShortUrlId()).get();
@@ -49,13 +43,7 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
         customerRepository.save(randomCustomer);
         String businessId = randomCustomer.firstBusiness().getId();
 
-        CreateMenuResponse createMenuResponse = webTestClient
-                .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest(businessId)), CreateMenuRequest.class)
-                .header("Authorization", generateAccessToken())
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody(CreateMenuResponse.class).returnResult().getResponseBody();
+        CreateMenuResponse createMenuResponse = createMenu(businessId);
 
         Customer customerWithCreatedMenu = customerRepository.findById(randomCustomer.getId()).get();
         ShortUrl createdShortUrl = shortUrlRepository.findById(createMenuResponse.getShortUrlId()).get();
@@ -74,5 +62,37 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
 
         assertEquals(createdMenu.getId(), updatedMenu.getId());
         assertNotEquals(createdMenu.getSections().get(0).getName(), updatedMenu.getSections().get(0).getName());
+    }
+
+    @Test
+    void aCustomerCouldCreateMoreThanOneMenu() {
+        customerRepository.save(randomCustomer);
+        String businessId = randomCustomer.firstBusiness().getId();
+
+        CreateMenuResponse createMenuResponse = createMenu(businessId);
+        CreateMenuResponse createMenuResponse2 = createMenu(businessId);
+        CreateMenuResponse createMenuResponse3 = createMenu(businessId);
+
+        Customer customer = customerRepository.findById(randomCustomer.getId()).get();
+        ShortUrl shortUrl = shortUrlRepository.findById(createMenuResponse.getShortUrlId()).get();
+
+        assertTrue(customer.findMenu(businessId, shortUrl.getMenus().get(0)).isPresent());
+        assertEquals(3, customer.firstBusiness().getMenus().size());
+        assertEquals(3, shortUrl.getMenus().size());
+        assertEquals(createMenuResponse.getShortUrlId(), createMenuResponse2.getShortUrlId());
+        assertEquals(createMenuResponse.getShortUrlId(), createMenuResponse3.getShortUrlId());
+        assertTrue(customer.firstBusiness().getMenus().stream().anyMatch(m -> m.getId().equals(shortUrl.getMenus().get(0))));
+        assertTrue(customer.firstBusiness().getMenus().stream().anyMatch(m -> m.getId().equals(shortUrl.getMenus().get(1))));
+        assertTrue(customer.firstBusiness().getMenus().stream().anyMatch(m -> m.getId().equals(shortUrl.getMenus().get(2))));
+    }
+
+    private CreateMenuResponse createMenu(String businessId) {
+        return webTestClient
+                .post().uri("/web/v1/menus")
+                .body(Mono.just(MenuRequestHelper.randomRequest(businessId)), CreateMenuRequest.class)
+                .header("Authorization", generateAccessToken())
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(CreateMenuResponse.class).returnResult().getResponseBody();
     }
 }
