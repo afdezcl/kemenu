@@ -1,6 +1,5 @@
 package com.kemenu.kemenu_backend.domain.model;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,7 +13,7 @@ import java.util.UUID;
 
 @Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@AllArgsConstructor(access = AccessLevel.PRIVATE, onConstructor = @__(@PersistenceConstructor))
+@AllArgsConstructor(onConstructor = @__(@PersistenceConstructor))
 public class Business {
 
     @Id
@@ -22,14 +21,12 @@ public class Business {
     private String id;
     private String name;
     private List<Menu> menus;
+    private String imageUrl;
+    private String phone;
+    private String info;
 
     public Business(String name) {
-        this(UUID.randomUUID().toString(), name, new ArrayList<>());
-    }
-
-    public Optional<String> changeName(String newName) {
-        this.name = newName;
-        return Optional.of(name);
+        this(UUID.randomUUID().toString(), name, new ArrayList<>(), "", "", "");
     }
 
     public String createMenu(Menu menu) {

@@ -14,8 +14,8 @@ import java.util.List;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = DishData.DishDataBuilder.class)
-public class DishData {
+@JsonDeserialize(builder = DishRequest.DishRequestBuilder.class)
+public class DishRequest {
     @NotBlank
     @Size(max = 255)
     String name;
@@ -24,4 +24,5 @@ public class DishData {
     BigDecimal price;
     @Valid
     List<AllergenData> allergens;
+    String imageUrl;
 }

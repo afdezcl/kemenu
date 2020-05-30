@@ -70,8 +70,15 @@ public class Customer implements GrantedAuthority {
         return findBusiness(businessId).flatMap(b -> b.findMenu(menuId));
     }
 
-    public Optional<String> changeBusinessName(String businessId, String newName) {
-        return findBusiness(businessId).flatMap(b -> b.changeName(newName));
+    public Optional<String> changeBusiness(Business newBusiness) {
+        for (int i = 0; i < businesses.size(); i++) {
+            if (businesses.get(i).getId().equals(newBusiness.getId())) {
+                businesses.set(i, newBusiness);
+                return Optional.of(newBusiness.getId());
+            }
+        }
+
+        return Optional.empty();
     }
 
     public Optional<Business> findBusiness(String businessId) {

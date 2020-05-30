@@ -3,6 +3,9 @@ spring.profiles: dev
 server:
   port: 8085
   address: 127.0.0.1
+  tomcat:
+    mbeanregistry:
+      enabled: true
 
 app:
   version: @project.version@
@@ -15,18 +18,42 @@ app:
   admin:
     username: admin@example.com
     password: admin
-  sendgrid: ${KEMENU_REGISTER_EMAILS}
+  sendgrid: dev_test
+  cloudinary:
+    key: dev_test
+    secret: dev_test
+    cloudname: dev_test
 
 spring:
+  jmx:
+    enabled: true
   data:
     mongodb:
       uri: mongodb://admin:password@localhost:27017/kemenudb
+  servlet:
+    multipart:
+      max-file-size: 7MB
+      max-request-size: 7MB
 ---
 spring.profiles: prod
 
 server:
   port: 8085
   address: 127.0.0.1
+  tomcat:
+    mbeanregistry:
+      enabled: true
+
+management:
+  endpoints:
+    enabled-by-default: false
+    jmx:
+      exposure:
+        include: "*"
+  metrics:
+    export:
+      datadog:
+        api-key: ${DD_API_KEY}
 
 app:
   version: @project.version@
@@ -40,8 +67,18 @@ app:
     username: admin@kemenu.com
     password: ${KEMENU_ADMIN_PWD}
   sendgrid: ${KEMENU_REGISTER_EMAILS}
+  cloudinary:
+    key: ${CLOUDINARY_KEY}
+    secret: ${CLOUDINARY_SECRET}
+    cloudname: ${CLOUDINARY_CLOUDNAME}
 
 spring:
+  jmx:
+    enabled: true
   data:
     mongodb:
       uri: mongodb://${MONGO_DB_USER_KEMENU}:${MONGO_DB_PWD_KEMENU}@localhost:27017/${MONGO_DB_NAME_KEMENU}
+  servlet:
+    multipart:
+      max-file-size: 7MB
+      max-request-size: 7MB

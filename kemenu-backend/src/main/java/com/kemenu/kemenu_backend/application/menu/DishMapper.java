@@ -15,25 +15,27 @@ import static java.util.stream.Collectors.toList;
 @AllArgsConstructor
 public class DishMapper {
 
-    public List<Dish> from(MenuSectionData menuSectionData) {
-        return menuSectionData.getDishes().stream()
+    public List<Dish> from(MenuSectionRequest menuSectionRequest) {
+        return menuSectionRequest.getDishes().stream()
                 .map(d -> Dish.builder()
                         .name(d.getName())
                         .description(d.getDescription())
                         .price(d.getPrice())
                         .allergens(d.getAllergens().stream().map(a -> Allergen.builder().id(a.getId()).name(a.getName()).build()).collect(toList()))
+                        .imageUrl(d.getImageUrl())
                         .build()
                 )
                 .collect(toList());
     }
 
-    public List<DishData> from(MenuSection menuSection) {
+    public List<DishResponse> from(MenuSection menuSection) {
         return menuSection.getDishes().stream()
-                .map(d -> DishData.builder()
+                .map(d -> DishResponse.builder()
                         .name(d.getName())
                         .description(d.getDescription())
                         .price(d.getPrice())
                         .allergens(d.getAllergens().stream().map(a -> AllergenData.builder().id(a.getId()).name(a.getName()).build()).collect(toList()))
+                        .imageUrl(d.getImageUrl())
                         .build()
                 )
                 .collect(toList());

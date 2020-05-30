@@ -1,15 +1,13 @@
 package com.kemenu.kemenu_backend.application.customer;
 
-import com.kemenu.kemenu_backend.application.menu.CreateMenuRequest;
 import com.kemenu.kemenu_backend.application.menu.CreateMenuResponse;
 import com.kemenu.kemenu_backend.application.menu.MenuResponse;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
-import com.kemenu.kemenu_backend.helper.menu.MenuRequestHelper;
+import com.kemenu.kemenu_backend.helper.menu.MenuWebClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import reactor.core.publisher.Mono;
 
 import java.util.Base64;
 
@@ -27,15 +25,8 @@ class CustomerPublicIntegrationTest extends KemenuIntegrationTest {
     void anUnauthorizedUserCouldSeeAMenu() {
         customerRepository.save(randomCustomer);
         String businessId = randomCustomer.firstBusiness().getId();
-        CreateMenuRequest createMenuRequest = MenuRequestHelper.randomRequest(businessId);
 
-        CreateMenuResponse createMenuResponse = webTestClient
-                .post().uri("/web/v1/menus")
-                .body(Mono.just(createMenuRequest), CreateMenuRequest.class)
-                .header("Authorization", generateAccessToken())
-                .exchange()
-                .expectStatus().isOk()
-                .expectBody(CreateMenuResponse.class).returnResult().getResponseBody();
+        CreateMenuResponse createMenuResponse = MenuWebClient.create(webTestClient, businessId, generateAccessToken());
 
         String uri = "/show/" + createMenuResponse.getShortUrlId();
         HttpHeaders headers = webTestClient
@@ -49,6 +40,6 @@ class CustomerPublicIntegrationTest extends KemenuIntegrationTest {
         MenuResponse menuResponse = customerService.readMenu(shortUrlId).get();
 
         assertEquals(randomCustomer.firstBusiness().getName(), menuResponse.getBusinessName());
-        assertEquals(createMenuRequest.getSections().get(0).getName(), menuResponse.getSections().get(0).getName());
+        assertEquals(MenuWebClient.request.getSections().get(0).getName(), menuResponse.getSections().get(0).getName());
     }
 }

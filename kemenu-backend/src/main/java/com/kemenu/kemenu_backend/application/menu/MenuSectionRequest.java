@@ -11,11 +11,11 @@ import java.util.List;
 
 @Value
 @Builder(toBuilder = true)
-@JsonDeserialize(builder = CreateMenuRequest.CreateMenuRequestBuilder.class)
-public class CreateMenuRequest {
+@JsonDeserialize(builder = MenuSectionRequest.MenuSectionRequestBuilder.class)
+public class MenuSectionRequest {
     @NotBlank
     @Size(max = 255)
-    String businessId;
+    String name;
     @Valid
-    List<MenuSectionRequest> sections;
+    List<DishRequest> dishes;
 }
