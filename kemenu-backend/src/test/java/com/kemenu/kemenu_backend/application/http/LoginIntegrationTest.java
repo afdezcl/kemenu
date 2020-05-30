@@ -14,6 +14,7 @@ import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.helper.LoginRequestHelper;
 import com.kemenu.kemenu_backend.helper.customer.CustomerRequestHelper;
 import com.kemenu.kemenu_backend.helper.menu.MenuRequestHelper;
+import com.kemenu.kemenu_backend.helper.menu.MenuWebClient;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -104,12 +105,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
 
         String accessToken = responseHeaders.get("Authorization").get(0);
 
-        webTestClient
-                .post().uri("/web/v1/menus")
-                .body(Mono.just(MenuRequestHelper.randomRequest(customer.firstBusiness().getId())), CreateMenuRequest.class)
-                .header("Authorization", accessToken)
-                .exchange()
-                .expectStatus().isOk();
+        MenuWebClient.create(webTestClient, customer.firstBusiness().getId(), accessToken);
     }
 
     @Test

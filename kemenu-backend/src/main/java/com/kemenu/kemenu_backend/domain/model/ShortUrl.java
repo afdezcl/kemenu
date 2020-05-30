@@ -47,4 +47,8 @@ public class ShortUrl {
     public Optional<String> findMenu(String menuId) {
         return menus.stream().filter(menuId::equals).findFirst();
     }
+
+    public void addMenu(String menuId) {
+        menus.add(menuId);
+    }
 }
