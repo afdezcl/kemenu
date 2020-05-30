@@ -17,6 +17,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.stream.Collectors.toList;
+
 @Service
 @AllArgsConstructor
 public class CustomerService {
@@ -45,12 +47,25 @@ public class CustomerService {
         return customerRepository.all();
     }
 
-    public Optional<MenuResponse> readMenu(String shortUrlId) { // TODO: (1) add the menuId you want to read
+    @Deprecated(forRemoval = true) // In favor of readMenus method
+    public Optional<MenuResponse> readMenu(String shortUrlId) {
         return shortUrlRepository.findById(shortUrlId)
                 .flatMap(shortUrl -> customerRepository.findByEmail(shortUrl.getCustomerEmail())
-                        .flatMap(customer -> customer.findBusiness(shortUrl.getBusinessId()) // TODO: (2) Change to findMenu method when TODO (1)
-                                .flatMap(business -> business.findMenu(shortUrl.getMenus().get(0)) // TODO: (3) Change to findMenu method when TODO (1)
+                        .flatMap(customer -> customer.findBusiness(shortUrl.getBusinessId())
+                                .flatMap(business -> business.findMenu(shortUrl.getMenus().get(0))
                                         .flatMap(menu -> Optional.of(menuMapper.from(shortUrl.getId(), business.getName(), menu)))
+                                )
+                        )
+                );
+    }
+
+    public Optional<List<MenuResponse>> readMenus(String shortUrlId) {
+        return shortUrlRepository.findById(shortUrlId)
+                .flatMap(shortUrl -> customerRepository.findByEmail(shortUrl.getCustomerEmail())
+                        .flatMap(customer -> customer.findBusiness(shortUrl.getBusinessId())
+                                .flatMap(business -> Optional.of(business.getMenus().stream()
+                                        .map(menu -> menuMapper.from(shortUrl.getId(), business.getName(), menu))
+                                        .collect(toList()))
                                 )
                         )
                 );
