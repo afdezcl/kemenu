@@ -3,9 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { EditProfileService } from '@services/edit-profile/edit-profile.service';
 import { AuthenticationService } from '@services/authentication/authentication.service';
-import { ChangePassword } from '@models/edit-profile/changePassword.model';
 import { AlertsService } from '@services/alerts/alerts.service';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { UpdateBusiness } from '@models/edit-profile/updateBusiness.model';
 
 @Component({
   selector: 'app-edit-information',
@@ -14,7 +14,8 @@ import {TranslateService} from '@ngx-translate/core';
 })
 export class EditInformationComponent implements OnInit {
 
-  changePassword: FormGroup;
+  public editInformationForm: FormGroup;
+
   constructor(
     private translate: TranslateService,
     private formBuilder: FormBuilder,
@@ -25,44 +26,41 @@ export class EditInformationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.changePassword = this.formBuilder.group({
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['']
-    }, { validators: this.checkPasswords });
+    this.editInformationForm = this.formBuilder.group({
+      businessName: ['', Validators.required],
+      phone: [''],
+      info: ['']
+    });
   }
   get form() {
-    return this.changePassword.controls;
+    return this.editInformationForm.controls;
   }
 
-  checkPasswords(form: FormGroup) {
-    const password = form.controls.password.value;
-    const confirmPassword = form.controls.confirmPassword.value;
-
-    return password === confirmPassword ? null : { notSame: true };
-  }
 
   goBack() {
     this._location.back();
   }
 
-  onSubmit(){
-    const changePassword: ChangePassword = {
-      email: this._auth.getUserEmail(),
-      password: this.form.password.value,
-      repeatedPassword: this.form.confirmPassword.value,
+  onSubmit() {
+    const updateBusiness: UpdateBusiness = {
+      imageURL: '',
+      info: '',
+      name: '',
+      phone: ''
     };
-    this.changePasswordAttempt(changePassword);
+    this.updateInformationAttempt(updateBusiness);
 
   }
 
-  changePasswordAttempt(changePassword: ChangePassword){
-    this.alertService.clear();
-    this._editProfile.changePassword(changePassword)
-        .subscribe(() => {
-          this.alertService.success(this.translate.instant('Success Change Password'));          
-        });
+  updateInformationAttempt(updateBusiness: UpdateBusiness) {
+    const businessId: string = ''
 
-    this.changePassword.reset();
+    this.alertService.clear();
+    this._editProfile.updateBusiness(updateBusiness, businessId)
+      .subscribe(() => {
+        this.alertService.success(this.translate.instant('Success Change Password'));
+      });
+
   }
 
 }

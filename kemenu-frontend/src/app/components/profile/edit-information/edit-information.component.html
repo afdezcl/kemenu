@@ -6,7 +6,8 @@
           <div class="card-body col-12">
             <div class="row">
               <div class="col-sm-2 text-left go-back">
-                <button type="submit" class="btn btn-secondary circular-button" (click)="goBack()"><i class="fas fa-arrow-left"></i></button>
+                <button type="submit" class="btn btn-secondary circular-button" (click)="goBack()"><i
+                    class="fas fa-arrow-left"></i></button>
               </div>
             </div>
             <div class="row">
@@ -14,43 +15,44 @@
               <app-alert></app-alert>
 
               <div class="col-sm-6">
-                <img src="../../../assets/images/change-password.svg" alt="profile" class="img-fluid">
+                <img src="../../../assets/images/profile.svg" alt="profile" class="img-fluid">
               </div>
               <div class="col-sm-6">
                 <div class="text-center">
                   <h4 class="card-title mb-4 mt-3">{{ 'Edit Information' | translate }}</h4>
                 </div>
-                <form [formGroup]="changePassword" (submit)="onSubmit()">
+                <form [formGroup]="editInformationForm" (submit)="onSubmit()">
                   <div class="form-group">
                     <span class="icon-input">
-                      <i class="fas fa-lock"></i>
+                      <i class="fas fa-user"></i>
                     </span>
-                    <input type="password" class="form-control" id="password" placeholder="{{ 'Password' | translate }}"
-                      formControlName="password" required>
+                    <input type="text" class="form-control" id="businessName" aria-describedby="businessName"
+                      placeholder="{{ 'PlaceholderNameRestaurant' | translate }}" formControlName="businessName"
+                      required>
                     <div
-                      *ngIf="changePassword.get('password').errors && (changePassword.get('password').dirty || changePassword.get('password').touched)">
-                      <small *ngIf="changePassword.get('password').hasError('minlength')" class="text-muted ml-2 mt-1">
-                        {{ 'PlaceholderPassword' | translate }}
-                      </small>
-                      <small *ngIf="changePassword.get('password').hasError('required')" class="text-muted ml-2 mt-1">
-                        {{ 'RequiredPassword' | translate }}
+                      *ngIf="editInformationForm.get('businessName').errors && (editInformationForm.get('businessName').dirty || editInformationForm.get('businessName').touched)">
+                      <small *ngIf="editInformationForm.get('businessName').hasError('required')" class="text-muted ml-2 mt-1">
+                        {{ 'RequiredNameRestaurant' | translate }}
                       </small>
                     </div>
                   </div>
                   <div class="form-group">
                     <span class="icon-input">
-                      <i class="fas fa-unlock"></i>
+                      <i class="fas fa-phone"></i>
                     </span>
-                    <input type="password" class="form-control" id="confirmPassword"
-                      placeholder="{{ 'PlaceholderConfirmPassword' | translate }}" formControlName="confirmPassword"
-                      required>
-                    <small *ngIf="changePassword.hasError('notSame')" class="text-muted ml-2 mt-1">
-                      {{ 'PasswordCoincidence' | translate }}
-                    </small>
+                    <input type="number" class="form-control" id="phone" aria-describedby="phone"
+                      placeholder="{{ 'Telephone number' | translate }}" formControlName="phone">
+                  </div>
+                  <div class="form-group">
+                    <span class="icon-input">
+                      <i class="fas fa-info"></i>
+                    </span>
+                    <textarea type="text" class="form-control" id="info" aria-describedby="info"
+                      placeholder="{{ 'Placeholder Information' | translate }}" formControlName="info"></textarea>
                   </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary"
-                      [disabled]="changePassword.invalid">{{ 'Save' | translate }} <i
+                      [disabled]="editInformationForm.invalid">{{ 'Save' | translate }} <i
                         class="fas fa-save pl-2"></i></button>
                   </div>
                 </form>
