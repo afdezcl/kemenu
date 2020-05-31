@@ -10,7 +10,7 @@
     <artifactId>kemenu-backend</artifactId>
 
     <properties>
-        <logstash-logback-encoder.version>6.3</logstash-logback-encoder.version>
+        <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
         <java-jwt.version>3.10.3</java-jwt.version>
         <zxing.version>3.4.0</zxing.version>
         <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
