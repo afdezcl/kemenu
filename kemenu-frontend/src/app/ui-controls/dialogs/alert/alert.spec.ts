@@ -2,7 +2,7 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { AlertComponent } from './alert.component';
 import { RouterModule } from '@angular/router';
 
-fdescribe('Component: Alert', () => {
+describe('Component: Alert', () => {
 
   let component: AlertComponent;
   let fixture: ComponentFixture<AlertComponent>;
