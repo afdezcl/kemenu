@@ -25,4 +25,5 @@ public class DishRequest {
     @Valid
     List<AllergenData> allergens;
     String imageUrl;
+    Boolean available;
 }
