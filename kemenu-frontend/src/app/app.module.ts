@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RegisterModule} from './components/register/register.module';
+import {ForgotPasswordModule} from './components/forgotPassword/forgotPassword.module';
 import {LoginModule} from './components/login/login.module';
 import {FooterModule} from './components/footer/footer.module';
 import {NavbarModule} from './components/navbar/navbar.module';
@@ -52,6 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
 
     // My modules
     RegisterModule,
+    ForgotPasswordModule,
     LoginModule,
     NavbarModule,
     FooterModule,

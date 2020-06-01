@@ -6,6 +6,7 @@ import {Tokens} from '@models/auth/tokens.model';
 import {Login} from '@models/auth/login.interface';
 import {Register} from '@models/auth/register.interface';
 import * as jwt_decode from 'jwt-decode';
+import {ForgotPassword} from "@models/auth/forgotPassword.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +26,11 @@ export class AuthenticationService {
   register(user: Register) {
     return this.httpClient
       .post(environment.apiBaseUrl + '/register', user);
+  }
+
+  forgotPassword(user: ForgotPassword) {
+    return this.httpClient
+      .post(environment.apiBaseUrl + '/forgot/password', user);
   }
 
   login(user: Login) {

@@ -3,21 +3,21 @@ import {FormGroup, Validators, FormBuilder} from '@angular/forms';
 import {AlertsService} from '@services/alerts/alerts.service';
 import {Subscription} from 'rxjs';
 import {ReCaptchaV3Service} from 'ng-recaptcha';
-import {Register} from '@models/auth/register.interface';
+import {ForgotPassword} from '@models/auth/forgotPassword.interface';
 import {AuthenticationService} from '@services/authentication/authentication.service';
 import {TranslateService} from '@ngx-translate/core';
 import Utils from '../../utils/utils';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  templateUrl: './forgotPassword.component.html',
+  styleUrls: ['./forgotPassword.component.css'],
   providers: [AlertsService, ReCaptchaV3Service, AuthenticationService]
 })
 
-export class RegisterComponent implements OnInit, OnDestroy {
+export class ForgotPasswordComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  registerForm: FormGroup;
+  forgotPasswordForm: FormGroup;
 
   constructor(
     private translate: TranslateService,
@@ -29,16 +29,13 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      businessName: ['', Validators.required],
+    this.forgotPasswordForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['']
-    }, {validators: this.checkPasswords});
+    });
   }
 
   get form() {
-    return this.registerForm.controls;
+    return this.forgotPasswordForm.controls;
   }
 
   onSubmit() {
@@ -51,31 +48,22 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   private registerAttempt(token: string) {
-    const user: Register = {
-      businessName: this.form.businessName.value,
+    const user: ForgotPassword = {
       email: this.form.email.value,
-      password: this.form.password.value,
-      recaptchaToken: token,
-      lang: Utils.getBrowserLang()
+      lang: Utils.getBrowserLang(),
+      recaptchaToken: token
     };
     this.alertService.clear();
-    this.authService.register(user)
+    this.authService.forgotPassword(user)
       .subscribe(() => {
-          this.registerForm.reset();
-          this.alertService.success(this.translate.instant('Success Register'));
+          this.forgotPasswordForm.reset();
+          this.alertService.success(this.translate.instant('SuccessForgotPassword'));
         },
         (error) => {
-          this.alertService.error(this.translate.instant('Error Register'));
+          this.alertService.success(this.translate.instant('SuccessForgotPassword'));
         }
       );
 
-  }
-
-  checkPasswords(form: FormGroup) {
-    const password = form.controls.password.value;
-    const confirmPassword = form.controls.confirmPassword.value;
-
-    return password === confirmPassword ? null : {notSame: true};
   }
 
   public ngOnDestroy() {

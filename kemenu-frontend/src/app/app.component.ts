@@ -5,6 +5,7 @@ import {Router, NavigationEnd} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
 import {AuthenticationService} from '@services/authentication/authentication.service';
 import {Tokens} from '@models/auth/tokens.model';
+import Utils from './utils/utils';
 
 declare var gtag;
 
@@ -25,8 +26,8 @@ export class AppComponent implements OnInit {
     private cookieService: CookieService,
     private authService: AuthenticationService
   ) {
-    translate.setDefaultLang(this.getBrowserLang());
-    translate.use(this.getBrowserLang());
+    translate.setDefaultLang(Utils.getBrowserLang());
+    translate.use(Utils.getBrowserLang());
 
     const navEndEvents$ = this.router.events
       .pipe(
@@ -69,11 +70,4 @@ export class AppComponent implements OnInit {
     }
   }
 
-  private getBrowserLang(): string {
-    if (window.navigator.language.includes('es')) {
-      return 'es';
-    } else {
-      return 'en';
-    }
-  }
 }

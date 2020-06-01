@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RegisterComponent } from './components/register/register.component';
+import { ForgotPasswordComponent } from './components/forgotPassword/forgotPassword.component';
 import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { CustomerComponent } from './components/customer/customer.component';
@@ -10,6 +11,7 @@ export const routes: Routes = [
 
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'forgotPassword', component: ForgotPasswordComponent },
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard]  },
   { path: 'demo', component: CustomerComponent },
   { path: 'show', component: CustomerComponent },
