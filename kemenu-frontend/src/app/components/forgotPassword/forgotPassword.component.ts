@@ -9,7 +9,7 @@ import {TranslateService} from '@ngx-translate/core';
 import Utils from '../../utils/utils';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-forgot-passoword',
   templateUrl: './forgotPassword.component.html',
   styleUrls: ['./forgotPassword.component.css'],
   providers: [AlertsService, ReCaptchaV3Service, AuthenticationService]
@@ -39,15 +39,15 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.register();
+    this.sendRequest();
   }
 
-  private register(): void {
+  private sendRequest(): void {
     this.subscription = this.recaptchaV3Service.execute('login')
-      .subscribe((token) => this.registerAttempt(token));
+      .subscribe((token) => this.sendRequestAttempt(token));
   }
 
-  private registerAttempt(token: string) {
+  private sendRequestAttempt(token: string) {
     const user: ForgotPassword = {
       email: this.form.email.value,
       lang: Utils.getBrowserLang(),

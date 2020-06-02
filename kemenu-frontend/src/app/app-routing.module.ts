@@ -6,12 +6,14 @@ import { HomeComponent } from './components/home/home.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { AuthGuard } from '@ui-controls/guards/auth/auth.guard';
+import {ChangePasswordComponent} from './components/changePassword/changePassword.component';
 
 export const routes: Routes = [
 
   { path: '', component: HomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgotPassword', component: ForgotPasswordComponent },
+  { path: 'changePassword', component: ChangePasswordComponent },
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard]  },
   { path: 'demo', component: CustomerComponent },
   { path: 'show', component: CustomerComponent },
