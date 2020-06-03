@@ -18,7 +18,12 @@
         <span class="icon-input">
           <i class="fas fa-lock"></i>
         </span>
-          <input type="password" name="password" placeholder="{{ 'PlaceholderPassword' | translate }}" class="form-control" formControlName="password">
+        <input type="password" name="password" placeholder="{{ 'PlaceholderPassword' | translate }}" class="form-control" formControlName="password">
+        <div class="text-left">
+          <small>
+            <a class="text-muted mt-1 pointer-cursor" [routerLink]="['/forgotPassword']" (click)="bsModalRef.hide()">{{ 'IForgotMyPassword' | translate }}</a>
+          </small>
+        </div>
       </div>
       <div class="form-froup mb-4">
       </div>
