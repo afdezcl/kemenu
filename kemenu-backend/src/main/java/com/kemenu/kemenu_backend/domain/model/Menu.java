@@ -16,12 +16,17 @@ public class Menu {
 
     String id;
     List<MenuSection> sections;
+    String imageUrl;
 
     public Menu() {
-        this(UUID.randomUUID().toString(), new ArrayList<>());
+        this(UUID.randomUUID().toString(), new ArrayList<>(), "");
     }
 
     public Menu(List<MenuSection> sections) {
-        this(UUID.randomUUID().toString(), sections);
+        this(UUID.randomUUID().toString(), sections, "");
+    }
+
+    public Menu(String id, List<MenuSection> sections) {
+        this(id, sections, "");
     }
 }
