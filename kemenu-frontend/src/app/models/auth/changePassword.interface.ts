@@ -3,3 +3,8 @@ export interface ChangePassword {
   repeatedPassword: string;
   recaptchaToken: string;
 }
+
+export interface ForgotPasswordId {
+  id: string;
+  email: string;
+}

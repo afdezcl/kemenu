@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 import {ReCaptchaV3Service} from 'ng-recaptcha';
 import {AuthenticationService} from '@services/authentication/authentication.service';
 import {TranslateService} from '@ngx-translate/core';
-import {ChangePassword} from '@models/auth/changePassword.interface';
+import {ChangePassword, ForgotPasswordId} from '@models/auth/changePassword.interface';
 
 @Component({
   selector: 'app-change-password',
@@ -18,7 +18,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
   changePasswordForm: FormGroup;
   cookieBASE64: string;
-  forgotPasswordId: string;
+  forgotPasswordId: ForgotPasswordId;
 
   constructor(
     private translate: TranslateService,
@@ -32,7 +32,6 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.getDataToBuildForgotPassword();
     this.changePasswordForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       repeatedPassword: ['']
     }, {validators: this.checkPasswords});
@@ -40,9 +39,9 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   getDataToBuildForgotPassword() {
     this.cookieBASE64 = localStorage.getItem('FORGOT-PASSWORD-EMAIL');
-    const forgotPasswordId = atob(this.cookieBASE64);
-    this.forgotPasswordId = forgotPasswordId;
-    localStorage.setItem('forgotPasswordId', this.forgotPasswordId);
+    const forgotPasswordIdString: string = atob(this.cookieBASE64);
+    localStorage.setItem('forgotPasswordId', forgotPasswordIdString);
+    this.forgotPasswordId = JSON.parse(forgotPasswordIdString);
   }
 
   get form() {
@@ -68,6 +67,8 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     this.authService.changePassword(this.forgotPasswordId, changePassword)
       .subscribe(() => {
           this.changePasswordForm.reset();
+          localStorage.removeItem('FORGOT-PASSWORD-EMAIL');
+          localStorage.removeItem('forgotPasswordId');
           this.alertService.success(this.translate.instant('ConfirmPasswordChanged'));
         },
         (error) => {
