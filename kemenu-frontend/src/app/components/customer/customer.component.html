@@ -9,7 +9,9 @@
       <div class="col">
         <accordion [isAnimated]="true">
           <accordion-group heading="{{'Menu Image' | translate}}">
-
+            <lib-ngx-image-zoom
+              [thumbImage]=imageUrl
+              [zoomMode]="'hover'"></lib-ngx-image-zoom>
           </accordion-group>
         </accordion>
       </div>
@@ -17,9 +19,12 @@
 
     <div class="row mt-4">
       <div class="col">
+        <div class="text-left mb-3">
+          <span class="text-muted">{{ 'Digital Menu' | translate}}</span>
+        </div>
         <accordion [isAnimated]="true">
           <accordion-group *ngFor="let section of (menu | async)?.sections" heading="{{section.name}}">
-            <div class="dishes mt-2" *ngFor="let dish of section.dishes; let dishCounter = index;" >
+            <div class="dishes mt-2" *ngFor="let dish of section.dishes; let dishCounter = index;">
               <div class="row">
                 <div class="col-sm-8 col-8 text-left">
                   <span class="dish-title">{{dish.name}}</span>
@@ -35,7 +40,8 @@
               </div>
               <div class="row">
                 <div *ngFor="let allergen of dish.allergens">
-                  <img src="../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen" class="icons-allergens">
+                  <img src="../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen"
+                       class="icons-allergens">
                 </div>
               </div>
             </div>

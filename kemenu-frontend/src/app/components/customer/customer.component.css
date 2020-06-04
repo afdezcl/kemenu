@@ -15,3 +15,7 @@
     height: 25px !important;
     width: 25px !important;
 }
+
+::ng-deep .ngxImageZoomContainer > img{
+  max-height: 450px!important;
+}

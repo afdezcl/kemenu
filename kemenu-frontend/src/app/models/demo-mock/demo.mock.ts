@@ -144,5 +144,5 @@ export const Demo: ShowMenu = {
     }]
   }],
   shortUrlId: '',
-  imageUrl: ''
+  imageUrl: 'asd'
 };
