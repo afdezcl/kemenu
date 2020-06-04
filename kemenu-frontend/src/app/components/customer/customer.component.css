@@ -16,6 +16,13 @@
     width: 25px !important;
 }
 
-::ng-deep .ngxImageZoomContainer > img{
-  max-height: 450px!important;
+::ng-deep .ngxImageZoomContainer > img {
+  max-height: 650px !important;
+}
+
+@media screen and (max-width: 500px) {
+  ::ng-deep .ngxImageZoomContainer > img {
+    flex: 100% !important;
+    max-width: 350px !important;
+  }
 }

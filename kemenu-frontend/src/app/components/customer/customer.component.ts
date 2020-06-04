@@ -35,12 +35,16 @@ export class CustomerComponent implements OnInit {
     if (!Object.is(this.router.snapshot.url[0].path, 'demo')) {
       this.getDataToBuildMenu();
       this.menu = this.menuService.getMenuById(this.shortUrlId)
-        .pipe(map(menu => this.matchAllergens(menu)));
+        .pipe(map(menu => {
+          const showMenu = this.matchAllergens(menu);
+          if (showMenu.imageUrl) {
+            this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(showMenu.imageUrl);
+          }
+          return showMenu;
+        }));
     } else {
       this.menu = of(Demo);
     }
-
-    this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl('https://res.cloudinary.com/dcb7j4q7p/image/upload/v1591284238/jgkzm1cjtwxnz0y3aa0j.jpg')
   }
 
   getDataToBuildMenu() {

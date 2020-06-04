@@ -12,8 +12,15 @@
     </div>
 
     <div class="row" *ngIf="menu.sections.length > 0">
-      <div class="col-sm-3 text-lg-left text-center">
-        <app-drag-drop-file buttonText="Upload Menu Image" (uploadFileEvent)="handleFileUpload($event)"></app-drag-drop-file>
+      <div class="col-sm-3 text-lg-center text-center">
+          <app-drag-drop-file
+            buttonText="Upload Menu Image"
+            (uploadFileEvent)="handleFileUpload($event)"></app-drag-drop-file>
+      </div>
+      <div *ngIf="menu.imageUrl" class="col-sm-3 text-lg-center text-center">
+        <lib-ngx-image-zoom
+          [thumbImage]=getMenuImageSanitized()
+          [zoomMode]="'click'"></lib-ngx-image-zoom>
       </div>
       <div class="col-sm-3 text-lg-left text-center">
         <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()">
