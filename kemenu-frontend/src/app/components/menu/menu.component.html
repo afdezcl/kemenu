@@ -12,25 +12,25 @@
     </div>
 
     <div class="row" *ngIf="menu.sections.length > 0">
-      <div class="col-sm-3 text-lg-center text-center">
+      <div class="col-sm-2 text-lg-center text-center">
           <app-drag-drop-file
             buttonText="Upload Menu Image"
             (uploadFileEvent)="handleFileUpload($event)"></app-drag-drop-file>
       </div>
-      <div *ngIf="menu.imageUrl" class="col-sm-3 text-lg-center text-center">
+      <div *ngIf="menu.imageUrl" class="col-sm-2 text-lg-center text-center">
         <lib-ngx-image-zoom
           [thumbImage]=getMenuImageSanitized()
           [zoomMode]="'click'"></lib-ngx-image-zoom>
       </div>
-      <div class="col-sm-3 text-lg-left text-center">
+      <div class="col-sm-2 text-lg-left text-center">
         <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()">
           {{ 'Create Section' | translate }}<i class="fas fa-list pl-2"></i></button>
       </div>
-      <div class="col-sm-3 text-center">
+      <div class="col-sm-4 text-center">
         <button type="submit" class="btn btn-primary mt-3" (click)="openShareQR()" [disabled]="!menu.shortUrlId || thereIsChange">
           {{ 'Get QR and share' | translate }}<i class="fas fa-qrcode pl-2"></i></button>
       </div>
-      <div class="col-sm-3 text-lg-right text-center">
+      <div class="col-sm-2 text-lg-right text-center">
         <button type="submit" class="btn btn-primary mt-3" (click)="onSaveMenu()" [disabled]="!thereIsChange">
           {{ 'Save' | translate }} <i class="fas fa-save pl-1"></i></button>
       </div>

@@ -6,14 +6,8 @@
     </div>
 
     <div *ngIf="(menu | async)?.imageUrl" class="row mt-4">
-      <div class="col">
-        <accordion [isAnimated]="true">
-          <accordion-group heading="{{'Menu Image' | translate}}">
-            <lib-ngx-image-zoom
-              [thumbImage]=imageUrl
-              [zoomMode]="'toggle'"></lib-ngx-image-zoom>
-          </accordion-group>
-        </accordion>
+      <div class="col text-center">
+        <a class="btn btn-primary navbar-btn ml-0 ml-lg-3" [href]="imageUrl" target="_blank">{{'Menu Image' | translate}}</a>
       </div>
     </div>
 

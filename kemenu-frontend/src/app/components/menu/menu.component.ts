@@ -213,10 +213,10 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  handleFileUpload(e) {
-    if (e) {
-      this.menu.imageUrl = e.url;
-      this.thereIsChange = true;
+  handleFileUpload(event) {
+    if (event) {
+      this.menu.imageUrl = event.url;
+      this.onSaveMenu();
     }
   }
 
