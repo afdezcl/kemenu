@@ -18,4 +18,5 @@ public class CreateMenuRequest {
     String businessId;
     @Valid
     List<MenuSectionRequest> sections;
+    String imageUrl;
 }

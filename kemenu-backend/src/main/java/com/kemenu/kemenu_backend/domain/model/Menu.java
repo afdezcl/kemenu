@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Value;
 import org.springframework.data.annotation.PersistenceConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,12 +15,13 @@ public class Menu {
 
     String id;
     List<MenuSection> sections;
-
-    public Menu() {
-        this(UUID.randomUUID().toString(), new ArrayList<>());
-    }
+    String imageUrl;
 
     public Menu(List<MenuSection> sections) {
-        this(UUID.randomUUID().toString(), sections);
+        this(UUID.randomUUID().toString(), sections, "");
+    }
+
+    public Menu(List<MenuSection> sections, String imageUrl) {
+        this(UUID.randomUUID().toString(), sections, imageUrl);
     }
 }

@@ -5,6 +5,7 @@ export class Menu {
     public customerEmail: string,
     public sections: Section[],
     public shortUrlId?: string,
+    public imageUrl?: string,
     public id?: string
   ) {
   }

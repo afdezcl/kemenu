@@ -21,4 +21,5 @@ public class UpdateMenuRequest {
     String businessId;
     @Valid
     List<MenuSectionRequest> sections;
+    String imageUrl;
 }
