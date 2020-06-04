@@ -10,6 +10,7 @@ import {ShareQrComponent} from './share-qr/share-qr.component';
 import {ShareButtonsModule} from 'ngx-sharebuttons/buttons';
 import {ShareIconsModule} from 'ngx-sharebuttons/icons';
 import {HttpClientModule} from '@angular/common/http';
+import {DragDropFileComponent} from '../dragDropFile/dragDropFile.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import {HttpClientModule} from '@angular/common/http';
     MenuComponent,
     CreateSectionComponent,
     CreateDishComponent,
-    ShareQrComponent
+    ShareQrComponent,
+    DragDropFileComponent
   ]
 })
 export class MenuModule {

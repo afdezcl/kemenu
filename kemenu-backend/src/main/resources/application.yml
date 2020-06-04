@@ -20,9 +20,9 @@ app:
     password: admin
   sendgrid: ${KEMENU_REGISTER_EMAILS}
   cloudinary:
-    key: dev_test
-    secret: dev_test
-    cloudname: dev_test
+    key: ${CLOUDINARY_KEY}
+    secret: ${CLOUDINARY_SECRET}
+    cloudname: ${CLOUDINARY_CLOUDNAME}
 
 spring:
   jmx:

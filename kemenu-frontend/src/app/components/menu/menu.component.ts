@@ -26,6 +26,7 @@ export class MenuComponent implements OnInit {
   public thereIsChange = false;
   public menuId: string;
   public allergens: Allergen[] = AllAllergens;
+  private menuImageUrl: string;
 
   constructor(
     private modalService: BsModalService,
@@ -164,7 +165,8 @@ export class MenuComponent implements OnInit {
     const menuSections = this.sanitizeAllergensMenuToUpdate();
     const menuToSave = {
       businessId: this.businessId,
-      sections: menuSections
+      sections: menuSections,
+      imageUrl: this.menuImageUrl
     };
     this.menuService.createMenu(menuToSave)
       .subscribe((response: any) => {
@@ -179,7 +181,8 @@ export class MenuComponent implements OnInit {
     const menuToUpdate = {
       businessId: this.businessId,
       menuId: this.menu.id,
-      sections: menuSections
+      sections: menuSections,
+      imageUrl: this.menuImageUrl
     };
     this.menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
@@ -206,5 +209,12 @@ export class MenuComponent implements OnInit {
         });
       });
     });
+  }
+
+  handleFileUpload(e) {
+    if (e) {
+      this.menuImageUrl = e.url;
+      this.thereIsChange = true;
+    }
   }
 }
