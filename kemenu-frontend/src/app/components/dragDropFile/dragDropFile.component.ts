@@ -30,14 +30,15 @@ export class DragDropFileComponent implements OnInit {
         this.uploadingFile = true;
         const formData = new FormData();
         formData.append('file', file);
-        this.httpClient.post<any>(environment.apiBaseUrl + '/web/v1/customer/' + this.authService.getUserEmail() + '/upload/image', formData)
+        this.httpClient.post<any>(environment.apiBaseUrl + '/web/v1/customer/'
+          + this.authService.getUserEmail() + '/upload/image', formData)
           .subscribe(
             (res) => {
               this.uploadFileEvent.emit(res);
               this.uploadingFile = false;
             },
             (err) => {
-              console.log("Error: " + JSON.stringify(err));
+              console.log('Error: ' + JSON.stringify(err));
               this.uploadFileEvent.emit(undefined);
               this.uploadingFile = false;
             }
