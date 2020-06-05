@@ -8,10 +8,6 @@ app-alert {
 .home-main-text {
   z-index: 1;
   color: white;
-
-  .lead {
-    color: lightgoldenrodyellow;
-  }
 }
 
 @media (min-width: 991.98px) {
