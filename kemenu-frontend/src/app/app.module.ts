@@ -11,6 +11,7 @@ import {FooterModule} from './components/footer/footer.module';
 import {NavbarModule} from './components/navbar/navbar.module';
 import {HomeModule} from './components/home/home.module';
 import {MenuModule} from './components/menu/menu.module';
+import {AboutUsModule} from './components/aboutUs/aboutUs.module';
 import {CustomerModule} from './components/customer/customer.module';
 import {HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
@@ -61,6 +62,7 @@ export function createTranslateLoader(http: HttpClient) {
     FooterModule,
     HomeModule,
     MenuModule,
+    AboutUsModule,
     CustomerModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),

@@ -7,6 +7,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { AuthGuard } from '@ui-controls/guards/auth/auth.guard';
 import {ChangePasswordComponent} from './components/changePassword/changePassword.component';
+import {AboutUsComponent} from './components/aboutUs/aboutUs.component';
 
 export const routes: Routes = [
 
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard]  },
   { path: 'demo', component: CustomerComponent },
   { path: 'show', component: CustomerComponent },
+  { path: 'aboutUs', component: AboutUsComponent },
   { path: '**', redirectTo: '' }
 
 ];
