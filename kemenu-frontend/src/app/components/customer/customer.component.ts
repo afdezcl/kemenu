@@ -8,6 +8,7 @@ import {Dish} from '@models/menu/dish.model';
 import {AllAllergens, Allergen} from '@models/menu/allergen.model';
 import {Observable, of} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-customer',
@@ -21,10 +22,12 @@ export class CustomerComponent implements OnInit {
   menu: Observable<ShowMenu>;
   cookieBASE64: string;
   shortUrlId: string;
+  imageUrl: SafeResourceUrl;
 
   constructor(
     private router: ActivatedRoute,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private sanitizer: DomSanitizer
   ) {
   }
 
@@ -32,7 +35,13 @@ export class CustomerComponent implements OnInit {
     if (!Object.is(this.router.snapshot.url[0].path, 'demo')) {
       this.getDataToBuildMenu();
       this.menu = this.menuService.getMenuById(this.shortUrlId)
-        .pipe(map(menu => this.matchAllergens(menu)));
+        .pipe(map(menu => {
+          const showMenu = this.matchAllergens(menu);
+          if (showMenu.imageUrl) {
+            this.imageUrl = this.sanitizer.bypassSecurityTrustResourceUrl(showMenu.imageUrl);
+          }
+          return showMenu;
+        }));
     } else {
       this.menu = of(Demo);
     }

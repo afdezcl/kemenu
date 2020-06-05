@@ -143,5 +143,6 @@ export const Demo: ShowMenu = {
       allergens: []
     }]
   }],
-  shortUrlId: ''
+  shortUrlId: '',
+  imageUrl: 'asd'
 };
