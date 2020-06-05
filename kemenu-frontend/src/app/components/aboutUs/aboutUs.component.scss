@@ -7,8 +7,19 @@ h1 {
   padding-bottom: 100px;
 }
 
+.title {
+  @media (max-width: 991.98px) {
+    text-align: center;
+  }
+}
+
 .aboutUs-text {
   color: white;
+  text-align: justify;
+
+  @media (max-width: 991.98px) {
+    padding: 0 1em;
+  }
 }
 
 .member {
