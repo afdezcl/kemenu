@@ -10,7 +10,7 @@ import {ShareQrComponent} from './share-qr/share-qr.component';
 import {ShareButtonsModule} from 'ngx-sharebuttons/buttons';
 import {ShareIconsModule} from 'ngx-sharebuttons/icons';
 import {HttpClientModule} from '@angular/common/http';
-import {DragDropFileComponent} from '../dragDropFile/dragDropFile.component';
+import {UploadImageButtonComponent} from '../uploadImageButton/uploadImageButton.component';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @NgModule({
@@ -32,7 +32,7 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     CreateSectionComponent,
     CreateDishComponent,
     ShareQrComponent,
-    DragDropFileComponent
+    UploadImageButtonComponent
   ]
 })
 export class MenuModule {

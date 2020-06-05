@@ -13,9 +13,9 @@
 
     <div class="row" *ngIf="menu.sections.length > 0">
       <div class="col-sm-2 text-lg-center text-center">
-          <app-drag-drop-file
+          <app-upload-image-button
             buttonText="Upload Menu Image"
-            (uploadFileEvent)="handleFileUpload($event)"></app-drag-drop-file>
+            (uploadFileEvent)="handleFileUpload($event)"></app-upload-image-button>
       </div>
       <div *ngIf="menu.imageUrl" class="col-sm-2 text-lg-center text-center">
         <lib-ngx-image-zoom

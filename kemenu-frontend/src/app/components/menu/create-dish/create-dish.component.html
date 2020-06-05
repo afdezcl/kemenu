@@ -5,6 +5,11 @@
     </div>
     <div class="modal-body p-4 p-lg-5">
       <form [formGroup]="dishForm" (ngSubmit)="onSubmit()" class="login-form text-left">
+        <div class="row text-center">
+          <app-upload-image-button
+            buttonText="Upload Dish Image"
+            (uploadFileEvent)="handleDishImageUpload($event)"></app-upload-image-button>
+        </div>
         <div class="row">
           <div class="col">
             <div class="form-group mb-4">
@@ -31,18 +36,21 @@
               <input type="number" name="price" placeholder="{{ 'Dish price' | translate }}" class="form-control"
                 formControlName="price" min="0">
             </div>
+            <div class="form-group form-check mb-4">
+              <input type="checkbox" name="available" formControlName="available" class="form-check-input" id="notAvailableCheckbox">
+              <label class="form-check-label" for="notAvailableCheckbox">{{ 'Not Available' | translate }}</label>
+            </div>
           </div>
         </div>
-  
 
         <div class="row mb-3">
           <div class="col text-center">
             <h5 (click)="activeShowAllergens()" class="btn btn-secondary">{{ 'Show Allergens' | translate }}</h5>
             <br>
-            <small class="text-muted text-center">{{ 'Allergens description' | translate }}</small>            
+            <small class="text-muted text-center">{{ 'Allergens description' | translate }}</small>
           </div>
         </div>
-        
+
         <div class="row mb-4" *ngIf="showAllergens">
           <!-- LEFT COLUMN -->
           <div class="col">
@@ -57,7 +65,7 @@
               </div>
             </div>
           </div>
-          
+
           <!-- RIGHT COLUMN -->
           <div class="col">
             <div class="form-check" *ngFor="let allergen of allergensListToShowOnRight">
@@ -69,10 +77,10 @@
                   {{ 'Allergens Names.' + allergen.id | translate}}
                 </label>
               </div>
-            </div>          
+            </div>
           </div>
         </div>
-  
+
         <div class="form-group text-center">
           <input type="submit" value="{{ 'Create dish' | translate }}" class="btn btn-primary"
             [disabled]="dishForm.invalid">

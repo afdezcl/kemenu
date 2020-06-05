@@ -1,11 +1,13 @@
-import {AllergenRequestResponse, Allergen} from './allergen.model';
+import {Allergen} from './allergen.model';
 
 export class Dish {
   constructor(
     public name: string,
     public description: string,
     public price: number,
-    public allergens: Allergen[]
+    public allergens: Allergen[],
+    public imageUrl?: string,
+    public available?: boolean
   ) {
   }
 }

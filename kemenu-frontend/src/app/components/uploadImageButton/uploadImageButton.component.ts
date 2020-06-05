@@ -4,11 +4,11 @@ import {environment} from '@environments/environment';
 import {AuthenticationService} from '@services/authentication/authentication.service';
 
 @Component({
-  selector: 'app-drag-drop-file',
-  templateUrl: './dragDropFile.component.html',
-  styleUrls: ['./dragDropFile.component.css']
+  selector: 'app-upload-image-button',
+  templateUrl: './uploadImageButton.component.html',
+  styleUrls: ['./uploadImageButton.component.css']
 })
-export class DragDropFileComponent implements OnInit {
+export class UploadImageButtonComponent implements OnInit {
 
   @Input() buttonText: string;
   @Output() uploadFileEvent = new EventEmitter<any>();
@@ -22,7 +22,7 @@ export class DragDropFileComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  uploadFile(event) {
+  uploadImage(event) {
     const files = event.target.files || (event.dataTransfer && event.dataTransfer.files);
     if (files.length > 0) {
       const file = files[0];
