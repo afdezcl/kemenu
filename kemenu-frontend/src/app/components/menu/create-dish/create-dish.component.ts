@@ -16,7 +16,7 @@ export class CreateDishComponent implements OnInit {
   public name: string;
   public description: string;
   public price: number;
-  public available = true;
+  public available = false;
   public selectedAllergens: Allergen[] = [];
   public allergens: Allergen[] = AllAllergens;
   public allergensListToShowOnLeft: Allergen[];
