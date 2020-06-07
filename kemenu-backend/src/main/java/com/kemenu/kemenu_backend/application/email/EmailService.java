@@ -25,7 +25,7 @@ public class EmailService {
         Email from = new Email(event.getFrom());
         String subject = event.getSubject();
         Email to = new Email(event.getTo());
-        Content content = new Content("text/plain", contentWithUrl);
+        Content content = new Content("text/html", contentWithUrl);
         Mail mail = new Mail(from, subject, to, content);
 
         SendGrid sg = new SendGrid(sendgridApiKey);
