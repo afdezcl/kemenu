@@ -19,27 +19,30 @@ public class EmailEventFactory {
                 .sendEmailEvent(
                         createNoReplyEmail(
                                 lang,
+                                "text/html",
                                 "email.confirmation.subject",
                                 "email.confirmation.content",
                                 email
                         )
                 )
+                .htmlTemplate("email_" + lang + ".ftl")
                 .build();
     }
 
     public SendEmailEvent forgotPasswordEmailEvent(String lang, String email) {
         return createNoReplyEmail(
                 lang,
+                "text/plain",
                 "email.forgot.password.subject",
                 "email.forgot.password.content",
                 email
         );
     }
 
-    private SendEmailEvent createNoReplyEmail(String lang, String subjectMessage, String contentMessage, String email) {
+    private SendEmailEvent createNoReplyEmail(String lang, String type, String subjectMessage, String contentMessage, String email) {
         Locale locale = new Locale.Builder().setLanguage(lang).build();
         String subject = messageSource.getMessage(subjectMessage, null, locale);
         String content = messageSource.getMessage(contentMessage, null, locale);
-        return SendEmailEvent.noReplyEmail(email, subject, content);
+        return SendEmailEvent.noReplyEmail(email, subject, type, content);
     }
 }

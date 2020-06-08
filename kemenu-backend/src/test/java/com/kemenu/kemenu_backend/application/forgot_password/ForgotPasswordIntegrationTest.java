@@ -50,7 +50,7 @@ class ForgotPasswordIntegrationTest extends KemenuIntegrationTest {
 
     @BeforeEach
     void initAll() {
-        Mockito.doNothing().when(emailService).sendMail(any(), anyString());
+        Mockito.doNothing().when(emailService).sendMail(any(), anyString(), anyString());
     }
 
     @Test
@@ -67,7 +67,7 @@ class ForgotPasswordIntegrationTest extends KemenuIntegrationTest {
                 .expectStatus().isOk()
                 .expectBody(UUID.class).returnResult().getResponseBody().toString();
 
-        verify(emailService, timeout(250).times(1)).sendMail(any(), anyString());
+        verify(emailService, timeout(250).times(1)).sendMail(any(), anyString(), anyString());
         assertTrue(forgotPasswordRepository.findById(forgotPasswordId).isPresent());
     }
 
