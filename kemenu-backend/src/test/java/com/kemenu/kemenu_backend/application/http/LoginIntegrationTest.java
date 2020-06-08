@@ -59,7 +59,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
 
     @BeforeEach
     void initAll() {
-        Mockito.doNothing().when(emailService).sendMail(any(), anyString());
+        Mockito.doNothing().when(emailService).sendMail(any(), anyString(), anyString());
     }
 
     @Test
@@ -84,7 +84,7 @@ class LoginIntegrationTest extends KemenuIntegrationTest {
         ConfirmedEmail notConfirmedEmail = optionalConfirmedEmail.get();
 
         assertFalse(notConfirmedEmail.isConfirmed());
-        verify(emailService, timeout(250).times(1)).sendMail(any(), anyString());
+        verify(emailService, timeout(250).times(1)).sendMail(any(), anyString(), anyString());
 
         webTestClient
                 .get().uri("/public/confirm/email/" + notConfirmedEmail.getId())

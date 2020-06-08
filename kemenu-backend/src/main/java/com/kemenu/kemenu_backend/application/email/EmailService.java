@@ -21,11 +21,11 @@ public class EmailService {
     private String sendgridApiKey;
 
     @SneakyThrows
-    public void sendMail(SendEmailEvent event, String contentWithUrl) {
+    public void sendMail(SendEmailEvent event, String type, String contentWithUrl) {
         Email from = new Email(event.getFrom());
         String subject = event.getSubject();
         Email to = new Email(event.getTo());
-        Content content = new Content("text/plain", contentWithUrl);
+        Content content = new Content(type, contentWithUrl);
         Mail mail = new Mail(from, subject, to, content);
 
         SendGrid sg = new SendGrid(sendgridApiKey);

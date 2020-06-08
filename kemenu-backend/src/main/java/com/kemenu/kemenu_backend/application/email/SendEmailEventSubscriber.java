@@ -17,7 +17,7 @@ public class SendEmailEventSubscriber extends VertxEventSubscriber<SendEmailEven
 
     @Override
     public void subscribe(SendEmailEvent event) {
-        emailService.sendMail(event, event.getContent());
+        emailService.sendMail(event, event.getType(), event.getContent());
     }
 
     @Override

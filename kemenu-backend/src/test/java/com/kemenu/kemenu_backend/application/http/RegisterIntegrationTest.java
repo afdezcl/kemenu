@@ -27,7 +27,7 @@ class RegisterIntegrationTest extends KemenuIntegrationTest {
 
     @BeforeEach
     void initAll() {
-        Mockito.doNothing().when(emailService).sendMail(any(), anyString());
+        Mockito.doNothing().when(emailService).sendMail(any(), anyString(), anyString());
     }
 
     @Test
@@ -41,7 +41,7 @@ class RegisterIntegrationTest extends KemenuIntegrationTest {
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.TOO_MANY_REQUESTS);
 
-        verify(emailService, timeout(250).times(0)).sendMail(any(), anyString());
+        verify(emailService, timeout(250).times(0)).sendMail(any(), anyString(), anyString());
     }
 
     @Test
@@ -65,7 +65,7 @@ class RegisterIntegrationTest extends KemenuIntegrationTest {
                 .exchange()
                 .expectStatus().isEqualTo(HttpStatus.CONFLICT);
 
-        verify(emailService, timeout(250).times(1)).sendMail(any(), anyString());
+        verify(emailService, timeout(250).times(1)).sendMail(any(), anyString(), anyString());
     }
 
     @Test
@@ -79,6 +79,6 @@ class RegisterIntegrationTest extends KemenuIntegrationTest {
                 .exchange()
                 .expectStatus().isBadRequest();
 
-        verify(emailService, timeout(250).times(0)).sendMail(any(), anyString());
+        verify(emailService, timeout(250).times(0)).sendMail(any(), anyString(), anyString());
     }
 }
