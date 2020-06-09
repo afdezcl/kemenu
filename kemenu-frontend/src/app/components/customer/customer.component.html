@@ -19,7 +19,7 @@
         <accordion [isAnimated]="true">
           <accordion-group *ngFor="let section of (menu | async)?.sections" heading="{{section.name}}">
             <div class="dishes mt-2" *ngFor="let dish of section.dishes; let dishCounter = index;">
-              <div class="row">
+              <div *ngIf="dish.available" class="row">
                 <div class="col-sm-8 col-8 text-left">
                   <span class="dish-title">{{dish.name}}</span>
                 </div>
