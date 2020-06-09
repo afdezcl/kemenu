@@ -16,11 +16,13 @@ export class CreateDishComponent implements OnInit {
   public name: string;
   public description: string;
   public price: number;
+  public available = false;
   public selectedAllergens: Allergen[] = [];
   public allergens: Allergen[] = AllAllergens;
   public allergensListToShowOnLeft: Allergen[];
   public allergensListToShowOnRight: Allergen[];
   public showAllergens = false;
+  public imageUrl = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,11 +34,11 @@ export class CreateDishComponent implements OnInit {
     this.dishForm = this.formBuilder.group({
       name: [this.name, Validators.required],
       description: [this.description],
-      price: [this.price, [Validators.required, Validators.min(0)]]
+      price: [this.price, [Validators.required, Validators.min(0)]],
+      available: [this.available]
     });
     console.log(this.selectedAllergens);
     this.divideAllergensList();
-
   }
 
   get form() {
@@ -54,7 +56,9 @@ export class CreateDishComponent implements OnInit {
       this.form.name.value,
       this.form.description.value,
       this.form.price.value,
-      this.selectedAllergens
+      this.selectedAllergens,
+      this.imageUrl,
+      !this.form.available.value
     );
     this.messageEvent.emit(dish);
     this.bsModalRef.hide();
@@ -79,5 +83,11 @@ export class CreateDishComponent implements OnInit {
 
   allergenIsChecked(allergen: AllergenRequestResponse) {
     return this.selectedAllergens.find(item => Object.is(item.id, allergen.id));
+  }
+
+  handleDishImageUpload(image) {
+    if (image) {
+      this.imageUrl = image.url;
+    }
   }
 }

@@ -137,7 +137,9 @@ export class MenuComponent implements OnInit {
       name: dishToEdit.name,
       description: dishToEdit.description,
       price: dishToEdit.price,
-      selectedAllergens: dishToEdit.allergens
+      selectedAllergens: dishToEdit.allergens,
+      imageUrl: dishToEdit.imageUrl,
+      available: !dishToEdit.available
     };
     this.modalReference = this.modalService.show(CreateDishComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {

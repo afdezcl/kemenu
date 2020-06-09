@@ -7,7 +7,8 @@
 
     <div *ngIf="(menu | async)?.imageUrl" class="row mt-4">
       <div class="col text-center">
-        <a class="btn btn-primary navbar-btn ml-0 ml-lg-3" [href]="imageUrl" target="_blank">{{'Menu Image' | translate}}</a>
+        <a class="btn btn-primary navbar-btn ml-0 ml-lg-3" [href]="imageUrl"
+           target="_blank">{{'Menu Image' | translate}}</a>
       </div>
     </div>
 
@@ -18,24 +19,31 @@
         </div>
         <accordion [isAnimated]="true">
           <accordion-group *ngFor="let section of (menu | async)?.sections" heading="{{section.name}}">
-            <div class="dishes mt-2" *ngFor="let dish of section.dishes; let dishCounter = index;">
-              <div class="row">
-                <div class="col-sm-8 col-8 text-left">
-                  <span class="dish-title">{{dish.name}}</span>
+            <div *ngFor="let dish of section.dishes; let dishCounter = index;">
+              <div *ngIf="dish.available" class="dishes mt-2">
+                <div *ngIf="dish.imageUrl" class="row">
+                  <div class="col text-center mb-3">
+                    <img src="{{dish.imageUrl}}" class="img-fluid" alt="Responsive image">
+                  </div>
                 </div>
-                <div class="col-sm-4 col-4 text-right">
-                  <span class="dish-price">{{dish.price}}€</span>
+                <div class="row">
+                  <div class="col-sm-8 col-8 text-left">
+                    <span class="dish-title">{{dish.name}}</span>
+                  </div>
+                  <div class="col-sm-4 col-4 text-right">
+                    <span class="dish-price">{{dish.price}}€</span>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <small class="dish-description text-muted">{{dish.description}}</small>
+                <div class="row">
+                  <div class="col">
+                    <small class="dish-description text-muted">{{dish.description}}</small>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div *ngFor="let allergen of dish.allergens">
-                  <img src="../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen"
-                       class="icons-allergens">
+                <div class="row">
+                  <div *ngFor="let allergen of dish.allergens">
+                    <img src="../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen"
+                         class="icons-allergens">
+                  </div>
                 </div>
               </div>
             </div>

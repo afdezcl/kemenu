@@ -13,14 +13,12 @@
 
     <div class="row" *ngIf="menu.sections.length > 0">
       <div class="col-sm-2 text-lg-center text-center">
-          <app-drag-drop-file
+          <app-upload-image-button
             buttonText="Upload Menu Image"
-            (uploadFileEvent)="handleFileUpload($event)"></app-drag-drop-file>
+            (uploadFileEvent)="handleFileUpload($event)"></app-upload-image-button>
       </div>
       <div *ngIf="menu.imageUrl" class="col-sm-2 text-lg-center text-center">
-        <lib-ngx-image-zoom
-          [thumbImage]=getMenuImageSanitized()
-          [zoomMode]="'click'"></lib-ngx-image-zoom>
+        <img src="{{menu.imageUrl}}" style="width: 100px;" class="img-thumbnail" alt="Responsive image">
       </div>
       <div class="col-sm-2 text-lg-left text-center">
         <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()">
