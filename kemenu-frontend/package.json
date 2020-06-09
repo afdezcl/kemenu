@@ -32,7 +32,6 @@
     "ng-recaptcha": "^5.0.0",
     "ngx-bootstrap": "^5.6.1",
     "ngx-cookie-service": "^3.0.4",
-    "ngx-image-zoom": "^0.6.0",
     "ngx-sharebuttons": "^8.0.0-beta.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

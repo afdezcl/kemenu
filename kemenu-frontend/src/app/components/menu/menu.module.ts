@@ -11,7 +11,6 @@ import {ShareButtonsModule} from 'ngx-sharebuttons/buttons';
 import {ShareIconsModule} from 'ngx-sharebuttons/icons';
 import {HttpClientModule} from '@angular/common/http';
 import {UploadImageButtonComponent} from '../uploadImageButton/uploadImageButton.component';
-import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @NgModule({
   imports: [
@@ -21,7 +20,6 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     AccordionModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxImageZoomModule,
     ShareButtonsModule.withConfig({
       debug: true
     }),
