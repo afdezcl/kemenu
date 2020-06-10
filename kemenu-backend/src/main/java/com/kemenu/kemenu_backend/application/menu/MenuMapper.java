@@ -2,13 +2,12 @@ package com.kemenu.kemenu_backend.application.menu;
 
 import com.kemenu.kemenu_backend.domain.model.Menu;
 import com.kemenu.kemenu_backend.domain.model.MenuSection;
+import static java.util.Objects.isNull;
+import static java.util.stream.Collectors.toList;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-import static java.util.Objects.isNull;
-import static java.util.stream.Collectors.toList;
 
 @Component
 @AllArgsConstructor

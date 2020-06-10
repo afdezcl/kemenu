@@ -18,6 +18,7 @@
         <sendgrid.version>4.5.0</sendgrid.version>
         <vertx.version>3.9.1</vertx.version>
         <cloudinary.version>1.26.0</cloudinary.version>
+        <thumbnailator.version>0.4.11</thumbnailator.version>
     </properties>
 
     <dependencies>
@@ -125,6 +126,12 @@
             <groupId>com.cloudinary</groupId>
             <artifactId>cloudinary-http44</artifactId>
             <version>${cloudinary.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.coobird</groupId>
+            <artifactId>thumbnailator</artifactId>
+            <version>${thumbnailator.version}</version>
         </dependency>
 
         <dependency>

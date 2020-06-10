@@ -2,10 +2,17 @@ package com.kemenu.kemenu_backend.infrastructure.cloudinary;
 
 import com.cloudinary.Cloudinary;
 import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.filters.Canvas;
+import net.coobird.thumbnailator.geometry.Positions;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Map;
 
@@ -27,9 +34,33 @@ public class CloudinaryService {
         );
     }
 
+    public String uploadResized(MultipartFile file) {
+        try(ByteArrayOutputStream os = new ByteArrayOutputStream()) {
+            BufferedImage bufferedImage = Thumbnails.of(file.getInputStream())
+                    .size(300, 300)
+                    .addFilter(new Canvas(300, 300, Positions.CENTER, false, Color.WHITE))
+                    .asBufferedImage();
+            ImageIO.write(bufferedImage, "png", os);
+            os.flush();
+            return uploadToCloudinary(os.toByteArray());
+        } catch (IOException e) {
+            log.error("[Cloudinary] Failure when resizing image", e);
+            return "";
+        }
+    }
+
     public String upload(MultipartFile file) {
         try {
-            Map<String, Object> uploadResult = cloudinary.uploader().upload(file.getBytes(), Map.of("resource_type", "auto"));
+            return uploadToCloudinary(file.getBytes());
+        } catch (IOException e) {
+            log.error("[Cloudinary] Failure when converting file to bytes", e);
+            return "";
+        }
+    }
+
+    private String uploadToCloudinary(byte[] image) {
+        try {
+            Map<String, Object> uploadResult = cloudinary.uploader().upload(image, Map.of("resource_type", "auto"));
             CloudinaryUploadResponse uploadResponse = CloudinaryUploadResponse.from(uploadResult);
             return uploadResponse.getSecureUrl();
         } catch (IOException e) {

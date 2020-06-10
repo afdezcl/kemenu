@@ -33,4 +33,17 @@ class UploadImageController {
 
         return ResponseEntity.ok(new UploadImageResponse(cloudinaryService.upload(file)));
     }
+
+    @PostMapping("/customer/{email}/upload/image/resized")
+    ResponseEntity<UploadImageResponse> uploadImageResized(@RequestHeader(value = "Authorization") String token,
+                                                           @PathVariable String email,
+                                                           @RequestParam("file") MultipartFile file) {
+        String tokenEmail = jwtService.decodeAccessToken(token).getSubject();
+
+        if (!email.equals(tokenEmail)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        return ResponseEntity.ok(new UploadImageResponse(cloudinaryService.uploadResized(file)));
+    }
 }
