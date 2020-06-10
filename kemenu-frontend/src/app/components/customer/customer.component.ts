@@ -67,4 +67,21 @@ export class CustomerComponent implements OnInit {
     return menu;
   }
   // TODO: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  loadImagesWhenOpen(isOpenEvent: boolean, sectionIdx: number) {
+    if (isOpenEvent) {
+      this.menu.subscribe(showMenu => {
+        for (let i = 0; i < showMenu.sections.length; i++) {
+          if (i === sectionIdx) {
+            for (let j = 0; j < showMenu.sections[i].dishes.length; j++) {
+              const img = document.querySelector<HTMLImageElement>('#dish-img-' + i + '-' + j);
+              if (!img.src) {
+                img.src = img.dataset.urlsrc;
+              }
+            }
+          }
+        }
+      });
+    }
+  }
 }

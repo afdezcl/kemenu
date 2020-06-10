@@ -18,12 +18,13 @@
           <span class="text-muted">{{ 'Digital Menu' | translate}}</span>
         </div>
         <accordion [isAnimated]="true">
-          <accordion-group *ngFor="let section of (menu | async)?.sections" heading="{{section.name}}">
+          <accordion-group *ngFor="let section of (menu | async)?.sections; let sectionIdx = index;"
+                           heading="{{section.name}}" (isOpenChange)="loadImagesWhenOpen($event, sectionIdx)">
             <div *ngFor="let dish of section.dishes; let dishCounter = index;">
               <div *ngIf="dish.available" class="dishes mt-2">
                 <div *ngIf="dish.imageUrl" class="row">
                   <div class="col text-center mb-3">
-                    <img src="{{dish.imageUrl}}" class="img-fluid" alt="Responsive image">
+                    <img id="{{'dish-img-' + sectionIdx + '-' + dishCounter}}" [attr.data-urlsrc]="dish.imageUrl" class="img-fluid" alt="Responsive image">
                   </div>
                 </div>
                 <div class="row">
