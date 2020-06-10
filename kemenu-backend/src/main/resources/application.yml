@@ -80,5 +80,5 @@ spring:
       uri: mongodb://${MONGO_DB_USER_KEMENU}:${MONGO_DB_PWD_KEMENU}@localhost:27017/${MONGO_DB_NAME_KEMENU}
   servlet:
     multipart:
-      max-file-size: 7MB
-      max-request-size: 7MB
+      max-file-size: 18MB
+      max-request-size: 18MB
