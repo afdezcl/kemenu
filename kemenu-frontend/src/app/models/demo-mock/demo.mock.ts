@@ -24,7 +24,8 @@ export const Demo: ShowMenu = {
           name: 'Sesame',
           imageName: 'sesame.png'
         }
-      ]
+      ],
+      available: true
     }, {
       name: 'Croquetas',
       description: 'Croquetas de jamón ibérico',
