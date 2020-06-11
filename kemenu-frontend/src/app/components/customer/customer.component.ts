@@ -75,7 +75,7 @@ export class CustomerComponent implements OnInit {
           if (i === sectionIdx) {
             for (let j = 0; j < showMenu.sections[i].dishes.length; j++) {
               const img = document.querySelector<HTMLImageElement>('#dish-img-' + i + '-' + j);
-              if (!img.src) {
+              if (img && !img.src) {
                 img.src = img.dataset.urlsrc;
               }
             }
