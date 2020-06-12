@@ -42,6 +42,7 @@ public class MenuRequestHelper {
                                         .name(UUID.randomUUID().toString())
                                         .build()))
                                 .imageUrl(UUID.randomUUID().toString())
+                                .available(true)
                                 .build()))
                         .build()))
                 .build();

@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 @Slf4j
 @Configuration
@@ -71,5 +72,12 @@ class WebConfig implements WebMvcConfigurer {
                             log.info("Admin user created");
                         }
                 );
+    }
+
+    @Bean
+    FreeMarkerConfigurer freeMarkerConfigurer() {
+        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+        configurer.setTemplateLoaderPath("classpath:/templates/");
+        return configurer;
     }
 }

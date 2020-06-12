@@ -14,4 +14,5 @@ public class MenuResponse {
     String businessName;
     String shortUrlId;
     List<MenuSectionResponse> sections;
+    String imageUrl;
 }

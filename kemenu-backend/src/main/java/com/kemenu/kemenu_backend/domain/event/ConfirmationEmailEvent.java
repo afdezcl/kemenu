@@ -10,6 +10,7 @@ import lombok.Value;
 public class ConfirmationEmailEvent implements Event {
 
     SendEmailEvent sendEmailEvent;
+    String htmlTemplate;
 
     @Override
     public String id() {

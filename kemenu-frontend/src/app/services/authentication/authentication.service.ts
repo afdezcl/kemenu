@@ -6,6 +6,8 @@ import {Tokens} from '@models/auth/tokens.model';
 import {Login} from '@models/auth/login.interface';
 import {Register} from '@models/auth/register.interface';
 import * as jwt_decode from 'jwt-decode';
+import {ForgotPassword} from '@models/auth/forgotPassword.interface';
+import {ChangePassword, ForgotPasswordId} from '@models/auth/changePassword.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +39,16 @@ export class AuthenticationService {
         };
         this.storeTokens(tokens);
       }));
+  }
+
+  forgotPassword(data: ForgotPassword) {
+    return this.httpClient
+      .post(environment.apiBaseUrl + '/public/forgot/password', data);
+  }
+
+  changePassword(forgotPasswordId: ForgotPasswordId, data: ChangePassword) {
+    return this.httpClient
+      .patch(environment.apiBaseUrl + '/public/forgot/password/' + forgotPasswordId.id + '/email/' + forgotPasswordId.email, data);
   }
 
   logout() {

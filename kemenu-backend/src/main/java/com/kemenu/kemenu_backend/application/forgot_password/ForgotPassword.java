@@ -1,5 +1,6 @@
 package com.kemenu.kemenu_backend.application.forgot_password;
 
+import static com.kemenu.kemenu_backend.domain.model.ConfirmedEmail.ONE_DAY_IN_SECONDS;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -12,8 +13,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 import java.util.UUID;
-
-import static com.kemenu.kemenu_backend.domain.model.ConfirmedEmail.ONE_DAY_IN_SECONDS;
 
 @Getter
 @Document

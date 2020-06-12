@@ -10,7 +10,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {ShareQrComponent} from './share-qr/share-qr.component';
 import {MenuService} from '@services/menu/menu.service';
 import {AuthenticationService} from '@services/authentication/authentication.service';
-import {Allergen, AllAllergens, AllergenRequestResponse} from '@models/menu/allergen.model';
+import {Allergen, AllAllergens} from '@models/menu/allergen.model';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-menu',
@@ -31,7 +32,8 @@ export class MenuComponent implements OnInit {
     private modalService: BsModalService,
     private translate: TranslateService,
     private menuService: MenuService,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private sanitizer: DomSanitizer
   ) {
   }
 
@@ -52,6 +54,7 @@ export class MenuComponent implements OnInit {
         if (response.businesses[0].menus.length !== 0) {
           this.menu.sections = response.businesses[0].menus[0].sections;
           this.menu.shortUrlId = response.businesses[0].menus[0].shortUrlId;
+          this.menu.imageUrl = response.businesses[0].menus[0].imageUrl;
           this.menu.id = response.businesses[0].menus[0].id;
           this.matchAllergens();
         }
@@ -134,12 +137,13 @@ export class MenuComponent implements OnInit {
       name: dishToEdit.name,
       description: dishToEdit.description,
       price: dishToEdit.price,
-      selectedAllergens: dishToEdit.allergens
+      selectedAllergens: dishToEdit.allergens,
+      imageUrl: dishToEdit.imageUrl,
+      available: !dishToEdit.available
     };
     this.modalReference = this.modalService.show(CreateDishComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].dishes[dishIndex] = data;
-      console.log(this.menu.sections);
       this.matchAllergens();
       this.thereIsChange = true;
     });
@@ -165,7 +169,8 @@ export class MenuComponent implements OnInit {
     const menuSections = this.sanitizeAllergensMenuToUpdate();
     const menuToSave = {
       businessId: this.businessId,
-      sections: menuSections
+      sections: menuSections,
+      imageUrl: this.menu.imageUrl
     };
     this.menuService.createMenu(menuToSave)
       .subscribe((response: any) => {
@@ -180,20 +185,18 @@ export class MenuComponent implements OnInit {
     const menuToUpdate = {
       businessId: this.businessId,
       menuId: this.menu.id,
-      sections: menuSections
+      sections: menuSections,
+      imageUrl: this.menu.imageUrl
     };
-    console.log(this.menu);
     this.menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
         this.menu.id = response;
         this.matchAllergens();
-        console.log(this.menu);
       });
   }
 
   sanitizeAllergensMenuToUpdate() {
     const sections = this.menu.sections;
-    console.log(this.menu);
     sections.map((section: Section) => {
       section.dishes.map((dish: Dish) => {
         dish.allergens.map((allergen: Allergen) => delete allergen.imageName);
@@ -210,7 +213,16 @@ export class MenuComponent implements OnInit {
         });
       });
     });
+  }
 
-    console.log(this.menu);
+  handleFileUpload(event) {
+    if (event) {
+      this.menu.imageUrl = event.url;
+      this.onSaveMenu();
+    }
+  }
+
+  getMenuImageSanitized() {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.menu.imageUrl);
   }
 }

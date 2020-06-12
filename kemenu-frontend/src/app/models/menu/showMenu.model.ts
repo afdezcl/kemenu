@@ -5,6 +5,7 @@ export class ShowMenu {
     public businessName: string,
     public sections: Section[],
     public shortUrlId: string,
+    public imageUrl: string,
     public id?: string
   ) {
   }

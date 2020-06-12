@@ -22,6 +22,6 @@ public class MenuHelper {
     }
 
     public static Menu from(String id, List<MenuSection> sections) {
-        return new Menu(id, sections);
+        return new Menu(id, sections, "");
     }
 }

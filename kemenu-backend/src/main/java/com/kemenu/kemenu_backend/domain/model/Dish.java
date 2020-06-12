@@ -18,4 +18,5 @@ public class Dish {
     BigDecimal price;
     List<Allergen> allergens;
     String imageUrl;
+    Boolean available;
 }

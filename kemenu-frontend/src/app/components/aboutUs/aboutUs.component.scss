@@ -1,0 +1,68 @@
+h1 {
+  z-index: 1;
+  color: white;
+}
+
+.row {
+  padding-bottom: 100px;
+}
+
+.title {
+  @media (max-width: 991.98px) {
+    text-align: center;
+  }
+}
+
+.aboutUs-text {
+  color: white;
+  text-align: justify;
+
+  @media (max-width: 991.98px) {
+    padding: 0 1em;
+  }
+}
+
+.member {
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+
+  .image {
+    text-align: center;
+
+    img {
+      margin: auto;
+    }
+  }
+
+  .business, .position {
+    color: antiquewhite;
+    text-align: center;
+  }
+
+  .name {
+    color: white;
+    font-size: 1.5em;
+    text-align: center;
+  }
+
+  .sn {
+    text-align: center;
+
+    a {
+    color: #fff;
+    font-size: 1rem;
+    margin: 0 0.625rem;
+    }
+  }
+}
+
+section.section-translation {
+  .translation strong {
+    font-weight: bolder;
+  }
+
+  @media (max-width: 991.98px) {
+    padding-top: 0;
+  }
+}

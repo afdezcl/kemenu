@@ -19,13 +19,15 @@ public class SendEmailEvent implements Event {
     String to;
     String subject;
     String content;
+    String type;
 
-    public static SendEmailEvent noReplyEmail(String to, String subject, String content) {
+    public static SendEmailEvent noReplyEmail(String to, String subject, String type, String content) {
         return SendEmailEvent.builder()
                 .from(NO_REPLAY_EMAIL)
                 .to(to)
                 .subject(subject)
                 .content(content)
+                .type(type)
                 .build();
     }
 

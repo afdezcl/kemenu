@@ -24,7 +24,9 @@ export const Demo: ShowMenu = {
           name: 'Sesame',
           imageName: 'sesame.png'
         }
-      ]
+      ],
+      imageUrl: 'https://res.cloudinary.com/dcb7j4q7p/image/upload/v1591770336/Screenshot_from_2020-06-10_08-25-14_g3ad8b.png',
+      available: true
     }, {
       name: 'Croquetas',
       description: 'Croquetas de jamón ibérico',
@@ -45,7 +47,9 @@ export const Demo: ShowMenu = {
           name: 'Wheat',
           imageName: 'wheat.png'
         }
-      ]
+      ],
+      imageUrl: 'https://res.cloudinary.com/dcb7j4q7p/image/upload/v1591770401/Screenshot_from_2020-06-10_08-26-30_z3vtyp.png',
+      available: true
     }]
   }, {
     name: 'Carnes',
@@ -59,7 +63,8 @@ export const Demo: ShowMenu = {
           name: 'Suphurdioxide',
           imageName: 'suphurdioxide.png'
         },
-      ]
+      ],
+      available: true
     }]
   }, {
     name: 'Hamburguesas',
@@ -67,7 +72,8 @@ export const Demo: ShowMenu = {
       name: 'César',
       description: 'Hamburguesa con queso, tomate y lechuga',
       price: 7.50,
-      allergens: []
+      allergens: [],
+      available: true
     }, {
       name: 'Simple',
       description: 'Hamburguesa con mayonesa simple',
@@ -83,12 +89,14 @@ export const Demo: ShowMenu = {
           name: 'Lupin',
           imageName: 'lupin.png'
         }
-      ]
+      ],
+      available: true
     }, {
       name: 'Big-Burguer',
       description: 'Hamburguesa doble con beacon',
       price: 9.50,
-      allergens: []
+      allergens: [],
+      available: true
     }]
   }, {
     name: 'Bebidas',
@@ -96,17 +104,20 @@ export const Demo: ShowMenu = {
       name: 'Coca-Cola',
       description: '',
       price: 1.80,
-      allergens: []
+      allergens: [],
+      available: true
     }, {
       name: 'Cerveza - Caña',
       description: '',
       price: 1.20,
-      allergens: []
+      allergens: [],
+      available: true
     }, {
       name: 'Agua',
       description: '',
       price: 1.20,
-      allergens: []
+      allergens: [],
+      available: true
     }]
   }, {
     name: 'Postres',
@@ -114,7 +125,8 @@ export const Demo: ShowMenu = {
       name: 'Tarta de queso',
       description: 'Tarta de queso casera',
       price: 3.50,
-      allergens: []
+      allergens: [],
+      available: true
     }, {
       name: 'Natillas',
       description: 'Natillas caseras de la casa',
@@ -135,13 +147,16 @@ export const Demo: ShowMenu = {
           name: 'Sesame',
           imageName: 'sesame.png'
         }
-      ]
+      ],
+      available: true
     }, {
       name: 'Variado de tartas',
       description: 'Un variado de tartas caseras de la casa',
       price: 7,
-      allergens: []
+      allergens: [],
+      available: true
     }]
   }],
-  shortUrlId: ''
+  shortUrlId: '',
+  imageUrl: 'asd'
 };

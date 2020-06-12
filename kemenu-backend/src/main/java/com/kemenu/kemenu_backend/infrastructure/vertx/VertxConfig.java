@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import java.util.List;
 
@@ -40,11 +41,12 @@ class VertxConfig {
                                     ObjectMapper mapper,
                                     ConfirmedEmailRepository confirmedEmailRepository,
                                     EventPublisher eventPublisher,
-                                    EmailService emailService) {
+                                    EmailService emailService,
+                                    FreeMarkerConfigurer freeMarkerConfigurer) {
         return args -> {
             DeploymentOptions workerVerticleOptions = new DeploymentOptions().setWorker(true);
             for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
-                vertx.deployVerticle(new ConfirmationEmailEventSubscriber(eventBus, mapper, confirmedEmailRepository, allowedOrigins.get(0), eventPublisher), workerVerticleOptions);
+                vertx.deployVerticle(new ConfirmationEmailEventSubscriber(eventBus, mapper, confirmedEmailRepository, allowedOrigins.get(0), eventPublisher, freeMarkerConfigurer), workerVerticleOptions);
                 vertx.deployVerticle(new SendEmailEventSubscriber(eventBus, mapper, emailService), workerVerticleOptions);
             }
             log.info("Verticles deployed");

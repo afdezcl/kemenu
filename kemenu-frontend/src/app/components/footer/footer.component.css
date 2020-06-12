@@ -3,7 +3,7 @@
 *     FOOTER
 * =====================================================
 */
-footer.main-footer {       
+footer.main-footer {
     width: 100%;
     bottom: 0;
     padding: 7rem 0;
@@ -11,44 +11,43 @@ footer.main-footer {
     color: #fff;
     padding-bottom: 0;
   }
-  
+
   .footer-logo {
     width: 7.5rem;
   }
-  
+
   .footer-link {
     color: #fff;
     font-size: 0.9rem;
     font-weight: 300;
     margin: 0.3rem 0;
   }
-  
+
   .footer-link:hover, .footer-link:focus {
     color: #fff;
   }
-  
+
   .social-link {
     color: #fff;
     font-size: 0.9rem;
     margin: 0 0.625rem;
   }
-  
+
   .social-link:hover {
     color: #fff;
   }
-  
+
   .footer-heading {
     margin-bottom: 1.25rem;
     font-weight: 600;
   }
-  
+
   .copyrights-text {
     font-weight: 300;
     font-size: 0.9rem;
   }
-  
+
   .copyrights {
     margin-top: 2rem;
     padding: 1.25rem 0;
   }
-  

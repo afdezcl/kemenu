@@ -18,11 +18,11 @@ app:
   admin:
     username: admin@example.com
     password: admin
-  sendgrid: dev_test
+  sendgrid: ${KEMENU_REGISTER_EMAILS}
   cloudinary:
-    key: dev_test
-    secret: dev_test
-    cloudname: dev_test
+    key: ${CLOUDINARY_KEY}
+    secret: ${CLOUDINARY_SECRET}
+    cloudname: ${CLOUDINARY_CLOUDNAME}
 
 spring:
   jmx:
@@ -80,5 +80,5 @@ spring:
       uri: mongodb://${MONGO_DB_USER_KEMENU}:${MONGO_DB_PWD_KEMENU}@localhost:27017/${MONGO_DB_NAME_KEMENU}
   servlet:
     multipart:
-      max-file-size: 7MB
-      max-request-size: 7MB
+      max-file-size: 18MB
+      max-request-size: 18MB
