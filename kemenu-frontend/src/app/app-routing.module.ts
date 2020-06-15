@@ -7,10 +7,9 @@ import { MenuComponent } from './components/menu/menu.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { AuthGuard } from '@ui-controls/guards/auth/auth.guard';
 import { ProfileComponent } from './components/profile/profile.component';
-import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
 import { EditInformationComponent } from './components/profile/edit-information/edit-information.component';
-import {ChangePasswordComponent} from './components/changePassword/changePassword.component';
-import {AboutUsComponent} from './components/aboutUs/aboutUs.component';
+import { ChangePasswordComponent } from './components/changePassword/changePassword.component';
+import { AboutUsComponent } from './components/aboutUs/aboutUs.component';
 
 export const routes: Routes = [
 
@@ -18,10 +17,10 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'forgotPassword', component: ForgotPasswordComponent },
   { path: 'changePassword', component: ChangePasswordComponent },
-  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard]  },
+  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'profile/new-password', component: ChangePasswordComponent,  canActivate: [AuthGuard] },
-  { path: 'profile/edit', component: EditInformationComponent,  canActivate: [AuthGuard] },
+  { path: 'profile/new-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
+  { path: 'profile/edit', component: EditInformationComponent, canActivate: [AuthGuard] },
   { path: 'demo', component: CustomerComponent },
   { path: 'show', component: CustomerComponent },
   { path: 'aboutUs', component: AboutUsComponent },
