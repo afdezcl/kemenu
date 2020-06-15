@@ -5,11 +5,12 @@ import { AuthGuard } from '@ui-controls/guards/auth/auth.guard';
 import { ProfileComponent } from './profile.component';
 
 export const routes: Routes = [
-  { path: 'profile', 
-    component: ProfileComponent,  
+  {
+    path: 'profile',
+    component: ProfileComponent,
     children: [
-        { path: 'new-password', component: ChangePasswordComponent,  canActivate: [AuthGuard] }
-    ] 
+      { path: 'new-password', component: ChangePasswordComponent, canActivate: [AuthGuard] }
+    ]
   }
 ];
 

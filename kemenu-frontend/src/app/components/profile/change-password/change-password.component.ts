@@ -5,7 +5,7 @@ import { EditProfileService } from '@services/edit-profile/edit-profile.service'
 import { AuthenticationService } from '@services/authentication/authentication.service';
 import { ChangePassword } from '@models/edit-profile/changePassword.model';
 import { AlertsService } from '@services/alerts/alerts.service';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-change-password',
@@ -18,9 +18,9 @@ export class ChangePasswordComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private formBuilder: FormBuilder,
-    private _location: Location,
-    private _editProfile: EditProfileService,
-    private _auth: AuthenticationService,
+    private location: Location,
+    private editProfile: EditProfileService,
+    private auth: AuthenticationService,
     private alertService: AlertsService,
   ) { }
 
@@ -42,12 +42,12 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   goBack() {
-    this._location.back();
+    this.location.back();
   }
 
-  onSubmit(){
+  onSubmit() {
     const changePassword: ChangePassword = {
-      email: this._auth.getUserEmail(),
+      email: this.auth.getUserEmail(),
       password: this.form.password.value,
       repeatedPassword: this.form.confirmPassword.value,
     };
@@ -55,12 +55,12 @@ export class ChangePasswordComponent implements OnInit {
 
   }
 
-  changePasswordAttempt(changePassword: ChangePassword){
+  changePasswordAttempt(changePassword: ChangePassword) {
     this.alertService.clear();
-    this._editProfile.changePassword(changePassword)
-        .subscribe(() => {
-          this.alertService.success(this.translate.instant('Success Change Password'));          
-        });
+    this.editProfile.changePassword(changePassword)
+      .subscribe(() => {
+        this.alertService.success(this.translate.instant('Success Change Password'));
+      });
 
     this.changePassword.reset();
   }

@@ -4,5 +4,5 @@ export class UpdateBusiness {
         public info: string,
         public name: string,
         public phone: string
-    ){}
+    ) { }
 }

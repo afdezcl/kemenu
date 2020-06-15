@@ -19,9 +19,9 @@ export class EditInformationComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private formBuilder: FormBuilder,
-    private _location: Location,
-    private _editProfile: EditProfileService,
-    private _auth: AuthenticationService,
+    private location: Location,
+    private editProfile: EditProfileService,
+    private auth: AuthenticationService,
     private alertService: AlertsService,
   ) { }
 
@@ -38,7 +38,7 @@ export class EditInformationComponent implements OnInit {
 
 
   goBack() {
-    this._location.back();
+    this.location.back();
   }
 
   onSubmit() {
@@ -53,10 +53,10 @@ export class EditInformationComponent implements OnInit {
   }
 
   updateInformationAttempt(updateBusiness: UpdateBusiness) {
-    const businessId: string = ''
+    const businessId = '';
 
     this.alertService.clear();
-    this._editProfile.updateBusiness(updateBusiness, businessId)
+    this.editProfile.updateBusiness(updateBusiness, businessId)
       .subscribe(() => {
         this.alertService.success(this.translate.instant('Success Change Password'));
       });

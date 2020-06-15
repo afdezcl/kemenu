@@ -3,5 +3,5 @@ export class ChangePassword {
         public password: string,
         public repeatedPassword: string,
         public email: string
-    ){}
+    ) { }
 }

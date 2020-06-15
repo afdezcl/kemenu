@@ -17,7 +17,7 @@ import { EditInformationComponent } from './edit-information/edit-information.co
     ReactiveFormsModule,
     AlertModule.forRoot(),
     RouterModule,
-    TranslateModule, 
+    TranslateModule,
     DialogModule,
     ProfileRoutingModule
   ],
