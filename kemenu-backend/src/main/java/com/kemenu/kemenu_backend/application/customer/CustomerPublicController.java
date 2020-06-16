@@ -33,6 +33,7 @@ class CustomerPublicController {
 
         Cookie cookie = new Cookie("show_menu", Base64.getEncoder().encodeToString(shortUrlId.getBytes()));
         response.addCookie(cookie);
+        log.info("Showing {} shortUrl", shortUrlId);
         return "forward:/index.html";
     }
 }
