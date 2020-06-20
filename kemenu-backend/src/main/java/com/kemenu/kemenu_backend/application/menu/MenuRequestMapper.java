@@ -8,7 +8,7 @@ import static org.mapstruct.InjectionStrategy.CONSTRUCTOR;
 import static org.mapstruct.NullValueCheckStrategy.ALWAYS;
 
 @Mapper(componentModel = "spring", nullValueCheckStrategy = ALWAYS, injectionStrategy = CONSTRUCTOR)
-public interface MenuMapper2 {
+public interface MenuRequestMapper {
     @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID().toString())")
     Menu from(CreateMenuRequest createMenuRequest);
 

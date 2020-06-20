@@ -20,12 +20,12 @@ class MenuWebController {
 
     private final JWTService jwtService;
     private final MenuService menuService;
-    private final MenuMapper2 menuMapper2;
+    private final MenuRequestMapper menuRequestMapper;
 
     @PostMapping("/menus")
     ResponseEntity<CreateMenuResponse> create(@RequestHeader(value = "Authorization") String token, @RequestBody @Valid CreateMenuRequest createMenuRequest) {
         String customerEmail = jwtService.decodeAccessToken(token).getSubject();
-        return menuService.create(customerEmail, createMenuRequest.getBusinessId(), menuMapper2.from(createMenuRequest))
+        return menuService.create(customerEmail, createMenuRequest.getBusinessId(), menuRequestMapper.from(createMenuRequest))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
