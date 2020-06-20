@@ -4,12 +4,13 @@ import com.kemenu.kemenu_backend.application.allergen.AllergenData;
 import com.kemenu.kemenu_backend.domain.model.Allergen;
 import com.kemenu.kemenu_backend.domain.model.Dish;
 import com.kemenu.kemenu_backend.domain.model.MenuSection;
-import static java.util.Objects.isNull;
-import static java.util.stream.Collectors.toList;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
+import static java.util.Objects.isNull;
+import static java.util.stream.Collectors.toList;
 
 @Component
 @AllArgsConstructor
