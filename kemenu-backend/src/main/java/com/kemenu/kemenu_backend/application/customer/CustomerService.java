@@ -1,6 +1,6 @@
 package com.kemenu.kemenu_backend.application.customer;
 
-import com.kemenu.kemenu_backend.application.business.BusinessMapper;
+import com.kemenu.kemenu_backend.application.business.BusinessRequestMapper;
 import com.kemenu.kemenu_backend.application.business.UpdateBusinessRequest;
 import com.kemenu.kemenu_backend.application.email.EmailEventFactory;
 import com.kemenu.kemenu_backend.application.menu.MenuMapper;
@@ -10,13 +10,14 @@ import com.kemenu.kemenu_backend.domain.model.Business;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
-import static java.util.stream.Collectors.toList;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @AllArgsConstructor
@@ -29,7 +30,7 @@ public class CustomerService {
     private final ShortUrlRepository shortUrlRepository;
     private final MenuMapper menuMapper;
     private final PasswordEncoder passwordEncoder;
-    private final BusinessMapper businessMapper;
+    private final BusinessRequestMapper businessRequestMapper;
 
     public String create(CustomerRequest customerRequest) {
         Customer customer = customerMapper.from(customerRequest);
@@ -82,7 +83,7 @@ public class CustomerService {
         return customerRepository.findByEmail(email)
                 .flatMap(c -> c.findBusiness(businessId)
                         .flatMap(b -> {
-                            Business newBusiness = businessMapper.from(businessId, b.getMenus(), updateBusinessRequest);
+                            Business newBusiness = businessRequestMapper.from(businessId, b.getMenus(), updateBusinessRequest);
                             return c.changeBusiness(newBusiness);
                         })
                         .flatMap(updatedBusinessId -> Optional.of(customerRepository.save(c)))
