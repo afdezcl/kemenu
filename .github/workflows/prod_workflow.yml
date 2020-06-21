@@ -16,8 +16,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 14
-      - name: See branch
-        run: echo ${{ github.ref }}
+      - name: Test frontend
+        run: mvn -B clean install -pl :kemenu-frontend
       - name: Test backend
         run: mvn -B clean test -pl :kemenu-backend
 
