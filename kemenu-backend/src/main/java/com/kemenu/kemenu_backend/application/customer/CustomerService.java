@@ -1,6 +1,6 @@
 package com.kemenu.kemenu_backend.application.customer;
 
-import com.kemenu.kemenu_backend.application.business.BusinessMapper;
+import com.kemenu.kemenu_backend.application.business.BusinessRequestMapper;
 import com.kemenu.kemenu_backend.application.business.UpdateBusinessRequest;
 import com.kemenu.kemenu_backend.application.email.EmailEventFactory;
 import com.kemenu.kemenu_backend.application.menu.MenuMapper;
@@ -30,7 +30,7 @@ public class CustomerService {
     private final ShortUrlRepository shortUrlRepository;
     private final MenuMapper menuMapper;
     private final PasswordEncoder passwordEncoder;
-    private final BusinessMapper businessMapper;
+    private final BusinessRequestMapper businessRequestMapper;
 
     public String create(CustomerRequest customerRequest) {
         Customer customer = customerMapper.from(customerRequest);
@@ -83,7 +83,7 @@ public class CustomerService {
         return customerRepository.findByEmail(email)
                 .flatMap(c -> c.findBusiness(businessId)
                         .flatMap(b -> {
-                            Business newBusiness = businessMapper.from(businessId, b.getMenus(), updateBusinessRequest);
+                            Business newBusiness = businessRequestMapper.from(businessId, b.getMenus(), updateBusinessRequest);
                             return c.changeBusiness(newBusiness);
                         })
                         .flatMap(updatedBusinessId -> Optional.of(customerRepository.save(c)))

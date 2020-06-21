@@ -1,6 +1,7 @@
 package com.kemenu.kemenu_backend.domain.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
@@ -12,6 +13,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Getter
+@Builder
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @AllArgsConstructor(onConstructor = @__(@PersistenceConstructor))
 public class Business {
