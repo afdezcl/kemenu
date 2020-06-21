@@ -16,8 +16,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 14
-      - name: Test frontend
-        run: mvn -B clean install -pl :kemenu-frontend
+      - name: See branch
+        run: echo ${{ github.ref }}
       - name: Test backend
         run: mvn -B clean test -pl :kemenu-backend
 
@@ -33,10 +33,16 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
+      - name: Run docker-compose
+        run: docker-compose up -d
       - name: Set up JDK 14
         uses: actions/setup-java@v1
         with:
           java-version: 14
+      - name: Build frontend
+        run: mvn -B clean install -pl :kemenu-frontend
+      - name: Test backend
+        run: mvn -B clean test package -pl :kemenu-backend
       - name: Create version
         run: |
           APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
