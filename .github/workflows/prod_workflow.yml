@@ -41,7 +41,7 @@ jobs:
           java-version: 14
       - name: Build frontend
         run: mvn -B clean install -pl :kemenu-frontend
-      - name: Test backend
+      - name: Build backend
         run: mvn -B clean test package -pl :kemenu-backend
       - name: Create version
         run: |
