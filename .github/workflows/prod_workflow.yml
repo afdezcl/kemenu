@@ -16,8 +16,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 14
-      - name: Test frontend
-        run: mvn -B clean install -pl :kemenu-frontend
+      - name: Wait 5s for docker
+        run: sleep 5
       - name: Test backend
         run: mvn -B clean test -pl :kemenu-backend
 
