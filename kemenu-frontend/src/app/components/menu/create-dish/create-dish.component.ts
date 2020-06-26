@@ -1,8 +1,11 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
-import {BsModalRef} from 'ngx-bootstrap/modal';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {Dish} from '@models/menu/dish.model';
 import {Allergen, AllAllergens, AllergenRequestResponse} from '@models/menu/allergen.model';
+import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
+import {TranslateService} from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-create-dish',
@@ -23,9 +26,12 @@ export class CreateDishComponent implements OnInit {
   public allergensListToShowOnRight: Allergen[];
   public showAllergens = false;
   public imageUrl = '';
+  public modalReference: BsModalRef;
 
   constructor(
+    private modalService: BsModalService,
     private formBuilder: FormBuilder,
+    private translate: TranslateService,
     public bsModalRef: BsModalRef
   ) {
   }
@@ -66,6 +72,20 @@ export class CreateDishComponent implements OnInit {
 
   activeShowAllergens() {
     this.showAllergens = !this.showAllergens;
+  }
+
+  removeImage() {
+    const initialState = {
+      title: this.translate.instant('Delete dish image'),
+      message: this.translate.instant('Delete dish image description')
+    };
+
+    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
+    this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
+      if (canDelete) {
+        this.imageUrl = '';
+      }
+    });
   }
 
   changeAllergens(idAllergen: string) {

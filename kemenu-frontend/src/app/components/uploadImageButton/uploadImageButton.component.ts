@@ -6,12 +6,13 @@ import {AuthenticationService} from '@services/authentication/authentication.ser
 @Component({
   selector: 'app-upload-image-button',
   templateUrl: './uploadImageButton.component.html',
-  styleUrls: ['./uploadImageButton.component.css']
+  styleUrls: ['./uploadImageButton.component.scss']
 })
 export class UploadImageButtonComponent implements OnInit {
 
   @Input() buttonText: string;
   @Input() resized = false;
+  @Input() firstMenu: boolean;
   @Output() uploadFileEvent = new EventEmitter<any>();
 
   uploadingFile = false;

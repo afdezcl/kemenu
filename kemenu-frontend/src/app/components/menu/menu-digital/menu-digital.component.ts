@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Menu} from '@models/menu/menu.model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-import {CreateSectionComponent} from './create-section/create-section.component';
+import {CreateSectionComponent} from '../create-section/create-section.component';
 import {Section} from '@models/menu/section.model';
-import {CreateDishComponent} from './create-dish/create-dish.component';
+import {CreateDishComponent} from '../create-dish/create-dish.component';
 import {Dish} from '@models/menu/dish.model';
 import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 import {TranslateService} from '@ngx-translate/core';
-import {ShareQrComponent} from './share-qr/share-qr.component';
 import {MenuService} from '@services/menu/menu.service';
 import {AuthenticationService} from '@services/authentication/authentication.service';
 import {Allergen, AllAllergens} from '@models/menu/allergen.model';
@@ -16,11 +15,11 @@ import {Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  selector: 'app-menu-digital',
+  templateUrl: './menu-digital.component.html',
+  styleUrls: ['./menu-digital.component.scss']
 })
-export class MenuComponent implements OnInit {
+export class MenuDigitalComponent implements OnInit {
 
   public menu: Menu;
   public modalReference: BsModalRef;
@@ -156,28 +155,6 @@ export class MenuComponent implements OnInit {
       this.matchAllergens();
       this.onSaveMenu();
     });
-  }
-
-  removeMenuImage() {
-    const initialState = {
-      title: this.translate.instant('Delete Menu Image title'),
-      message: this.translate.instant('Delete Menu Image description')
-    };
-
-    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
-    this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
-      if (canDelete) {
-        this.menu.imageUrl = '';
-        this.onSaveMenu();
-      }
-    });
-  }
-
-  openShareQR() {
-    const initialState = {
-      shortUrlId: this.menu.shortUrlId
-    };
-    this.modalReference = this.modalService.show(ShareQrComponent, {initialState});
   }
 
   onSaveMenu() {

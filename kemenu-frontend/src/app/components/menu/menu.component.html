@@ -1,90 +1,42 @@
 <section class="create-menu">
+
+  <div class="row section-header align-items-center" *ngIf="menu.sections.length > 0 || menu.imageUrl">
+    <div class="col-sm-12 text-center">
+      <button type="submit" class="btn btn-primary mt-3" (click)="openShareQR()" [disabled]="!menu.shortUrlId || thereIsChange">
+        {{ 'Get QR and share' | translate }}<i class="fas fa-qrcode pl-2"></i></button>
+    </div>
+  </div>
+
   <div class="container">
-    <div class="row text-center mt-5" *ngIf="menu.sections.length === 0">
-      <div class="col mt-5">
+    <div class="row text-center card-buttons-container" *ngIf="menu.sections.length === 0 && !menu.imageUrl">
+      <div class="col-lg-5 col-md-12 card">
+        <img src="../../../assets/images/photo_sharing.svg" alt="no-sections" class="img-fluid no-sections-image">
+        <h5 class="font-weight-bold">{{ 'Upload Menu Image' | translate }}</h5>
+        <span class="text-muted">{{ 'WarningMenuImage' | translate }}</span>
+        <app-upload-image-button firstMenu="true"(uploadFileEvent)="handleFileUpload($event)"></app-upload-image-button>
+      </div>
+      <div class="col-lg-2 col-md-12 or-container">
+        <h5 class="font-weight-bold">{{ 'Or' | translate }}</h5>
+      </div>
+      <div class="col-lg-5 col-md-12 card" (click)="openCreateSection()">
         <img src="../../../assets/images/no-sections.svg" alt="no-sections" class="img-fluid no-sections-image">
-        <br>
-        <h5 class="font-weight-bold">{{ 'Sections menu' | translate }}</h5>
-        <span class="text-muted">{{ 'Warning no dishes' | translate }}</span>
-        <br>
-        <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()">{{ 'Create Section' | translate }}</button>
+        <h5 class="font-weight-bold">{{ 'CreateDigitalFirstMenu' | translate }}</h5>
+        <span class="text-muted">{{ 'WarningFirstMenu' | translate }}</span>
       </div>
     </div>
 
-    <div class="row" *ngIf="menu.sections.length > 0">
-      <div class="col-sm-2 text-lg-center text-center">
-          <app-upload-image-button
-            buttonText="Upload Menu Image"
-            (uploadFileEvent)="handleFileUpload($event)"></app-upload-image-button>
+    <div class="row mt-3 mb-lg-5" *ngIf="menu.sections.length > 0 || menu.imageUrl">
+      <div class="col-12 p-0">
+        <app-menu-image></app-menu-image>
       </div>
-      <div *ngIf="menu.imageUrl" class="col-sm-2 text-lg-center text-center">
-        <img src="{{menu.imageUrl}}" style="width: 100px;" class="img-thumbnail" alt="Responsive image">
+
+      <div class="col-12 p-0 mt-2">
+        <app-menu-digital></app-menu-digital>
       </div>
-      <div class="col-sm-2 text-lg-left text-center">
-        <button type="submit" class="btn btn-primary mt-3" (click)="openCreateSection()">
-          {{ 'Create Section' | translate }}<i class="fas fa-list pl-2"></i></button>
-      </div>
-      <div class="col-sm-4 text-center">
-        <button type="submit" class="btn btn-primary mt-3" (click)="openShareQR()" [disabled]="!menu.shortUrlId || thereIsChange">
-          {{ 'Get QR and share' | translate }}<i class="fas fa-qrcode pl-2"></i></button>
-      </div>
-      <div class="col-sm-2 text-lg-right text-center">
+
+      <div class="save-button">
         <button type="submit" class="btn btn-primary mt-3" (click)="onSaveMenu()" [disabled]="!thereIsChange">
-          {{ 'Save' | translate }} <i class="fas fa-save pl-1"></i></button>
-      </div>
-    </div>
-
-    <div class="row mb-lg-5" *ngIf="menu.sections.length > 0">
-      <div class="col mt-5">
-        <accordion [isAnimated]="true">
-          <div *ngFor="let section of menu.sections; let sectionCounter = index;">
-
-            <accordion-group>
-              <button type="submit" class="btn btn-link clearfix" accordion-heading>
-                <div class="pull-left float-left">{{section.name}}</div>
-              </button>
-              <button type="submit" class="btn btn-link clearfix float-right pull-right delete-section" accordion-heading (click)="deleteSection(section)">
-                <i class="fas fa-trash"></i>
-              </button>
-              <button type="submit" class="btn btn-link clearfix float-right pull-right edit-section" accordion-heading (click)="editSection(section, sectionCounter)">
-                <i class="fas fa-edit"></i>
-              </button>
-
-
-              <div class="dishes mt-2" *ngFor="let dish of section.dishes; let dishCounter = index;" >
-                <div class="row">
-                  <div class="col-sm-8 col-8 text-left">
-                    <span class="dish-title">{{dish.name}}</span>
-                  </div>
-                  <div class="col-sm-4 col-4 text-right">
-                    <span class="dish-price">{{dish.price}}€</span>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-7">
-                    <small class="dish-description text-muted">{{dish.description}}</small>
-                  </div>
-                  <div class="col-5 text-right">
-                    <button type="submit" class="btn btn-link edit-dish" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                    <button type="submit" class="btn btn-link delete-dish" accordion-heading (click)="deleteDish(dish, sectionCounter)">
-                      <i class="fas fa-trash"></i>
-                    </button>
-                  </div>
-                </div>
-                <div class="row">
-                  <div *ngFor="let allergen of dish.allergens">
-                    <img src="../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen" class="icons-allergens">
-                  </div>
-                </div>
-              </div>
-              <button type="submit" class="btn btn-primary mt-3 add-dish" (click)="openCreateDish(sectionCounter)"><i class="fas fa-plus"></i></button>
-            </accordion-group>
-
-
-          </div>
-        </accordion>
+          <span>{{ 'Save' | translate }}</span><i class="fas fa-save pl-1"></i></button>
       </div>
     </div>
 

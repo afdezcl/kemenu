@@ -1,0 +1,66 @@
+<accordion class="accordion-custom accordion-child" [isAnimated]="true">
+  <div>
+    <accordion-group>
+      <button type="submit" class="btn btn-link clearfix" accordion-heading>
+        <i class="fas fa-book-open float-left pb-2 d-none d-md-inline-block"></i><div class="pull-left float-left">{{ 'Digital Menu' | translate }}</div>
+      </button>
+      <button type="submit" class="btn btn-link accordion-heading-button" accordion-heading  (click)="openCreateSection()">
+        <i class="fas pl-2 fa-plus d-none d-md-inline-block pb-2"></i><span>{{ 'Create Section' | translate }}</span>
+      </button>
+
+      <accordion class="accordion-custom section" cdkDropList [isAnimated]="true" (cdkDropListDropped)="dropSection($event)">
+        <div *ngFor="let section of menu.sections; let sectionCounter = index;" cdkDrag>
+          <accordion-group>
+            <button class="col-1 sort clearfix" accordion-heading cdkDragHandle>
+              <i class="fas fa-bars float-left"></i>
+            </button>
+            <button type="submit" class="col-9 col-md-10 clearfix" accordion-heading>
+              <div class="pull-left float-left">{{section.name}}</div>
+            </button>
+            <button type="submit" class="col-1 accordion-heading-button text-right" accordion-heading (click)="editSection(section, sectionCounter)">
+              <i class="fas fa-edit"></i>
+            </button>
+
+            <div class="dishes mt-3" *ngFor="let dish of section.dishes; let dishCounter = index;" >
+            <div class="row">
+              <div (click)="editDish(dish, sectionCounter, dishCounter)" class="col-sm-8 col-8 text-left">
+                <span class="dish-title">{{dish.name}}</span>
+              </div>
+              <div class="col-sm-4 col-4 text-right">
+                <span class="dish-price">{{dish.price}}€</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-7">
+                <small class="dish-description text-muted">{{dish.description}}</small>
+              </div>
+              <div class="col-5 text-right">
+                <button type="submit" class="btn btn-link edit-dish" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button type="submit" class="btn btn-link delete-dish" accordion-heading (click)="deleteDish(dish, sectionCounter)">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div *ngFor="let allergen of dish.allergens">
+                <img src="../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen" class="icons-allergens">
+              </div>
+            </div>
+          </div>
+
+            <button type="submit" class="btn btn-secondary mt-3 section-inner-button left delete-section" (click)="deleteSection(section)">
+              <i class="fas fa-trash"></i><span class="d-none d-sm-inline-block">{{ 'Delete section' | translate }}</span>
+            </button>
+
+            <button type="submit" class="btn btn-secondary mt-3 section-inner-button add-dish float-right" (click)="openCreateDish(sectionCounter)">
+              <i class="fas fa-plus"></i><span class="d-none d-sm-inline-block">{{ 'Create dish' | translate }}</span>
+            </button>
+
+          </accordion-group>
+        </div>
+      </accordion>
+    </accordion-group>
+  </div>
+</accordion>

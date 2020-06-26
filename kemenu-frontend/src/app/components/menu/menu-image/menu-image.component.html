@@ -1,0 +1,18 @@
+<accordion class="accordion-custom" [isAnimated]="true">
+    <accordion-group>
+      <button type="submit" class="btn btn-link clearfix" accordion-heading>
+        <i class="fas fa-file-image float-left d-none d-md-inline-block"></i><div class="pull-left float-left">{{ 'Menu Image' | translate }}</div>
+      </button>
+      <app-upload-image-button class="btn btn-link clearfix" accordion-heading
+        buttonText="{{ menu.imageUrl ? 'Change Image' : 'Upload Menu Image' | translate }}"
+        (uploadFileEvent)="handleFileUpload($event)"></app-upload-image-button>
+
+      <div *ngIf="menu.imageUrl" class=" col-sm-auto text-lg-center text-center">
+        <button class="btn btn-link delete-menu-image" accordion-heading (click)="removeMenuImage()">
+          <i class="fas fa-times-circle"></i>
+        </button>
+        <img src="{{menu.imageUrl}}" class="img-thumbnail" alt="Responsive image">
+      </div>
+
+    </accordion-group>
+</accordion>
