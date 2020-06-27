@@ -31,6 +31,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '@environments/environment';
 import { ProfileModule } from './components/profile/profile.module';
+import { UploadImageButtonModule } from './components/uploadImageButton/uploadImageButton.module';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -66,6 +67,7 @@ export function createTranslateLoader(http: HttpClient) {
     MenuModule,
     AboutUsModule,
     CustomerModule,
+    UploadImageButtonModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),

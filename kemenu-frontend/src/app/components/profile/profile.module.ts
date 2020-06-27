@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { DialogModule } from '@ui-controls/dialogs/dialog.module';
 import { EditInformationComponent } from './edit-information/edit-information.component';
+import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { EditInformationComponent } from './edit-information/edit-information.co
     AlertModule.forRoot(),
     RouterModule,
     TranslateModule,
-    DialogModule
+    DialogModule,
+    UploadImageButtonModule
   ],
   declarations: [
     ProfileComponent,

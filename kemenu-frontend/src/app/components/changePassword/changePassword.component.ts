@@ -1,11 +1,11 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {FormGroup, Validators, FormBuilder} from '@angular/forms';
-import {AlertsService} from '@services/alerts/alerts.service';
-import {Subscription} from 'rxjs';
-import {ReCaptchaV3Service} from 'ng-recaptcha';
-import {AuthenticationService} from '@services/authentication/authentication.service';
-import {TranslateService} from '@ngx-translate/core';
-import {ChangePassword, ForgotPasswordId} from '@models/auth/changePassword.interface';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AlertsService } from '@services/alerts/alerts.service';
+import { Subscription } from 'rxjs';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { AuthenticationService } from '@services/authentication/authentication.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ChangePassword, ForgotPasswordId } from '@models/auth/changePassword.interface';
 
 @Component({
   selector: 'app-change-password',
@@ -34,7 +34,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     this.changePasswordForm = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
       repeatedPassword: ['']
-    }, {validators: this.checkPasswords});
+    }, { validators: this.checkPasswords });
   }
 
   getDataToBuildForgotPassword() {
@@ -66,11 +66,11 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     this.alertService.clear();
     this.authService.changePassword(this.forgotPasswordId, changePassword)
       .subscribe(() => {
-          this.changePasswordForm.reset();
-          localStorage.removeItem('FORGOT-PASSWORD-EMAIL');
-          localStorage.removeItem('forgotPasswordId');
-          this.alertService.success(this.translate.instant('ConfirmPasswordChanged'));
-        },
+        this.changePasswordForm.reset();
+        localStorage.removeItem('FORGOT-PASSWORD-EMAIL');
+        localStorage.removeItem('forgotPasswordId');
+        this.alertService.success(this.translate.instant('ConfirmPasswordChanged'));
+      },
         (error) => {
           this.alertService.error(this.translate.instant('ErrorChangingPassword'));
         }
@@ -82,7 +82,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     const password = form.controls.password.value;
     const repeatedPassword = form.controls.repeatedPassword.value;
 
-    return password === repeatedPassword ? null : {notSame: true};
+    return password === repeatedPassword ? null : { notSame: true };
   }
 
   public ngOnDestroy() {

@@ -21,6 +21,9 @@
                 <div class="text-center">
                   <h4 class="card-title mb-4 mt-3">{{ 'Edit Information' | translate }}</h4>
                 </div>
+                <div class="text-center mb-4">
+                  <app-upload-image-button buttonText="Upload business image"></app-upload-image-button>
+                </div>
                 <form [formGroup]="editInformationForm" (submit)="onSubmit()">
                   <div class="form-group">
                     <span class="icon-input">
