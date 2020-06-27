@@ -6,6 +6,7 @@ import { AuthenticationService } from '@services/authentication/authentication.s
 import { AlertsService } from '@services/alerts/alerts.service';
 import { TranslateService } from '@ngx-translate/core';
 import { UpdateBusiness } from '@models/edit-profile/updateBusiness.model';
+import { MenuService } from '@services/menu/menu.service';
 
 @Component({
   selector: 'app-edit-information',
@@ -15,6 +16,10 @@ import { UpdateBusiness } from '@models/edit-profile/updateBusiness.model';
 export class EditInformationComponent implements OnInit {
 
   public editInformationForm: FormGroup;
+  public businessImageURL = '';
+  public businessName = '';
+  public info = '';
+  public phone: number;
 
   constructor(
     private translate: TranslateService,
@@ -23,19 +28,39 @@ export class EditInformationComponent implements OnInit {
     private editProfile: EditProfileService,
     private auth: AuthenticationService,
     private alertService: AlertsService,
+    private menuService: MenuService
   ) { }
 
   ngOnInit() {
+    this.getBusinessData();
     this.editInformationForm = this.formBuilder.group({
       businessName: ['', Validators.required],
       phone: [''],
       info: ['']
     });
   }
+
+  getBusinessData() {
+    this.menuService.getMenu(this.auth.getUserEmail())
+      .subscribe((response: any) => {
+        this.businessName = response.businesses[0].name;
+        this.info = response.businesses[0].info;
+        this.phone = response.businesses[0].phone;
+        this.fillForm();
+      });
+  }
+
+  fillForm() {
+    this.editInformationForm = this.formBuilder.group({
+      businessName: [this.businessName, Validators.required],
+      phone: [this.phone],
+      info: [this.info]
+    });
+  }
+
   get form() {
     return this.editInformationForm.controls;
   }
-
 
   goBack() {
     this.location.back();
@@ -61,6 +86,12 @@ export class EditInformationComponent implements OnInit {
         this.alertService.success(this.translate.instant('Success Change Password'));
       });
 
+  }
+
+  handleFileUpload(event) {
+    if (event) {
+      this.businessImageURL = event.url;
+    }
   }
 
 }
