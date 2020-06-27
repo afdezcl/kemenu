@@ -19,7 +19,8 @@ export class EditInformationComponent implements OnInit {
   public businessImageURL = '';
   public businessName = '';
   public info = '';
-  public phone: number;
+  public phone = '';
+  public businessId = '';
 
   constructor(
     private translate: TranslateService,
@@ -46,6 +47,7 @@ export class EditInformationComponent implements OnInit {
         this.businessName = response.businesses[0].name;
         this.info = response.businesses[0].info;
         this.phone = response.businesses[0].phone;
+        this.businessId = response.businesses[0].id;
         this.fillForm();
       });
   }
@@ -68,20 +70,17 @@ export class EditInformationComponent implements OnInit {
 
   onSubmit() {
     const updateBusiness: UpdateBusiness = {
-      imageURL: '',
-      info: '',
-      name: '',
-      phone: ''
+      imageURL: this.businessImageURL,
+      info: this.info,
+      name: this.businessName,
+      phone: this.phone
     };
     this.updateInformationAttempt(updateBusiness);
-
   }
 
   updateInformationAttempt(updateBusiness: UpdateBusiness) {
-    const businessId = '';
-
     this.alertService.clear();
-    this.editProfile.updateBusiness(updateBusiness, businessId)
+    this.editProfile.updateBusiness(updateBusiness, this.businessId)
       .subscribe(() => {
         this.alertService.success(this.translate.instant('Success Change Password'));
       });
