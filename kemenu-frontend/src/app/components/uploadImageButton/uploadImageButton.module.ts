@@ -13,7 +13,7 @@ import { UploadImageButtonComponent } from './uploadImageButton.component';
     UploadImageButtonComponent
   ],
   exports: [
-    UploadImageButtonComponent  
+    UploadImageButtonComponent
   ]
 })
 export class UploadImageButtonModule { }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-customizeMenu',
+  selector: 'app-customize-menu',
   templateUrl: './customizeMenu.component.html',
   styleUrls: ['./customizeMenu.component.css']
 })
