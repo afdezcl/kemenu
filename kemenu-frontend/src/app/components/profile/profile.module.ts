@@ -8,6 +8,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { DialogModule } from '@ui-controls/dialogs/dialog.module';
 import { EditInformationComponent } from './edit-information/edit-information.component';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
+import { CustomizeMenuComponent } from './customizeMenu/customizeMenu.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.
   ],
   declarations: [
     ProfileComponent,
-    EditInformationComponent
+    EditInformationComponent,
+    CustomizeMenuComponent
   ]
 })
 export class ProfileModule { }

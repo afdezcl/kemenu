@@ -1,0 +1,23 @@
+.background {
+    background-color: #e7475e;
+}
+@media (min-width: 991.98px) {
+  .background {
+    height: 100vh !important;
+  }
+}  
+.container, .row {
+    height: 100%;
+}
+
+@media (max-width: 991.98px) {
+  .card {
+      margin-top: 100px;
+  }
+}
+
+.go-back {
+  margin-top: -50px;
+  margin-left: -50px;
+}
+
