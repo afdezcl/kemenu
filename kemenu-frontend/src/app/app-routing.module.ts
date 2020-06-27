@@ -7,7 +7,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { AuthGuard } from '@ui-controls/guards/auth/auth.guard';
 import { ProfileComponent } from './components/profile/profile.component';
-import { ChangePasswordComponent } from './components/profile/change-password/change-password.component';
+import { ChangePasswordComponent } from './components/changePassword/changePassword.component';
 import { EditInformationComponent } from './components/profile/edit-information/edit-information.component';
 import { AboutUsComponent } from './components/aboutUs/aboutUs.component';
 

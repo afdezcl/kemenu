@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileComponent } from './profile.component';
+import { ChangePasswordComponent } from './changePassword.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { DialogModule } from '@ui-controls/dialogs/dialog.module';
-import { EditInformationComponent } from './edit-information/edit-information.component';
 
 @NgModule({
   imports: [
@@ -18,9 +17,8 @@ import { EditInformationComponent } from './edit-information/edit-information.co
     TranslateModule,
     DialogModule
   ],
-  declarations: [
-    ProfileComponent,
-    EditInformationComponent
-  ]
+  declarations: [ChangePasswordComponent]
 })
-export class ProfileModule { }
+
+export class ChangePasswordModule {
+}
