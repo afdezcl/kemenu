@@ -13,9 +13,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class MenuService {
 
-    private final MenuMapper menuMapper;
     private final CustomerRepository customerRepository;
     private final ShortUrlRepository shortUrlRepository;
+    private final MenuRequestMapper menuRequestMapper;
 
     public Optional<CreateMenuResponse> create(String customerEmail, String businessId, Menu menu) {
         return customerRepository.findByEmail(customerEmail)
@@ -43,7 +43,7 @@ public class MenuService {
 
     public Optional<String> update(String customerEmail, UpdateMenuRequest updateMenuRequest) {
         return customerRepository.findByEmail(customerEmail)
-                .flatMap(customer -> customer.changeMenu(updateMenuRequest.getBusinessId(), menuMapper.from(updateMenuRequest))
+                .flatMap(customer -> customer.changeMenu(updateMenuRequest.getBusinessId(), menuRequestMapper.from(updateMenuRequest))
                         .flatMap(menuId -> {
                             customerRepository.save(customer);
                             return Optional.of(menuId);
