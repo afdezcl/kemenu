@@ -60,7 +60,11 @@ public class CloudinaryService {
     }
 
     public String getOptimizedUrl(String url) {
-        String imageName = url.substring(url.lastIndexOf("/") + 1);
+        int lastDashIndex = url.lastIndexOf("/");
+        if (lastDashIndex == -1) {
+            return "";
+        }
+        String imageName = url.substring(lastDashIndex + 1);
         return cloudinary.url().transformation(new Transformation().quality("auto").fetchFormat("auto")).generate(imageName);
     }
 
