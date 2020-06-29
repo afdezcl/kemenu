@@ -1,6 +1,7 @@
 package com.kemenu.kemenu_backend.infrastructure.cloudinary;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.Transformation;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.filters.Canvas;
@@ -35,7 +36,7 @@ public class CloudinaryService {
     }
 
     public String uploadResized(MultipartFile file) {
-        try(ByteArrayOutputStream os = new ByteArrayOutputStream()) {
+        try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
             BufferedImage bufferedImage = Thumbnails.of(file.getInputStream())
                     .size(300, 300)
                     .addFilter(new Canvas(300, 300, Positions.CENTER, false, Color.WHITE))
@@ -58,11 +59,20 @@ public class CloudinaryService {
         }
     }
 
+    public String getOptimizedUrl(String url) {
+        int lastDashIndex = url.lastIndexOf("/");
+        if (lastDashIndex == -1) {
+            return "";
+        }
+        String imageName = url.substring(lastDashIndex + 1);
+        return cloudinary.url().transformation(new Transformation().quality("auto").fetchFormat("auto")).generate(imageName);
+    }
+
     private String uploadToCloudinary(byte[] image) {
         try {
             Map<String, Object> uploadResult = cloudinary.uploader().upload(image, Map.of("resource_type", "auto"));
             CloudinaryUploadResponse uploadResponse = CloudinaryUploadResponse.from(uploadResult);
-            return uploadResponse.getSecureUrl();
+            return getOptimizedUrl(uploadResponse.getSecureUrl());
         } catch (IOException e) {
             log.error("Failure while uploading photo to Cloudinary", e);
             return "";

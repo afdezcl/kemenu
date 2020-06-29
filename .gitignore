@@ -53,6 +53,7 @@ project/project
 dependency-reduced-pom.xml
 node/
 node_modules/
-kemenu-backend/src/main/resources/public/
+kemenu-backend/src/main/resources/public/*
+!kemenu-backend/src/main/resources/public/index.html
 dist/
 *.log

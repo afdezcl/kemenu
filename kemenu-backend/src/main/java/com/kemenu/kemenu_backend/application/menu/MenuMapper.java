@@ -1,42 +1,21 @@
 package com.kemenu.kemenu_backend.application.menu;
 
 import com.kemenu.kemenu_backend.domain.model.Menu;
-import com.kemenu.kemenu_backend.domain.model.MenuSection;
-import static java.util.Objects.isNull;
-import static java.util.stream.Collectors.toList;
+import com.kemenu.kemenu_backend.infrastructure.cloudinary.CloudinaryService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Component
 @AllArgsConstructor
 public class MenuMapper {
 
     private final DishMapper dishMapper;
-
-    public Menu from(CreateMenuRequest createMenuRequest) {
-        List<MenuSection> sections = createMenuRequest.getSections().stream()
-                .map(msd -> MenuSection.builder()
-                        .name(msd.getName())
-                        .dishes(dishMapper.from(msd))
-                        .build()
-                )
-                .collect(toList());
-        return new Menu(sections, isNull(createMenuRequest.getImageUrl()) ? "" : createMenuRequest.getImageUrl());
-    }
-
-    public Menu from(UpdateMenuRequest updateMenuRequest) {
-        Menu menuWithoutId = from(
-                CreateMenuRequest.builder()
-                        .businessId(updateMenuRequest.getBusinessId())
-                        .sections(updateMenuRequest.getSections())
-                        .imageUrl(updateMenuRequest.getImageUrl())
-                        .build()
-        );
-
-        return new Menu(updateMenuRequest.getMenuId(), menuWithoutId.getSections(), menuWithoutId.getImageUrl());
-    }
+    private final CloudinaryService cloudinaryService;
 
     public List<MenuResponse> from(String shortUrlId, String businessName, List<Menu> menus) {
         return menus.stream().map(m -> from(shortUrlId, businessName, m)).collect(toList());
@@ -54,7 +33,7 @@ public class MenuMapper {
                                 .build())
                         .collect(toList())
                 )
-                .imageUrl(menu.getImageUrl())
+                .imageUrl(!StringUtils.isEmpty(menu.getImageUrl()) ? cloudinaryService.getOptimizedUrl(menu.getImageUrl()) : "")
                 .build();
     }
 }
