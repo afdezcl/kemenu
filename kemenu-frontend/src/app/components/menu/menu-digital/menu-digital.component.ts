@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Menu} from '@models/menu/menu.model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-import {CreateSectionComponent} from '../create-section/create-section.component';
+import {CreateSectionComponent} from './create-section/create-section.component';
 import {Section} from '@models/menu/section.model';
-import {CreateDishComponent} from '../create-dish/create-dish.component';
+import {CreateDishComponent} from './create-dish/create-dish.component';
 import {Dish} from '@models/menu/dish.model';
 import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 import {TranslateService} from '@ngx-translate/core';
@@ -20,7 +20,7 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
   styleUrls: ['./menu-digital.component.scss']
 })
 export class MenuDigitalComponent implements OnInit {
-
+  @Input() editMode: boolean;
   public menu: Menu;
   public modalReference: BsModalRef;
   public businessId: string;
@@ -40,6 +40,7 @@ export class MenuDigitalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.editMode = !!this.editMode;
     this.loadMenu();
   }
 
@@ -63,7 +64,9 @@ export class MenuDigitalComponent implements OnInit {
       });
   }
 
-  openCreateSection() {
+  openCreateSection(event) {
+    event.stopPropagation();
+    event.preventDefault();
     this.modalReference = this.modalService.show(CreateSectionComponent);
     this.modalReference.content.messageEvent.subscribe(name => {
       this.addNewSection(name);
@@ -108,6 +111,11 @@ export class MenuDigitalComponent implements OnInit {
   dropSection(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.menu.sections, event.previousIndex, event.currentIndex);
     this.onSaveMenu();
+  }
+
+  getSectionIcon(sectionName: string) {
+    const icon = this.translate.instant(sectionName.substr(0, 3).toUpperCase());
+    return icon ? icon : 'spoon-and-fork';
   }
 
   openCreateDish(sectionIndex: number) {

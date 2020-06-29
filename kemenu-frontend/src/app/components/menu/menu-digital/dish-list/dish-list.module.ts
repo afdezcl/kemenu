@@ -1,18 +1,13 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MenuComponent} from './menu.component';
+import {DishListComponent} from './dish-list.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {AccordionModule} from 'ngx-bootstrap/accordion';
-import {CreateSectionComponent} from './menu-digital/create-section/create-section.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CreateDishComponent} from './menu-digital/create-dish/create-dish.component';
-import {ShareQrComponent} from './share-qr/share-qr.component';
 import {ShareButtonsModule} from 'ngx-sharebuttons/buttons';
 import {ShareIconsModule} from 'ngx-sharebuttons/icons';
 import {HttpClientModule} from '@angular/common/http';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {MenuDigitalModule} from './menu-digital/menu-digital.module';
-import {MenuImageModule} from './menu-image/menu-image.module';
 
 @NgModule({
   imports: [
@@ -26,16 +21,14 @@ import {MenuImageModule} from './menu-image/menu-image.module';
     ShareButtonsModule.withConfig({
       debug: true
     }),
-    ShareIconsModule.forRoot(),
-    MenuDigitalModule,
-    MenuImageModule
+    ShareIconsModule.forRoot()
+  ],
+  exports: [
+    DishListComponent
   ],
   declarations: [
-    MenuComponent,
-    CreateSectionComponent,
-    CreateDishComponent,
-    ShareQrComponent
+    DishListComponent
   ]
 })
-export class MenuModule {
+export class DishListModule {
 }

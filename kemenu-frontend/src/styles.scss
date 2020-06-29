@@ -1,4 +1,5 @@
 @import '~ngx-sharebuttons/themes/modern/modern-light-theme';
+@import 'assets/icons-food/icofont.css';
 /* You can add global styles to this file, and also import other style files */
 /*
 =========================================
@@ -294,9 +295,7 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
     background-color: white;
   }
 
-  .accordion-custom .card-header button,
-  .accordion-custom .card-header app-upload-image-button,
-  .accordion-custom .card-header app-upload-image-button a {
+  .accordion-custom .card-header button {
     color: #333;
     text-transform: none !important;
     background: none;
@@ -314,10 +313,6 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
     z-index: 1;
   }
 
-  .accordion-custom .card-header button i {
-    padding: 4px 10px 0 0;
-  }
-
   .accordion-custom .card-header button[aria-expanded='true'] {
     background: none;
     color: #fff;
@@ -327,8 +322,6 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
     text-decoration: none;
   }
 
-  .accordion-custom .card-header app-upload-image-button,
-  .accordion-custom .card-header app-upload-image-button a,
   .accordion-custom .card-header .accordion-heading-button {
     max-width: 190px;
     padding: 0 1rem;
@@ -336,15 +329,6 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
   }
   .accordion-custom .card-header .accordion-heading-button.sort {
     max-width: 50px;
-  }
-
-  .accordion-custom .card-header app-upload-image-button a {
-    padding: 1.5rem 1rem;
-
-    &:active {
-      color: #333 !important;
-      background-color: transparent !important;
-    }
   }
 
   @media (max-width: 991.98px) {
@@ -382,7 +366,7 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
     padding-top: 0.2rem;
   }
 
-  .accordion-custom.accordion-child {
+  .accordion-custom.accordion-digital {
     .card-body {
       padding: 1em 0 4.7rem 0;
 
@@ -399,8 +383,6 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
       }
 
       .card-header button.sort {
-        padding-right: 1.3rem;
-
         button i {
           padding: 0;
         }
@@ -408,10 +390,13 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
 
       .card-header button,
       .card-header app-upload-image-button,
-      .card-header app-upload-image-button a {
+      .card-header app-upload-image-button a,
+      .card-header .accordion-heading-button {
         padding-top: 1em;
         padding-bottom: 1em;
         background: #fff2f2;
+        color: #333333;
+        z-index: 1;
       }
     }
 
@@ -2104,22 +2089,3 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
   .dropdown-item.disabled, .dropdown-item:disabled {
     color: #6c757d;
   }
-
- // DISHES //
-
- .dishes {
-  background-color: white;
-  color: #e7475e;
-  padding: 15px;
-  border-radius: 5px;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-.dish-title {
-  font-size: 15px !important;
-  font-family: "Poppins", sans-serif;
-}
-.dish-price {
-  font-size: 16px !important;
-  font-family: "Poppins", sans-serif;
-}

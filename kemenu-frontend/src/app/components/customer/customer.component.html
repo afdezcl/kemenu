@@ -21,7 +21,7 @@
           <accordion-group *ngFor="let section of (menu | async)?.sections; let sectionIdx = index;"
                            heading="{{section.name}}" (isOpenChange)="loadImagesWhenOpen($event, sectionIdx)">
             <div *ngFor="let dish of section.dishes; let dishCounter = index;">
-              <div *ngIf="dish.available" class="dishes mt-2">
+              <div *ngIf="dish.available" class="dish mt-2">
                 <div *ngIf="dish.imageUrl" class="row">
                   <div class="col text-center mb-3">
                     <img id="{{'dish-img-' + sectionIdx + '-' + dishCounter}}" [attr.data-urlsrc]="dish.imageUrl" class="img-fluid" alt="Responsive image">
@@ -43,7 +43,7 @@
                 <div class="row">
                   <div *ngFor="let allergen of dish.allergens">
                     <img src="../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen"
-                         class="icons-allergens">
+                         class="icon-allergen">
                   </div>
                 </div>
               </div>

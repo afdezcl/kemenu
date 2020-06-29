@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Menu} from '@models/menu/menu.model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-import {CreateSectionComponent} from './create-section/create-section.component';
+import {CreateSectionComponent} from './menu-digital/create-section/create-section.component';
 import {Section} from '@models/menu/section.model';
-import {CreateDishComponent} from './create-dish/create-dish.component';
+import {CreateDishComponent} from './menu-digital/create-dish/create-dish.component';
 import {Dish} from '@models/menu/dish.model';
 import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 import {TranslateService} from '@ngx-translate/core';

@@ -1,4 +1,4 @@
-<section class="create-menu">
+<section class="menu-section">
 
   <div class="row section-header align-items-center" *ngIf="menu.sections.length > 0 || menu.imageUrl">
     <div class="col-sm-12 text-center">
@@ -31,7 +31,7 @@
       </div>
 
       <div class="col-12 p-0 mt-2">
-        <app-menu-digital></app-menu-digital>
+        <app-menu-digital [editMode]="true"></app-menu-digital>
       </div>
 
       <div class="save-button">

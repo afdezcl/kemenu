@@ -9,12 +9,12 @@
 }
 
 
-.icons-allergens{
+.icon-allergen{
     height: 30px !important;
     width: 30px !important;
 }
 
-.checkbox label:after, 
+.checkbox label:after,
 .radio label:after {
     content: '';
     display: table;

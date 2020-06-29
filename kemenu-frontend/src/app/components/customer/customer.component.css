@@ -4,13 +4,13 @@
 }
 
 @media (max-width: 380px) {
-    .icons-allergens{
+    .icon-allergen{
         margin-top: 10px;
 
     }
 }
 
-.icons-allergens{
+.icon-allergen{
     margin-left: 10px;
     height: 25px !important;
     width: 25px !important;
