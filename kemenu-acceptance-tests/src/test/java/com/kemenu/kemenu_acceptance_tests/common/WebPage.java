@@ -3,7 +3,7 @@ package com.kemenu.kemenu_acceptance_tests.common;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum WebPages {
+public enum WebPage {
   HOME("/");
 
   private final String path;
