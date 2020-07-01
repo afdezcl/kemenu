@@ -5,9 +5,9 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum Button {
-    SIGN_IN("//a[contains(@class,'navbar-btn') and text() = 'Sign in']"),
-    SIGN_IN_SUBMIT("//input[@value = 'Sign in']");
+public enum Input {
+    EMAIL("//input[@type = 'email' and @name = 'email']"),
+    PASSWORD("//input[@type = 'password' and @name = 'password']");
 
     private final String xPath;
 }

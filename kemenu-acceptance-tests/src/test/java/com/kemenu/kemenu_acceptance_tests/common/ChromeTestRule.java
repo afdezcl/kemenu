@@ -18,7 +18,7 @@ public class ChromeTestRule extends ExternalResource {
     ChromeOptions chromeOptions = new ChromeOptions();
     chromeOptions.setHeadless(true);
     chrome = new ChromeDriver(chromeOptions);
-    chrome.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+    chrome.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
   }
 
   @Override
