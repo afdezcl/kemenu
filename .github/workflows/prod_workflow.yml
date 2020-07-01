@@ -16,8 +16,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 14
-      - name: Show chrome
-        run: ls /usr/bin
       - name: Cache maven repository
         uses: actions/cache@v2
         with:

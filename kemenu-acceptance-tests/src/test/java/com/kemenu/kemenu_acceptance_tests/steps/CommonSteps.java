@@ -17,7 +17,7 @@ public class CommonSteps {
 
     @When("clicks on {}")
     public void clicksOn(Button button) {
-        WebElement signInButton = chromeTestRule.getChrome().findElementByClassName(button.getCssClass());
+        WebElement buttonElement = chromeTestRule.getChrome().findElementByXPath(button.getXPath());
         System.out.println("ad");
     }
 }

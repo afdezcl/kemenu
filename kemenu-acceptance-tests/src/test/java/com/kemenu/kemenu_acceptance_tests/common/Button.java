@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum Button {
-    SIGN_IN("btn btn-primary navbar-btn ml-0 ml-lg-3");
+    SIGN_IN("//a[text() = 'Sign in']");
 
-    private final String cssClass;
+    private final String xPath;
 }
