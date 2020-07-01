@@ -1,6 +1,6 @@
 # kemenu
 
-Kemenu web app, for menu management written in Java and Angular.
+Kemenu web application, for menu management written in Java and Angular.
 
 ## IMPORTANT:exclamation:: Use npm as follows
 
