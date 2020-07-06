@@ -46,7 +46,7 @@ jobs:
       - name: Run backend
         run: |
           APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          java -Dspring.profiles.active=test -jar ${{ github.workspace }}/kemenu-backend/target/kemenu-backend-$APP_RELEASE_VERSION-SNAPSHOT.jar &
+          java -Dspring.profiles.active=test -jar ${{ github.workspace }}/kemenu-backend/target/kemenu-backend-$APP_RELEASE_VERSION.jar &
       - name: Run acceptance tests
         run: mvn -B clean test -pl :kemenu-acceptance-tests
 
