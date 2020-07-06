@@ -32,4 +32,9 @@ public class CommonSteps {
     public void isRedirectedTo(String path) {
         new WebDriverWait(chromeTestRule.getChrome(), 1).until(webDriver -> webDriver.getCurrentUrl().endsWith(path));
     }
+
+    @Then("a {string} alert appears")
+    public void anAlertAppears(String alertType) {
+        chromeTestRule.getChrome().findElementByXPath("//div[contains(@class, 'alert-" + alertType + "')]").isDisplayed();
+    }
 }

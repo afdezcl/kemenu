@@ -4,7 +4,8 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum WebPage {
-  HOME("/");
+  HOME("/"),
+  REGISTER("/register");
 
   private final String path;
 
