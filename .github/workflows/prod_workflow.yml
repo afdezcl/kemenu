@@ -23,8 +23,6 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: |
             ${{ runner.os }}-maven-
-      - name: Test backend
-        run: mvn -B clean test -pl :kemenu-backend
       - name: Set up Node 14
         uses: actions/setup-node@v2-beta
         with:
@@ -42,6 +40,13 @@ jobs:
           npm install kemenu-frontend --prefix ./kemenu-frontend
           npm --prefix kemenu-frontend run lint
           npm --prefix kemenu-frontend run test
+          npm --prefix kemenu-frontend run build
+      - name: Test backend
+        run: mvn -B clean test package -pl :kemenu-backend
+      - name: Run backend
+        run: java -Dspring.profiles.active=test -jar ${{ github.workspace }}/kemenu-backend/target/kemenu-backend-.*.jar &
+      - name: Run acceptance tests
+        run: mvn -B clean test -pl :kemenu-acceptance-tests
 
   kemenu_deploy:
     name: Deploy on server
@@ -74,7 +79,7 @@ jobs:
       - name: Build frontend
         run: |
           npm install kemenu-frontend --prefix ./kemenu-frontend
-          npm --prefix kemenu-frontend run build
+          npm --prefix kemenu-frontend run build -- --prod
       - name: Create version
         run: |
           APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
