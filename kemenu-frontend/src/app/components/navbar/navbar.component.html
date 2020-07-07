@@ -30,7 +30,7 @@
             <a class="nav-link pointer-cursor" (click)="onLogout()" *ngIf="authService.isLoggedIn()">{{ 'Log out' | translate }}</a>
           </li>
 
-        </ul><a style="color: white;" (click)="openModalLogIn()" class="btn btn-primary navbar-btn ml-0 ml-lg-3" *ngIf="!authService.isLoggedIn()">{{ 'SignIn' | translate }} </a>
+        </ul><a style="color: white;" (click)="openModalLogIn()" class="btn btn-primary navbar-btn ml-0 ml-lg-3" *ngIf="!authService.isLoggedIn()">{{ 'SignIn' | translate }}</a>
       </div>
     </div>
   </nav>
