@@ -20,8 +20,4 @@ public class Menu {
     public Menu(List<MenuSection> sections) {
         this(UUID.randomUUID().toString(), sections, "");
     }
-
-    public Menu(List<MenuSection> sections, String imageUrl) {
-        this(UUID.randomUUID().toString(), sections, imageUrl);
-    }
 }
