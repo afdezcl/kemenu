@@ -28,6 +28,7 @@ public class BusinessMapper {
                 .imageUrl(business.getImageUrl())
                 .phone(business.getPhone())
                 .info(business.getInfo())
+                .color(business.getColor())
                 .build();
     }
 }
