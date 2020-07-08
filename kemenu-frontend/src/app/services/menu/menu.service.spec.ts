@@ -19,7 +19,7 @@ describe('MenuService', () => {
 
     httpClientSpy.get.and.returnValue(TestUtils.asyncData(existingMenu));
 
-    service.getMenu('text@example.com').subscribe(
+    service.getCustomer('text@example.com').subscribe(
       menu => expect(menu).toEqual(existingMenu, 'expected menu'),
       fail
     );
@@ -35,7 +35,7 @@ describe('MenuService', () => {
 
     httpClientSpy.get.and.returnValue(TestUtils.asyncError(errorResponse));
 
-    service.getMenu('test@example.com').subscribe(
+    service.getCustomer('test@example.com').subscribe(
       heroes => fail('expected an error, not heroes'),
       error => expect(error.message).toContain('404')
     );
