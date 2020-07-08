@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
@@ -14,14 +15,16 @@ import static java.util.stream.Collectors.toList;
 public class MenuHelper {
 
     public static Menu randomMenu() {
-        return new Menu(
-                IntStream.rangeClosed(0, 3) // 4 sections
+        return Menu.builder()
+                .id(UUID.randomUUID().toString())
+                .sections(IntStream.rangeClosed(0, 3) // 4 sections
                         .mapToObj(i -> MenuSectionHelper.randomSection())
                         .collect(toList())
-        );
+                )
+                .build();
     }
 
     public static Menu from(String id, List<MenuSection> sections) {
-        return new Menu(id, sections, "");
+        return Menu.builder().id(id).sections(sections).build();
     }
 }

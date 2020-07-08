@@ -22,6 +22,7 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+import org.zalando.jackson.datatype.money.MoneyModule;
 
 @Slf4j
 @Configuration
@@ -37,6 +38,7 @@ class WebConfig implements WebMvcConfigurer {
     ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
 
+        mapper.registerModule(new MoneyModule());
         mapper.registerModule(new JavaTimeModule());
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         mapper.enable(DeserializationFeature.USE_LONG_FOR_INTS);

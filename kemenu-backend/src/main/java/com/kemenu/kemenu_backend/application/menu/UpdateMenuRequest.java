@@ -22,4 +22,5 @@ public class UpdateMenuRequest {
     @Valid
     List<MenuSectionRequest> sections;
     String imageUrl;
+    String currency;
 }
