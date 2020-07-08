@@ -1,77 +1,84 @@
-.no-sections-image {
-  height: 120px;
-  width: 120px;
+.dish-list {
 
-  @media (max-width: 991.98px) {
-    height: 80px;
-    width: 80px;
+  &-no-dishes {
+    opacity: 0.7;
+    font-size: 20px;
+    margin: 1rem auto;
+    text-align: center;
+  }
+
+  &-dish {
+    background-color: white;
+    color: #333333;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    line-height: initial;
+
+    &-img {
+      &-container {
+        width: 100px;
+        height: 100px;
+
+        @media (max-width: 374px) {
+          width: 80px;
+          height: 80px;
+        }
+
+        @media (max-width: 991.98px) {
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          border-radius: 50%;
+          overflow: hidden;
+        }
+
+        img {
+          margin-left: -50%;
+          max-width: inherit;
+          height: inherit;
+        }
+      }
+    }
+
+    &-title {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    &-description {
+      color: #4e555b;
+    }
+
+    &-price {
+      font-size: 20px;
+    }
+
+    &-alergens {
+      margin: 10px 0 0 -27px;
+
+      &-icon img {
+        margin-left: 10px;
+        height: 25px !important;
+        width: 25px !important;
+      }
+    }
+
+    &-edit-mode-options {
+      border-top: 1px solid #eaeaea;
+
+      & button {
+        background-color: transparent;
+        color: #e7475e;
+        border: none;
+      }
+
+      &-message {
+        color: #7f7f7f;
+      }
+    }
   }
 }
-
-.dish {
-  background-color: white;
-  color: #333333;
-  padding: 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
-  line-height: initial;
-
-  &-img img {
-    width: 100%;
-
-    @media (max-width: 991.98px) {
-      -webkit-border-radius: 50%;
-      -moz-border-radius: 50%;
-      border-radius: 50%;
-      width: 100%;
-    }
-  }
-
-  &-title {
-    font-size: 18px;
-    margin-bottom: 5px;
-  }
-
-  &-description {
-    color: #4e555b;
-  }
-
-  &-price {
-    font-size: 20px;
-  }
-
-  &-alergens {
-    margin: 10px 0 0 -27px;
-
-    &-icon img {
-      margin-left: 10px;
-      height: 25px !important;
-      width: 25px !important;
-    }
-  }
-
-  &-icon-food {
-    font-size: 20px;
-    color: #7f7f7f;
-    line-height: 30px;
-  }
-
-  &-edit-mode-options {
-    border-top: 1px solid #eaeaea;
-
-    & button {
-      background-color: transparent;
-      color: #e7475e;
-      border: none;
-    }
-
-    &-message {
-      color: #7f7f7f;
-    }
-  }
-}
-
 .panel-open {
   &-icon-food {
     font-size: 20px;
@@ -88,10 +95,6 @@
   right: 1rem;
 }
 
-.delete-section {
-  left: 1rem;
-}
-
 .delete-menu-image i {
   font-size: 2em;
   position: absolute;
@@ -100,13 +103,13 @@
 }
 
 .edit-section {
-    border-radius: 25px !important;
-    color: #e7475e;
-    padding-top: 7px !important;
-    padding-bottom: 10px !important;
-    padding-left: 10px !important;
-    padding-right: 5px !important;
-    margin-right: 40px;
+  border-radius: 25px !important;
+  color: #e7475e;
+  padding-top: 7px !important;
+  padding-bottom: 10px !important;
+  padding-left: 10px !important;
+  padding-right: 5px !important;
+  margin-right: 40px;
 }
 
 .card-buttons-container {

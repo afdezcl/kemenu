@@ -100,7 +100,11 @@
   "WarningFirstMenu": "No tienes ningún menú creado aun, empieza por crear tu primera sección.",
   "WarningMenuImage": "Si sólo necesita una imagen de su menú, por favor súbala aquí.",
   "Welcome to": "Bienvenid@ a",
-	"Allergens Names": {
+  "noDishes": "No existen platos en esta sección",
+  "noSections": "No existen secciones en su carta digital",
+  "MenuImageText": "Echa un vistazo a nuestra:",
+  "MenuImageTextOr": "o más detalles en nuestro:",
+  "Allergens Names": {
 		"kemenu_allergen_1": "Apio",
 		"kemenu_allergen_2": "Crustáceos",
 		"kemenu_allergen_3": "Huevos",
@@ -116,6 +120,8 @@
 		"kemenu_allergen_13": "Frutos secos",
 		"kemenu_allergen_14": "Gluten"
 	},
+  "PAR": "cheese",
+  "PIC": "cheese",
   "PES": "fish",
   "CAR": "steak",
   "VEG": "broccoli",

@@ -1,22 +1,25 @@
-<accordion class="accordion-custom accordion-digital" [isAnimated]="true">
+<accordion class="accordion-custom menu-digital {{editMode ? 'edit-mode' : ''}}" [isAnimated]="true">
   <div>
     <accordion-group>
-      <button type="submit" class="btn btn-link clearfix" accordion-heading>
-        <i class="fas fa-book-open float-left pb-2 d-none d-md-inline-block"></i><div class="pull-left float-left">{{ 'Digital Menu' | translate }}</div>
+      <button type="submit" class="btn btn-link clearfix menu-digital-title" accordion-heading>
+        <div class="pull-left">{{ 'Digital Menu' | translate }}</div>
+        <i class="icofont-collapse ml-2"></i>
       </button>
-      <button type="submit" class="btn btn-link accordion-heading-button" accordion-heading  (click)="openCreateSection($event)">
-        <i class="fas pl-2 fa-plus d-none d-md-inline-block pb-2"></i><span>{{ 'Create Section' | translate }}</span>
+      <button *ngIf="editMode" type="submit" class="btn btn-link menu-digital-new-section" accordion-heading  (click)="openCreateSection($event)">
+        <i class="fas pl-2 fa-plus pb-2"></i><span>{{ 'Create Section' | translate }}</span>
       </button>
 
-      <accordion class="accordion-custom section" id="list-sections" cdkDropList [isAnimated]="true" (cdkDropListDropped)="dropSection($event)">
+      <accordion class="accordion-custom section menu-digital-section" id="list-sections" cdkDropList [isAnimated]="true" (cdkDropListDropped)="dropSection($event)">
         <div *ngFor="let section of menu.sections; let sectionCounter = index;" cdkDrag>
           <accordion-group>
-            <button class="col-1 sort clearfix" accordion-heading cdkDragHandle>
-              <i *ngIf="editMode" class="fas fa-bars float-left"></i>
-              <i *ngIf="!editMode" class="dish-icon-food icofont-{{getSectionIcon(section.name)}}"></i>
+            <button class="col-2 clearfix pl-2 pr-1" accordion-heading cdkDragHandle>
+              <i *ngIf="editMode else elseSectionName" class="fas fa-bars float-left"></i>
+              <ng-template #elseSectionName>
+                <i *ngIf="!editMode" class="menu-digital-section-icon-food icofont-{{getSectionIcon(section.name)}}"></i>
+              </ng-template>
             </button>
-            <button type="submit" class="clearfix" accordion-heading>
-              <div class="pull-left float-left">
+            <button type="submit" class="clearfix pl-1" accordion-heading>
+              <div class="pull-left float-left menu-digital-section-title-text">
                 <span>{{section.name}}</span>
                 <span *ngIf="section.dishes.length > 0" > ({{section.dishes.length}})</span>
               </div>
@@ -25,19 +28,29 @@
               <i class="fas fa-edit mr-2"></i>
             </button>
 
-            <app-dish-list [editMode]="editMode" [dishes]="section.dishes" [sectionCounter]="sectionCounter"></app-dish-list>
+            <app-dish-list
+              [editMode]="editMode"
+              [dishes]="section.dishes"
+              [sectionCounter]="sectionCounter"
+              [sectionCounter]="sectionCounter"
+              (editClicked)="editDish($event)"
+              (deleteClicked)="deleteDish($event)"
+              (changeDishOrder)="changeDishOrder($event)">
+            </app-dish-list>
 
-            <button type="submit" class="btn btn-secondary mt-3 section-inner-button left delete-section" (click)="deleteSection(section)">
+            <button *ngIf="editMode" type="submit" class="btn btn-secondary mt-3 section-inner-button left menu-digital-section-delete-section" (click)="deleteSection(section)">
               <i class="fas fa-trash"></i><span class="d-none d-sm-inline-block">{{ 'Delete section' | translate }}</span>
             </button>
-
-            <button type="submit" class="btn btn-secondary mt-3 section-inner-button add-dish float-right" (click)="openCreateDish(sectionCounter)">
+            <button *ngIf="editMode" type="submit" class="btn btn-secondary mt-3 section-inner-button menu-digital-section-add-dish float-right" (click)="openCreateDish(sectionCounter)">
               <i class="fas fa-plus"></i><span class="d-none d-sm-inline-block">{{ 'Create dish' | translate }}</span>
             </button>
-
           </accordion-group>
         </div>
       </accordion>
+
+      <div class="menu-digital-no-sections" *ngIf="!menu.sections || menu.sections.length === 0">
+        {{ "noSections" | translate }}
+      </div>
     </accordion-group>
   </div>
 </accordion>

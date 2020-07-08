@@ -9,14 +9,14 @@
         <img [src]="imageQRcode"
          alt="qr-code" class="img-fluid qr-code">
          <br>
-         <a class="btn btn-primary mt-3" [href]="imageQRcode" download="imageQRcode">                
-          Descargar QR<i class="fas fa-download ml-2"></i>            
+         <a class="btn btn-primary mt-3" [href]="imageQRcode" download="imageQRcode">
+          Descargar QR<i class="fas fa-download ml-2"></i>
         </a>
       </div>
     </div>
     <div class="row">
       <div class="col text-center mt-2">
-        <small class="text-muted">Tu carta: {{url}}</small>
+        <small class="text-muted">Tu carta: <a href="{{url}}" target="_blank">{{url}}</a></small>
       </div>
     </div>
 
@@ -29,7 +29,7 @@
         [description]="'En este enlace puedes ver nuestra carta de forma digital'"
         [autoSetMeta]="false"
         [url]="url"
-       ></share-buttons>        
+       ></share-buttons>
       </div>
     </div>
   </div>

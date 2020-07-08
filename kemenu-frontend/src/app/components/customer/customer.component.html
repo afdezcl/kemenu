@@ -1,57 +1,32 @@
-<div class="container">
-  <div class="letter">
-    <div class="text-center mb-3">
-      <h3 class="font-weight-bold">{{ 'Welcome to' | translate}} {{(menu | async)?.businessName}}</h3>
-      <span class="text-muted">{{ 'Here you can see our menu' | translate}}</span>
+<div class="customer">
+  <div class="customer-header kemenu-dark-background">
+    <div class="text-center">
+      <h3 class="font-weight-bold title">{{ 'Welcome to' | translate}} {{(menu | async)?.businessName}}</h3>
+      <span class="subtitle">{{ 'Here you can see our menu' | translate}}</span>
     </div>
+  </div>
 
-    <div *ngIf="(menu | async)?.imageUrl" class="row mt-4">
-      <div class="col text-center">
-        <a class="btn btn-primary navbar-btn ml-0 ml-lg-3" [href]="imageUrl"
-           target="_blank">{{'Menu Image' | translate}}</a>
-      </div>
+  <div *ngIf="(menu | async)?.imageUrl" class="row customer-menu-image kemenu-watermark">
+    <div class="col-12 text-center">
+      {{ "MenuImageText" | translate }}
     </div>
-
-    <div class="row mt-4">
-      <div class="col">
-        <div class="text-left mb-3">
-          <span class="text-muted">{{ 'Digital Menu' | translate}}</span>
-        </div>
-        <accordion [isAnimated]="true">
-          <accordion-group *ngFor="let section of (menu | async)?.sections; let sectionIdx = index;"
-                           heading="{{section.name}}" (isOpenChange)="loadImagesWhenOpen($event, sectionIdx)">
-            <div *ngFor="let dish of section.dishes; let dishCounter = index;">
-              <div *ngIf="dish.available" class="dish mt-2">
-                <div *ngIf="dish.imageUrl" class="row">
-                  <div class="col text-center mb-3">
-                    <img id="{{'dish-img-' + sectionIdx + '-' + dishCounter}}" [attr.data-urlsrc]="dish.imageUrl" class="img-fluid" alt="Responsive image">
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-8 col-8 text-left">
-                    <span class="dish-title">{{dish.name}}</span>
-                  </div>
-                  <div class="col-sm-4 col-4 text-right">
-                    <span class="dish-price">{{dish.price}}€</span>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <small class="dish-description text-muted">{{dish.description}}</small>
-                  </div>
-                </div>
-                <div class="row">
-                  <div *ngFor="let allergen of dish.allergens">
-                    <img src="../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen"
-                         class="icon-allergen">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </accordion-group>
-        </accordion>
-      </div>
+    <div class="col-12 text-center">
+      <a class="btn btn-secondary customer-menu-image-button" [href]="imageUrl"
+         target="_blank">{{'Menu Image' | translate}}</a>
     </div>
+    <div class="col-12 text-center customer-menu-image-or">
+      <span class="btn btn-primary">
+        {{ "MenuImageTextOr" | translate }}
+      </span>
+    </div>
+  </div>
 
+  <div class="row customer-digital-menu">
+    <div class="col">
+      <app-menu-digital
+        [editMode]="false"
+        [menu]="(menu | async)">
+      </app-menu-digital>
+    </div>
   </div>
 </div>

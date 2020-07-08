@@ -101,7 +101,11 @@
   "WarningFirstMenu": "You don't have any menu created, start with the first section",
   "WarningMenuImage": "If you only need an image of your menu, please upload it here.",
 	"Welcome to": "Welcome to",
-	"Allergens Names": {
+  "noDishes": "No dishes in this section",
+  "noSections": "No sections in the digital menu",
+  "MenuImageText": "Please check our:",
+  "MenuImageTextOr": "or more details in our:",
+  "Allergens Names": {
 		"kemenu_allergen_1": "Celery",
 		"kemenu_allergen_2": "Crustacean",
 		"kemenu_allergen_3": "Eggs",
@@ -117,6 +121,8 @@
 		"kemenu_allergen_13": "Treenut",
 		"kemenu_allergen_14": "Wheat"
 	},
+  "PAR": "cheese",
+  "PIC": "cheese",
   "PES": "fish",
   "CAR": "steak",
   "VEG": "broccoli",

@@ -1,10 +1,10 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Menu} from '@models/menu/menu.model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {CreateSectionComponent} from './create-section/create-section.component';
-import {Section} from '@models/menu/section.model';
+import {Section, SectionIndex} from '@models/menu/section.model';
 import {CreateDishComponent} from './create-dish/create-dish.component';
-import {Dish} from '@models/menu/dish.model';
+import {Dish, SectionDish} from '@models/menu/dish.model';
 import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 import {TranslateService} from '@ngx-translate/core';
 import {MenuService} from '@services/menu/menu.service';
@@ -21,10 +21,10 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 })
 export class MenuDigitalComponent implements OnInit {
   @Input() editMode: boolean;
-  public menu: Menu;
+  @Input() menu: Menu;
+  @Output() menuChange: EventEmitter<Menu> = new EventEmitter<Menu>();
   public modalReference: BsModalRef;
   public businessId: string;
-  public customerId: string;
   public thereIsChange = false;
   public menuId: string;
   public allergens: Allergen[] = AllAllergens;
@@ -41,27 +41,6 @@ export class MenuDigitalComponent implements OnInit {
 
   ngOnInit() {
     this.editMode = !!this.editMode;
-    this.loadMenu();
-  }
-
-  loadMenu() {
-    const customerEmail = this.authService.getUserEmail();
-    this.menu = new Menu(
-      customerEmail,
-      []
-    );
-    this.menuService.getCustomer(customerEmail)
-      .subscribe((response: any) => {
-        this.customerId = response.id;
-        this.businessId = response.businesses[0].id;
-        if (response.businesses[0].menus.length !== 0) {
-          this.menu.sections = response.businesses[0].menus[0].sections;
-          this.menu.shortUrlId = response.businesses[0].menus[0].shortUrlId;
-          this.menu.imageUrl = response.businesses[0].menus[0].imageUrl;
-          this.menu.id = response.businesses[0].menus[0].id;
-          this.matchAllergens();
-        }
-      });
   }
 
   openCreateSection(event) {
@@ -104,7 +83,7 @@ export class MenuDigitalComponent implements OnInit {
     this.modalReference = this.modalService.show(CreateSectionComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].name = data;
-      this.thereIsChange = true;
+      this.onSaveMenu();
     });
   }
 
@@ -119,7 +98,10 @@ export class MenuDigitalComponent implements OnInit {
   }
 
   openCreateDish(sectionIndex: number) {
-    this.modalReference = this.modalService.show(CreateDishComponent);
+    const initialState = {
+      editMode: this.editMode
+    };
+    this.modalReference = this.modalService.show(CreateDishComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(dish => {
       this.addNewDish(dish, sectionIndex);
       this.matchAllergens();
@@ -131,7 +113,12 @@ export class MenuDigitalComponent implements OnInit {
     this.onSaveMenu();
   }
 
-  deleteDish(dishToRemove: Dish, sectionIndex: number) {
+  changeDishOrder(sectionIndex: SectionIndex) {
+    this.menu.sections[sectionIndex.sectionIndex].dishes = sectionIndex.section.dishes;
+    this.onSaveMenu();
+  }
+
+  deleteDish(dishToRemove: SectionDish) {
     const initialState = {
       title: this.translate.instant('Delete Dish title'),
       message: this.translate.instant('Delete Dish description'),
@@ -140,38 +127,33 @@ export class MenuDigitalComponent implements OnInit {
     this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
     this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
       if (canDelete) {
-        this.menu.sections[sectionIndex].dishes =
-          this.menu.sections[sectionIndex].dishes.filter(dish => dish !== dishToRemove);
+        this.menu.sections[dishToRemove.sectionIndex].dishes =
+          this.menu.sections[dishToRemove.sectionIndex].dishes.filter(dish => dish !== dishToRemove.dish);
         this.onSaveMenu();
       }
       this.thereIsChange = true;
     });
   }
 
-  editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number) {
+  editDish(dishToEdit: SectionDish) {
     const initialState = {
-      name: dishToEdit.name,
-      description: dishToEdit.description,
-      price: dishToEdit.price,
-      selectedAllergens: dishToEdit.allergens,
-      imageUrl: dishToEdit.imageUrl,
-      available: !dishToEdit.available
+      name: dishToEdit.dish.name,
+      description: dishToEdit.dish.description,
+      price: dishToEdit.dish.price,
+      selectedAllergens: dishToEdit.dish.allergens,
+      imageUrl: dishToEdit.dish.imageUrl,
+      available: !dishToEdit.dish.available
     };
     this.modalReference = this.modalService.show(CreateDishComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {
-      this.menu.sections[sectionIndex].dishes[dishIndex] = data;
+      this.menu.sections[dishToEdit.sectionIndex].dishes[dishToEdit.dishIndex] = data;
       this.matchAllergens();
       this.onSaveMenu();
     });
   }
 
   onSaveMenu() {
-    if (this.menu.id) {
-      this.updateMenu();
-    } else {
-      this.createMenu();
-    }
-    this.thereIsChange = false;
+    this.menuChange.emit(this.menu);
   }
 
   private createMenu() {

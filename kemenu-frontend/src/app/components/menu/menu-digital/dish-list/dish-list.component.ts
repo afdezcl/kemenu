@@ -1,8 +1,7 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Menu} from '@models/menu/menu.model';
-import {BsModalService} from 'ngx-bootstrap/modal';
-import {Dish} from '@models/menu/dish.model';
-import {TranslateService} from '@ngx-translate/core';
+import {Dish, SectionDish} from '@models/menu/dish.model';
+import {Section, SectionIndex} from '@models/menu/section.model';
 import {Allergen, AllAllergens} from '@models/menu/allergen.model';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
@@ -16,15 +15,15 @@ export class DishListComponent implements OnInit {
   @Input() public dishes: Dish[];
   @Input() editMode: boolean;
   @Input() sectionCounter: number;
+  @Output() editClicked: EventEmitter<SectionDish> = new EventEmitter<SectionDish>();
+  @Output() deleteClicked: EventEmitter<SectionDish> = new EventEmitter<SectionDish>();
+  @Output() changeDishOrder: EventEmitter<SectionIndex> = new EventEmitter<SectionIndex>();
+
   public menu: Menu;
   public menuId: string;
   public allergens: Allergen[] = AllAllergens;
 
-  constructor(
-    private modalService: BsModalService,
-    private translate: TranslateService
-  ) {
-  }
+  constructor() {}
 
   ngOnInit() {
     this.editMode = !!this.editMode;
@@ -32,26 +31,18 @@ export class DishListComponent implements OnInit {
 
   dropDish(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.dishes, event.previousIndex, event.currentIndex);
+    this.changeOrder();
   }
 
-  getSectionIcon(sectionName: string) {
-    const icon = this.translate.instant(sectionName.substr(0, 3).toUpperCase());
-    return icon ? icon : 'spoon-and-fork';
+  changeOrder() {
+    this.changeDishOrder.emit(new SectionIndex(new Section('', this.dishes), this.sectionCounter));
   }
 
-  openCreateDish(sectionIndex: number) {
-
-  }
-
-  private addNewDish(dish: Dish, sectionIndex: number) {
-
-  }
-
-  deleteDish(dishToRemove: Dish, sectionIndex: number) {
-
+  deleteDish(dishToRemove: Dish, sectionIndex: number, dishIndex: number) {
+    this.deleteClicked.emit(new SectionDish(dishToRemove, sectionIndex, dishIndex));
   }
 
   editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number) {
-
+    this.editClicked.emit(new SectionDish(dishToEdit, sectionIndex, dishIndex));
   }
 }

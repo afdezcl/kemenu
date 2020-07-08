@@ -1,5 +1,7 @@
 @import '~ngx-sharebuttons/themes/modern/modern-light-theme';
 @import 'assets/icons-food/icofont.css';
+@import './variables';
+
 /* You can add global styles to this file, and also import other style files */
 /*
 =========================================
@@ -18,8 +20,13 @@ html {
   min-height: 100%;
 }
 
-$kemenu-red: #E7475D;
-$kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
+.kemenu-watermark {
+  background: $kemenu-watermark;
+}
+
+.kemenu-dark-background {
+  background: $kemenu-dark-background;
+}
 
 .tipography-kemenu {
   color: black;
@@ -29,7 +36,6 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
   .menu-word {
     color: $kemenu-red;
   }
-
 }
 
 @media (max-width: 991.98px) {
@@ -39,7 +45,7 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
 }
 
 .section-header {
-  background-image: url('./assets/images/section-header.png');
+  background-image: $kemenu-dark-background;
   background-size: cover;
   margin: 4rem 0 0 0;
   height: 150px;
@@ -284,8 +290,15 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
   .accordion-custom .card {
     border-radius: 0;
     border: none;
-    margin-bottom: 1.3rem;
     background: $kemenu-watermark;
+  }
+
+  .accordion-custom.menu-digital .card {
+    border-bottom: 1px solid #333333;
+  }
+
+  .accordion-custom:not(.menu-digital) .card {
+    border-bottom: 3px solid #ffe0e0;
   }
 
   .accordion-custom .card-header {
@@ -297,16 +310,14 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
 
   .accordion-custom .card-header button {
     color: #333;
-    text-transform: none !important;
-    background: none;
     display: block;
-    border: none;
+    background-color: white;
+    text-align: center;
+    padding-left: 2rem;
     padding-top: 1.3em;
     padding-bottom: 1.1em;
     cursor: pointer;
     width: 100%;
-    text-align: left;
-    background: #f5f5f5;
     outline: none;
     border-radius: 0;
     box-shadow: none;
@@ -332,7 +343,6 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
   }
 
   @media (max-width: 991.98px) {
-
     .accordion-custom .card-header .accordion-heading-button {
       max-width: 130px;
     }
@@ -366,9 +376,9 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
     padding-top: 0.2rem;
   }
 
-  .accordion-custom.accordion-digital {
+  .accordion-custom.menu-digital {
     .card-body {
-      padding: 1em 0 4.7rem 0;
+      padding: 0 0 4.7rem 0;
 
       .accordion-custom .card-body {
         padding: 0 1em 4.7rem 1em;
@@ -397,6 +407,7 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
         background: #fff2f2;
         color: #333333;
         z-index: 1;
+        border: none;
       }
     }
 
@@ -1962,9 +1973,6 @@ $kemenu-watermark: #E7475D url('./assets/images/watermark-bg.svg');
     border-bottom-left-radius: 0;
   }
 
-  .card-body {
-    padding: 1.25rem;
-  }
 
   .card-title {
     margin-bottom: 0.75rem;

@@ -1,7 +1,9 @@
 <header class="header">
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-      <a [routerLink]="['']" class="navbar-brand tipography-kemenu">KE<span class="menu-word">MENU</span></a>
+      <a [routerLink]="['']" class="navbar-brand tipography-kemenu">
+        <img src="../../../assets/images/logo-kemenu.png" />
+      </a>
 
       <button type="button" (click)="isCollapsed = !isCollapsed"
         aria-controls="collapseBasic" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation"

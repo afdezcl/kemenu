@@ -1,6 +1,6 @@
 <a (click)="fileInput.click()"
    [class.disabled]="uploadingFile"
-   [className]="firstMenu ? 'first-menu-card' : 'btn btn-primary navbar-btn ml-0 ml-lg-3'"
+   class="btn btn-primary navbar-btn ml-0 ml-lg-3"
 >
   <span *ngIf="uploadingFile; else elseBlock" class="spinner-border" role="status" aria-hidden="true"></span>
   <ng-template #elseBlock>

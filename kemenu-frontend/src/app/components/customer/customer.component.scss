@@ -1,0 +1,76 @@
+@import '../../../_variables.scss';
+
+.customer {
+  padding-bottom: 4rem;
+  background-color: whitesmoke;
+
+  &-header {
+    background-size: cover;
+    margin-top: $header-mobile-height;
+    padding: 3rem 0;
+    color: white;
+  }
+
+  &-menu-image {
+    letter-spacing: 0.08rem;
+    z-index: 2;
+    font-size: .8rem;
+    position: relative;
+    color: whitesmoke;
+    padding: 2rem 0 3rem 0;
+    -webkit-box-shadow: inset 0px 5px 5px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px 5px 5px -4px rgba(0,0,0,0.75);
+    box-shadow: inset 0px 5px 5px -4px rgba(0,0,0,0.75);
+
+    &-button {
+      margin-top: 1rem;
+    }
+
+    &-or {
+      position: absolute;
+      bottom: -1rem;
+
+      span {
+        font-size: .8rem;
+        text-transform: initial;
+      }
+    }
+  }
+
+  &-digital-menu {
+    z-index: 1;
+    padding-top: 1rem;
+    background-color: white;
+  }
+}
+
+.letter {
+    margin-top: 150px;
+    margin-bottom: 150px;
+}
+
+@media (max-width: 380px) {
+    .icon-allergen{
+        margin-top: 10px;
+
+    }
+}
+
+.icon-allergen{
+    margin-left: 10px;
+    height: 25px !important;
+    width: 25px !important;
+}
+
+::ng-deep .ngxImageZoomContainer > img {
+  max-height: 650px !important;
+}
+
+@media screen and (max-width: 500px) {
+  ::ng-deep .ngxImageZoomContainer > img {
+    flex: 100% !important;
+    max-width: 350px !important;
+  }
+}
+
+

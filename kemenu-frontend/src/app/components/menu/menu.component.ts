@@ -3,9 +3,7 @@ import {Menu} from '@models/menu/menu.model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {CreateSectionComponent} from './menu-digital/create-section/create-section.component';
 import {Section} from '@models/menu/section.model';
-import {CreateDishComponent} from './menu-digital/create-dish/create-dish.component';
 import {Dish} from '@models/menu/dish.model';
-import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 import {TranslateService} from '@ngx-translate/core';
 import {ShareQrComponent} from './share-qr/share-qr.component';
 import {MenuService} from '@services/menu/menu.service';
@@ -13,7 +11,6 @@ import {AuthenticationService} from '@services/authentication/authentication.ser
 import {Allergen, AllAllergens} from '@models/menu/allergen.model';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-menu',
@@ -80,97 +77,14 @@ export class MenuComponent implements OnInit {
     this.onSaveMenu();
   }
 
-  deleteSection(sectionToRemove: Section) {
-    const initialState = {
-      title: this.translate.instant('Delete Section title'),
-      message: this.translate.instant('Delete Section description')
-    };
-
-    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
-    this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
-      if (canDelete) {
-        this.menu.sections = this.menu.sections.filter(section => section !== sectionToRemove);
-      }
-      this.onSaveMenu();
-    });
-  }
-
-  editSection(sectionToEdit: Section, sectionIndex: number) {
-    const initialState = {
-      name: sectionToEdit.name
-    };
-    this.modalReference = this.modalService.show(CreateSectionComponent, {initialState});
-    this.modalReference.content.messageEvent.subscribe(data => {
-      this.menu.sections[sectionIndex].name = data;
-      this.thereIsChange = true;
-    });
-  }
-
-  dropSection(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.menu.sections, event.previousIndex, event.currentIndex);
-    this.onSaveMenu();
-  }
-
-  openCreateDish(sectionIndex: number) {
-    this.modalReference = this.modalService.show(CreateDishComponent);
-    this.modalReference.content.messageEvent.subscribe(dish => {
-      this.addNewDish(dish, sectionIndex);
-      this.matchAllergens();
-    });
-  }
-
   private addNewDish(dish: Dish, sectionIndex: number) {
     this.menu.sections[sectionIndex].dishes.push(dish);
     this.onSaveMenu();
   }
 
-  deleteDish(dishToRemove: Dish, sectionIndex: number) {
-    const initialState = {
-      title: this.translate.instant('Delete Dish title'),
-      message: this.translate.instant('Delete Dish description'),
-    };
-
-    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
-    this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
-      if (canDelete) {
-        this.menu.sections[sectionIndex].dishes =
-          this.menu.sections[sectionIndex].dishes.filter(dish => dish !== dishToRemove);
-        this.onSaveMenu();
-      }
-      this.thereIsChange = true;
-    });
-  }
-
-  editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number) {
-    const initialState = {
-      name: dishToEdit.name,
-      description: dishToEdit.description,
-      price: dishToEdit.price,
-      selectedAllergens: dishToEdit.allergens,
-      imageUrl: dishToEdit.imageUrl,
-      available: !dishToEdit.available
-    };
-    this.modalReference = this.modalService.show(CreateDishComponent, {initialState});
-    this.modalReference.content.messageEvent.subscribe(data => {
-      this.menu.sections[sectionIndex].dishes[dishIndex] = data;
-      this.matchAllergens();
-      this.onSaveMenu();
-    });
-  }
-
-  removeMenuImage() {
-    const initialState = {
-      title: this.translate.instant('Delete Menu Image title'),
-      message: this.translate.instant('Delete Menu Image description')
-    };
-
-    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
-    this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
-      if (canDelete) {
-        this.menu.imageUrl = '';
-        this.onSaveMenu();
-      }
-    });
+  menuChange(menu: Menu) {
+    this.menu = menu;
+    this.onSaveMenu();
   }
 
   openShareQR() {
@@ -201,7 +115,7 @@ export class MenuComponent implements OnInit {
         this.menu.shortUrlId = response.shortUrlId;
         this.menu.id = response.menuId;
         this.matchAllergens();
-        this.router.navigateByUrl('show');
+        this.router.navigateByUrl('menu');
       });
   }
 

@@ -1,29 +1,31 @@
 <div class="dish-list" cdkDropList (cdkDropListDropped)="dropDish($event)">
-  <div class="dish mt-3" *ngFor="let dish of dishes; let dishCounter = index;" cdkDrag>
+  <div class="dish-list-dish mt-3" *ngFor="let dish of dishes; let dishCounter = index;" cdkDrag>
     <div class="row justify-content-between">
-      <div *ngIf="dish.imageUrl" class="col-4 col-md-3 dish-img">
-        <img src="{{dish.imageUrl}}" alt="Responsive image">
+      <div *ngIf="dish.imageUrl" class="col-4 col-md-3 dish-list-dish-img">
+        <div class="dish-list-dish-img-container">
+          <img src="{{dish.imageUrl}}" alt="Responsive image">
+        </div>
       </div>
       <div (click)="editDish(dish, sectionCounter, dishCounter)" class="col-6 text-left">
-        <div class="dish-title"><strong>{{dish.name}}</strong></div>
-        <div class="dish-description">{{dish.description}}</div>
-        <div class="col-12 dish-alergens">
-          <span *ngFor="let allergen of dish.allergens" class="dish-alergens-icon">
+        <div class="dish-list-dish-title"><strong>{{dish.name}}</strong></div>
+        <div class="dish-list-dish-description">{{dish.description}}</div>
+        <div class="col-12 dish-list-dish-alergens">
+          <span *ngFor="let allergen of dish.allergens" class="dish-list-dish-alergens-icon">
             <img src="../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen">
           </span>
         </div>
       </div>
-      <div class="col-2 text-right">
+      <div class="col-2 text-right pl-0">
         <span class="dish-price">{{dish.price}}€</span>
       </div>
     </div>
-    <div *ngIf="editMode" class="row dish-edit-mode-options mt-2 pt-3">
-      <div class="col-6 dish-edit-mode-options-message">{{ 'Edit mode text' | translate }}</div>
-      <div class="col-6 dish-edit-mode-options-buttons text-right">
+    <div *ngIf="editMode" class="row dish-list-dish-edit-mode-options mt-2 pt-3">
+      <div class="col-6 dish-list-dish-edit-mode-options-message">{{ 'Edit mode text' | translate }}</div>
+      <div class="col-6 dish-list-dish-edit-mode-options-buttons text-right">
         <button type="submit" class="edit-dish mr-3" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">
           <i class="fas fa-edit"></i>
         </button>
-        <button type="submit" class="delete-dish mr-3" accordion-heading (click)="deleteDish(dish, sectionCounter)">
+        <button type="submit" class="delete-dish mr-3" accordion-heading (click)="deleteDish(dish, sectionCounter, dishCounter)">
           <i class="fas fa-trash"></i>
         </button>
         <button type="submit" class="move-dish" accordion-heading cdkDragHandle>
@@ -31,5 +33,8 @@
         </button>
       </div>
     </div>
+  </div>
+  <div class="dish-list-no-dishes" *ngIf="dishes.length === 0">
+    {{ "noDishes" | translate }}
   </div>
 </div>

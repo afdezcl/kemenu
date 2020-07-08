@@ -12,7 +12,6 @@ export class UploadImageButtonComponent implements OnInit {
 
   @Input() buttonText: string;
   @Input() resized = false;
-  @Input() firstMenu: boolean;
   @Output() uploadFileEvent = new EventEmitter<any>();
 
   uploadingFile = false;
