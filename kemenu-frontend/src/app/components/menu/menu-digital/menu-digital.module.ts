@@ -8,7 +8,7 @@ import {ShareButtonsModule} from 'ngx-sharebuttons/buttons';
 import {ShareIconsModule} from 'ngx-sharebuttons/icons';
 import {HttpClientModule} from '@angular/common/http';
 import {DragDropModule} from '@angular/cdk/drag-drop';
-import {DishListModule} from "./dish-list/dish-list.module";
+import {DishListModule} from './dish-list/dish-list.module';
 
 @NgModule({
   imports: [
