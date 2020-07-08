@@ -15,6 +15,7 @@ public class UpdateBusinessRequestHelper {
                 .imageUrl(UUID.randomUUID().toString())
                 .phone(UUID.randomUUID().toString())
                 .info(UUID.randomUUID().toString())
+                .color("#FfFFFF")
                 .build();
     }
 }
