@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Locale;
 
 import static java.util.stream.Collectors.toList;
 
@@ -17,11 +18,11 @@ public class MenuMapper {
     private final DishMapper dishMapper;
     private final CloudinaryService cloudinaryService;
 
-    public List<MenuResponse> from(String shortUrlId, String businessName, List<Menu> menus) {
-        return menus.stream().map(m -> from(shortUrlId, businessName, m)).collect(toList());
+    public List<MenuResponse> from(String shortUrlId, String businessName, List<Menu> menus, Locale locale) {
+        return menus.stream().map(m -> from(shortUrlId, businessName, m, locale)).collect(toList());
     }
 
-    public MenuResponse from(String shortUrlId, String businessName, Menu menu) {
+    public MenuResponse from(String shortUrlId, String businessName, Menu menu, Locale locale) {
         return MenuResponse.builder()
                 .id(menu.getId())
                 .businessName(businessName)
@@ -29,7 +30,7 @@ public class MenuMapper {
                 .sections(menu.getSections().stream()
                         .map(ms -> MenuSectionResponse.builder()
                                 .name(ms.getName())
-                                .dishes(dishMapper.from(ms))
+                                .dishes(dishMapper.from(ms, menu.getCurrency(), locale))
                                 .build())
                         .collect(toList())
                 )

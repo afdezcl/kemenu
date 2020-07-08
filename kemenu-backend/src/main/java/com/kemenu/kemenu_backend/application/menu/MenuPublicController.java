@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @AllArgsConstructor
@@ -19,15 +20,15 @@ class MenuPublicController {
 
     @Deprecated(forRemoval = true)
     @GetMapping("/short/{shortUrlId}")
-    ResponseEntity<MenuResponse> readMenu(@PathVariable String shortUrlId) {
-        return customerService.readMenu(shortUrlId)
-                .map(ResponseEntity::ok)
+    ResponseEntity<MenuResponse> readMenu(@PathVariable String shortUrlId, Locale locale) {
+        return customerService.readMenus(shortUrlId, locale)
+                .map(menus -> ResponseEntity.ok(menus.get(0)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/v1/short/{shortUrlId}")
-    ResponseEntity<List<MenuResponse>> readMenus(@PathVariable String shortUrlId) {
-        return customerService.readMenus(shortUrlId)
+    ResponseEntity<List<MenuResponse>> readMenus(@PathVariable String shortUrlId, Locale locale) {
+        return customerService.readMenus(shortUrlId, locale)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

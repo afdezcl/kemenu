@@ -10,8 +10,10 @@ import static org.mapstruct.NullValueCheckStrategy.ALWAYS;
 @Mapper(componentModel = "spring", nullValueCheckStrategy = ALWAYS, injectionStrategy = CONSTRUCTOR)
 public interface MenuRequestMapper {
     @Mapping(target = "id", expression = "java(java.util.UUID.randomUUID().toString())")
-    Menu from(CreateMenuRequest createMenuRequest);
+    @Mapping(target = "currency", expression = "java(javax.money.Monetary.getCurrency(java.util.Objects.isNull(c.getCurrency()) ? \"EUR\" : c.getCurrency()))")
+    Menu from(CreateMenuRequest c);
 
     @Mapping(source = "menuId", target = "id")
-    Menu from(UpdateMenuRequest updateMenuRequest);
+    @Mapping(target = "currency", expression = "java(javax.money.Monetary.getCurrency(java.util.Objects.isNull(u.getCurrency()) ? \"EUR\" : u.getCurrency()))")
+    Menu from(UpdateMenuRequest u);
 }
