@@ -9,6 +9,8 @@ import javax.money.CurrencyUnit;
 import javax.money.Monetary;
 import java.util.List;
 
+import static java.util.Objects.isNull;
+
 @Value
 @Builder(toBuilder = true)
 @AllArgsConstructor(onConstructor = @__(@PersistenceConstructor))
@@ -21,7 +23,7 @@ public class Menu {
     @Builder.Default
     CurrencyUnit currency = Monetary.getCurrency("EUR");
 
-    public Menu changeCurrency(String newCurrency) {
-        return toBuilder().currency(Monetary.getCurrency(newCurrency)).build();
+    public CurrencyUnit getCurrency() {
+        return isNull(currency) ? Monetary.getCurrency("EUR") : currency; // TODO: This should be in migrations?
     }
 }

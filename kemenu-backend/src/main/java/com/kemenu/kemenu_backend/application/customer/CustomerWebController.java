@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Locale;
 import java.util.UUID;
 
 @RestController
@@ -25,7 +26,9 @@ class CustomerWebController {
     private final CustomerMapper customerMapper;
 
     @GetMapping("/customer/{email}")
-    ResponseEntity<CustomerResponse> read(@RequestHeader(value = "Authorization") String token, @PathVariable String email) {
+    ResponseEntity<CustomerResponse> read(@RequestHeader(value = "Authorization") String token,
+                                          @PathVariable String email,
+                                          Locale locale) {
         String tokenEmail = jwtService.decodeAccessToken(token).getSubject();
 
         if (!email.equals(tokenEmail)) {
@@ -33,7 +36,7 @@ class CustomerWebController {
         }
 
         return customerService.read(tokenEmail)
-                .map(c -> ResponseEntity.ok(customerMapper.from(c)))
+                .map(c -> ResponseEntity.ok(customerMapper.from(c, locale)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
