@@ -17,4 +17,5 @@ public class BusinessResponse {
     String imageUrl;
     String phone;
     String info;
+    String color;
 }

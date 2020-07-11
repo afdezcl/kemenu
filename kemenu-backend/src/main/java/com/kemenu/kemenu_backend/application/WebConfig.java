@@ -39,6 +39,7 @@ class WebConfig implements WebMvcConfigurer {
 
         mapper.registerModule(new JavaTimeModule());
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         mapper.enable(DeserializationFeature.USE_LONG_FOR_INTS);
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         mapper.setAnnotationIntrospector(new JacksonAnnotationIntrospector() {

@@ -12,6 +12,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Slf4j
@@ -23,10 +25,10 @@ class CustomerPublicController {
     private final CustomerService customerService;
 
     @GetMapping("/{shortUrlId}")
-    String readMenu(@PathVariable String shortUrlId, HttpServletResponse response) throws IOException {
-        Optional<MenuResponse> optionalMenuResponse = customerService.readMenu(shortUrlId);
+    String readMenu(@PathVariable String shortUrlId, Locale locale, HttpServletResponse response) throws IOException {
+        Optional<List<MenuResponse>> optionalMenuResponses = customerService.readMenus(shortUrlId, locale);
 
-        if (optionalMenuResponse.isEmpty()) {
+        if (optionalMenuResponses.isEmpty()) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return "";
         }

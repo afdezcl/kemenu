@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Locale;
+
 @Component
 @AllArgsConstructor
 public class CustomerMapper {
@@ -24,13 +26,13 @@ public class CustomerMapper {
         );
     }
 
-    public CustomerResponse from(Customer customer) {
+    public CustomerResponse from(Customer customer, Locale locale) {
         String shortUrlId = shortUrlRepository.findByCustomerEmail(customer.getEmail())
                 .map(ShortUrl::getId)
                 .orElse("");
         return CustomerResponse.builder()
                 .id(customer.getId())
-                .businesses(businessMapper.from(shortUrlId, customer.getBusinesses()))
+                .businesses(businessMapper.from(shortUrlId, customer.getBusinesses(), locale))
                 .build();
     }
 }

@@ -5,8 +5,11 @@ import lombok.Builder;
 import lombok.Value;
 import org.springframework.data.annotation.PersistenceConstructor;
 
+import javax.money.CurrencyUnit;
+import javax.money.Monetary;
 import java.util.List;
-import java.util.UUID;
+
+import static java.util.Objects.isNull;
 
 @Value
 @Builder(toBuilder = true)
@@ -15,13 +18,12 @@ public class Menu {
 
     String id;
     List<MenuSection> sections;
-    String imageUrl;
+    @Builder.Default
+    String imageUrl = "";
+    @Builder.Default
+    CurrencyUnit currency = Monetary.getCurrency("EUR");
 
-    public Menu(List<MenuSection> sections) {
-        this(UUID.randomUUID().toString(), sections, "");
-    }
-
-    public Menu(List<MenuSection> sections, String imageUrl) {
-        this(UUID.randomUUID().toString(), sections, imageUrl);
+    public CurrencyUnit getCurrency() {
+        return isNull(currency) ? Monetary.getCurrency("EUR") : currency; // TODO: This should be in migrations?
     }
 }

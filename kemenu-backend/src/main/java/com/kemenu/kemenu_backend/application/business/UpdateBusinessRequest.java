@@ -1,6 +1,7 @@
 package com.kemenu.kemenu_backend.application.business;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.kemenu.kemenu_backend.application.validation.HexColor;
 import lombok.Builder;
 import lombok.Value;
 
@@ -23,4 +24,6 @@ public class UpdateBusinessRequest {
     @NotBlank
     @Size(max = 4096)
     String info;
+    @HexColor
+    String color;
 }

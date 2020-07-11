@@ -17,7 +17,7 @@ app:
   cors: http://localhost:8085, http://localhost:4200
   admin:
     username: admin@example.com
-    password: admin
+    password: adminPassword
   sendgrid: ${KEMENU_REGISTER_EMAILS}
   cloudinary:
     key: ${CLOUDINARY_KEY}

@@ -5,12 +5,5 @@ import { AppVersionService } from './app-version.service';
 
 describe('Service: AppVersion', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [AppVersionService]
-    });
   });
-
-  it('should ...', inject([AppVersionService], (service: AppVersionService) => {
-    expect(service).toBeTruthy();
-  }));
 });
