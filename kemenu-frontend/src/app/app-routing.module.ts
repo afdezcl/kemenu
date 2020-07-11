@@ -10,7 +10,6 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ChangePasswordComponent } from './components/changePassword/changePassword.component';
 import { EditInformationComponent } from './components/profile/edit-information/edit-information.component';
 import { AboutUsComponent } from './components/aboutUs/aboutUs.component';
-import { CustomizeMenuComponent } from './components/profile/customizeMenu/customizeMenu.component';
 
 export const routes: Routes = [
 
@@ -22,7 +21,6 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'profile/new-password', component: ChangePasswordComponent, canActivate: [AuthGuard] },
   { path: 'profile/edit', component: EditInformationComponent, canActivate: [AuthGuard] },
-  { path: 'profile/customize', component: CustomizeMenuComponent, canActivate: [AuthGuard] },
   { path: 'demo', component: CustomerComponent },
   { path: 'show', component: CustomerComponent },
   { path: 'aboutUs', component: AboutUsComponent },

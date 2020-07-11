@@ -8,7 +8,6 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { DialogModule } from '@ui-controls/dialogs/dialog.module';
 import { EditInformationComponent } from './edit-information/edit-information.component';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
-import { CustomizeMenuComponent } from './customizeMenu/customizeMenu.component';
 import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { ColorPickerModule } from 'ngx-color-picker';
   declarations: [
     ProfileComponent,
     EditInformationComponent,
-    CustomizeMenuComponent
   ]
 })
 export class ProfileModule { }

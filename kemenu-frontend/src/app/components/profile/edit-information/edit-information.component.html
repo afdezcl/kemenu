@@ -14,18 +14,18 @@
 
               <app-alert></app-alert>
 
-              <div class="col-sm-6">
-                <img src="../../../assets/images/profile.svg" alt="profile" class="img-fluid">
+              <div class="col-sm-6 text-center">
+                <div class="text-center mb-4 mt-3">  
+                  <app-upload-image-button 
+                  buttonText="Upload Business Image"
+                  (uploadFileEvent)="handleFileUpload($event)">
+                </app-upload-image-button>
+                </div>
+                <img *ngIf="businessImageURL" [src]="businessImageURL" alt="profile-image" class="img-fluid">
               </div>
               <div class="col-sm-6">
                 <div class="text-center">
                   <h4 class="card-title mb-4 mt-3">{{ 'Edit Information' | translate }}</h4>
-                </div>
-                <div class="text-center mb-4">
-                  <app-upload-image-button 
-                    buttonText="Upload Business Image"
-                    (uploadFileEvent)="handleFileUpload($event)">
-                  </app-upload-image-button>
                 </div>
                 <form [formGroup]="editInformationForm" (submit)="onSubmit()">
                   <div class="form-group">
