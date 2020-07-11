@@ -9,6 +9,7 @@ import { DialogModule } from '@ui-controls/dialogs/dialog.module';
 import { EditInformationComponent } from './edit-information/edit-information.component';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
 import { CustomizeMenuComponent } from './customizeMenu/customizeMenu.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { CustomizeMenuComponent } from './customizeMenu/customizeMenu.component'
     RouterModule,
     TranslateModule,
     DialogModule,
-    UploadImageButtonModule
+    UploadImageButtonModule,
+    ColorPickerModule
   ],
   declarations: [
     ProfileComponent,

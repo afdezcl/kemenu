@@ -21,6 +21,7 @@ export class EditInformationComponent implements OnInit {
   public info = '';
   public phone = '';
   public businessId = '';
+  public color = '';
 
   constructor(
     private translate: TranslateService,
@@ -70,6 +71,7 @@ export class EditInformationComponent implements OnInit {
 
   onSubmit() {
     const updateBusiness: UpdateBusiness = {
+      color: '#ffff',
       imageURL: this.businessImageURL,
       info: this.info,
       name: this.businessName,

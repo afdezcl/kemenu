@@ -30,6 +30,14 @@
                 <form [formGroup]="editInformationForm" (submit)="onSubmit()">
                   <div class="form-group">
                     <span class="icon-input">
+                      <i class="fas fa-paint-roller"></i>
+                    </span>
+                    <input class="form-control" placeholder="{{ 'MainColor' | translate}}" 
+                    [(colorPicker)]="color" 
+                    [style.background]="color"/>
+                  </div>
+                  <div class="form-group">
+                    <span class="icon-input">
                       <i class="fas fa-user"></i>
                     </span>
                     <input type="text" class="form-control" id="businessName" aria-describedby="businessName"
