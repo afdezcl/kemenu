@@ -15,14 +15,8 @@ public class UpdateBusinessRequest {
     @NotBlank
     @Size(max = 255)
     String name;
-    @NotBlank
-    @Size(max = 4096)
     String imageUrl;
-    @NotBlank
-    @Size(max = 255)
     String phone;
-    @NotBlank
-    @Size(max = 4096)
     String info;
     @HexColor
     String color;
