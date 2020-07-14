@@ -14,7 +14,7 @@
           </ng-container>
         </div>
         <div class="menu-digital-options">
-          <button *ngIf="editMode" type="submit" class="btn btn-primary menu-digital-options-new-section btn-link"  (click)="openCreateSection($event)">
+          <button *ngIf="editMode" type="submit" class="btn btn-primary menu-digital-options-new-section btn-link" (click)="openCreateSection($event)">
             <i class="fas fa-plus"></i><span>{{ 'Create Section' | translate }}</span>
           </button>
         </div>
@@ -43,8 +43,8 @@
               <span *ngIf="section.dishes.length > 0" > ({{section.dishes.length}})</span>
             </div>
           </button>
-          <button *ngIf="editMode" type="submit" class="accordion-heading-button text-right" accordion-heading (click)="editSection(section, sectionCounter)">
-            <i class="fas fa-edit mr-2"></i>
+          <button *ngIf="editMode" type="submit" class="accordion-heading-button text-right" accordion-heading>
+            <i class="fas fa-edit mr-2" (click)="editSection(section, sectionCounter)"></i>
           </button>
 
           <app-dish-list

@@ -110,11 +110,11 @@
             </div>
           </div>
 
-          <div class="row mb-4" *ngIf="showAllergens">
+          <div class="row mb-4 dish-alergens" *ngIf="showAllergens">
             <!-- LEFT COLUMN -->
             <div class="col">
               <div class="form-check" *ngFor="let allergen of allergensListToShowOnLeft">
-                <div class="checkbox">
+                <div class="checkbox dish-alergens-alergen">
                   <label style="font-size: 1em">
                     <input type="checkbox" class="button-checkbox" (change)="changeAllergens(allergen.id)" [checked]="allergenIsChecked(allergen)">
                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>
@@ -128,7 +128,7 @@
             <!-- RIGHT COLUMN -->
             <div class="col">
               <div class="form-check" *ngFor="let allergen of allergensListToShowOnRight">
-                <div class="checkbox">
+                <div class="checkbox dish-alergens-alergen">
                   <label style="font-size: 1em">
                     <input type="checkbox" (change)="changeAllergens(allergen.id)" [checked]="allergenIsChecked(allergen)">
                     <span class="cr"><i class="cr-icon fa fa-check"></i></span>

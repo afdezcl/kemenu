@@ -160,8 +160,4 @@ export class MenuComponent implements OnInit {
       this.onSaveMenu();
     }
   }
-
-  getMenuImageSanitized() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.menu.imageUrl);
-  }
 }

@@ -6,7 +6,7 @@
       </button>
 
       <div *ngIf="menu.imageUrl" class=" col-sm-auto text-lg-center text-center menu-image-content">
-        <button class="btn btn-link menu-image-delete" accordion-heading (click)="removeMenuImage()">
+        <button class="btn btn-link menu-image-content-delete" accordion-heading (click)="removeMenuImage()">
           <i class="fas fa-times-circle"></i>
         </button>
         <img src="{{menu.imageUrl}}" class="img-thumbnail menu-image-content-image" alt="Responsive image">

@@ -117,18 +117,17 @@
 
   @media (min-width: 940px) {
     .modal-content{
-        width: 600px !important;
+        width: 600px;
     }
     .form-check {
-        font-size: 15px !important;
-        margin-left: 20px !important;
+        font-size: 15px;
+        margin-left: 20px;
     }
   }
 
-
-  .icon-allergen{
-      height: 30px !important;
-      width: 30px !important;
+  .icon-allergen {
+      height: 30px;
+      width: 30px;
   }
 
   .checkbox label:after,
@@ -198,7 +197,7 @@
       }
 
       .button-checkbox{
-          margin-top: 85px !important;
+          margin-top: 85px;
       }
   }
 
@@ -209,7 +208,7 @@
       }
 
       .button-checkbox{
-          margin-right: 85px !important;
+          margin-right: 85px;
       }
   }
 }

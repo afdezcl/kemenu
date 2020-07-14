@@ -28,7 +28,9 @@
     <div class="row mt-3 mt-md-5 mb-md-5" *ngIf="menu.sections.length > 0 || menu.imageUrl">
       <div class="col-12 p-0">
         <app-menu-image
-          [editMode]="true">
+          [editMode]="true"
+          [menu]="menu"
+          (uploadedMenuImage)="menuChange($event)">
         </app-menu-image>
       </div>
 

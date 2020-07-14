@@ -96,6 +96,7 @@
     }
   }
 }
+
 .panel-open {
   &-icon-food {
     font-size: 20px;
@@ -198,8 +199,4 @@
   .edit-section {
       margin-right: 10px;
   }
-}
-
-::ng-deep .ngxImageZoomContainer > img {
-    max-height: 50px !important;
 }

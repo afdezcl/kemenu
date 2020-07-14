@@ -5,7 +5,7 @@
     padding-left: 40px;
     text-align: center;
 
-    @media (max-width: 991.98px) {
+    @media (max-width: 992px) {
       padding-left: 1rem;
     }
 
@@ -44,19 +44,18 @@
     &-upload::ng-deep a {
       color: white;
     }
-
   }
 
-  &-delete {
-    font-size: 2em;
-    position: absolute;
-    top: 0;
-    right: 0;
+  &-content {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 3rem;
+
+    &-delete {
+      font-size: 2em;
+      position: absolute;
+      top: -35px;
+      right: -45px;
+    }
   }
-
-  ::ng-deep .ngxImageZoomContainer > img {
-    max-height: 50px !important;
-  }
-
-
 }
