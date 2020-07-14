@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Menu} from '@models/menu/menu.model';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {Section} from '@models/menu/section.model';
@@ -17,6 +17,7 @@ import {Router} from '@angular/router';
 })
 export class MenuImageComponent implements OnInit {
 
+  @Input() editMode: boolean;
   public menu: Menu;
   public modalReference: BsModalRef;
   public businessId: string;
@@ -58,15 +59,6 @@ export class MenuImageComponent implements OnInit {
       });
   }
 
-  private addNewSection(name: string) {
-    const section = new Section(
-      name,
-      []
-    );
-    this.menu.sections.push(section);
-    this.onSaveMenu();
-  }
-
   removeMenuImage() {
     const initialState = {
       title: this.translate.instant('Delete Menu Image title'),
@@ -94,7 +86,7 @@ export class MenuImageComponent implements OnInit {
   private createMenu() {
     const menuToSave = {
       businessId: this.businessId,
-      sections: {},
+      sections: this.menu.sections ? this.menu.sections : {},
       imageUrl: this.menu.imageUrl
     };
     this.menuService.createMenu(menuToSave)
@@ -109,7 +101,7 @@ export class MenuImageComponent implements OnInit {
     const menuToUpdate = {
       businessId: this.businessId,
       menuId: this.menu.id,
-      sections: {},
+      sections:  this.menu.sections ? this.menu.sections : {},
       imageUrl: this.menu.imageUrl
     };
     this.menuService.updateMenu(menuToUpdate)
@@ -120,6 +112,7 @@ export class MenuImageComponent implements OnInit {
 
   handleFileUpload(event) {
     if (event) {
+      debugger
       this.menu.imageUrl = event.url;
       this.onSaveMenu();
     }

@@ -5,12 +5,13 @@ import {Dish} from '@models/menu/dish.model';
 import {Allergen, AllAllergens, AllergenRequestResponse} from '@models/menu/allergen.model';
 import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
 
 
 @Component({
   selector: 'app-create-dish',
   templateUrl: './create-dish.component.html',
-  styleUrls: ['./create-dish.component.css']
+  styleUrls: ['./create-dish.component.scss']
 })
 export class CreateDishComponent implements OnInit {
 
@@ -27,12 +28,15 @@ export class CreateDishComponent implements OnInit {
   public showAllergens = false;
   public imageUrl = '';
   public modalReference: BsModalRef;
+  public editMode: boolean;
+  public currency: string;
 
   constructor(
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
     private translate: TranslateService,
-    public bsModalRef: BsModalRef
+    public bsModalRef: BsModalRef,
+    public router: Router
   ) {
   }
 
@@ -43,7 +47,6 @@ export class CreateDishComponent implements OnInit {
       price: [this.price, [Validators.required, Validators.min(0)]],
       available: [this.available]
     });
-    console.log(this.selectedAllergens);
     this.divideAllergensList();
   }
 
@@ -68,6 +71,10 @@ export class CreateDishComponent implements OnInit {
     );
     this.messageEvent.emit(dish);
     this.bsModalRef.hide();
+  }
+
+  reroute(url: string) {
+    this.router.navigateByUrl(url);
   }
 
   activeShowAllergens() {

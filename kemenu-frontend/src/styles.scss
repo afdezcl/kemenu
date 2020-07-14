@@ -20,6 +20,11 @@ html {
   min-height: 100%;
 }
 
+.logo-white {
+  background: $logo-white;
+  background-size: cover;
+}
+
 .kemenu-watermark {
   background: $kemenu-watermark;
 }
@@ -115,7 +120,6 @@ html {
     opacity: 1;
     padding: 0;
     outline: none;
-
   }
 
   .modal-content .close span {
@@ -294,7 +298,7 @@ html {
   }
 
   .accordion-custom.menu-digital .card {
-    border-bottom: 1px solid #333333;
+    border-bottom: 2px solid #d0d0d0;
   }
 
   .accordion-custom:not(.menu-digital) .card {
@@ -363,6 +367,11 @@ html {
     line-height: 1.7rem;
     background-color: white;
 
+    @media (max-width: 991.98px) {
+      margin-top: -1px;
+      padding: .5rem .5rem 1rem .5rem;
+    }
+
     & .section-inner-button {
       border-radius: 25px;
       padding: 10px 15px;
@@ -377,10 +386,13 @@ html {
   }
 
   .accordion-custom.menu-digital {
-    .card-body {
-      padding: 0 0 4.7rem 0;
 
-      .accordion-custom .card-body {
+    &.edit-mode .card-body {
+      padding: 0 1em 4.7rem 1em!important;
+    }
+
+    .card-body {
+      .accordion-custom.menu-digital .card-body {
         padding: 0 1em 4.7rem 1em;
 
         button {
@@ -390,6 +402,10 @@ html {
             margin-left: 0.5em;
           }
         }
+      }
+
+      .accordion-custom.edit-mode .card-body {
+        padding: 0 0 4.7rem 0;
       }
 
       .card-header button.sort {
@@ -411,6 +427,9 @@ html {
       }
     }
 
+    & .card-body .accordion-custom .card-body {
+      padding: 0 1em 1rem 1em;
+    }
   }
 
 .cdk-drag-preview {
@@ -1990,10 +2009,6 @@ html {
     padding: 0.75rem 1.25rem;
     background-color: rgba(0, 0, 0, 0.03);
     border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-  }
-
-  .card-header:first-child {
-    border-radius: calc(0 - 1px) calc(0 - 1px) 0 0;
   }
 
   .card-header-transparent {

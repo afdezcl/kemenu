@@ -2,52 +2,52 @@
 .menu-image {
 
   &-title {
-    padding-left: 2rem;
+    padding-left: 40px;
+    text-align: center;
 
     @media (max-width: 991.98px) {
       padding-left: 1rem;
     }
 
+    > div {
+      padding-left: 40px;
+    }
+
+    > * {
+      display: inline-block;
+    }
+
     i {
+      font-size: 1.5rem;
       margin: 3px 10px 0 0;
+      width: 18px;
+      height: 12px;
+      overflow: hidden;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
     }
   }
 
-  &-upload,
-  &-upload::ng-deep a {
-    max-width: 190px;
-    padding: 0 1rem;
-    text-align: right;
-    color: #333;
-    text-transform: none !important;
-    background: none;
-    display: block;
-    border: none;
-    padding-top: 1.3em;
-    padding-bottom: 1.1em;
-    cursor: pointer;
-    width: 100%;
-    background: #f5f5f5;
-    outline: none;
-    border-radius: 0;
-    box-shadow: none;
-    z-index: 1;
+  & .panel.panel-open .menu-image-title i::before {
+    top: -10px;
   }
 
-  &-upload::ng-deep a {
-    padding: 0 1rem 0 0;
+  &-options {
+    text-align: center;
 
-    @media (max-width: 991.98px) {
-      padding: 0;
+    &-upload,
+    &-upload::ng-deep a {
+      color: white;
     }
 
-      &:active {
-      color: #333 !important;
-      background-color: transparent !important;
-    }
   }
 
-  &-delete i {
+  &-delete {
     font-size: 2em;
     position: absolute;
     top: 0;

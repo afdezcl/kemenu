@@ -30,6 +30,7 @@
       background: #fff;
       -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.08);
       box-shadow: 0 2px 3px rgba(0, 0, 0, 0.08);
+      width: 100vw;
     }
     nav.navbar .dropdown-menu {
       -webkit-box-shadow: none;
@@ -53,7 +54,6 @@
 
   .navbar-toggler {
     color: #333333;
-    padding: 0.25rem 1rem;
     font-size: 1.2rem;
     font-weight: 600;
     line-height: 1;

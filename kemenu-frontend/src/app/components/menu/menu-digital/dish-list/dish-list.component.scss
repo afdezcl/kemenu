@@ -3,7 +3,7 @@
   &-no-dishes {
     opacity: 0.7;
     font-size: 20px;
-    margin: 1rem auto;
+    margin: 1rem auto 4rem;
     text-align: center;
   }
 
@@ -18,12 +18,16 @@
 
     &-img {
       &-container {
-        width: 100px;
-        height: 100px;
+        height: 120px;
+
+        @media (max-width: 992px) {
+          width: 90px;
+          height: 90px;
+        }
 
         @media (max-width: 374px) {
-          width: 80px;
-          height: 80px;
+          width: 70px;
+          height: 70px;
         }
 
         @media (max-width: 991.98px) {
@@ -33,10 +37,16 @@
           overflow: hidden;
         }
 
-        img {
-          margin-left: -50%;
+        & img {
           max-width: inherit;
           height: inherit;
+
+          @media (max-width: 992px) {
+            position: relative;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translateY(-50%) translateX(-50%);
+          }
         }
       }
     }
@@ -48,19 +58,26 @@
 
     &-description {
       color: #4e555b;
+      margin-bottom: 4rem;
+      @media (max-width: 992px) {
+        margin-bottom: 2rem;
+      }
     }
 
     &-price {
-      font-size: 20px;
+      display: inline-block;
+      width: 50%;
+      text-align: right;
     }
 
     &-alergens {
-      margin: 10px 0 0 -27px;
+      display: inline-block;
+      width: 50%;
 
       &-icon img {
-        margin-left: 10px;
-        height: 25px !important;
-        width: 25px !important;
+        margin-right: 5px;
+        height: 20px;
+        width: 20px;
       }
     }
 

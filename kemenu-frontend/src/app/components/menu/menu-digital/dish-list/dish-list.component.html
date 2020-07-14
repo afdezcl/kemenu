@@ -1,40 +1,64 @@
-<div class="dish-list" cdkDropList (cdkDropListDropped)="dropDish($event)">
+<div class="dish-list" *ngIf="editMode" cdkDropList (cdkDropListDropped)="dropDish($event)">
   <div class="dish-list-dish mt-3" *ngFor="let dish of dishes; let dishCounter = index;" cdkDrag>
-    <div class="row justify-content-between">
-      <div *ngIf="dish.imageUrl" class="col-4 col-md-3 dish-list-dish-img">
-        <div class="dish-list-dish-img-container">
-          <img src="{{dish.imageUrl}}" alt="Responsive image">
-        </div>
-      </div>
-      <div (click)="editDish(dish, sectionCounter, dishCounter)" class="col-6 text-left">
-        <div class="dish-list-dish-title"><strong>{{dish.name}}</strong></div>
-        <div class="dish-list-dish-description">{{dish.description}}</div>
-        <div class="col-12 dish-list-dish-alergens">
-          <span *ngFor="let allergen of dish.allergens" class="dish-list-dish-alergens-icon">
-            <img src="../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen">
-          </span>
-        </div>
-      </div>
-      <div class="col-2 text-right pl-0">
-        <span class="dish-price">{{dish.price}}€</span>
-      </div>
-    </div>
-    <div *ngIf="editMode" class="row dish-list-dish-edit-mode-options mt-2 pt-3">
-      <div class="col-6 dish-list-dish-edit-mode-options-message">{{ 'Edit mode text' | translate }}</div>
-      <div class="col-6 dish-list-dish-edit-mode-options-buttons text-right">
-        <button type="submit" class="edit-dish mr-3" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">
-          <i class="fas fa-edit"></i>
-        </button>
-        <button type="submit" class="delete-dish mr-3" accordion-heading (click)="deleteDish(dish, sectionCounter, dishCounter)">
-          <i class="fas fa-trash"></i>
-        </button>
-        <button type="submit" class="move-dish" accordion-heading cdkDragHandle>
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-    </div>
+    <ng-container
+      [ngTemplateOutlet]="dishes.length !== 0 ? dishContent : ''"
+      [ngTemplateOutletContext]="{dish:dish, dishCounter:dishCounter}">
+    </ng-container>
   </div>
   <div class="dish-list-no-dishes" *ngIf="dishes.length === 0">
     {{ "noDishes" | translate }}
   </div>
 </div>
+
+<div class="dish-list" *ngIf="!editMode">
+  <div class="dish-list-dish mt-3" *ngFor="let dish of dishes; let dishCounter = index;">
+    <ng-container
+      [ngTemplateOutlet]="dishes.length !== 0 ? dishContent : ''"
+      [ngTemplateOutletContext]="{dish:dish, dishCounter:dishCounter}">
+    </ng-container>
+  </div>
+  <div class="dish-list-no-dishes" *ngIf="dishes.length === 0">
+    {{ "noDishes" | translate }}
+  </div>
+</div>
+<ng-template #dishContent let-dish='dish' let-dishCounter='dishCounter'>
+  <div class="dish-list-dish-content">
+    <div class="row justify-content-between">
+      <div *ngIf="dish.imageUrl" class="col-4 col-lg-3 pr-0">
+        <div *ngIf="dish.imageUrl" class="dish-list-dish-img pl-0">
+          <div class="dish-list-dish-img-container">
+            <img src="{{dish.imageUrl}}" alt="Responsive image">
+          </div>
+        </div>
+      </div>
+      <div (click)="editDish(dish, sectionCounter, dishCounter)" class="{{dish.imageUrl ? 'col-8 col-lg-9' : 'col-12'}}">
+        <div class="col-12 p-0">
+          <div class="dish-list-dish-title"><strong>{{dish.name}}</strong></div>
+          <div class="dish-list-dish-description">{{dish.description}}</div>
+        </div>
+        <div class="col-12 p-0">
+          <div class="dish-list-dish-alergens">
+            <span *ngFor="let allergen of dish.allergens" class="dish-list-dish-alergens-icon">
+              <img src="../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen">
+            </span>
+          </div>
+          <div class="dish-list-dish-price">{{dish.price}}{{currency ? currency : ' €'}}</div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="editMode" class="row dish-list-dish-edit-mode-options mt-2 pt-3">
+    <div class="col-6 dish-list-dish-edit-mode-options-message">{{ 'Edit mode text' | translate }}</div>
+    <div class="col-6 dish-list-dish-edit-mode-options-buttons text-right">
+      <button type="submit" class="edit-dish mr-3" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">
+        <i class="fas fa-edit"></i>
+      </button>
+      <button type="submit" class="delete-dish mr-3" accordion-heading (click)="deleteDish(dish, sectionCounter, dishCounter)">
+        <i class="fas fa-trash"></i>
+      </button>
+      <button type="submit" class="move-dish" accordion-heading cdkDragHandle>
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </div>
+  </div>
+</ng-template>

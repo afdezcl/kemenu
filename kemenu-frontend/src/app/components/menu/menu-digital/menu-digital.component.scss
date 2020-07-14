@@ -36,13 +36,17 @@
     top: -10px;
   }
 
-  &-new-section {
-    text-align: right;
-    padding-right: 1rem;
+  &-options {
+    text-align: center;
 
-    i {
-      margin: 3px 10px 0 0;
-    }
+    &-new-section {
+      padding: .5rem 1rem;
+      margin: 1rem 0;
+
+      & span {
+        margin-left: 5px;
+      }
+   }
   }
 
   @media (max-width: 991.98px) {

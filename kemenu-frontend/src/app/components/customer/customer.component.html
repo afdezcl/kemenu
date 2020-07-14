@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <div *ngIf="(menu | async)?.imageUrl" class="row customer-menu-image kemenu-watermark">
+  <div *ngIf="(menu | async)?.imageUrl" class="customer-menu-image kemenu-watermark">
     <div class="col-12 text-center">
       {{ "MenuImageText" | translate }}
     </div>
@@ -21,8 +21,8 @@
     </div>
   </div>
 
-  <div class="row customer-digital-menu">
-    <div class="col">
+  <div class="customer-digital-menu">
+    <div>
       <app-menu-digital
         [editMode]="false"
         [menu]="(menu | async)">

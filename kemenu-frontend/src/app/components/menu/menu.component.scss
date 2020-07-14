@@ -13,14 +13,14 @@
   right: 0;
   margin: auto;
 
+  & span {
+    margin-left : 5px;
+  }
+
   @media (max-width: 991.98px) {
 
     & button {
       padding: 0.9rem 1rem;
-
-      & span {
-        display: none;
-      }
     }
   }
 }

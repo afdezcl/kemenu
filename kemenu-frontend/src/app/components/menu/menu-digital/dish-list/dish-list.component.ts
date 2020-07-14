@@ -15,6 +15,7 @@ export class DishListComponent implements OnInit {
   @Input() public dishes: Dish[];
   @Input() editMode: boolean;
   @Input() sectionCounter: number;
+  @Input() currency: string;
   @Output() editClicked: EventEmitter<SectionDish> = new EventEmitter<SectionDish>();
   @Output() deleteClicked: EventEmitter<SectionDish> = new EventEmitter<SectionDish>();
   @Output() changeDishOrder: EventEmitter<SectionIndex> = new EventEmitter<SectionIndex>();
@@ -39,10 +40,10 @@ export class DishListComponent implements OnInit {
   }
 
   deleteDish(dishToRemove: Dish, sectionIndex: number, dishIndex: number) {
-    this.deleteClicked.emit(new SectionDish(dishToRemove, sectionIndex, dishIndex));
+    this.deleteClicked.emit(new SectionDish(dishToRemove, sectionIndex, dishIndex, this.menu.currency));
   }
 
   editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number) {
-    this.editClicked.emit(new SectionDish(dishToEdit, sectionIndex, dishIndex));
+    this.editClicked.emit(new SectionDish(dishToEdit, sectionIndex, dishIndex, this.currency));
   }
 }
