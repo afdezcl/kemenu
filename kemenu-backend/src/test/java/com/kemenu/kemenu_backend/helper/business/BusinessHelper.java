@@ -18,7 +18,8 @@ public class BusinessHelper {
                 menus,
                 UUID.randomUUID().toString(),
                 UUID.randomUUID().toString(),
-                UUID.randomUUID().toString()
+                UUID.randomUUID().toString(),
+                "#ffffff"
         );
     }
 }

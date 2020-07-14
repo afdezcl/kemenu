@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 
 import java.util.Base64;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -37,7 +38,7 @@ class CustomerPublicIntegrationTest extends KemenuIntegrationTest {
                 .expectBody().returnResult().getResponseHeaders();
 
         String shortUrlId = new String(Base64.getDecoder().decode(headers.get("Set-Cookie").get(0).replace("show_menu=", "")));
-        MenuResponse menuResponse = customerService.readMenu(shortUrlId).get();
+        MenuResponse menuResponse = customerService.readMenus(shortUrlId, Locale.US).get().get(0);
 
         assertEquals(randomCustomer.firstBusiness().getName(), menuResponse.getBusinessName());
         assertEquals(MenuWebClient.request.getSections().get(0).getName(), menuResponse.getSections().get(0).getName());

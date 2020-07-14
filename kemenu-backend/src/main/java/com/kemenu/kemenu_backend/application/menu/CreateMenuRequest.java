@@ -19,4 +19,5 @@ public class CreateMenuRequest {
     @Valid
     List<MenuSectionRequest> sections;
     String imageUrl;
+    String currency;
 }

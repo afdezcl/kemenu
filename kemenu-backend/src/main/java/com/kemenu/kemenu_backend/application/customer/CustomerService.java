@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
@@ -47,24 +48,12 @@ public class CustomerService {
         return customerRepository.all();
     }
 
-    @Deprecated(forRemoval = true) // In favor of readMenus method
-    public Optional<MenuResponse> readMenu(String shortUrlId) {
-        return shortUrlRepository.findById(shortUrlId)
-                .flatMap(shortUrl -> customerRepository.findByEmail(shortUrl.getCustomerEmail())
-                        .flatMap(customer -> customer.findBusiness(shortUrl.getBusinessId())
-                                .flatMap(business -> business.findMenu(shortUrl.getMenus().get(0))
-                                        .flatMap(menu -> Optional.of(menuMapper.from(shortUrl.getId(), business.getName(), menu)))
-                                )
-                        )
-                );
-    }
-
-    public Optional<List<MenuResponse>> readMenus(String shortUrlId) {
+    public Optional<List<MenuResponse>> readMenus(String shortUrlId, Locale locale) {
         return shortUrlRepository.findById(shortUrlId)
                 .flatMap(shortUrl -> customerRepository.findByEmail(shortUrl.getCustomerEmail())
                         .flatMap(customer -> customer.findBusiness(shortUrl.getBusinessId())
                                 .flatMap(business -> Optional.of(business.getMenus().stream()
-                                        .map(menu -> menuMapper.from(shortUrl.getId(), business.getName(), menu))
+                                        .map(menu -> menuMapper.from(shortUrl.getId(), business.getName(), menu, locale))
                                         .collect(toList()))
                                 )
                         )

@@ -26,9 +26,10 @@ public class Business {
     private String imageUrl;
     private String phone;
     private String info;
+    private String color;
 
     public Business(String name) {
-        this(UUID.randomUUID().toString(), name, new ArrayList<>(), "", "", "");
+        this(UUID.randomUUID().toString(), name, new ArrayList<>(), "", "", "", "#e7475e");
     }
 
     public String createMenu(Menu menu) {
