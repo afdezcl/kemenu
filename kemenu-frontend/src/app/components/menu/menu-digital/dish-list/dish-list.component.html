@@ -23,7 +23,7 @@
 </div>
 <ng-template #dishContent let-dish='dish' let-dishCounter='dishCounter'>
   <div class="dish-list-dish-content">
-    <div class="row justify-content-between">
+    <div class="row justify-content-between" (click)="editDish(dish, sectionCounter, dishCounter)">
       <div *ngIf="dish.imageUrl" class="col-4 col-lg-3 pr-0">
         <div *ngIf="dish.imageUrl" class="dish-list-dish-img pl-0">
           <div class="dish-list-dish-img-container">
@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-      <div (click)="editDish(dish, sectionCounter, dishCounter)" class="{{dish.imageUrl ? 'col-8 col-lg-9' : 'col-12'}}">
+      <div class="{{dish.imageUrl ? 'col-8 col-lg-9' : 'col-12'}}">
         <div class="col-12 p-0">
           <div class="dish-list-dish-title"><strong>{{dish.name}}</strong></div>
           <div class="dish-list-dish-description">{{dish.description}}</div>
@@ -47,8 +47,7 @@
       </div>
     </div>
     <div *ngIf="editMode" class="row dish-list-dish-edit-mode-options mt-2 pt-3">
-    <div class="col-6 dish-list-dish-edit-mode-options-message">{{ 'Edit mode text' | translate }}</div>
-    <div class="col-6 dish-list-dish-edit-mode-options-buttons text-right">
+    <div class="col-12 dish-list-dish-edit-mode-options-buttons text-right">
       <button type="submit" class="edit-dish mr-3" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">
         <i class="fas fa-edit"></i>
       </button>
@@ -56,7 +55,7 @@
         <i class="fas fa-trash"></i>
       </button>
       <button type="submit" class="move-dish" accordion-heading cdkDragHandle>
-        <i class="fas fa-bars"></i>
+        <i class="fas fa-sort"></i>
       </button>
     </div>
   </div>

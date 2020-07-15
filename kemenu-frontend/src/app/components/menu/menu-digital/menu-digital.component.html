@@ -67,7 +67,7 @@
         </accordion-group>
       </ng-template>
 
-      <div class="menu-digital-no-sections" *ngIf="!menu.sections || menu.sections.length === 0">
+      <div class="menu-digital-no-sections" *ngIf="!menu || !menu.sections || menu.sections.length === 0">
         {{ "noSections" | translate }}
       </div>
     </accordion-group>

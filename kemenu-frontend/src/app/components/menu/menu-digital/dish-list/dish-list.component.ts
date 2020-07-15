@@ -40,7 +40,7 @@ export class DishListComponent implements OnInit {
   }
 
   deleteDish(dishToRemove: Dish, sectionIndex: number, dishIndex: number) {
-    this.deleteClicked.emit(new SectionDish(dishToRemove, sectionIndex, dishIndex, this.menu.currency));
+    this.deleteClicked.emit(new SectionDish(dishToRemove, sectionIndex, dishIndex, null));
   }
 
   editDish(dishToEdit: Dish, sectionIndex: number, dishIndex: number) {

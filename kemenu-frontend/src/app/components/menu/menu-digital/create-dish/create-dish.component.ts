@@ -74,7 +74,7 @@ export class CreateDishComponent implements OnInit {
   }
 
   reroute(url: string) {
-    this.router.navigateByUrl(url);
+    window.location.href = url;
   }
 
   activeShowAllergens() {
