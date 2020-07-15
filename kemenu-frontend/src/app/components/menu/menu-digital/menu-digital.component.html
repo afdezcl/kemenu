@@ -32,7 +32,7 @@
       <ng-template #sectionContent let-section='section' let-sectionCounter='sectionCounter'>
         <accordion-group>
           <button class="col-2 col-lg-1 clearfix pl-2 pr-1" accordion-heading cdkDragHandle>
-            <i *ngIf="editMode else elseSectionName" class="fas fa-bars"></i>
+            <i *ngIf="editMode else elseSectionName" class="fas fa-sort"></i>
             <ng-template #elseSectionName>
               <i *ngIf="!editMode" class="menu-digital-section-icon-food icofont-{{getSectionIcon(section.name)}}"></i>
             </ng-template>
