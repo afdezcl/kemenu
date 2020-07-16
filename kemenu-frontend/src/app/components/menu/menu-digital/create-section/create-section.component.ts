@@ -11,6 +11,7 @@ export class CreateSectionComponent implements OnInit {
   @Output() messageEvent = new EventEmitter<string>();
   public section: FormGroup;
   public name: string;
+  public editing: boolean;
 
   constructor(
     private formBuilder: FormBuilder,

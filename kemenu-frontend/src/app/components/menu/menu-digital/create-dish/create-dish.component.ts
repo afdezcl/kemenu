@@ -30,6 +30,7 @@ export class CreateDishComponent implements OnInit {
   public modalReference: BsModalRef;
   public editMode: boolean;
   public currency: string;
+  public editing: boolean;
 
   constructor(
     private modalService: BsModalService,
@@ -60,7 +61,7 @@ export class CreateDishComponent implements OnInit {
     this.allergensListToShowOnRight = this.allergens.slice(halfLength, this.allergens.length);
   }
 
-  onSubmit() {
+  onSave() {
     const dish = new Dish(
       this.form.name.value,
       this.form.description.value,
@@ -70,6 +71,10 @@ export class CreateDishComponent implements OnInit {
       !this.form.available.value
     );
     this.messageEvent.emit(dish);
+  }
+
+  onSubmit() {
+    this.onSave();
     this.bsModalRef.hide();
   }
 
@@ -81,18 +86,8 @@ export class CreateDishComponent implements OnInit {
     this.showAllergens = !this.showAllergens;
   }
 
-  removeImage() {
-    const initialState = {
-      title: this.translate.instant('Delete dish image'),
-      message: this.translate.instant('Delete dish image description')
-    };
-
-    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
-    this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
-      if (canDelete) {
-        this.imageUrl = '';
-      }
-    });
+  removeDishImage() {
+      this.imageUrl = '';
   }
 
   changeAllergens(idAllergen: string) {

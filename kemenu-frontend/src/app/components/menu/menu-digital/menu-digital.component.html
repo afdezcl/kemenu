@@ -7,11 +7,16 @@
       </button>
 
       <accordion *ngIf="editMode" class="accordion-custom section menu-digital-section" cdkDropList [isAnimated]="true" (cdkDropListDropped)="dropSection($event)">
-        <div *ngFor="let section of menu.sections; let sectionCounter = index;" cdkDrag>
-          <ng-container
-            [ngTemplateOutlet]="menu.sections.length !== 0 ? sectionContent : ''"
-            [ngTemplateOutletContext]="{section:section, sectionCounter:sectionCounter}">
-          </ng-container>
+        <div *ngIf="menu">
+          <div *ngFor="let section of menu.sections; let sectionCounter = index;" cdkDrag>
+            <ng-container
+              [ngTemplateOutlet]="menu.sections.length !== 0 ? sectionContent : ''"
+              [ngTemplateOutletContext]="{section:section, sectionCounter:sectionCounter}">
+            </ng-container>
+          </div>
+        </div>
+        <div class="menu-digital-no-sections" *ngIf="!menu || !menu.sections || menu.sections.length === 0">
+          {{ "noSections" | translate }}
         </div>
         <div class="menu-digital-options">
           <button *ngIf="editMode" type="submit" class="btn btn-primary menu-digital-options-new-section btn-link" (click)="openCreateSection($event)">
@@ -21,11 +26,13 @@
       </accordion>
 
       <accordion *ngIf="!editMode" class="accordion-custom section menu-digital-section" [isAnimated]="true">
-        <div *ngFor="let section of menu.sections; let sectionCounter = index;">
-          <ng-container
-            [ngTemplateOutlet]="menu.sections.length !== 0 ? sectionContent : ''"
-            [ngTemplateOutletContext]="{section:section, sectionCounter:sectionCounter}">
-          </ng-container>
+        <div *ngIf="menu">
+          <div *ngFor="let section of menu.sections; let sectionCounter = index;">
+            <ng-container
+              [ngTemplateOutlet]="menu.sections.length !== 0 ? sectionContent : ''"
+              [ngTemplateOutletContext]="{section:section, sectionCounter:sectionCounter}">
+            </ng-container>
+          </div>
         </div>
       </accordion>
 
@@ -50,7 +57,7 @@
           <app-dish-list
             [editMode]="editMode"
             [currency]="menu.currency"
-            [dishes]="section.dishes"
+            [dishes]="getActiveDishes(section)"
             [sectionCounter]="sectionCounter"
             [sectionCounter]="sectionCounter"
             (editClicked)="editDish($event)"
@@ -66,10 +73,6 @@
           </button>
         </accordion-group>
       </ng-template>
-
-      <div class="menu-digital-no-sections" *ngIf="!menu || !menu.sections || menu.sections.length === 0">
-        {{ "noSections" | translate }}
-      </div>
     </accordion-group>
   </div>
 </accordion>

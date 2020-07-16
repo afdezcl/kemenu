@@ -78,7 +78,8 @@ export class MenuDigitalComponent implements OnInit {
 
   editSection(sectionToEdit: Section, sectionIndex: number) {
     const initialState = {
-      name: sectionToEdit.name
+      name: sectionToEdit.name,
+      editing: true
     };
     this.modalReference = this.modalService.show(CreateSectionComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {
@@ -144,7 +145,8 @@ export class MenuDigitalComponent implements OnInit {
       imageUrl: dishToEdit.dish.imageUrl,
       available: !dishToEdit.dish.available,
       editMode: this.editMode,
-      currency: dishToEdit.currency
+      currency: dishToEdit.currency,
+      editing: true
     };
     this.modalReference = this.modalService.show(CreateDishComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {
@@ -152,6 +154,16 @@ export class MenuDigitalComponent implements OnInit {
       this.matchAllergens();
       this.onSaveMenu();
     });
+  }
+
+  getActiveDishes(section: Section) {
+    const activeDishes = [];
+    for (const i in section.dishes) {
+      if (section.dishes[i].available) {
+        activeDishes.push(section.dishes[i]);
+      }
+    }
+    return activeDishes;
   }
 
   onSaveMenu() {
@@ -207,16 +219,5 @@ export class MenuDigitalComponent implements OnInit {
         });
       });
     });
-  }
-
-  handleFileUpload(event) {
-    if (event) {
-      this.menu.imageUrl = event.url;
-      this.onSaveMenu();
-    }
-  }
-
-  getMenuImageSanitized() {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(this.menu.imageUrl);
   }
 }

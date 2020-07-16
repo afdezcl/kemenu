@@ -1,5 +1,10 @@
 .menu-digital {
 
+  &-no-sections {
+    color: #333333;
+    text-align: center;
+  }
+
   &-title {
     padding-left: 2rem;
     text-transform: uppercase;
@@ -92,7 +97,6 @@
       }
     }
   }
-
 }
 
 .create-menu {
