@@ -47,7 +47,7 @@
           <button type="submit" class="clearfix pl-1" accordion-heading>
             <div class="pull-left float-left menu-digital-section-title-text">
               <span>{{section.name}}</span>
-              <span *ngIf="section.dishes.length > 0" > ({{section.dishes.length}})</span>
+              <span> ({{editMode ? section.dishes.length : getActiveDishes(section).length}})</span>
             </div>
           </button>
           <button *ngIf="editMode" type="submit" class="accordion-heading-button text-right" accordion-heading>
@@ -57,8 +57,7 @@
           <app-dish-list
             [editMode]="editMode"
             [currency]="menu.currency"
-            [dishes]="getActiveDishes(section)"
-            [sectionCounter]="sectionCounter"
+            [dishes]="editMode ? section.dishes : getActiveDishes(section)"
             [sectionCounter]="sectionCounter"
             (editClicked)="editDish($event)"
             (deleteClicked)="deleteDish($event)"
