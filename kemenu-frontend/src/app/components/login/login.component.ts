@@ -1,12 +1,12 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {BsModalRef} from 'ngx-bootstrap/modal';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AuthenticationService} from '@services/authentication/authentication.service';
-import {Login} from '@models/auth/login.interface';
-import {ReCaptchaV3Service} from 'ng-recaptcha';
-import {Subscription} from 'rxjs';
-import {AlertsService} from '@services/alerts/alerts.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '@services/authentication/authentication.service';
+import { Login } from '@models/auth/login.interface';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { Subscription } from 'rxjs';
+import { AlertsService } from '@services/alerts/alerts.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -59,9 +59,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     };
     this.authService.login(user)
       .subscribe(result => {
-          this.bsModalRef.hide();
-          this.router.navigateByUrl('menu');
-        },
+        this.bsModalRef.hide();
+        this.router.navigateByUrl('menu');
+      },
         err => {
           this.alertService.error(this.translate.instant('Email wrong'));
         }

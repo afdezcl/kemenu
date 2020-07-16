@@ -9,6 +9,7 @@ import { DialogModule } from '@ui-controls/dialogs/dialog.module';
 import { EditInformationComponent } from './edit-information/edit-information.component';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { ResetPasswordComponent } from './resetPassword/resetPassword.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ColorPickerModule } from 'ngx-color-picker';
   declarations: [
     ProfileComponent,
     EditInformationComponent,
+    ResetPasswordComponent
   ]
 })
 export class ProfileModule { }
