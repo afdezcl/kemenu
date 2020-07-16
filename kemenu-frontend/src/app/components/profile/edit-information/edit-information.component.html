@@ -12,18 +12,17 @@
             </div>
             <div class="row">
 
-              <app-alert></app-alert>
-
               <div class="col-sm-6 text-center">
                 <div class="text-center mb-4 mt-3">
-                  <app-upload-image-button
-                  buttonText="Upload Business Image"
-                  (uploadFileEvent)="handleFileUpload($event)">
-                </app-upload-image-button>
+                  <app-upload-image-button buttonText="Upload Business Image"
+                    (uploadFileEvent)="handleFileUpload($event)">
+                  </app-upload-image-button>
                 </div>
                 <img *ngIf="businessImageURL" [src]="businessImageURL" alt="profile-image" class="img-fluid">
               </div>
+
               <div class="col-sm-6">
+                <app-alert></app-alert>
                 <div class="text-center">
                   <h4 class="card-title mb-4 mt-3">{{ 'Edit Information' | translate }}</h4>
                 </div>
@@ -32,9 +31,8 @@
                     <span class="icon-input">
                       <i class="fas fa-paint-roller"></i>
                     </span>
-                    <input class="form-control" placeholder="{{ 'MainColor' | translate}}"
-                    [(colorPicker)]="color"
-                    [style.background]="color"/>
+                    <input class="form-control" placeholder="{{ 'MainColor' | translate}}" [(colorPicker)]="color"
+                      [style.background]="color" />
                   </div>
                   <div class="form-group">
                     <span class="icon-input">
@@ -45,7 +43,8 @@
                       required>
                     <div
                       *ngIf="editInformationForm.get('businessName').errors && (editInformationForm.get('businessName').dirty || editInformationForm.get('businessName').touched)">
-                      <small *ngIf="editInformationForm.get('businessName').hasError('required')" class="text-muted ml-2 mt-1">
+                      <small *ngIf="editInformationForm.get('businessName').hasError('required')"
+                        class="text-muted ml-2 mt-1">
                         {{ 'RequiredNameRestaurant' | translate }}
                       </small>
                     </div>

@@ -49,11 +49,12 @@ export class EditInformationComponent implements OnInit {
         this.info = response.businesses[0].info;
         this.phone = response.businesses[0].phone;
         this.businessId = response.businesses[0].id;
+        this.color = response.businesses[0].color;
         this.fillForm();
       });
   }
 
-  fillForm() {
+  private fillForm() {
     this.editInformationForm = this.formBuilder.group({
       businessName: [this.businessName, Validators.required],
       phone: [this.phone],
@@ -71,11 +72,11 @@ export class EditInformationComponent implements OnInit {
 
   onSubmit() {
     const updateBusiness: UpdateBusiness = {
-      color: '#ffffff',
+      color: this.color,
       imageURL: this.businessImageURL,
-      info: this.info,
-      name: this.businessName,
-      phone: this.phone
+      info: this.form.info.value,
+      name: this.form.businessName.value,
+      phone: this.form.phone.value
     };
     this.updateInformationAttempt(updateBusiness);
   }
@@ -84,7 +85,7 @@ export class EditInformationComponent implements OnInit {
     this.alertService.clear();
     this.editProfile.updateBusiness(updateBusiness, this.businessId)
       .subscribe(() => {
-        this.alertService.success(this.translate.instant('Success Change Password'));
+        this.alertService.success(this.translate.instant('Saved Correctly'));
       });
 
   }
