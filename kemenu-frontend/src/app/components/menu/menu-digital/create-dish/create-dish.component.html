@@ -54,7 +54,7 @@
           <div class="row">
             <div class="col text-center">
               <app-upload-image-button
-                buttonText="Upload Dish Image"
+                buttonText="{{ 'Upload dish image' | translate }}"
                 resized="{{true}}"
                 (uploadFileEvent)="handleDishImageUpload($event)"></app-upload-image-button>
             </div>
