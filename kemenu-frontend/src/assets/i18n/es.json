@@ -143,13 +143,9 @@
   "MAR": "lobster",
   "FIS": "fish",
   "MEA": "steak",
-  "VEG": "broccoli",
   "DES": "pie",
-  "PAS": "noodles",
-  "ENT": "cheese",
   "DRI": "beer",
   "LIQ": "beer",
-  "PIZ": "pizza",
   "RIC": "crop-plant",
   "COF": "coffee",
   "BUR": "burger",
@@ -158,5 +154,6 @@
   "SOU": "soup-bowl",
   "STE": "soup-bowl",
   "ICE": "ice-cream-alt",
-  "SEA": "lobster"
+  "SEA": "lobster",
+  "REC": "culinary"
 }
