@@ -1,4 +1,4 @@
-name: Kemenu CI1
+name: Kemenu CI
 
 on: [push]
 
@@ -7,6 +7,7 @@ jobs:
   kemenu_testing:
     name: Kemenu testing job
     runs-on: ubuntu-latest
+    if: github.ref != 'refs/heads/rollback'
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -109,9 +110,9 @@ jobs:
       - name: Kill java process
         run: |
           ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'bash -s' < $KILL_JAVA_SH
-      - name: Remove old artifacts
+      - name: Moving old jar
         run: |
-          ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "rm -rf kemenu-backend-*.jar"
+          ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "mv kemenu-backend-*.jar ~/old_jars/"
       - name: Copy jar to server
         run: |
           scp -P ${{ secrets.PORT }} ${{ github.workspace }}/kemenu-backend/target/$JAR_NAME ${{ secrets.USERNAME }}@${{ secrets.HOST }}:~
@@ -125,3 +126,40 @@ jobs:
           git pull
           git commit -am "CI/CD: $JAR_NAME artifact deployed"
           git push
+
+  deploy_previous:
+    name: Deploy Previous Version
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/rollback'
+    env:
+      KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
+      JAVA_CMD_PATH: ~/jdk/bin/java
+      JAR_NAME: kemenu-backend-
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Set up JDK 14
+        uses: actions/setup-java@v1
+        with:
+          java-version: 14
+      - name: Create version
+        run: |
+          APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          APP_RELEASE_VERSION_ARRAY=(${APP_RELEASE_VERSION//./ })
+          ((APP_RELEASE_VERSION_ARRAY[2]--))
+          APP_RELEASE_VERSION="${APP_RELEASE_VERSION_ARRAY[0]}.${APP_RELEASE_VERSION_ARRAY[1]}.${APP_RELEASE_VERSION_ARRAY[2]}"
+          echo "::set-env name=JAR_NAME::$JAR_NAME$APP_RELEASE_VERSION-SNAPSHOT.jar"
+          echo $JAR_NAME
+      - name: Prepare SSH Keys
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.PRIVATE_CLIENT_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.SERVER_PUB_KEY }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      - name: Kill java process
+        run: |
+          ssh -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} 'bash -s' < $KILL_JAVA_SH
+      - name: Launch app
+        run: |
+          ssh -f -p ${{ secrets.PORT }} ${{ secrets.USERNAME }}@${{ secrets.HOST }} "export MONGO_DB_USER_KEMENU=${{ secrets.MONGO_DB_USER_KEMENU }} && export MONGO_DB_PWD_KEMENU=${{ secrets.MONGO_DB_PWD_KEMENU }} && export MONGO_DB_NAME_KEMENU=${{ secrets.MONGO_DB_NAME_KEMENU }} && export JWT_SECRET=${{ secrets.JWT_SECRET }} && export JWT_SECRET_REFRESH=${{ secrets.JWT_SECRET_REFRESH }} && export RECAPTCHA_TOKEN=${{ secrets.RECAPTCHA_TOKEN }} && export KEMENU_ADMIN_PWD=${{ secrets.KEMENU_ADMIN_PWD }} && export KEMENU_REGISTER_EMAILS=${{ secrets.KEMENU_REGISTER_EMAILS }} && export CLOUDINARY_KEY=${{ secrets.CLOUDINARY_KEY }} && export CLOUDINARY_SECRET=${{ secrets.CLOUDINARY_SECRET }} && export CLOUDINARY_CLOUDNAME=${{ secrets.CLOUDINARY_CLOUDNAME }} && export DD_API_KEY=${{ secrets.DD_API_KEY }} && $JAVA_CMD_PATH -Dsentry.dsn=${{ secrets.SENTRY_DSN }} -Dspring.profiles.active=prod -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=7199 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.1.1 -Xms256M -Xmx2G -jar ~/old_jars/$JAR_NAME &"

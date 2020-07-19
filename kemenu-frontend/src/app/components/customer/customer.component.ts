@@ -13,13 +13,13 @@ import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.css']
+  styleUrls: ['./customer.component.scss']
 })
 export class CustomerComponent implements OnInit {
 
   public allergens: Allergen[] = AllAllergens; // TODO: REFACTOR THIS WHEN MOVE matchAllergens METHOD
 
-  menu: Observable<ShowMenu>;
+  public menu: Observable<ShowMenu>;
   cookieBASE64: string;
   shortUrlId: string;
   imageUrl: SafeResourceUrl;

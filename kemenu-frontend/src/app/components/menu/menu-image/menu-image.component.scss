@@ -1,0 +1,61 @@
+
+.menu-image {
+
+  &-title {
+    padding-left: 40px;
+    text-align: center;
+
+    @media (max-width: 992px) {
+      padding-left: 1rem;
+    }
+
+    > div {
+      padding-left: 40px;
+    }
+
+    > * {
+      display: inline-block;
+    }
+
+    i {
+      font-size: 1.5rem;
+      margin: 3px 10px 0 0;
+      width: 18px;
+      height: 12px;
+      overflow: hidden;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+    }
+  }
+
+  & .panel.panel-open .menu-image-title i::before {
+    top: -10px;
+  }
+
+  &-options {
+    text-align: center;
+
+    &-upload,
+    &-upload::ng-deep a {
+      color: white;
+    }
+  }
+
+  &-content {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 3rem;
+
+    &-delete {
+      font-size: 2em;
+      position: absolute;
+      top: -35px;
+      right: -45px;
+    }
+  }
+}

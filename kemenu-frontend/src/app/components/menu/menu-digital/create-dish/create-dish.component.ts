@@ -1,13 +1,17 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {Validators, FormGroup, FormBuilder} from '@angular/forms';
-import {BsModalRef} from 'ngx-bootstrap/modal';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {Dish} from '@models/menu/dish.model';
 import {Allergen, AllAllergens, AllergenRequestResponse} from '@models/menu/allergen.model';
+import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
+import {TranslateService} from '@ngx-translate/core';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-create-dish',
   templateUrl: './create-dish.component.html',
-  styleUrls: ['./create-dish.component.css']
+  styleUrls: ['./create-dish.component.scss']
 })
 export class CreateDishComponent implements OnInit {
 
@@ -23,10 +27,17 @@ export class CreateDishComponent implements OnInit {
   public allergensListToShowOnRight: Allergen[];
   public showAllergens = false;
   public imageUrl = '';
+  public modalReference: BsModalRef;
+  public editMode: boolean;
+  public currency: string;
+  public editing: boolean;
 
   constructor(
+    private modalService: BsModalService,
     private formBuilder: FormBuilder,
-    public bsModalRef: BsModalRef
+    private translate: TranslateService,
+    public bsModalRef: BsModalRef,
+    public router: Router
   ) {
   }
 
@@ -37,7 +48,6 @@ export class CreateDishComponent implements OnInit {
       price: [this.price, [Validators.required, Validators.min(0)]],
       available: [this.available]
     });
-    console.log(this.selectedAllergens);
     this.divideAllergensList();
   }
 
@@ -51,7 +61,7 @@ export class CreateDishComponent implements OnInit {
     this.allergensListToShowOnRight = this.allergens.slice(halfLength, this.allergens.length);
   }
 
-  onSubmit() {
+  onSave() {
     const dish = new Dish(
       this.form.name.value,
       this.form.description.value,
@@ -61,11 +71,23 @@ export class CreateDishComponent implements OnInit {
       !this.form.available.value
     );
     this.messageEvent.emit(dish);
+  }
+
+  onSubmit() {
+    this.onSave();
     this.bsModalRef.hide();
+  }
+
+  reroute(url: string) {
+    window.open(url, '_blank');
   }
 
   activeShowAllergens() {
     this.showAllergens = !this.showAllergens;
+  }
+
+  removeDishImage() {
+      this.imageUrl = '';
   }
 
   changeAllergens(idAllergen: string) {

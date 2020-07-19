@@ -4,14 +4,14 @@ import {BsModalRef} from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-create-section',
-  templateUrl: './create-section.component.html',
-  styleUrls: ['./create-section.component.css']
+  templateUrl: './create-section.component.html'
 })
 export class CreateSectionComponent implements OnInit {
 
   @Output() messageEvent = new EventEmitter<string>();
   public section: FormGroup;
   public name: string;
+  public editing: boolean;
 
   constructor(
     private formBuilder: FormBuilder,

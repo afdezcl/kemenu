@@ -1,0 +1,77 @@
+<accordion class="accordion-custom menu-digital {{editMode ? 'edit-mode' : ''}}" [isAnimated]="true">
+  <div>
+    <accordion-group>
+      <button type="submit" class="btn btn-link clearfix menu-digital-title" accordion-heading>
+        <div class="pull-left">{{ 'Digital Menu' | translate }}</div>
+        <i class="icofont-collapse ml-2"></i>
+      </button>
+
+      <accordion *ngIf="editMode" class="accordion-custom section menu-digital-section" cdkDropList [isAnimated]="true" (cdkDropListDropped)="dropSection($event)">
+        <div *ngIf="menu">
+          <div *ngFor="let section of menu.sections; let sectionCounter = index;" cdkDrag>
+            <ng-container
+              [ngTemplateOutlet]="menu.sections.length !== 0 ? sectionContent : ''"
+              [ngTemplateOutletContext]="{section:section, sectionCounter:sectionCounter}">
+            </ng-container>
+          </div>
+        </div>
+        <div class="menu-digital-no-sections" *ngIf="!menu || !menu.sections || menu.sections.length === 0">
+          {{ "noSections" | translate }}
+        </div>
+        <div class="menu-digital-options">
+          <button *ngIf="editMode" type="submit" class="btn btn-primary menu-digital-options-new-section btn-link" (click)="openCreateSection($event)">
+            <i class="fas fa-plus"></i><span>{{ 'Create Section' | translate }}</span>
+          </button>
+        </div>
+      </accordion>
+
+      <accordion *ngIf="!editMode" class="accordion-custom section menu-digital-section" [isAnimated]="true">
+        <div *ngIf="menu">
+          <div *ngFor="let section of menu.sections; let sectionCounter = index;">
+            <ng-container
+              [ngTemplateOutlet]="menu.sections.length !== 0 ? sectionContent : ''"
+              [ngTemplateOutletContext]="{section:section, sectionCounter:sectionCounter}">
+            </ng-container>
+          </div>
+        </div>
+      </accordion>
+
+      <ng-template #sectionContent let-section='section' let-sectionCounter='sectionCounter'>
+        <accordion-group>
+          <button class="col-2 col-lg-1 clearfix pl-2 pr-1" accordion-heading cdkDragHandle>
+            <i *ngIf="editMode else elseSectionName" class="fas fa-sort"></i>
+            <ng-template #elseSectionName>
+              <i *ngIf="!editMode" class="menu-digital-section-icon-food icofont-{{getSectionIcon(section.name)}}"></i>
+            </ng-template>
+          </button>
+          <button type="submit" class="clearfix pl-1" accordion-heading>
+            <div class="pull-left float-left menu-digital-section-title-text">
+              <span>{{section.name}}</span>
+              <span> ({{editMode ? section.dishes.length : getActiveDishes(section).length}})</span>
+            </div>
+          </button>
+          <button *ngIf="editMode" type="submit" class="accordion-heading-button text-right" accordion-heading>
+            <i class="fas fa-edit mr-2" (click)="editSection(section, sectionCounter)"></i>
+          </button>
+
+          <app-dish-list
+            [editMode]="editMode"
+            [currency]="menu.currency"
+            [dishes]="editMode ? section.dishes : getActiveDishes(section)"
+            [sectionCounter]="sectionCounter"
+            (editClicked)="editDish($event)"
+            (deleteClicked)="deleteDish($event)"
+            (changeDishOrder)="changeDishOrder($event)">
+          </app-dish-list>
+
+          <button *ngIf="editMode" type="submit" class="btn btn-secondary mt-3 section-inner-button left menu-digital-section-delete-section" (click)="deleteSection(section)">
+            <i class="fas fa-trash"></i><span class="d-none d-sm-inline-block">{{ 'Delete section' | translate }}</span>
+          </button>
+          <button *ngIf="editMode" type="submit" class="btn btn-secondary mt-3 section-inner-button menu-digital-section-add-dish float-right" (click)="openCreateDish(sectionCounter)">
+            <i class="fas fa-plus"></i><span class="d-none d-sm-inline-block">{{ 'Create dish' | translate }}</span>
+          </button>
+        </accordion-group>
+      </ng-template>
+    </accordion-group>
+  </div>
+</accordion>

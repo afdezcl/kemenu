@@ -1,0 +1,112 @@
+.menu-digital {
+
+  &-no-sections {
+    color: #333333;
+    text-align: center;
+  }
+
+  &-title {
+    padding-left: 2rem;
+    text-transform: uppercase;
+
+    @media (max-width: 991.98px) {
+      padding-left: 1rem;
+    }
+
+    > div {
+      padding-left: 40px;
+    }
+
+    > * {
+      display: inline-block;
+    }
+
+    i {
+      font-size: 1.5rem;
+      margin: 3px 10px 0 0;
+      width: 18px;
+      height: 12px;
+      overflow: hidden;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+    }
+  }
+
+  & .panel.panel-open .menu-digital-title i::before {
+    top: -10px;
+  }
+
+  &-options {
+    text-align: center;
+
+    &-new-section {
+      padding: .5rem 1rem;
+      margin: 1rem 0;
+
+      & span {
+        margin-left: 5px;
+      }
+   }
+  }
+
+  @media (max-width: 991.98px) {
+    .menu-digital.edit-mode {
+      .menu-digital-title i {
+        display: none;
+      }
+    }
+  }
+
+  &-section {
+    &-add-dish {
+      right: 1rem;
+
+      span {
+        margin-left: 5px;
+      }
+    }
+
+    &-delete-section {
+      left: 1rem;
+
+      span {
+        margin-left: 5px;
+      }
+    }
+
+    &-icon-food {
+      font-size: 20px;
+      color: #7f7f7f;
+      line-height: 30px;
+    }
+
+    .panel-open {
+
+      .menu-digital-section-icon-food {
+        color: #333333;
+      }
+
+      button {
+        background: white;
+        font-weight: bolder;
+      }
+    }
+  }
+}
+
+.create-menu {
+  margin-top: 10px;
+  padding-top: initial;
+}
+
+.delete-menu-image i {
+  font-size: 2em;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
