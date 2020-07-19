@@ -1,18 +1,25 @@
 .background {
     background-color: #e7475e;
-}
-@media (min-width: 991.98px) {
-  .background {
-    height: 100vh !important;
   }
-}  
-.container, .row {
+  @media (min-width: 991.98px) {
+    .background {
+      height: 100vh !important;
+    }
+  }  
+  .container, .row {
     height: 100%;
 }
 
+
 @media (max-width: 991.98px) {
   .card {
-      margin-top: 100px;
+      margin-top: 100px;      
+    }
+  }
+  
+  @media (min-width: 1300.98px) {
+    .card {
+      min-width: 1100px;
   }
 }
 
