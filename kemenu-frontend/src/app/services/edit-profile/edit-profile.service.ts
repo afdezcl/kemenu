@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@environments/environment';
-import { ChangePassword } from '@models/edit-profile/changePassword.model';
 import { UpdateBusiness } from '@models/edit-profile/updateBusiness.model';
 import { AuthenticationService } from '@services/authentication/authentication.service';
+import { ChangePassword } from '@models/edit-profile/changePassword.interface';
 
 @Injectable({
   providedIn: 'root'
