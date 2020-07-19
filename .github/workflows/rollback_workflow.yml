@@ -1,4 +1,4 @@
-name: Kemenu CI
+name: Rollback workflow
 
 on: [push]
 
