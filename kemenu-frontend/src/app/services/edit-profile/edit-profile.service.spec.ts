@@ -10,7 +10,4 @@ describe('Service: EditProfile', () => {
     });
   });
 
-  it('should ...', inject([EditProfileService], (service: EditProfileService) => {
-    expect(service).toBeTruthy();
-  }));
 });
