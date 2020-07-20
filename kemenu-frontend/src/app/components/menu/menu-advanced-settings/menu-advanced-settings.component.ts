@@ -34,18 +34,8 @@ export class MenuAdvancedSettingsComponent implements OnInit {
   getCurrencies() {
     this.menuService.getCurrencies()
       .subscribe((currencies: Currency[]) => {
-        console.log(currencies);
-        
-        this.currencies = currencies;        
-      })
-
-     // this.fillForm();
-  }
-
-  private fillForm() {
-    this.settingsForm = this.formBuilder.group({
-      isoCode: ['EUR', Validators.required],
-    });
+        this.currencies = currencies;
+      });
   }
 
   get form() {

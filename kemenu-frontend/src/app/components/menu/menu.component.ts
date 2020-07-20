@@ -1,16 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {Menu} from '@models/menu/menu.model';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-import {CreateSectionComponent} from './menu-digital/create-section/create-section.component';
-import {Section} from '@models/menu/section.model';
-import {Dish} from '@models/menu/dish.model';
-import {TranslateService} from '@ngx-translate/core';
-import {ShareQrComponent} from './share-qr/share-qr.component';
-import {MenuService} from '@services/menu/menu.service';
-import {AuthenticationService} from '@services/authentication/authentication.service';
-import {Allergen, AllAllergens} from '@models/menu/allergen.model';
-import {DomSanitizer} from '@angular/platform-browser';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Menu } from '@models/menu/menu.model';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { CreateSectionComponent } from './menu-digital/create-section/create-section.component';
+import { Section } from '@models/menu/section.model';
+import { Dish } from '@models/menu/dish.model';
+import { TranslateService } from '@ngx-translate/core';
+import { ShareQrComponent } from './share-qr/share-qr.component';
+import { MenuService } from '@services/menu/menu.service';
+import { AuthenticationService } from '@services/authentication/authentication.service';
+import { Allergen, AllAllergens } from '@models/menu/allergen.model';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 
 @Component({
@@ -26,7 +26,7 @@ export class MenuComponent implements OnInit {
   public customerId: string;
   public thereIsChange = false;
   public menuId: string;
-  public allergens: Allergen[] = AllAllergens;  
+  public allergens: Allergen[] = AllAllergens;
 
   constructor(
     private modalService: BsModalService,
@@ -57,7 +57,7 @@ export class MenuComponent implements OnInit {
           this.menu.shortUrlId = response.businesses[0].menus[0].shortUrlId;
           this.menu.imageUrl = response.businesses[0].menus[0].imageUrl;
           this.menu.id = response.businesses[0].menus[0].id;
-          this.menu.currency = response.businesses[0].menus[0].currency;          
+          this.menu.currency = response.businesses[0].menus[0].currency;
           this.matchAllergens();
         }
       });
@@ -93,7 +93,7 @@ export class MenuComponent implements OnInit {
     const initialState = {
       shortUrlId: this.menu.shortUrlId
     };
-    this.modalReference = this.modalService.show(ShareQrComponent, {initialState});
+    this.modalReference = this.modalService.show(ShareQrComponent, { initialState });
   }
 
   onSaveMenu() {
@@ -168,7 +168,7 @@ export class MenuComponent implements OnInit {
     const initialState = {
       actualCurrency: this.menu.currency
     };
-    this.modalReference = this.modalService.show(MenuAdvancedSettingsComponent, {initialState});
+    this.modalReference = this.modalService.show(MenuAdvancedSettingsComponent, { initialState });
     this.modalReference.content.saveSettings.subscribe((currency: string) => {
       this.menu.currency = currency;
       this.onSaveMenu();
