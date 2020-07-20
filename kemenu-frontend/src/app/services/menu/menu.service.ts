@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {ShowMenu} from '@models/menu/showMenu.model';
+import { Currency } from '@models/menu/currency.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,10 @@ export class MenuService {
   getMenuById(shortUrlId: string) {
     return this.httpClient.get<ShowMenu>(environment.apiBaseUrl + `/public/short/${shortUrlId}`);
   }
+
+  getCurrencies() {
+    return this.httpClient.get<Currency[]>(environment.apiBaseUrl + `/web/v1/currencies`);
+  }
+
 }
 

@@ -11,6 +11,7 @@ import {AuthenticationService} from '@services/authentication/authentication.ser
 import {Allergen, AllAllergens} from '@models/menu/allergen.model';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
+import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 
 @Component({
   selector: 'app-menu',
@@ -26,6 +27,7 @@ export class MenuComponent implements OnInit {
   public thereIsChange = false;
   public menuId: string;
   public allergens: Allergen[] = AllAllergens;
+  public currency: string;
 
   constructor(
     private modalService: BsModalService,
@@ -125,7 +127,8 @@ export class MenuComponent implements OnInit {
       businessId: this.businessId,
       menuId: this.menu.id,
       sections: menuSections,
-      imageUrl: this.menu.imageUrl
+      imageUrl: this.menu.imageUrl,
+      currency: this.currency
     };
     this.menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
@@ -160,4 +163,13 @@ export class MenuComponent implements OnInit {
       this.onSaveMenu();
     }
   }
+
+  openSettingsModal() {
+    this.modalReference = this.modalService.show(MenuAdvancedSettingsComponent);
+    this.modalReference.content.saveSettings.subscribe((currency: string) => {
+      this.currency = currency;
+      this.onSaveMenu();
+    });
+  }
+
 }
