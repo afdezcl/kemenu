@@ -17,7 +17,8 @@
                     (uploadFileEvent)="handleFileUpload($event)">
                   </app-upload-image-button>
                 </div>
-                <img *ngIf="businessImageURL" [src]="businessImageURL" alt="profile-image" class="img-fluid">
+                <img *ngIf="businessImageURL" [src]="businessImageURL" alt="profile-image" class="img-fluid" width="400"
+                  height="400">
               </div>
 
               <div class="col-sm-6">
@@ -27,11 +28,17 @@
                 </div>
                 <form [formGroup]="editInformationForm" (submit)="onSubmit()">
                   <div class="form-group">
-                    <span class="icon-input">
-                      <i class="fas fa-paint-roller"></i>
-                    </span>
-                    <input class="form-control" placeholder="{{ 'MainColor' | translate}}" [(colorPicker)]="color"
-                      [style.background]="color" />
+                    <div class="row text-center">
+                      <div class="col-sm-9">
+                        <span class="icon-input">
+                          <i class="fas fa-paint-roller"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="{{ 'MainColor' | translate}}" disabled>
+                      </div>
+                      <div class="col-sm-3 text-center">
+                        <input class="form-control circular-button color-picker" [(colorPicker)]="color" [style.background]="color" [cpPosition]="'bottom'">
+                      </div>
+                    </div>
                   </div>
                   <div class="form-group">
                     <span class="icon-input">
