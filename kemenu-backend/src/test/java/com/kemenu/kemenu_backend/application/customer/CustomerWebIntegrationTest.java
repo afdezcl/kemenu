@@ -1,5 +1,6 @@
 package com.kemenu.kemenu_backend.application.customer;
 
+import com.kemenu.kemenu_backend.application.business.BusinessResponse;
 import com.kemenu.kemenu_backend.application.business.UpdateBusinessRequest;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.Business;
@@ -92,18 +93,27 @@ class CustomerWebIntegrationTest extends KemenuIntegrationTest {
                 .expectStatus().isOk()
                 .expectBody(UUID.class).returnResult().getResponseBody().toString();
 
+        CustomerResponse customerResponse = webTestClient
+                .get().uri("/web/v1/customer/" + customer.getEmail())
+                .header("Authorization", generateAccessToken(customer.getEmail()))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(CustomerResponse.class).returnResult().getResponseBody();
+
+        BusinessResponse businessResponse = customerResponse.getBusinesses().get(0);
+
         Customer updatedCustomer = customerRepository.findById(customerIdResponse).get();
         Business updatedBusiness = updatedCustomer.firstBusiness();
 
         assertEquals(customerId, customerIdResponse);
-        assertNotEquals(business.getName(), updatedCustomer.firstBusiness().getName());
-        assertEquals(business.getId(), updatedBusiness.getId());
-        assertEquals(request.getName(), updatedBusiness.getName());
-        assertEquals(request.getImageUrl(), updatedBusiness.getImageUrl());
-        assertEquals(request.getPhone(), updatedBusiness.getPhone());
-        assertEquals(request.getInfo(), updatedBusiness.getInfo());
+        assertNotEquals(business.getName(), businessResponse.getName());
+        assertEquals(business.getId(), businessResponse.getId());
+        assertEquals(request.getName(), businessResponse.getName());
+        assertEquals(request.getImageUrl(), businessResponse.getImageUrl());
+        assertEquals(request.getPhone(), businessResponse.getPhone());
+        assertEquals(request.getInfo(), businessResponse.getInfo());
         assertEquals(business.getMenus().get(0), updatedBusiness.getMenus().get(0));
-        assertEquals(updatedBusiness.getMenus().size(), business.getMenus().size());
+        assertEquals(updatedBusiness.getMenus().size(), businessResponse.getMenus().size());
     }
 
     @Test
