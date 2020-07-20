@@ -26,8 +26,7 @@ export class MenuComponent implements OnInit {
   public customerId: string;
   public thereIsChange = false;
   public menuId: string;
-  public allergens: Allergen[] = AllAllergens;
-  public currency: string;
+  public allergens: Allergen[] = AllAllergens;  
 
   constructor(
     private modalService: BsModalService,
@@ -58,6 +57,7 @@ export class MenuComponent implements OnInit {
           this.menu.shortUrlId = response.businesses[0].menus[0].shortUrlId;
           this.menu.imageUrl = response.businesses[0].menus[0].imageUrl;
           this.menu.id = response.businesses[0].menus[0].id;
+          this.menu.currency = response.businesses[0].menus[0].currency;          
           this.matchAllergens();
         }
       });
@@ -128,7 +128,7 @@ export class MenuComponent implements OnInit {
       menuId: this.menu.id,
       sections: menuSections,
       imageUrl: this.menu.imageUrl,
-      currency: this.currency
+      currency: this.menu.currency
     };
     this.menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
@@ -165,9 +165,12 @@ export class MenuComponent implements OnInit {
   }
 
   openSettingsModal() {
-    this.modalReference = this.modalService.show(MenuAdvancedSettingsComponent);
+    const initialState = {
+      actualCurrency: this.menu.currency
+    };
+    this.modalReference = this.modalService.show(MenuAdvancedSettingsComponent, {initialState});
     this.modalReference.content.saveSettings.subscribe((currency: string) => {
-      this.currency = currency;
+      this.menu.currency = currency;
       this.onSaveMenu();
     });
   }

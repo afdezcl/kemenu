@@ -12,6 +12,7 @@ import { Currency } from '@models/menu/currency.interface';
 export class MenuAdvancedSettingsComponent implements OnInit {
 
   public settingsForm: FormGroup;
+  public actualCurrency: string;
   public currencies: Currency[];
   @Output() saveSettings = new EventEmitter<string>();
 
@@ -23,7 +24,7 @@ export class MenuAdvancedSettingsComponent implements OnInit {
 
   ngOnInit() {
     this.settingsForm = this.formBuilder.group({
-      isoCode: ['EUR', Validators.required],
+      isoCode: [this.actualCurrency, Validators.required],
     });
 
     this.getCurrencies();
@@ -38,7 +39,7 @@ export class MenuAdvancedSettingsComponent implements OnInit {
         this.currencies = currencies;        
       })
 
-      this.fillForm();
+     // this.fillForm();
   }
 
   private fillForm() {
