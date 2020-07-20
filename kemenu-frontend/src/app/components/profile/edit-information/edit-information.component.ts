@@ -50,7 +50,7 @@ export class EditInformationComponent implements OnInit {
         this.phone = response.businesses[0].phone;
         this.businessId = response.businesses[0].id;
         this.color = response.businesses[0].color;
-      //  this.businessImageURL = response.businesses[0].
+        this.businessImageURL = response.businesses[0].imageUrl;
         this.fillForm();
       });
   }

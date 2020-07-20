@@ -14,8 +14,12 @@
 @media (max-width: 991.98px) {
   .card {
       margin-top: 100px;      
-    }
   }
+  .color-picker {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }  
+}
   
   @media (min-width: 1300.98px) {
     .card {
@@ -28,3 +32,9 @@
   margin-left: -50px;
 }
 
+.color-picker {
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+
+}
