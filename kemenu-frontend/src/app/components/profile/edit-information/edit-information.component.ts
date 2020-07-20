@@ -74,7 +74,7 @@ export class EditInformationComponent implements OnInit {
   onSubmit() {
     const updateBusiness: UpdateBusiness = {
       color: this.color,
-      imageURL: this.businessImageURL,
+      imageUrl: this.businessImageURL,
       info: this.form.info.value,
       name: this.form.businessName.value,
       phone: this.form.phone.value
