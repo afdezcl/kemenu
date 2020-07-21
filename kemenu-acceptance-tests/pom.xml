@@ -10,10 +10,10 @@
     <artifactId>kemenu-acceptance-tests</artifactId>
 
     <properties>
-        <cucumber.version>6.1.2</cucumber.version>
+        <cucumber.version>6.2.2</cucumber.version>
         <selenium.version>3.141.59</selenium.version>
-        <htmlunit-driver.version>2.41.0</htmlunit-driver.version>
-        <webdrivermanager.version>4.0.0</webdrivermanager.version>
+        <htmlunit-driver.version>2.42.0</htmlunit-driver.version>
+        <webdrivermanager.version>4.1.0</webdrivermanager.version>
         <junit.version>4.13</junit.version>
         <commons-logging.version>1.2</commons-logging.version>
     </properties>

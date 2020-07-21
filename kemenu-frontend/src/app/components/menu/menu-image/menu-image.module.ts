@@ -7,8 +7,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ShareButtonsModule} from 'ngx-sharebuttons/buttons';
 import {ShareIconsModule} from 'ngx-sharebuttons/icons';
 import {HttpClientModule} from '@angular/common/http';
-import {UploadImageButtonComponent} from '../../uploadImageButton/uploadImageButton.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {UploadImageButtonModule} from '../../uploadImageButton/uploadImageButton.module';
 
 @NgModule({
   imports: [
@@ -22,15 +22,14 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ShareButtonsModule.withConfig({
       debug: true
     }),
-    ShareIconsModule.forRoot()
+    ShareIconsModule.forRoot(),
+    UploadImageButtonModule
   ],
   exports: [
-    MenuImageComponent,
-    UploadImageButtonComponent
+    MenuImageComponent
   ],
   declarations: [
-    MenuImageComponent,
-    UploadImageButtonComponent
+    MenuImageComponent
   ]
 })
 export class MenuImageModule {

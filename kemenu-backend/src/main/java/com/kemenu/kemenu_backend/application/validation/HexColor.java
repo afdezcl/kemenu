@@ -27,7 +27,7 @@ public @interface HexColor {
         private static final Pattern hexColorPattern = Pattern.compile("#[0-9A-Fa-f]{6}");
         @Override
         public boolean isValid(String hexColor, ConstraintValidatorContext constraintValidatorContext) {
-            return !StringUtils.isEmpty(hexColor) && hexColorPattern.matcher(hexColor).matches();
+            return StringUtils.isEmpty(hexColor) || hexColorPattern.matcher(hexColor).matches();
         }
     }
 }

@@ -10,7 +10,8 @@ public enum Input {
     PASSWORD("//input[@type = 'password']"),
     BUSINESS_NAME("//input[@id = 'businessName']"),
     REGISTER_EMAIL("//input[@id = 'email']"),
-    CONFIRM_PASSWORD("//input[@id = 'confirmPassword']");
+    CONFIRM_PASSWORD("//input[@id = 'confirmPassword']"),
+    SECTION_NAME("//input[contains(@placeholder, 'Fishes, meals, hamburgers...')]");
 
     private final String xPath;
 }

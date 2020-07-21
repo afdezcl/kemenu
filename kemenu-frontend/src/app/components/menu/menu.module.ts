@@ -13,6 +13,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MenuDigitalModule} from './menu-digital/menu-digital.module';
 import {MenuImageModule} from './menu-image/menu-image.module';
+import {UploadImageButtonModule} from '../uploadImageButton/uploadImageButton.module';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import {MenuImageModule} from './menu-image/menu-image.module';
     }),
     ShareIconsModule.forRoot(),
     MenuDigitalModule,
-    MenuImageModule
+    MenuImageModule,
+    UploadImageButtonModule
   ],
   declarations: [
     MenuComponent,

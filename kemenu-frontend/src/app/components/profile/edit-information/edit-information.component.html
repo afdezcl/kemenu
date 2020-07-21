@@ -1,0 +1,87 @@
+<div class="background">
+  <div class="wrapper container">
+    <div class="row justify-content-md-center align-items-center">
+      <div class="col-auto">
+        <div class="card p-2 shadow" style="border-radius: 25px;">
+          <div class="card-body col-12">
+            <div class="row">
+              <div class="col-sm-2 text-left go-back">
+                <button type="submit" class="btn btn-secondary circular-button back-button" (click)="goBack()"><i
+                    class="fas fa-arrow-left"></i></button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6 text-center">
+                <div class="text-center mb-4 mt-3">
+                  <app-upload-image-button buttonText="Upload Business Image"
+                    (uploadFileEvent)="handleFileUpload($event)">
+                  </app-upload-image-button>
+                </div>
+                <img *ngIf="businessImageURL" [src]="businessImageURL" alt="profile-image" class="img-fluid" width="400"
+                  height="400">
+              </div>
+
+              <div class="col-sm-6">
+                <app-alert></app-alert>
+                <div class="text-center">
+                  <h4 class="card-title mb-4 mt-3">{{ 'Edit Information' | translate }}</h4>
+                </div>
+                <form [formGroup]="editInformationForm" (submit)="onSubmit()">
+                  <div class="form-group">
+                    <div class="row text-center">
+                      <div class="col-9">
+                        <span class="icon-input">
+                          <i class="fas fa-paint-roller"></i>
+                        </span>
+                        <input type="text" class="form-control" placeholder="{{ 'MainColor' | translate}}" disabled>
+                      </div>
+                      <div class="col-3 text-center">
+                        <input class="form-control circular-button color-picker" [(colorPicker)]="color" [style.background]="color" [cpPosition]="'bottom-left'">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <span class="icon-input">
+                      <i class="fas fa-user"></i>
+                    </span>
+                    <input type="text" class="form-control" id="businessName" aria-describedby="businessName"
+                      placeholder="{{ 'PlaceholderNameRestaurant' | translate }}" formControlName="businessName"
+                      required>
+                    <div
+                      *ngIf="editInformationForm.get('businessName').errors && (editInformationForm.get('businessName').dirty || editInformationForm.get('businessName').touched)">
+                      <small *ngIf="editInformationForm.get('businessName').hasError('required')"
+                        class="text-muted ml-2 mt-1">
+                        {{ 'RequiredNameRestaurant' | translate }}
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <span class="icon-input">
+                      <i class="fas fa-phone"></i>
+                    </span>
+                    <input type="text" class="form-control" id="phone" aria-describedby="phone"
+                      placeholder="{{ 'Telephone number' | translate }}" formControlName="phone">
+                  </div>
+                  <div class="form-group">
+                    <span class="icon-input">
+                      <i class="fas fa-info"></i>
+                    </span>
+                    <textarea type="text" class="form-control" id="info" aria-describedby="info"
+                      placeholder="{{ 'Placeholder Information' | translate }}" formControlName="info"></textarea>
+                  </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary"
+                      [disabled]="editInformationForm.invalid">{{ 'Save' | translate }} <i
+                        class="fas fa-save pl-2"></i></button>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
