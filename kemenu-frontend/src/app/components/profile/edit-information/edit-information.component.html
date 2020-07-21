@@ -2,11 +2,11 @@
   <div class="wrapper container">
     <div class="row justify-content-md-center align-items-center">
       <div class="col-auto">
-        <div class="card p-5 shadow" style="border-radius: 25px;">
+        <div class="card p-2 shadow" style="border-radius: 25px;">
           <div class="card-body col-12">
             <div class="row">
               <div class="col-sm-2 text-left go-back">
-                <button type="submit" class="btn btn-secondary circular-button" (click)="goBack()"><i
+                <button type="submit" class="btn btn-secondary circular-button back-button" (click)="goBack()"><i
                     class="fas fa-arrow-left"></i></button>
               </div>
             </div>
@@ -29,14 +29,14 @@
                 <form [formGroup]="editInformationForm" (submit)="onSubmit()">
                   <div class="form-group">
                     <div class="row text-center">
-                      <div class="col-sm-9">
+                      <div class="col-9">
                         <span class="icon-input">
                           <i class="fas fa-paint-roller"></i>
                         </span>
                         <input type="text" class="form-control" placeholder="{{ 'MainColor' | translate}}" disabled>
                       </div>
-                      <div class="col-sm-3 text-center">
-                        <input class="form-control circular-button color-picker" [(colorPicker)]="color" [style.background]="color" [cpPosition]="'bottom'">
+                      <div class="col-3 text-center">
+                        <input class="form-control circular-button color-picker" [(colorPicker)]="color" [style.background]="color" [cpPosition]="'bottom-left'">
                       </div>
                     </div>
                   </div>
