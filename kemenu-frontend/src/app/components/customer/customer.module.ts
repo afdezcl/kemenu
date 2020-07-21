@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 import { CustomerComponent } from './customer.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { TranslateModule } from '@ngx-translate/core';
+import {MenuDigitalModule} from '../menu/menu-digital/menu-digital.module';
+import {MenuImageModule} from '../menu/menu-image/menu-image.module';
 
 @NgModule({
   imports: [
     CommonModule,
     AccordionModule,
-    TranslateModule
+    TranslateModule,
+    MenuDigitalModule,
+    MenuImageModule
   ],
   declarations: [CustomerComponent]
 })

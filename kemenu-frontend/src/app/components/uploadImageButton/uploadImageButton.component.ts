@@ -6,7 +6,7 @@ import {AuthenticationService} from '@services/authentication/authentication.ser
 @Component({
   selector: 'app-upload-image-button',
   templateUrl: './uploadImageButton.component.html',
-  styleUrls: ['./uploadImageButton.component.css']
+  styleUrls: ['./uploadImageButton.component.scss']
 })
 export class UploadImageButtonComponent implements OnInit {
 

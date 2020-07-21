@@ -1,0 +1,157 @@
+  <div class="modal-content dish {{editMode ? 'edit-mode' : ''}}">
+
+    <div *ngIf="!editMode">
+      <button type="button" data-dismiss="modal" aria-label="Close" class="close close-modal dish-image-button" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">×</span>
+      </button>
+      <button type="button" data-dismiss="modal" class="close expand dish-image-button" (click)="reroute(imageUrl);">
+        <i class="fas fa-expand"></i>
+      </button>
+      <div class="modal-body">
+        <div class="text-left">
+          <div class="">
+            <div class="text-center dish-image">
+              <img *ngIf="imageUrl else defaultDishImage" src="{{imageUrl}}" alt="Responsive image">
+              <ng-template #defaultDishImage>
+                <div class="dish-image-default kemenu-watermark">
+                  <div class="logo-white"></div>
+                </div>
+              </ng-template>
+              <div class="dish-image-title">{{name}}</div>
+            </div>
+          </div>
+          <div class="dish-description">
+            <div class="col-lg-12">
+              <p>{{description}}</p>
+            </div>
+            <div class="dish-price col-lg-12">
+              <span>{{price}}{{currency ? currency : ' €'}}</span>
+            </div>
+          </div>
+
+          <div class="dish-alergens">
+            <div class="row justify-content-md-center">
+              <div class="dish-alergens-alergen col-4" *ngFor="let allergen of selectedAllergens">
+                <label>
+                  <img src="../../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen" class="icons-allergens">
+                  {{ 'Allergens Names.' + allergen.id | translate}}
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="editMode">
+      <div class="modal-header border-bottom-0">
+        <button type="button" data-dismiss="modal" aria-label="Close" class="close" (click)="bsModalRef.hide()">
+          <span aria-hidden="true">×</span></button>
+      </div>
+      <div class="modal-body p-4 p-lg-5">
+        <form [formGroup]="dishForm" (ngSubmit)="onSubmit()" class="login-form text-left">
+          <div class="row">
+            <div class="col text-center">
+              <app-upload-image-button
+                buttonText="{{ 'Upload dish image' | translate }}"
+                resized="{{true}}"
+                (uploadFileEvent)="handleDishImageUpload($event)"></app-upload-image-button>
+            </div>
+          </div>
+          <div class="row">
+            <div *ngIf="imageUrl" class="col text-center mt-3">
+              <div class="dish-image-content">
+                <button class="btn btn-link dish-image-content-delete" (click)="removeDishImage()">
+                  <i class="fas fa-times-circle"></i>
+                </button>
+                <img src="{{imageUrl}}" style="width: 200px;" class="img-thumbnail" alt="Responsive image">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group mt-4 mb-4">
+                <label>{{ 'Dish name' | translate }}</label>
+                <span class="icon-input">
+                  <i class="fas fa-hamburger"></i>
+                </span>
+                <input type="text" name="name" placeholder="{{ 'Examples of dishes' | translate }}" class="form-control"
+                       formControlName="name">
+              </div>
+              <div class="form-group mb-4">
+                <label>{{ 'Dish description (Optional)' | translate }} </label>
+                <span class="icon-input">
+                  <i class="fas fa-list"></i>
+                </span>
+                <input type="text" name="name" placeholder="{{ 'Dish Description' | translate }}" class="form-control"
+                       formControlName="description">
+              </div>
+              <div class="form-group mb-4">
+                <label>{{ 'Price' | translate }}</label>
+                <span class="icon-input">
+                  <i class="fas fa-money-bill-alt"></i>
+                </span>
+                <input type="number" name="price" placeholder="{{ 'Dish price' | translate }}" class="form-control"
+                       formControlName="price" min="0">
+              </div>
+              <div class="form-group form-check text-left mb-4">
+                <div class="checkbox">
+                  <label style="font-size: 1em">
+                    <input type="checkbox" name="available" formControlName="available" id="notAvailableCheckbox">
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    <label class="form-check-label" for="notAvailableCheckbox">{{ 'Not Available' | translate }}</label>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col text-center">
+              <h5 (click)="activeShowAllergens()" class="btn btn-secondary">{{ 'Show Allergens' | translate }}</h5>
+              <br>
+              <small class="text-muted text-center">{{ 'Allergens description' | translate }}</small>
+            </div>
+          </div>
+
+          <div class="row mb-4 dish-alergens" *ngIf="showAllergens">
+            <!-- LEFT COLUMN -->
+            <div class="col">
+              <div class="form-check" *ngFor="let allergen of allergensListToShowOnLeft">
+                <div class="checkbox dish-alergens-alergen">
+                  <label style="font-size: 1em">
+                    <input type="checkbox" class="button-checkbox" (change)="changeAllergens(allergen.id)" [checked]="allergenIsChecked(allergen)">
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    <img src="../../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen" class="icons-allergens">
+                    {{ 'Allergens Names.' + allergen.id | translate}}
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- RIGHT COLUMN -->
+            <div class="col">
+              <div class="form-check" *ngFor="let allergen of allergensListToShowOnRight">
+                <div class="checkbox dish-alergens-alergen">
+                  <label style="font-size: 1em">
+                    <input type="checkbox" (change)="changeAllergens(allergen.id)" [checked]="allergenIsChecked(allergen)">
+                    <span class="cr"><i class="cr-icon fa fa-check"></i></span>
+                    <img src="../../../../assets/icons-allergens/{{allergen.imageName}}" alt="allergen" class="icons-allergens">
+                    {{ 'Allergens Names.' + allergen.id | translate}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <input type="submit" value="{{ (!!editing ? 'Update dish' : 'Create dish') | translate }}" class="btn btn-primary"
+                   [disabled]="dishForm.invalid">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+

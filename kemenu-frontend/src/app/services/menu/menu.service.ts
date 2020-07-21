@@ -22,7 +22,7 @@ export class MenuService {
     return this.httpClient.put(environment.apiBaseUrl + '/web/v1/menus', menuToUpdate);
   }
 
-  getMenu(customerEmail: string) {
+  getCustomer(customerEmail: string) {
     return this.httpClient.get(environment.apiBaseUrl + `/web/v1/customer/${customerEmail}`);
   }
 

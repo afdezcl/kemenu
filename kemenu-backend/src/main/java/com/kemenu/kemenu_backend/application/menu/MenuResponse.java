@@ -15,4 +15,5 @@ public class MenuResponse {
     String shortUrlId;
     List<MenuSectionResponse> sections;
     String imageUrl;
+    String currency;
 }

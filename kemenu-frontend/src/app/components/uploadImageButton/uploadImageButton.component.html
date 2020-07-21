@@ -1,4 +1,7 @@
-<a style="color: white;" (click)="fileInput.click()" [class.disabled]="uploadingFile" class="btn btn-primary navbar-btn ml-0 ml-lg-3">
+<a (click)="fileInput.click()"
+   [class.disabled]="uploadingFile"
+   class="btn btn-primary navbar-btn upload"
+>
   <span *ngIf="uploadingFile; else elseBlock" class="spinner-border" role="status" aria-hidden="true"></span>
   <ng-template #elseBlock>
     {{ buttonText | translate }}

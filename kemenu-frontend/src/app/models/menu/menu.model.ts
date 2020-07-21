@@ -6,7 +6,8 @@ export class Menu {
     public sections: Section[],
     public shortUrlId?: string,
     public imageUrl?: string,
-    public id?: string
+    public id?: string,
+    public currency?: string
   ) {
   }
 }

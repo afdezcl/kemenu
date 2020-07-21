@@ -11,3 +11,13 @@ export class Dish {
   ) {
   }
 }
+
+export class SectionDish {
+  constructor(
+    public dish: Dish,
+    public sectionIndex: number,
+    public dishIndex: number,
+    public currency: string
+  ) {
+  }
+}

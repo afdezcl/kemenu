@@ -7,3 +7,11 @@ export class Section {
   ) {
   }
 }
+
+export class SectionIndex {
+  constructor(
+    public section: Section,
+    public sectionIndex: number
+  ) {
+  }
+}

@@ -1,0 +1,227 @@
+.dish {
+  position: relative;
+  color: #4e555b;
+  font-weight: 300;
+  font-size: 0.9rem;
+
+  @media (max-width: 992px) {
+    margin: -9px;
+    width: 100vw;
+  }
+
+  .modal-body {
+    padding: 0;
+  }
+
+  &-image {
+    max-width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+
+    &-content {
+      max-width: 100%;
+      margin: 1rem auto;
+      position: relative;
+
+      &-delete {
+        font-size: 2em;
+        position: absolute;
+        top: -35px;
+        right: -45px;
+      }
+    }
+
+    &-default {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+
+      & div {
+        width: 100px;
+        height: 100px;
+        max-width: 400px;
+        max-height: 400px;
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        opacity: 0.5;
+      }
+    }
+
+    img {
+      max-width: 120%;
+      min-height: inherit;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translateY(-50%) translateX(-50%);
+    }
+
+    &-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      display: block;
+      width: 100%;
+      padding: .5rem 1rem;
+      text-align: left;
+      font-size: 1rem;
+    }
+
+    &-button {
+      z-index: 2;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      width: 2rem;
+      height: 2rem;
+      background-color:rgba(0, 0, 0, 0.5);
+      margin: 1rem;
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      span, i {
+        font-size: 1rem;
+        display: inherit;
+        height: 1.1em;
+        color: white;
+      }
+
+      &.expand {
+        position: absolute;
+        left: 0;
+        right: initial;
+
+        i {
+          height: 1rem;
+        }
+      }
+    }
+  }
+
+  &-description {
+    padding: 1rem 0;
+  }
+
+  &-price {
+    text-align: right;
+    font-weight: bolder;
+  }
+
+  &-alergens {
+    padding: 0 1rem .5rem;
+
+    &-alergen {
+      & img {
+        width: 1.2rem;
+        margin-top: -3px;
+      }
+    }
+  }
+
+  @media (min-width: 940px) {
+    .modal-content{
+        width: 600px;
+    }
+    .form-check {
+        font-size: 15px;
+        margin-left: 20px;
+    }
+  }
+
+  .icon-allergen {
+      height: 30px;
+      width: 30px;
+  }
+
+  .checkbox label:after,
+  .radio label:after {
+      content: '';
+      display: table;
+      clear: both;
+  }
+
+  .checkbox .cr,
+  .radio .cr {
+      position: relative;
+      display: inline-block;
+      border: 1px solid #a9a9a9;
+      border-radius: .25em;
+      width: 1.3em;
+      height: 1.3em;
+      float: left;
+      margin-right: .5em;
+      margin-top: 0.2em;
+  }
+
+  .radio .cr {
+      border-radius: 50%;
+  }
+
+  .checkbox .cr .cr-icon,
+  .radio .cr .cr-icon {
+      position: absolute;
+      font-size: .8em;
+      line-height: 0;
+      top: 50%;
+      left: 20%;
+  }
+
+  .radio .cr .cr-icon {
+      margin-left: 0.04em;
+  }
+
+  .checkbox label input[type="checkbox"],
+  .radio label input[type="radio"] {
+      display: none;
+  }
+
+  .checkbox label input[type="checkbox"] + .cr > .cr-icon,
+  .radio label input[type="radio"] + .cr > .cr-icon {
+      transform: scale(3) rotateZ(-20deg);
+      opacity: 0;
+      transition: all .3s ease-in;
+  }
+
+  .checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+  .radio label input[type="radio"]:checked + .cr > .cr-icon {
+      transform: scale(1) rotateZ(0deg);
+      opacity: 1;
+  }
+
+  .checkbox label input[type="checkbox"]:disabled + .cr,
+  .radio label input[type="radio"]:disabled + .cr {
+      opacity: .5;
+  }
+
+  @media (max-width: 380px) {
+      .form-check {
+          font-size: 12px;
+          margin-left: -15px;
+      }
+
+      .button-checkbox{
+          margin-top: 85px;
+      }
+  }
+
+  @media (min-width: 413px) {
+      .form-check {
+          font-size: 13px;
+          margin-left: -10px;
+      }
+
+      .button-checkbox{
+          margin-right: 85px;
+      }
+  }
+}
