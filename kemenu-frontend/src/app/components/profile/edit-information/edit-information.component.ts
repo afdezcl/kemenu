@@ -43,7 +43,7 @@ export class EditInformationComponent implements OnInit {
   }
 
   getBusinessData() {
-    this.menuService.getMenu(this.auth.getUserEmail())
+    this.menuService.getCustomer(this.auth.getUserEmail())
       .subscribe((response: any) => {
         this.businessName = response.businesses[0].name;
         this.info = response.businesses[0].info;
