@@ -16,3 +16,4 @@ Feature: Create a menu
     And clicks on CREATE_SECTION
     And clicks on DIGITAL_MENU_COLLAPSE
     Then see the section "createMenuTest1Section1" created
+    When create a dish "createMenuTest1Section1Dish1" on "createMenuTest1Section1" section
