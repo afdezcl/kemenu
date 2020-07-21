@@ -9,7 +9,6 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 import java.util.Locale;
 
-import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
 
 @Component
