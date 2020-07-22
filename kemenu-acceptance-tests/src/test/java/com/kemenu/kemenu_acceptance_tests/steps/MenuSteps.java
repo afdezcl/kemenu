@@ -1,6 +1,7 @@
 package com.kemenu.kemenu_acceptance_tests.steps;
 
 import com.kemenu.kemenu_acceptance_tests.common.UserActions;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
@@ -23,7 +24,7 @@ public class MenuSteps {
 
     @When("create a dish {string} on {string} section")
     public void createADishOnSection(String dishName, String sectionName) {
-        UserActions.clickOn("//button[@type = 'submit' and contains(.//span, '" + sectionName + "')]");
+        UserActions.clickOnSection(sectionName);
         UserActions.clickOn("//button[@type = 'submit' and contains(@class, 'menu-digital-section-add-dish')]");
 
         WebElement dishNameInput = chromeTestRule.getChrome().findElementByXPath("//input[contains(@placeholder, 'Anchovies, potatoes, salad...')]");
@@ -35,5 +36,17 @@ public class MenuSteps {
         UserActions.clickOn("//h5[contains(text(), 'Show allergens')]");
         UserActions.clickOn("(//i[contains(@class, 'cr-icon') and contains(@class, 'fa-check')])[4]");
         UserActions.clickOn("//input[@type = 'submit' and @value = 'Create dish']");
+    }
+
+    @Then("get the QR and clicks on menu link")
+    public void getQRAndClicksOnMenuLink() {
+        String QRLink = UserActions.getQRLink();
+        chromeTestRule.getChrome().get(QRLink);
+    }
+
+    @And("see the dish {string} created in section {string}")
+    public void seeDishCreatedInSection(String dish, String section) {
+        UserActions.clickOnSection(section);
+        chromeTestRule.getChrome().findElementByXPath("//div[contains(@class, 'dish-list-dish-title') and contains(.//strong, '" + dish + "')]").isDisplayed();
     }
 }
