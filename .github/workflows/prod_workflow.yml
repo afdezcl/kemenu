@@ -1,4 +1,4 @@
-name: Kemenu CI prod
+name: Kemenu CI
 
 on: [push]
 
