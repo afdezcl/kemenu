@@ -8,6 +8,7 @@ import {Register} from '@models/auth/register.interface';
 import * as jwt_decode from 'jwt-decode';
 import {ForgotPassword} from '@models/auth/forgotPassword.interface';
 import {ChangePassword, ForgotPasswordId} from '@models/auth/changePassword.interface';
+import { ResetPassword } from '@models/auth/resetPassword.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,11 @@ export class AuthenticationService {
   changePassword(forgotPasswordId: ForgotPasswordId, data: ChangePassword) {
     return this.httpClient
       .patch(environment.apiBaseUrl + '/public/forgot/password/' + forgotPasswordId.id + '/email/' + forgotPasswordId.email, data);
+  }
+
+  resetPassword(resetPassword: ResetPassword) {
+    return this.httpClient
+      .patch(environment.apiBaseUrl + '/web/v1/customer/' + this.getUserEmail() + '/password/change', resetPassword);
   }
 
   logout() {

@@ -193,7 +193,6 @@ html {
     }
   }
 
-
   /* =====================================================
   *     HERO SECTION
   * =====================================================
@@ -2112,3 +2111,11 @@ html {
   .dropdown-item.disabled, .dropdown-item:disabled {
     color: #6c757d;
   }
+//BUTTONS
+.circular-button {
+  border-radius: 35px !important;
+  padding-top: 10px ;
+  padding-bottom: 10px ;
+  padding-left: 15px;
+  padding-right: 15px;
+}

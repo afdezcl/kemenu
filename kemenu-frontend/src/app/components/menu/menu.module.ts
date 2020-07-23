@@ -14,6 +14,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MenuDigitalModule} from './menu-digital/menu-digital.module';
 import {MenuImageModule} from './menu-image/menu-image.module';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
+import {UploadImageButtonModule} from '../uploadImageButton/uploadImageButton.module';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-adv
     }),
     ShareIconsModule.forRoot(),
     MenuDigitalModule,
-    MenuImageModule
+    MenuImageModule,
+    UploadImageButtonModule
   ],
   declarations: [
     MenuComponent,
