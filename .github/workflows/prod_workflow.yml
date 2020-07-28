@@ -1,4 +1,4 @@
-name: Kemenu CI/CD
+name: Kemenu CI
 
 on: [push]
 
