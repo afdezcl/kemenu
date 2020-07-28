@@ -182,9 +182,7 @@ jobs:
       - name: Create version
         run: |
           APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo $APP_RELEASE_VERSION
-          echo "::set-env name=JAR_NAME::$JAR_NAME$APP_RELEASE_VERSION-SNAPSHOT.jar"
-          echo $JAR_NAME
+          echo "::set-env name=JAR_NAME::$JAR_NAME$APP_RELEASE_VERSION.jar"
       - name: Prepare SSH Keys
         run: |
           mkdir -p ~/.ssh
