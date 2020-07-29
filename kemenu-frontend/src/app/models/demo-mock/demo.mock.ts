@@ -8,6 +8,7 @@ export const Demo: ShowMenu = {
       name: 'Nachos con queso',
       description: 'Nachos con queso cheddar, jalapeños y aceitunas negras',
       price: 7.50,
+      formattedPrice: '7.50€',
       allergens: [
         {
           id: 'kemenu_allergen_1',
@@ -31,6 +32,7 @@ export const Demo: ShowMenu = {
       name: 'Croquetas',
       description: 'Croquetas de jamón ibérico',
       price: 4.50,
+      formattedPrice: '4.50€',
       allergens: [
         {
           id: 'kemenu_allergen_3',
@@ -57,6 +59,7 @@ export const Demo: ShowMenu = {
       name: 'Solomillo a la brasa',
       description: 'Con mojo picón y sal de escamas',
       price: 10.20,
+      formattedPrice: '10.20€',
       allergens: [
         {
           id: 'kemenu_allergen_12',
@@ -72,12 +75,14 @@ export const Demo: ShowMenu = {
       name: 'César',
       description: 'Hamburguesa con queso, tomate y lechuga',
       price: 7.50,
+      formattedPrice: '7.50€',
       allergens: [],
       available: true
     }, {
       name: 'Simple',
       description: 'Hamburguesa con mayonesa simple',
       price: 7.80,
+      formattedPrice: '7.80€',
       allergens: [
         {
           id: 'kemenu_allergen_11',
@@ -95,6 +100,7 @@ export const Demo: ShowMenu = {
       name: 'Big-Burguer',
       description: 'Hamburguesa doble con beacon',
       price: 9.50,
+      formattedPrice: '9.50€',
       allergens: [],
       available: true
     }]
@@ -104,18 +110,21 @@ export const Demo: ShowMenu = {
       name: 'Coca-Cola',
       description: '',
       price: 1.80,
+      formattedPrice: '1.80€',
       allergens: [],
       available: true
     }, {
       name: 'Cerveza - Caña',
       description: '',
       price: 1.20,
+      formattedPrice: '1.20€',
       allergens: [],
       available: true
     }, {
       name: 'Agua',
       description: '',
       price: 1.20,
+      formattedPrice: '1.20€',
       allergens: [],
       available: true
     }]
@@ -125,12 +134,14 @@ export const Demo: ShowMenu = {
       name: 'Tarta de queso',
       description: 'Tarta de queso casera',
       price: 3.50,
+      formattedPrice: '3.50€',
       allergens: [],
       available: true
     }, {
       name: 'Natillas',
       description: 'Natillas caseras de la casa',
       price: 4.50,
+      formattedPrice: '4.50€',
       allergens: [
         {
           id: 'kemenu_allergen_6',
@@ -153,6 +164,7 @@ export const Demo: ShowMenu = {
       name: 'Variado de tartas',
       description: 'Un variado de tartas caseras de la casa',
       price: 7,
+      formattedPrice: '7.00€',
       allergens: [],
       available: true
     }]

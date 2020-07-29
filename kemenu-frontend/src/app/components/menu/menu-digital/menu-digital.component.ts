@@ -164,8 +164,8 @@ export class MenuDigitalComponent implements OnInit {
       imageUrl: dishToEdit.dish.imageUrl,
       available: !dishToEdit.dish.available,
       editMode: this.editMode,
-      currency: dishToEdit.currency,
-      editing: true
+      editing: true,
+      formattedPrice: dishToEdit.dish.formattedPrice
     };
     this.modalReference = this.modalService.show(CreateDishComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {

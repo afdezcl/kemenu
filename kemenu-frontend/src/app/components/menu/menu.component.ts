@@ -165,15 +165,4 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  openSettingsModal() {
-    const initialState = {
-      actualCurrency: this.menu.currency
-    };
-    this.modalReference = this.modalService.show(MenuAdvancedSettingsComponent, { initialState });
-    this.modalReference.content.saveSettings.subscribe((currency: string) => {
-      this.menu.currency = currency;
-      this.onSaveMenu();
-    });
-  }
-
 }
