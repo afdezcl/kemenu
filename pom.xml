@@ -5,14 +5,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.1.RELEASE</version>
+        <version>2.3.2.RELEASE</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.kemenu</groupId>
     <artifactId>kemenu</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.195-SNAPSHOT</version>
+    <version>0.0.202-SNAPSHOT</version>
 
     <modules>
         <module>kemenu-backend</module>
