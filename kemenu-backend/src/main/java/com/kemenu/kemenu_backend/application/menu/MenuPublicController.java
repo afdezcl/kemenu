@@ -23,13 +23,13 @@ class MenuPublicController {
     ResponseEntity<MenuResponse> readMenu(@PathVariable String shortUrlId, Locale locale) {
         return customerService.readMenus(shortUrlId, locale)
                 .map(menus -> ResponseEntity.ok(menus.get(0)))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/v1/short/{shortUrlId}")
     ResponseEntity<List<MenuResponse>> readMenus(@PathVariable String shortUrlId, Locale locale) {
         return customerService.readMenus(shortUrlId, locale)
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

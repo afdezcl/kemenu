@@ -27,7 +27,7 @@ class MenuWebController {
         String customerEmail = jwtService.decodeAccessToken(token).getSubject();
         return menuService.create(customerEmail, createMenuRequest.getBusinessId(), menuRequestMapper.from(createMenuRequest))
                 .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/menus")
@@ -35,6 +35,6 @@ class MenuWebController {
         String customerEmail = jwtService.decodeAccessToken(token).getSubject();
         return menuService.update(customerEmail, updateMenuRequest)
                 .map(menuId -> ResponseEntity.ok(UUID.fromString(menuId)))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

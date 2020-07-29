@@ -38,7 +38,7 @@ class ForgotPasswordPublicController {
                             } catch (JsonProcessingException e) {
                                 return "forward:/index.html";
                             }
-                        }).orElse("forward:/index.html")
-                ).orElse("forward:/index.html");
+                        }).orElseGet(() -> "forward:/index.html")
+                ).orElseGet(() -> "forward:/index.html");
     }
 }

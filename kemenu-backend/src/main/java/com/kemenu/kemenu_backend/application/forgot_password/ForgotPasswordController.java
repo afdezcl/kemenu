@@ -36,7 +36,7 @@ class ForgotPasswordController {
         if (recaptcha.isValid(request.getRecaptchaToken())) {
             return forgotPasswordService.changePassword(forgotPasswordId, customerEmail, request.getPassword())
                     .map(c -> ResponseEntity.ok(UUID.fromString(c)))
-                    .orElse(ResponseEntity.notFound().build());
+                    .orElseGet(() -> ResponseEntity.notFound().build());
         }
         return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(null);
     }

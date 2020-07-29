@@ -38,7 +38,7 @@ public class ForgotPasswordService {
                     eventPublisher.publish(emailEvent);
                     return forgotPasswordId;
                 })
-                .orElse(UUID.randomUUID().toString());
+                .orElseGet(() -> UUID.randomUUID().toString());
     }
 
     public Optional<String> changePassword(String forgotPasswordId, String customerEmail, String newPassword) {
