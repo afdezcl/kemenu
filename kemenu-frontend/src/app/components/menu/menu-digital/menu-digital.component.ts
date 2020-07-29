@@ -13,6 +13,7 @@ import {Allergen, AllAllergens} from '@models/menu/allergen.model';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {Currency} from '@models/menu/currency.interface';
 
 @Component({
   selector: 'app-menu-digital',
@@ -27,7 +28,9 @@ export class MenuDigitalComponent implements OnInit {
   public businessId: string;
   public thereIsChange = false;
   public menuId: string;
+  public currencies: Currency[];
   public allergens: Allergen[] = AllAllergens;
+  public selectedValue: string;
 
   constructor(
     private modalService: BsModalService,
@@ -41,6 +44,8 @@ export class MenuDigitalComponent implements OnInit {
 
   ngOnInit() {
     this.editMode = !!this.editMode;
+    this.getCurrencies();
+    this.selectedValue = this.menu.currency ? this.menu.currency : 'EUR';
   }
 
   openCreateSection(event) {
@@ -50,6 +55,18 @@ export class MenuDigitalComponent implements OnInit {
     this.modalReference.content.messageEvent.subscribe(name => {
       this.addNewSection(name);
     });
+  }
+
+  getCurrencies() {
+    this.menuService.getCurrencies()
+      .subscribe((currencies: Currency[]) => {
+        this.currencies = currencies.sort((a, b) => (a.isoCode > b.isoCode) ? 1 : (a.isoCode === b.isoCode) ? ((a.name > b.name) ? 1 : -1) : -1 )
+      });
+  }
+
+  onCurrencyChange(isoCode: string) {
+    this.menu.currency = isoCode;
+    this.onSaveMenu();
   }
 
   private addNewSection(name: string) {

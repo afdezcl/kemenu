@@ -18,10 +18,20 @@
         <div class="menu-digital-no-sections" *ngIf="!menu || !menu.sections || menu.sections.length === 0">
           {{ "noSections" | translate }}
         </div>
-        <div class="menu-digital-options">
-          <button *ngIf="editMode" type="submit" class="btn btn-primary menu-digital-options-new-section btn-link" (click)="openCreateSection($event)">
-            <i class="fas fa-plus"></i><span>{{ 'Create Section' | translate }}</span>
-          </button>
+        <div class="menu-digital-options row">
+          <div class="col-12 col-md-6">
+            <div class="select">
+              <select #currency (change)='onCurrencyChange(currency.value)' name="currency" id="currency" class="form-control" [(ngModel)]="selectedValue">
+                <option *ngFor="let currency of currencies" [value]="currency.isoCode">{{currency.isoCode}} - {{currency.name}} - {{currency.symbol}}</option>
+              </select>
+              <div class="select_arrow"></div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 text-md-right mt-3 mt-md-0">
+            <button *ngIf="editMode" type="submit" class="btn btn-primary menu-digital-options-new-section btn-link" (click)="openCreateSection($event)">
+              <i class="fas fa-plus"></i><span>{{ 'Create Section' | translate }}</span>
+            </button>
+          </div>
         </div>
       </accordion>
 
