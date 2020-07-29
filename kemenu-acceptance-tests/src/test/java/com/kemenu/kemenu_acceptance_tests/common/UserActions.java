@@ -14,17 +14,12 @@ import static com.kemenu.kemenu_acceptance_tests.RunCucumberTests.chromeTestRule
 public class UserActions {
 
     public static void clickOn(String xPath) {
-        clickOn(xPath, 0, 0);
+        clickOn(xPath, 0, 100);
     }
 
     private static void clickOn(String xPath, int cont, int sleep) {
         try {
-            WebElement buttonElement = chromeTestRule.getChrome().findElementByXPath(xPath);
-            try {
-                buttonElement.click();
-            } catch (ElementNotInteractableException e) {
-                chromeTestRule.getChrome().executeScript("arguments[0].click();", buttonElement);
-            }
+            click(xPath);
         } catch (StaleElementReferenceException e) {
             if (5 > cont) {
                 try {
@@ -34,8 +29,18 @@ public class UserActions {
                     interruptedException.printStackTrace();
                 }
                 clickOn(xPath, ++cont, sleep + 100);
+            } else {
+                throw e;
             }
-            throw e;
+        }
+    }
+
+    private static void click(String xPath) {
+        WebElement buttonElement = chromeTestRule.getChrome().findElementByXPath(xPath);
+        try {
+            buttonElement.click();
+        } catch (ElementNotInteractableException e) {
+            chromeTestRule.getChrome().executeScript("arguments[0].click();", buttonElement);
         }
     }
 
