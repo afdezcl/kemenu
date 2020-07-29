@@ -2,6 +2,7 @@ package com.kemenu.kemenu_acceptance_tests.common;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.kemenu.kemenu_acceptance_tests.RunCucumberTests.chromeTestRule;
 
+@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class UserActions {
 
@@ -27,6 +29,7 @@ public class UserActions {
             }
         } catch (StaleElementReferenceException e) {
             if (5 > cont) {
+                log.info("Retrying");
                 clickOn(xPath, ++cont);
             }
             throw e;
