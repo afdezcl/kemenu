@@ -60,7 +60,9 @@ export class MenuDigitalComponent implements OnInit {
   getCurrencies() {
     this.menuService.getCurrencies()
       .subscribe((currencies: Currency[]) => {
-        this.currencies = currencies.sort((a, b) => (a.isoCode > b.isoCode) ? 1 : (a.isoCode === b.isoCode) ? ((a.name > b.name) ? 1 : -1) : -1 )
+        this.currencies = currencies.sort((a, b) => {
+          return (a.isoCode > b.isoCode) ? 1 : (a.isoCode === b.isoCode) ? ((a.name > b.name) ? 1 : -1) : -1;
+        });
       });
   }
 
