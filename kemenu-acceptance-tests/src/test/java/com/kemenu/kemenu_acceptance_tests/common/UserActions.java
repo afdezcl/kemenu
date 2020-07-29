@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -13,11 +14,22 @@ import static com.kemenu.kemenu_acceptance_tests.RunCucumberTests.chromeTestRule
 public class UserActions {
 
     public static void clickOn(String xPath) {
-        WebElement buttonElement = chromeTestRule.getChrome().findElementByXPath(xPath);
+        clickOn(xPath, 0);
+    }
+
+    private static void clickOn(String xPath, int cont) {
         try {
-            buttonElement.click();
-        } catch (ElementNotInteractableException e) {
-            chromeTestRule.getChrome().executeScript("arguments[0].click();", buttonElement);
+            WebElement buttonElement = chromeTestRule.getChrome().findElementByXPath(xPath);
+            try {
+                buttonElement.click();
+            } catch (ElementNotInteractableException e) {
+                chromeTestRule.getChrome().executeScript("arguments[0].click();", buttonElement);
+            }
+        } catch (StaleElementReferenceException e) {
+            if (5 > cont) {
+                clickOn(xPath, cont++);
+            }
+            throw e;
         }
     }
 
