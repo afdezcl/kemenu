@@ -14,10 +14,10 @@ import static com.kemenu.kemenu_acceptance_tests.RunCucumberTests.chromeTestRule
 public class UserActions {
 
     public static void clickOn(String xPath) {
-        clickOn(xPath, 0);
+        clickOn(xPath, 0, 0);
     }
 
-    private static void clickOn(String xPath, int cont) {
+    private static void clickOn(String xPath, int cont, int sleep) {
         try {
             WebElement buttonElement = chromeTestRule.getChrome().findElementByXPath(xPath);
             try {
@@ -28,11 +28,12 @@ public class UserActions {
         } catch (StaleElementReferenceException e) {
             if (5 > cont) {
                 try {
-                    Thread.sleep(100);
+                    System.out.println("Retrying click");
+                    Thread.sleep(sleep + 100);
                 } catch (InterruptedException interruptedException) {
                     interruptedException.printStackTrace();
                 }
-                clickOn(xPath, ++cont);
+                clickOn(xPath, ++cont, sleep + 100);
             }
             throw e;
         }
