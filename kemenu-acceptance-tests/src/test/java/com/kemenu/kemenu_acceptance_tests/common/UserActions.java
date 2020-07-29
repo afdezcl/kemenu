@@ -27,7 +27,7 @@ public class UserActions {
             }
         } catch (StaleElementReferenceException e) {
             if (5 > cont) {
-                clickOn(xPath, cont++);
+                clickOn(xPath, ++cont);
             }
             throw e;
         }
