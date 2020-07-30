@@ -1,0 +1,29 @@
+<div class="modal-content">
+
+  <div class="modal-header border-bottom-0">
+    <button type="button" data-dismiss="modal" aria-label="Close" class="close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">×</span></button>
+  </div>
+  <div class="modal-body p-4 p-lg-5">
+    <div class="row mb-4">
+      <div class="col text-center">
+        <h3>Ajustes avanzados</h3>
+      </div>
+    </div>
+    <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()" class="login-form text-left">
+      <div class="row">
+        <div class="form-group">
+          <label for="currency">Moneda del menú</label>
+          <select name="currency" id="currency" class="form-control" formControlName="isoCode">            
+            <option *ngFor="let currency of currencies" value="{{currency.isoCode}}">{{currency.isoCode}} - {{currency.name}} - {{currency.symbol}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group text-center">
+        <input type="submit" class="btn btn-primary" [disabled]="settingsForm.invalid">
+      </div>
+    </form>
+  </div>
+
+</div>

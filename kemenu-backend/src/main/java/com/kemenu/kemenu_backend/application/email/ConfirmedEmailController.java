@@ -34,6 +34,6 @@ class ConfirmedEmailController {
                     Cookie cookie = new Cookie("confirmed_email", Boolean.toString(confirmed));
                     response.addCookie(cookie);
                     return "forward:/index.html";
-                }).orElse("forward:/index.html");
+                }).orElseGet(() -> "forward:/index.html");
     }
 }

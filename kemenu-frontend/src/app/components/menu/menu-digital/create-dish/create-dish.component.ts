@@ -20,6 +20,7 @@ export class CreateDishComponent implements OnInit {
   public name: string;
   public description: string;
   public price: number;
+  public formattedPrice: string;
   public available = false;
   public selectedAllergens: Allergen[] = [];
   public allergens: Allergen[] = AllAllergens;
@@ -29,7 +30,6 @@ export class CreateDishComponent implements OnInit {
   public imageUrl = '';
   public modalReference: BsModalRef;
   public editMode: boolean;
-  public currency: string;
   public editing: boolean;
 
   constructor(
@@ -66,6 +66,7 @@ export class CreateDishComponent implements OnInit {
       this.form.name.value,
       this.form.description.value,
       this.form.price.value,
+      null,
       this.selectedAllergens,
       this.imageUrl,
       !this.form.available.value

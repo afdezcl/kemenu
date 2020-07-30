@@ -29,7 +29,7 @@ public class CustomerMapper {
     public CustomerResponse from(Customer customer, Locale locale) {
         String shortUrlId = shortUrlRepository.findByCustomerEmail(customer.getEmail())
                 .map(ShortUrl::getId)
-                .orElse("");
+                .orElseGet(() -> "");
         return CustomerResponse.builder()
                 .id(customer.getId())
                 .businesses(businessMapper.from(shortUrlId, customer.getBusinesses(), locale))

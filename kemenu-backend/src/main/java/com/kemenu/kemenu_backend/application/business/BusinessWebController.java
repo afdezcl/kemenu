@@ -36,6 +36,6 @@ class BusinessWebController {
 
         return customerService.changeBusiness(email, businessId, request)
                 .map(c -> ResponseEntity.ok(UUID.fromString(c)))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

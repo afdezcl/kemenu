@@ -37,7 +37,7 @@ class CustomerWebController {
 
         return customerService.read(tokenEmail)
                 .map(c -> ResponseEntity.ok(customerMapper.from(c, locale)))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PatchMapping("/customer/{email}/password/change")
@@ -52,6 +52,6 @@ class CustomerWebController {
 
         return customerService.changePassword(email, passwordChangeRequest.getPassword())
                 .map(c -> ResponseEntity.ok(UUID.fromString(c)))
-                .orElse(ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
