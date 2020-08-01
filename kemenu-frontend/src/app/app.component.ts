@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {filter} from 'rxjs/operators';
-import {Router, NavigationEnd} from '@angular/router';
-import {CookieService} from 'ngx-cookie-service';
-import {AuthenticationService} from '@services/authentication/authentication.service';
-import {Tokens} from '@models/auth/tokens.model';
+import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { filter } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthenticationService } from '@services/authentication/authentication.service';
+import { Tokens } from '@models/auth/tokens.model';
 import Utils from './utils/utils';
 
 declare var gtag;
@@ -18,7 +18,8 @@ export class AppComponent implements OnInit {
 
   private readonly JWT_TOKEN = 'JWT_TOKEN';
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
-  cookieBASE64: string;
+  public cookieBASE64: string;
+  public showCookiesAlert = true;
 
   constructor(
     translate: TranslateService,
@@ -57,6 +58,10 @@ export class AppComponent implements OnInit {
       this.router.navigateByUrl('/changePassword');
     }
 
+    if (this.cookieService.get('CookieKemenu')) {
+      this.showCookiesAlert = false;
+    }
+
     if (localStorage.getItem(this.JWT_TOKEN)) {
       this.checkExpirationToken();
     }
@@ -74,6 +79,11 @@ export class AppComponent implements OnInit {
     if (this.authService.refreshTokenHasExpirated(tokens)) {
       this.authService.logout();
     }
+  }
+
+  onAcceptCookies() {
+    this.cookieService.set('CookieKemenu', 'GDPR', 30);
+    this.showCookiesAlert = !this.showCookiesAlert;
   }
 
 }

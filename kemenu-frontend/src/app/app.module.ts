@@ -32,6 +32,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '@environments/environment';
 import { ProfileModule } from './components/profile/profile.module';
 import { UploadImageButtonModule } from './components/uploadImageButton/uploadImageButton.module';
+import { CookiesBannerModule } from './components/cookies-banner/cookies-banner.module';
+
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -73,6 +75,7 @@ export function createTranslateLoader(http: HttpClient) {
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
     BrowserAnimationsModule,
+    CookiesBannerModule
   ],
   providers: [CookieService,
     {
