@@ -9,6 +9,7 @@ import com.kemenu.kemenu_backend.domain.event.EventPublisher;
 import com.kemenu.kemenu_backend.domain.model.Business;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
+import com.kemenu.kemenu_backend.domain.model.MarketingInfo;
 import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -77,5 +78,13 @@ public class CustomerService {
                         })
                         .flatMap(updatedBusinessId -> Optional.of(customerRepository.save(c)))
                 );
+    }
+
+    public Optional<String> changeMarketing(String email, CustomerMarketingRequest request) {
+        return customerRepository.findByEmail(email)
+                .flatMap(c -> {
+                    c.changeMarketing(MarketingInfo.builder().newsletterStatus(request.getNewsletterStatus()).build());
+                    return Optional.of(customerRepository.save(c));
+                });
     }
 }

@@ -54,4 +54,19 @@ class CustomerWebController {
                 .map(c -> ResponseEntity.ok(UUID.fromString(c)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
+    @PatchMapping("/customer/{email}/marketing")
+    ResponseEntity<UUID> changeMarketing(@RequestHeader(value = "Authorization") String token,
+                                         @PathVariable String email,
+                                         @RequestBody @Valid CustomerMarketingRequest customerMarketingRequest) {
+        String tokenEmail = jwtService.decodeAccessToken(token).getSubject();
+
+        if (!email.equals(tokenEmail)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+
+        return customerService.changeMarketing(email, customerMarketingRequest)
+                .map(c -> ResponseEntity.ok(UUID.fromString(c)))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 }
