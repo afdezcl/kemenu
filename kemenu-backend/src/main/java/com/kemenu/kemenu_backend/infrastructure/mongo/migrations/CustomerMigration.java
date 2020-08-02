@@ -25,9 +25,11 @@ public class CustomerMigration implements AfterConvertCallback<Customer> {
     public Customer onAfterConvert(Customer customer, Document document, String collection) {
         if (isNull(customer.getCreatedAt()) && isNull(customer.getUpdatedAt())) {
             confirmEmailOfOldCustomers(customer.getEmail());
-            return new Customer(customer.getId(), customer.getEmail(), customer.getPassword(), customer.getBusinesses(), customer.getRole());
+            Customer newCustomer = new Customer(customer.getId(), customer.getEmail(), customer.getPassword(), customer.getBusinesses(), customer.getRole());
+            newCustomer.putAsOldNewsletterCustomer(); // always is an old customer for newsletter
+            return newCustomer;
         } else {
-            return customer;
+            return tryToConvertToOldNewsletterCustomer(customer);
         }
     }
 
@@ -40,5 +42,13 @@ public class CustomerMigration implements AfterConvertCallback<Customer> {
             confirmedEmailRepository.save(confirmedEmail);
             log.info("Confirmed email {} for old customer", email);
         }
+    }
+
+    private Customer tryToConvertToOldNewsletterCustomer(Customer customer) {
+        if (isNull(customer.getMarketingInfo())) {
+            customer.putAsOldNewsletterCustomer();
+        }
+
+        return customer;
     }
 }

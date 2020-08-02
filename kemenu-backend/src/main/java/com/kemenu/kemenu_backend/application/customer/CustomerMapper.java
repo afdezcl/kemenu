@@ -33,6 +33,7 @@ public class CustomerMapper {
         return CustomerResponse.builder()
                 .id(customer.getId())
                 .businesses(businessMapper.from(shortUrlId, customer.getBusinesses(), locale))
+                .newsletterStatus(customer.getMarketingInfo().getNewsletterStatus())
                 .build();
     }
 }
