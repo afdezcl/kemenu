@@ -73,6 +73,9 @@
                       {{ 'PasswordCoincidence' | translate }}
                     </small>
                   </div>
+                  <div class="text-left mb-3">
+                    <small class="text-muted">Al registrarse está aceptando nuestra <a [routerLink]="['/cookies-policy']">Política de cookies y privacidad</a></small>
+                  </div>
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary"
                       [disabled]="registerForm.invalid">{{ 'SignUp' | translate }} <i

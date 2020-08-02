@@ -33,6 +33,7 @@ import { environment } from '@environments/environment';
 import { ProfileModule } from './components/profile/profile.module';
 import { UploadImageButtonModule } from './components/uploadImageButton/uploadImageButton.module';
 import { CookiesBannerModule } from './components/cookies-banner/cookies-banner.module';
+import { CookiesPolicyModule } from './components/cookies-policy/cookies-policy.module';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -75,7 +76,8 @@ export function createTranslateLoader(http: HttpClient) {
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
     BrowserAnimationsModule,
-    CookiesBannerModule
+    CookiesBannerModule,
+    CookiesPolicyModule
   ],
   providers: [CookieService,
     {
