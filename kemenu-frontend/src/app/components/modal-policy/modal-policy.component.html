@@ -1,3 +1,28 @@
-<p>
-  modal-policy works!
-</p>
+<div class="modal-content">
+  <div class="modal-header border-bottom-0">
+    <button type="button" data-dismiss="modal" aria-label="Close" class="close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">×</span></button>
+  </div>
+  <div class="modal-body p-4 p-lg-5">
+    <div class="row">
+      <div class="col-sm-12 mb-3">
+        <h5 class="text-bold">Nuevas Política y condiciones de uso</h5>
+        <small class="text-muted">{{ 'Alert cookies' | translate }}<a [routerLink]="['/cookies-policy']">{{ 'Cookies policy' | translate }}</a></small>
+        <h6 class="text-bold">{{ 'Cookies Page.Title 1' | translate }}</h6>
+        <small class="text-muted">{{ 'Cookies Page.Text 1' | translate }}</small>
+        <h6 class="text-bold">{{ 'Cookies Page.Title 2' | translate }}</h6>
+        <small class="text-muted">{{ 'Cookies Page.Text 2' | translate }}</small>             
+        <h6 class="text-bold">{{ 'Cookies Page.Additional Notes' | translate }}</h6>
+        <small class="text-muted">{{ 'Cookies Page.Additional Notes Description' | translate }}</small>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <button class="btn btn-secondary" (click)="updateNewsletterStatus('REJECTED')">{{ 'Reject' | translate }}</button>
+        <button class="btn btn-primary ml-2" (click)="updateNewsletterStatus('ACCEPTED')">{{ 'Accept' | translate }}</button>
+      </div>
+    </div>
+
+  </div>
+</div>

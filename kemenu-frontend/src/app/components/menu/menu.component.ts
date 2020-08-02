@@ -12,6 +12,7 @@ import { Allergen, AllAllergens } from '@models/menu/allergen.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
+import { ModalPolicyComponent } from '../modal-policy/modal-policy.component';
 
 @Component({
   selector: 'app-menu',
@@ -27,6 +28,7 @@ export class MenuComponent implements OnInit {
   public thereIsChange = false;
   public menuId: string;
   public allergens: Allergen[] = AllAllergens;
+  public newsletterStatus = '';
 
   constructor(
     private modalService: BsModalService,
@@ -52,6 +54,7 @@ export class MenuComponent implements OnInit {
       .subscribe((response: any) => {
         this.customerId = response.id;
         this.businessId = response.businesses[0].id;
+        this.newsletterStatus = response.newsletterStatus;
         if (response.businesses[0].menus.length !== 0) {
           this.menu.sections = response.businesses[0].menus[0].sections;
           this.menu.shortUrlId = response.businesses[0].menus[0].shortUrlId;
@@ -60,7 +63,14 @@ export class MenuComponent implements OnInit {
           this.menu.currency = response.businesses[0].menus[0].currency;
           this.matchAllergens();
         }
+        this.checkNewsletterStatus();
       });
+  }
+
+  private checkNewsletterStatus() {
+    if (this.newsletterStatus === 'REJECTED') {
+      this.modalReference = this.modalService.show(ModalPolicyComponent);
+    }
   }
 
   openCreateSection() {
