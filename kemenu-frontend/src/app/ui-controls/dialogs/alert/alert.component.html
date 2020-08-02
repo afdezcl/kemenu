@@ -1,3 +1,3 @@
-<alert *ngIf="message" type="{{message.type}}">
+<alert *ngIf="message" type="{{message.type}}" [dismissOnTimeout]="message.timeout">
   <span class="message">{{message.text}}</span>
 </alert>

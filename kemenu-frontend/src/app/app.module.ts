@@ -34,6 +34,7 @@ import { ProfileModule } from './components/profile/profile.module';
 import { UploadImageButtonModule } from './components/uploadImageButton/uploadImageButton.module';
 import { CookiesBannerModule } from './components/cookies-banner/cookies-banner.module';
 import { CookiesPolicyModule } from './components/cookies-policy/cookies-policy.module';
+import { ModalPolicyModule } from './components/modal-policy/modal-policy.module';
 
 
 export function createTranslateLoader(http: HttpClient) {
@@ -77,7 +78,8 @@ export function createTranslateLoader(http: HttpClient) {
     AccordionModule.forRoot(),
     BrowserAnimationsModule,
     CookiesBannerModule,
-    CookiesPolicyModule
+    CookiesPolicyModule,
+    ModalPolicyModule
   ],
   providers: [CookieService,
     {

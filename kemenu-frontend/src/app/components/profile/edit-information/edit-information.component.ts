@@ -22,6 +22,7 @@ export class EditInformationComponent implements OnInit {
   public phone = '';
   public businessId = '';
   public color = '';
+  public newsletterStatus = '';
 
   constructor(
     private translate: TranslateService,
@@ -51,6 +52,7 @@ export class EditInformationComponent implements OnInit {
         this.businessId = response.businesses[0].id;
         this.color = response.businesses[0].color;
         this.businessImageURL = response.businesses[0].imageUrl;
+        this.newsletterStatus = response.newsletterStatus;
         this.fillForm();
       });
   }
@@ -95,6 +97,21 @@ export class EditInformationComponent implements OnInit {
     if (event) {
       this.businessImageURL = event.url;
     }
+  }
+
+  changeNewsletterStatus(event) {
+    const newsletterActualStatus = event.currentTarget.checked;    
+    if(newsletterActualStatus) {
+      this.newsletterStatus = 'ACCEPTED';
+    } else {
+      this.newsletterStatus = 'REJECTED';
+    }
+    
+    this.editProfile.updateNewsletterStatus(this.newsletterStatus)
+      .subscribe(() => {
+        this.alertService.success(this.translate.instant('Saved Correctly'), 2000);              
+      });
+
   }
 
 }
