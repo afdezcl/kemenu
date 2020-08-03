@@ -79,7 +79,7 @@ export class EditInformationComponent implements OnInit {
       imageUrl: this.businessImageURL,
       info: this.form.info.value,
       name: this.form.businessName.value,
-      phone: this.form.phone.value
+      phone: this.form.phone.value      
     };
     this.updateInformationAttempt(updateBusiness);
   }
@@ -88,7 +88,7 @@ export class EditInformationComponent implements OnInit {
     this.alertService.clear();
     this.editProfile.updateBusiness(updateBusiness, this.businessId)
       .subscribe(() => {
-        this.alertService.success(this.translate.instant('Saved Correctly'));
+        this.alertService.success(this.translate.instant('Saved Correctly'), 2000);
       });
 
   }
@@ -108,7 +108,7 @@ export class EditInformationComponent implements OnInit {
     }
     
     this.editProfile.updateNewsletterStatus(this.newsletterStatus)
-      .subscribe(() => {
+      .subscribe(() => {        
         this.alertService.success(this.translate.instant('Saved Correctly'), 2000);              
       });
 

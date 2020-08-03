@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Menu } from '@models/menu/menu.model';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { CreateSectionComponent } from './menu-digital/create-section/create-section.component';
 import { Section } from '@models/menu/section.model';
 import { Dish } from '@models/menu/dish.model';
@@ -68,8 +68,14 @@ export class MenuComponent implements OnInit {
   }
 
   private checkNewsletterStatus() {
-    if (this.newsletterStatus === 'REJECTED') {
-      this.modalReference = this.modalService.show(ModalPolicyComponent);
+    if (this.newsletterStatus === 'OLD') {
+      const config: ModalOptions = {
+        backdrop: 'static',
+        keyboard: false,
+        animated: true,
+        ignoreBackdropClick: true,
+      };
+      this.modalReference = this.modalService.show(ModalPolicyComponent, config);
     }
   }
 

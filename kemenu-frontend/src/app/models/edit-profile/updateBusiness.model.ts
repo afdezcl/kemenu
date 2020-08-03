@@ -4,6 +4,6 @@ export class UpdateBusiness {
         public imageUrl: string,
         public info: string,
         public name: string,
-        public phone: string
+        public phone: string        
     ) { }
 }

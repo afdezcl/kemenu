@@ -11,7 +11,7 @@
   "ChangePassword": "Formulario para cambio de contraseña",
   "ChangeMyPassword": "Cambiar mi contraseña",
   "CoFounder": "Cofundador",
-  "Cookies policy": "Condiciones de uso, Política de Privacidad y el Uso de Cookies",
+  "Cookies policy": "Condiciones de uso y el Uso de Cookies",
   "ConfirmPasswordChanged": "Contraseña modificada correctamente. Por favor, intente acceder a la aplicación con la nueva contraseña.",
   "Contact us": "Contacta con nosotros",
 	"Create Section": "Crear sección",
@@ -156,7 +156,7 @@
                     "Cookies técnicas y funcionales: son las estrictamente necesarias para el uso del sitio web y para la prestación del servicio contratado."
                    ],
     "Title 5": "COOKIES QUE SE UTILIZAN EN ESTE SITIO WEB",
-    "Text 5 list": ["GDPR: cookie técnica y estrictamente necesaria que contiene el identificador de la sesión. Se elimina al cerrar el navegador.", 
+    "Text 5 list": ["GDPR: cookie técnica y estrictamente necesaria que contiene el identificador de la sesión. Caduca a los 30 días.", 
                     "_lang: cookie técnica y estrictamente necesaria que contiene el idioma de la sesión. Se elimina al cerrar el navegador.", 
                     "ac_cookies: cookie técnica y estrictamente necesaria que contiene el valor de si se ha aceptado la instalación de cookies. Caduca en 1 año desde la última actualización.", 
                     "_ga: cookie de Google Analytics que habilita la función de control de visitas únicas. La primera vez que un usuario entre en el sitio web a través de un navegador se instalará esta cookie. Cuando este usuario vuelva a entrar en la web con el mismo navegador, la cookie considerará que es el mismo usuario. Solo en el caso de que el usuario cambie de navegador, se considerará otro usuario. Caduca a los 2 años desde la última actualización.", 

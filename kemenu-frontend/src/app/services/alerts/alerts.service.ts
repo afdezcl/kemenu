@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class AlertsService {
   private subject = new Subject<any>();
-  private keepAfterRouteChange = false;
+  private keepAfterRouteChange = false;  
 
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
@@ -25,7 +25,7 @@ export class AlertsService {
 
   success(message: string, timeout?: number, keepAfterRouteChange = false) {
     this.keepAfterRouteChange = keepAfterRouteChange;
-    this.subject.next({ type: 'success', text: message, timeout: timeout});
+    this.subject.next({ type: 'success', text: message, timeout: timeout});    
   }
 
   error(message: string, timeout?: number, keepAfterRouteChange = false) {

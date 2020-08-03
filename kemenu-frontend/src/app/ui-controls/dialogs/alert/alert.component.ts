@@ -7,7 +7,7 @@ import { AlertsService } from 'src/app/services/alerts/alerts.service';
 
 export class AlertComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  public message: any;  
+  public message: any;    
 
   constructor(private alertService: AlertsService) { }
 
