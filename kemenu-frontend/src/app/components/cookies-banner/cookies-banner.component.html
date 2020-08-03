@@ -1,9 +1,8 @@
 <div class="banner">
-  <span class="banner-text">En esta web utilizamos cookies propias y de terceros para mejorar nuestros servicios, rendimiento y análisis de sus hábitos de navegación. Si continua navegando, consideramos que acepta su
-    uso.</span>
+  <span class="banner-text">{{ 'Cookie message' | translate }}</span>
   &nbsp;
   &nbsp;
-  <button class="banner-accept-button" (click)="onAccept()">Aceptar</button>
+  <button class="banner-accept-button" (click)="onAccept()">{{ 'Accept' | translate }}</button>
   &nbsp;
-  <button class="banner-read-more-button" [routerLink]="['/cookies-policy']">Leer más</button>
+  <button class="banner-read-more-button" [routerLink]="['/cookies-policy']">{{ 'Read More' | translate }}</button>
 </div>
