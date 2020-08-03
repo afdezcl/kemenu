@@ -4,9 +4,10 @@ set -euo pipefail
 
 mongodump --db=k3menudatastore --out=.
 
-DUMP_NAME=$(date '+%Y-%m-%d')
+DATE_FOR_NAME=$(date '+%Y-%m-%d')
+DUMP_NAME="dump_k3menudatastore_${DATE_FOR_NAME}.tar.gz"
 
-tar -czvf "dump_k3menudatastore_${DUMP_NAME}.tar.gz" ./k3menudatastore
+tar -czvf $DUMP_NAME ./k3menudatastore
 
 rm -rf ./k3menudatastore
 
@@ -29,6 +30,6 @@ ACCESS_TOKEN=$(echo $ACCESS_TOKEN_RESPONSE | jq .access_token)
 
 curl -s -X POST -L \
     -H "Authorization: Bearer ${ACCESS_TOKEN}" \
-    -F "metadata={name : '${}'};type=application/json;charset=UTF-8" \
-    -F "file=@${};type=application/gzip" \
+    -F "metadata={name : '${DUMP_NAME}'};type=application/json;charset=UTF-8" \
+    -F "file=@${DUMP_NAME};type=application/gzip" \
     "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart"
