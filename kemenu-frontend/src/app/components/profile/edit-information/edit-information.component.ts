@@ -79,7 +79,7 @@ export class EditInformationComponent implements OnInit {
       imageUrl: this.businessImageURL,
       info: this.form.info.value,
       name: this.form.businessName.value,
-      phone: this.form.phone.value      
+      phone: this.form.phone.value
     };
     this.updateInformationAttempt(updateBusiness);
   }
@@ -100,16 +100,16 @@ export class EditInformationComponent implements OnInit {
   }
 
   changeNewsletterStatus(event) {
-    const newsletterActualStatus = event.currentTarget.checked;    
-    if(newsletterActualStatus) {
+    const newsletterActualStatus = event.currentTarget.checked;
+    if (newsletterActualStatus) {
       this.newsletterStatus = 'ACCEPTED';
     } else {
       this.newsletterStatus = 'REJECTED';
     }
-    
+
     this.editProfile.updateNewsletterStatus(this.newsletterStatus)
-      .subscribe(() => {        
-        this.alertService.success(this.translate.instant('Saved Correctly'), 2000);              
+      .subscribe(() => {
+        this.alertService.success(this.translate.instant('Saved Correctly'), 2000);
       });
 
   }
