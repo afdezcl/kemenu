@@ -7,7 +7,7 @@ mongodump --db=k3menudatastore --out=.
 DATE_FOR_NAME=$(date '+%Y-%m-%d')
 DUMP_NAME="dump_k3menudatastore_${DATE_FOR_NAME}.tar.gz"
 
-tar -czvf $DUMP_NAME ./k3menudatastore
+tar -czvf $DUMP_NAME k3menudatastore
 
 rm -rf ./k3menudatastore
 
