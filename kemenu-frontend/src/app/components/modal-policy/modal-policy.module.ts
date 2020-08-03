@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from './footer.component';
+import { ModalPolicyComponent } from './modal-policy.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 
@@ -10,7 +10,6 @@ import { RouterModule } from '@angular/router';
     TranslateModule,
     RouterModule
   ],
-  declarations: [FooterComponent],
-  exports: [FooterComponent]
+  declarations: [ModalPolicyComponent]
 })
-export class FooterModule { }
+export class ModalPolicyModule { }

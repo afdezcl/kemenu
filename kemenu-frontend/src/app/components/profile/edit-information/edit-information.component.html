@@ -69,6 +69,16 @@
                     <textarea type="text" class="form-control" id="info" aria-describedby="info"
                       placeholder="{{ 'Placeholder Information' | translate }}" formControlName="info"></textarea>
                   </div>
+
+                  <div class="checkbox mb-4">
+                    <label style="font-size: 1em">
+                      <input type="checkbox" (change)="changeNewsletterStatus($event)" [checked]="newsletterStatus === 'ACCEPTED'">
+                      <span class="cr"><i class="cr-icon fa fa-check"></i></span>                      
+                      <small *ngIf="newsletterStatus === 'ACCEPTED'">Deshabilitar correos de ofertas de proveedores.</small>
+                      <small *ngIf="newsletterStatus !== 'ACCEPTED'">Habilitar correos de ofertas de proveedores.</small>
+                    </label>
+                  </div>
+
                   <div class="text-center">
                     <button type="submit" class="btn btn-primary"
                       [disabled]="editInformationForm.invalid">{{ 'Save' | translate }} <i

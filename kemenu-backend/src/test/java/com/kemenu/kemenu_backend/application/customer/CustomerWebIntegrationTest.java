@@ -6,6 +6,7 @@ import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.Business;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
+import com.kemenu.kemenu_backend.domain.model.NewsletterStatus;
 import com.kemenu.kemenu_backend.helper.business.UpdateBusinessRequestHelper;
 import com.kemenu.kemenu_backend.helper.customer.CustomerHelper;
 import com.kemenu.kemenu_backend.helper.customer.PasswordChangeRequestHelper;
@@ -16,6 +17,7 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class CustomerWebIntegrationTest extends KemenuIntegrationTest {
@@ -128,5 +130,45 @@ class CustomerWebIntegrationTest extends KemenuIntegrationTest {
                 .header("Authorization", generateAccessToken(customer.getEmail()))
                 .exchange()
                 .expectStatus().isNotFound();
+    }
+
+    @Test
+    void aCustomerCouldChangeHisNewsletterInfo() {
+        Customer customer = CustomerHelper.withMenu();
+        customerRepository.save(customer);
+
+        CustomerResponse registerCustomer = webTestClient
+                .get().uri("/web/v1/customer/" + customer.getEmail())
+                .header("Authorization", generateAccessToken(customer.getEmail()))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(CustomerResponse.class).returnResult().getResponseBody();
+
+        assertTrue(registerCustomer.getNewsletterStatus().isAccepted());
+
+        String customerIdResponse = webTestClient
+                .patch().uri("/web/v1/customer/" + customer.getEmail() + "/marketing")
+                .body(Mono.just(CustomerMarketingRequest.builder().newsletterStatus(NewsletterStatus.REJECTED).build()), CustomerMarketingRequest.class)
+                .header("Authorization", generateAccessToken(customer.getEmail()))
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(UUID.class).returnResult().getResponseBody().toString();
+
+        Customer updatedCustomer = customerRepository.findById(customerIdResponse).get();
+
+        assertTrue(updatedCustomer.getMarketingInfo().getNewsletterStatus().isRejected());
+    }
+
+    @Test
+    void aCustomerCouldNotChangeHisNewsletterInfoToOld() {
+        Customer customer = CustomerHelper.withMenu();
+        customerRepository.save(customer);
+
+        webTestClient
+                .patch().uri("/web/v1/customer/" + customer.getEmail() + "/marketing")
+                .body(Mono.just(CustomerMarketingRequest.builder().newsletterStatus(NewsletterStatus.OLD).build()), CustomerMarketingRequest.class)
+                .header("Authorization", generateAccessToken(customer.getEmail()))
+                .exchange()
+                .expectStatus().isBadRequest();
     }
 }

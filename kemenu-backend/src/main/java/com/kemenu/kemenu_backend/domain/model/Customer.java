@@ -32,6 +32,7 @@ public class Customer implements GrantedAuthority {
     private String password;
     private List<Business> businesses;
     private Role role;
+    private MarketingInfo marketingInfo;
     @CreatedDate
     private Instant createdAt;
     @LastModifiedDate
@@ -51,7 +52,18 @@ public class Customer implements GrantedAuthority {
     }
 
     public Customer(String id, String email, String password, List<Business> businesses, Role role) {
-        this(id, email, password, businesses, role, Instant.now(), Instant.now());
+        this(
+                id,
+                email,
+                password,
+                businesses,
+                role,
+                MarketingInfo.builder()
+                        .newsletterStatus(NewsletterStatus.ACCEPTED)
+                        .build(),
+                Instant.now(),
+                Instant.now()
+        );
     }
 
     public void changeEmail(String email) {
@@ -93,6 +105,14 @@ public class Customer implements GrantedAuthority {
 
     public void changePassword(String password) {
         this.password = password;
+    }
+
+    public void changeMarketing(MarketingInfo marketingInfo) {
+        this.marketingInfo = marketingInfo;
+    }
+
+    public void putAsOldNewsletterCustomer() {
+        changeMarketing(MarketingInfo.builder().newsletterStatus(NewsletterStatus.OLD).build());
     }
 
     @Override

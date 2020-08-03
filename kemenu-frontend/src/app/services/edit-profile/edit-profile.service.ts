@@ -26,4 +26,14 @@ export class EditProfileService {
     return this.httpClient
       .put(environment.apiBaseUrl + `/web/v1/customer/${email}/business/${businessId}`, updateBusiness);
   }
+
+  updateNewsletterStatus( newsletterStatus ) {
+    const email = this.auth.getUserEmail();
+    const newsletter = {
+      newsletterStatus
+    };
+    return this.httpClient
+      .patch(environment.apiBaseUrl + `/web/v1/customer/${email}/marketing`, newsletter);
+  }
+
 }

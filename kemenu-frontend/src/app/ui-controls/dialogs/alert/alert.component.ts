@@ -7,13 +7,15 @@ import { AlertsService } from 'src/app/services/alerts/alerts.service';
 
 export class AlertComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
-  message: any;
+  public message: any;
 
   constructor(private alertService: AlertsService) { }
 
   ngOnInit() {
     this.subscription = this.alertService.getAlert()
-      .subscribe(message => this.message = message);
+      .subscribe(message => {
+        this.message = message;
+      });
   }
 
   ngOnDestroy() {

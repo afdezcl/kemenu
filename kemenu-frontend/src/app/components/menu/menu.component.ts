@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Menu } from '@models/menu/menu.model';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { CreateSectionComponent } from './menu-digital/create-section/create-section.component';
 import { Section } from '@models/menu/section.model';
 import { Dish } from '@models/menu/dish.model';
@@ -12,6 +12,7 @@ import { Allergen, AllAllergens } from '@models/menu/allergen.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
+import { ModalPolicyComponent } from '../modal-policy/modal-policy.component';
 
 @Component({
   selector: 'app-menu',
@@ -27,6 +28,7 @@ export class MenuComponent implements OnInit {
   public thereIsChange = false;
   public menuId: string;
   public allergens: Allergen[] = AllAllergens;
+  public newsletterStatus = '';
 
   constructor(
     private modalService: BsModalService,
@@ -52,6 +54,7 @@ export class MenuComponent implements OnInit {
       .subscribe((response: any) => {
         this.customerId = response.id;
         this.businessId = response.businesses[0].id;
+        this.newsletterStatus = response.newsletterStatus;
         if (response.businesses[0].menus.length !== 0) {
           this.menu.sections = response.businesses[0].menus[0].sections;
           this.menu.shortUrlId = response.businesses[0].menus[0].shortUrlId;
@@ -60,7 +63,20 @@ export class MenuComponent implements OnInit {
           this.menu.currency = response.businesses[0].menus[0].currency;
           this.matchAllergens();
         }
+        this.checkNewsletterStatus();
       });
+  }
+
+  private checkNewsletterStatus() {
+    if (this.newsletterStatus === 'OLD') {
+      const config: ModalOptions = {
+        backdrop: 'static',
+        keyboard: false,
+        animated: true,
+        ignoreBackdropClick: true,
+      };
+      this.modalReference = this.modalService.show(ModalPolicyComponent, config);
+    }
   }
 
   openCreateSection() {

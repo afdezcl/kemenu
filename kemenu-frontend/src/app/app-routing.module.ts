@@ -11,6 +11,7 @@ import { ChangePasswordComponent } from './components/changePassword/changePassw
 import { EditInformationComponent } from './components/profile/edit-information/edit-information.component';
 import { AboutUsComponent } from './components/aboutUs/aboutUs.component';
 import { ResetPasswordComponent } from './components/profile/resetPassword/resetPassword.component';
+import { CookiesPolicyComponent } from './components/cookies-policy/cookies-policy.component';
 
 export const routes: Routes = [
 
@@ -18,6 +19,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'forgotPassword', component: ForgotPasswordComponent },
   { path: 'changePassword', component: ChangePasswordComponent },
+  { path: 'cookies-policy', component: CookiesPolicyComponent},
   { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'profile/new-password', component: ResetPasswordComponent, canActivate: [AuthGuard] },
