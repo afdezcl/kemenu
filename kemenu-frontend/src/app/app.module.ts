@@ -3,16 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RegisterModule } from './components/register/register.module';
-import { ForgotPasswordModule } from './components/forgotPassword/forgotPassword.module';
-import { ChangePasswordModule } from './components/changePassword/changePassword.module';
-import { LoginModule } from './components/login/login.module';
 import { FooterModule } from './components/footer/footer.module';
 import { NavbarModule } from './components/navbar/navbar.module';
-import { HomeModule } from './components/home/home.module';
-import { MenuModule } from './components/menu/menu.module';
-import { AboutUsModule } from './components/aboutUs/aboutUs.module';
-import { CustomerModule } from './components/customer/customer.module';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './ui-controls/interceptor/auth.interceptor';
@@ -30,10 +22,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '@environments/environment';
-import { ProfileModule } from './components/profile/profile.module';
 import { UploadImageButtonModule } from './components/uploadImageButton/uploadImageButton.module';
 import { CookiesBannerModule } from './components/cookies-banner/cookies-banner.module';
-import { CookiesPolicyModule } from './components/cookies-policy/cookies-policy.module';
 import { ModalPolicyModule } from './components/modal-policy/modal-policy.module';
 
 
@@ -60,28 +50,19 @@ export function createTranslateLoader(http: HttpClient) {
     }),
 
     // My modules
-    RegisterModule,
-    ProfileModule,
-    ForgotPasswordModule,
-    ChangePasswordModule,
-    LoginModule,
     NavbarModule,
     FooterModule,
-    HomeModule,
-    MenuModule,
-    AboutUsModule,
-    CustomerModule,
     UploadImageButtonModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
     BrowserAnimationsModule,
-    CookiesBannerModule,
-    CookiesPolicyModule,
+    CookiesBannerModule,    
     ModalPolicyModule
   ],
-  providers: [CookieService,
+  providers: [
+    CookieService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -91,5 +72,4 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }
