@@ -58,7 +58,7 @@ export function createTranslateLoader(http: HttpClient) {
     CollapseModule.forRoot(),
     AccordionModule.forRoot(),
     BrowserAnimationsModule,
-    CookiesBannerModule,    
+    CookiesBannerModule,
     ModalPolicyModule
   ],
   providers: [

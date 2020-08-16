@@ -6,15 +6,15 @@ import { ResetPasswordComponent } from './resetPassword/resetPassword.component'
 import { EditInformationComponent } from './edit-information/edit-information.component';
 
 export const routes: Routes = [
-    {
-        path: '', component: ProfileComponent, canActivate: [AuthGuard],        
-    },
-    { 
-      path: 'new-password', component: ResetPasswordComponent, canActivate: [AuthGuard] 
-    },
-    { 
-      path: 'edit', component: EditInformationComponent, canActivate: [AuthGuard] 
-    }
+  {
+    path: '', component: ProfileComponent, canActivate: [AuthGuard],
+  },
+  {
+    path: 'new-password', component: ResetPasswordComponent, canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit', component: EditInformationComponent, canActivate: [AuthGuard]
+  }
 
 ];
 

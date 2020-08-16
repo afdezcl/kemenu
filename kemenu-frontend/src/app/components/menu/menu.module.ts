@@ -30,7 +30,7 @@ import { MenuRoutingModule } from './menu-routing.module';
     ShareButtonsModule.withConfig({
       debug: true
     }),
-    ShareIconsModule.forRoot(),
+    ShareIconsModule,
     MenuDigitalModule,
     MenuImageModule,
     UploadImageButtonModule,
