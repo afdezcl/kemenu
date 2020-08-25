@@ -1,0 +1,66 @@
+.faq {
+
+  .panel-body.card-body {
+    padding: 0;
+  }
+
+  & .panel.panel-open .faq-title > i::before {
+    top: -10px;
+  }
+
+  &-title {
+    padding-left: 2rem;
+    text-transform: none;
+
+    @media (max-width: 991.98px) {
+      padding-left: 1rem;
+    }
+
+    > div {
+      padding-left: 10px;
+      line-height: 1rem;
+    }
+
+    > * {
+      display: inline-block;
+    }
+
+    i {
+      font-size: 1.5rem;
+      margin: 3px 10px 0 0;
+      width: 18px;
+      height: 12px;
+      overflow: hidden;
+      position: relative;
+
+      &::before {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+      }
+    }
+
+    &-question {
+      text-align: left!important;
+      padding: 1rem!important;
+      border: 0;
+
+      div, i {
+        padding-left: 0px;
+        float: left;
+      }
+    }
+
+  }
+
+  &-question-answer {
+    padding: 0 .5rem;
+    line-height: 1rem;
+    color: #4e555b;
+  }
+
+
+  .accordion-custom .card {
+    border-bottom: 1px solid whitesmoke;
+  }
+}
