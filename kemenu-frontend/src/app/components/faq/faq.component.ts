@@ -16,7 +16,5 @@ export class FaqComponent implements OnInit {
 
   ngOnInit() {
     this.faq = this.translate.getTranslation(this.translate.currentLang).subscribe(trans => trans);
-
-    console.log(this.faq);
   }
 }

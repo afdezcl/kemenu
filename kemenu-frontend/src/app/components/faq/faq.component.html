@@ -9,9 +9,13 @@
         <div *ngFor="let questionObject of ('faq' | translate)">
           <accordion class="accordion-custom faq-question" [isAnimated]="true">
             <accordion-group>
-              <button type="submit" class="faq-title faq-title-question d-flex align-items-center" accordion-heading>
-                <div class="col-10">{{questionObject.question}}</div>
-                <i class="icofont-collapse col-2 ml-2"></i>
+              <button type="submit" class="faq-title-question d-flex align-items-center" accordion-heading>
+                <div>
+                  <span>
+                    {{questionObject.question}}
+                  </span>
+                  <i class="icofont-collapse"></i>
+                </div>
               </button>
               <div class="faq-question-answer">{{questionObject.answer}}</div>
             </accordion-group>

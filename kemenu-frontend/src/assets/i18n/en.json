@@ -250,28 +250,28 @@
   "Faq title": "FAQ",
   "faq": [
     {
-      "question": "¿Cuántas veces puedo modificar mi menú?",
-      "answer": "Puedes modificar el menú tantas veces quieras, es decir, puedes añadir, editar o eliminar las secciones de la carta y los platos de cada una de ellas todas las veces que necesites. No existe ningún límite de modificaciones del menú."
+      "question": "How many times can I modify my menu?",
+      "answer": "You  can modify your menu as many times as you want, you can add, modify and delete the menu sections and the dishes of each one the times you need. There are no limits at all."
     },
     {
-      "question": "¿Cómo obtengo el código QR?",
-      "answer": "Para poder obtener el código QR de su restaurante necesita registrarse con sus datos e iniciar sesión. Acto seguido podrá iniciar sesión y comenzar a crear su menú digital o subir una imagen de la carta. En este momento KEMENU te proporcionará el código QR que podrás guardar e imprimir para dejarlo por su restaurante."
+      "question": "How can I get my QR code?",
+      "answer": "In order to get the QR code of your restaurant you need to sign up and log in. Then you will be able to create your digital menu or upload the full menu image of your restaurant. At this point KEMENU will give you the option to get your QR code to be placed in your restaurant."
     },
     {
-      "question": "¿Cuánto tiempo dura el código QR?",
-      "answer": "El código QR es de por vida, es decir, no tiene fecha de caducidad."
+      "question": "Does the QR code expires?",
+      "answer": "Our QR codes don't expire. You can have the same QR code for life."
     },
     {
-      "question": "¿Si modifico el menú cambia el código QR?",
-      "answer": "Puedes modificar el menú todas las veces que necesites y el código QR será el mismo, por lo que si ya tienes el código impreso y repartido por el restaurante, no te preocupes porque el código QR seguirá siendo el mismo aunque cambies la carta."
+      "question": "If I modify my menu, does the QR code change?",
+      "answer": "You can modify your menu as many times as you need and the QR code will always be the same, so if your QR code in  printed and placed around your restaurant don't worry because the QR code  will be the same even if you change the  menu."
     },
     {
-      "question": "¿Puedo subir una imagen de la carta de mi restaurante?",
-      "answer": "Desde KEMENU ofrecemos la posibilidad de hacer el menú digital (dónde tendrás que introducir cada sección y plato de tu carta), pero también puedes subir una imagen de la carta para el mismo código QR."
+      "question": "Can I upload an image of my restaurant menu?",
+      "answer": "In KEMENU we bring your the opportunity to create a digital menu (where your will be able to create different sections and dishes), but at the same time you can upload an image of the full menu with the same QR code."
     },
     {
-      "question": "¿Cómo pueden ver los clientes la carta en su móvil?",
-      "answer": "Cuando tengas el código QR repartido por tu restaurante, los clientes solo tendrán que abrir la cámara de su móvil y enfocar al código QR, acto seguido les aparecerá un enlace con la carta de tu restaurante. Si no funcionase con la cámara del móvil, recomendamos descargar alguna aplicación gratuita de lector de QR, ya que móviles de años anteriores no permiten leer el código QR directamente desde la cámara."
+      "question": "How customers can see my restaurant menu?",
+      "answer": "When you had the QR code printed and placed around your restaurant, customers would only have to open their mobile camera and read the QR code with it, then they will get a link to the menu of the restaurant. If the camera option doesn't work, we recommend to download and install a free QR code reader application, this is because many older mobiles versions don't allow reading the  QR code with the camera application."
     }
   ]
 }
