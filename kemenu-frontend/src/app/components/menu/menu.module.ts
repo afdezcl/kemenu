@@ -28,7 +28,7 @@ import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.
     ShareButtonsModule.withConfig({
       debug: true
     }),
-    ShareIconsModule,
+    ShareIconsModule.forRoot(),
     MenuDigitalModule,
     MenuImageModule,
     MenuRoutingModule,
