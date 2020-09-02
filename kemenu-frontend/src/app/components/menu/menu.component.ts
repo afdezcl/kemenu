@@ -4,14 +4,11 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { CreateSectionComponent } from './menu-digital/create-section/create-section.component';
 import { Section } from '@models/menu/section.model';
 import { Dish } from '@models/menu/dish.model';
-import { TranslateService } from '@ngx-translate/core';
 import { ShareQrComponent } from './share-qr/share-qr.component';
 import { MenuService } from '@services/menu/menu.service';
 import { AuthenticationService } from '@services/authentication/authentication.service';
 import { Allergen, AllAllergens } from '@models/menu/allergen.model';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 import { ModalPolicyComponent } from '../modal-policy/modal-policy.component';
 
 @Component({
@@ -32,13 +29,10 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private modalService: BsModalService,
-    private translate: TranslateService,
     private menuService: MenuService,
     private authService: AuthenticationService,
-    private router: Router,
-    private sanitizer: DomSanitizer
-  ) {
-  }
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.loadMenu();

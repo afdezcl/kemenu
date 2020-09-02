@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-import {LoginComponent} from '../login/login.component';
-import {TranslateService} from '@ngx-translate/core';
-import {AuthenticationService} from '@services/authentication/authentication.service';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { LoginComponent } from '../login/login.component';
+import { TranslateService } from '@ngx-translate/core';
+import { AuthenticationService } from '@services/authentication/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -20,8 +20,7 @@ export class NavbarComponent implements OnInit {
     private translate: TranslateService,
     public authService: AuthenticationService,
     private router: Router
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
   }
