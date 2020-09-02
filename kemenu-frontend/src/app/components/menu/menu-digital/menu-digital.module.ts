@@ -1,14 +1,16 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MenuDigitalComponent} from './menu-digital.component';
-import {TranslateModule} from '@ngx-translate/core';
-import {AccordionModule} from 'ngx-bootstrap/accordion';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ShareButtonsModule} from 'ngx-sharebuttons/buttons';
-import {ShareIconsModule} from 'ngx-sharebuttons/icons';
-import {HttpClientModule} from '@angular/common/http';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import {DishListModule} from './dish-list/dish-list.module';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MenuDigitalComponent } from './menu-digital.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { HttpClientModule } from '@angular/common/http';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DishListModule } from './dish-list/dish-list.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -23,7 +25,9 @@ import {DishListModule} from './dish-list/dish-list.module';
       debug: true
     }),
     ShareIconsModule.forRoot(),
-    DishListModule
+    DishListModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   exports: [
     MenuDigitalComponent
