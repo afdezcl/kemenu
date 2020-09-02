@@ -16,7 +16,6 @@ import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-adv
 import { MenuRoutingModule } from './menu-routing.module';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
 
-
 @NgModule({
   imports: [
     HttpClientModule,
