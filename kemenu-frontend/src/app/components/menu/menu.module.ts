@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateDishComponent } from './menu-digital/create-dish/create-dish.component';
 import { ShareQrComponent } from './share-qr/share-qr.component';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
-import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuDigitalModule } from './menu-digital/menu-digital.module';
 import { MenuImageModule } from './menu-image/menu-image.module';
@@ -27,7 +26,6 @@ import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.
     ShareButtonsModule.withConfig({
       debug: true
     }),
-    ShareIconsModule.forRoot(),
     MenuDigitalModule,
     MenuImageModule,
     MenuRoutingModule,

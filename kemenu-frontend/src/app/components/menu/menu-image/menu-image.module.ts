@@ -5,8 +5,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { HttpClientModule } from '@angular/common/http';
 import { UploadImageButtonModule } from '../../uploadImageButton/uploadImageButton.module';
-import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
-import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 @NgModule({
   imports: [
@@ -14,11 +12,7 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
     CommonModule,
     TranslateModule,
     AccordionModule,
-    UploadImageButtonModule,
-    ShareButtonsModule.withConfig({
-      debug: true
-    }),
-    ShareIconsModule.forRoot(),
+    UploadImageButtonModule
   ],
   exports: [
     MenuImageComponent

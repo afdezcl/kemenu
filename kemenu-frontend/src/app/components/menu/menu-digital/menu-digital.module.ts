@@ -7,8 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DishListModule } from './dish-list/dish-list.module';
-import { ShareIconsModule } from 'ngx-sharebuttons/icons';
-import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 
 @NgModule({
   imports: [
@@ -20,10 +18,6 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
     ReactiveFormsModule,
     DragDropModule,
     DishListModule,
-    ShareButtonsModule.withConfig({
-      debug: true
-    }),
-    ShareIconsModule.forRoot(),
   ],
   exports: [
     MenuDigitalComponent
