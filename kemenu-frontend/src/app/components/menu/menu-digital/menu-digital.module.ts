@@ -9,7 +9,6 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DishListModule } from './dish-list/dish-list.module';
-import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     }),
     ShareIconsModule.forRoot(),
     DishListModule,
-    ToastrModule.forRoot(),
     BrowserAnimationsModule
   ],
   exports: [

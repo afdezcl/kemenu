@@ -14,7 +14,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Currency } from '@models/menu/currency.interface';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-menu-digital',
@@ -39,8 +38,7 @@ export class MenuDigitalComponent implements OnInit {
     private menuService: MenuService,
     private authService: AuthenticationService,
     private router: Router,
-    private sanitizer: DomSanitizer,
-    private toastr: ToastrService
+    private sanitizer: DomSanitizer
   ) {
   }
 
@@ -73,10 +71,6 @@ export class MenuDigitalComponent implements OnInit {
   onCurrencyChange(isoCode: string) {
     this.menu.currency = isoCode;
     this.onSaveMenu();
-  }
-
-  showSuccessToasty() {
-    this.toastr.success(this.translate.instant('Saved Correctly'));
   }
 
   private addNewSection(name: string) {
@@ -194,7 +188,6 @@ export class MenuDigitalComponent implements OnInit {
   }
 
   onSaveMenu() {
-    this.showSuccessToasty();
     this.menuChange.emit(this.menu);
   }
 
