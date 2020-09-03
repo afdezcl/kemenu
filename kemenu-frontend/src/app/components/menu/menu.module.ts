@@ -14,6 +14,7 @@ import { MenuImageModule } from './menu-image/menu-image.module';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 import { MenuRoutingModule } from './menu-routing.module';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.
     ShareButtonsModule.withConfig({
       debug: true
     }),
+    ShareIconsModule,
     MenuDigitalModule,
     MenuImageModule,
     MenuRoutingModule,
