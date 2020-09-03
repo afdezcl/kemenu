@@ -1,0 +1,96 @@
+.faq {
+
+  .panel-body.card-body {
+    padding: 0;
+  }
+
+  i.icofont-collapse {
+    font-size: 1.5rem;
+    width: 18px;
+    height: 12px;
+    overflow: hidden;
+
+    &::before {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+  }
+
+  & .panel.panel-open .faq-title > i::before {
+    top: -10px;
+  }
+
+  .faq-question .panel.panel-open .faq-title-question > i::before {
+    top: -10px;
+  }
+
+  &-title {
+    padding-left: 2rem;
+    text-transform: none;
+
+    @media (max-width: 991.98px) {
+      padding-left: 1rem;
+    }
+
+    > div {
+      padding-left: 10px;
+      line-height: 1rem;
+    }
+
+    > * {
+      display: inline-block;
+    }
+
+    i {
+      position: relative;
+    }
+
+    &-question {
+      text-align: left!important;
+      padding: 1rem!important;
+      border: 0;
+
+      div, i, span {
+        padding-left: 0px;
+        float: left;
+      }
+
+      span {
+        max-width: 92%;
+        @media (min-width: 991.98px) {
+          max-width: unset;
+        }
+      }
+
+      i {
+        position: absolute;
+        right: 1rem;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
+    }
+
+  }
+
+  &-question {
+      & .panel.panel-open .faq-title-question > div > i::before {
+        top: -10px;
+      }
+      &.accordion-custom .card-body {
+        padding-top: 0;
+      }
+  }
+
+  &-question-answer {
+    padding: 0 .5rem;
+    line-height: 1rem;
+    color: #4e555b;
+    max-width: 92%;
+    @media (min-width: 991.98px) {
+      max-width: unset;
+    }
+  }
+
+}

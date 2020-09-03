@@ -11,7 +11,6 @@ import { AuthenticationService } from '@services/authentication/authentication.s
 import { Allergen, AllAllergens } from '@models/menu/allergen.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 import { ModalPolicyComponent } from '../modal-policy/modal-policy.component';
 
 @Component({
