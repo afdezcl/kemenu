@@ -12,6 +12,7 @@ import { Allergen, AllAllergens } from '@models/menu/allergen.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ModalPolicyComponent } from '../modal-policy/modal-policy.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-menu',
@@ -35,7 +36,8 @@ export class MenuComponent implements OnInit {
     private menuService: MenuService,
     private authService: AuthenticationService,
     private router: Router,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private toasty: ToastrService
   ) {
   }
 
@@ -133,6 +135,9 @@ export class MenuComponent implements OnInit {
         this.menu.id = response.menuId;
         this.matchAllergens();
         this.router.navigateByUrl('menu');
+        this.showSuccessToasty();
+      }, () => {
+        this.showErrorToasty();
       });
   }
 
@@ -150,6 +155,9 @@ export class MenuComponent implements OnInit {
         this.menu.id = response;
         this.matchAllergens();
         this.loadMenu();
+        this.showSuccessToasty();
+      }, () => {
+        this.showErrorToasty();
       });
   }
 
@@ -180,4 +188,11 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  showSuccessToasty() {
+    this.toasty.success(this.translate.instant('Saved Correctly'));
+  }
+
+  showErrorToasty() {
+    this.toasty.error(this.translate.instant('Save error'));
+  }
 }
