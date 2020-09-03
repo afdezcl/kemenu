@@ -16,6 +16,7 @@ import { MenuImageModule } from './menu-image/menu-image.module';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot(),
     MenuDigitalModule,
     MenuImageModule,
-    UploadImageButtonModule
+    UploadImageButtonModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     MenuComponent,

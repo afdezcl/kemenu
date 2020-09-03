@@ -9,7 +9,6 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { HttpClientModule } from '@angular/common/http';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DishListModule } from './dish-list/dish-list.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -24,8 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       debug: true
     }),
     ShareIconsModule.forRoot(),
-    DishListModule,
-    BrowserAnimationsModule
+    DishListModule
   ],
   exports: [
     MenuDigitalComponent
