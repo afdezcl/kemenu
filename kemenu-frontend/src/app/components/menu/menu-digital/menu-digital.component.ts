@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Menu } from '@models/menu/menu.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { CreateSectionComponent } from './create-section/create-section.component';
