@@ -20,4 +20,5 @@ public class CreateMenuRequest {
     List<MenuSectionRequest> sections;
     String imageUrl;
     String currency;
+    String name;
 }
