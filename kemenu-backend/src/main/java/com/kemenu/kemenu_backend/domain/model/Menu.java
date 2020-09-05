@@ -22,6 +22,8 @@ public class Menu {
     String imageUrl = "";
     @Builder.Default
     CurrencyUnit currency = Monetary.getCurrency("EUR");
+    @Builder.Default
+    String name = "";
 
     public CurrencyUnit getCurrency() {
         return isNull(currency) ? Monetary.getCurrency("EUR") : currency; // TODO: This should be in migrations?

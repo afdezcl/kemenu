@@ -14,10 +14,18 @@ public class MenuWebClient {
 
     public static CreateMenuRequest request;
 
-    public static CreateMenuResponse create(WebTestClient webTestClient,
-                                            String businessId,
-                                            String token) {
+    public static CreateMenuResponse create(WebTestClient webTestClient, String businessId, String token) {
         request = MenuRequestHelper.randomRequest(businessId);
+        return webTestClient
+                .post().uri(PATH)
+                .body(Mono.just(request), CreateMenuRequest.class)
+                .header("Authorization", token)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(CreateMenuResponse.class).returnResult().getResponseBody();
+    }
+
+    public static CreateMenuResponse create(WebTestClient webTestClient, CreateMenuRequest request, String token) {
         return webTestClient
                 .post().uri(PATH)
                 .body(Mono.just(request), CreateMenuRequest.class)
