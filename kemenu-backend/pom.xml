@@ -13,14 +13,14 @@
         <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
         <java-jwt.version>3.10.3</java-jwt.version>
         <zxing.version>3.4.0</zxing.version>
-        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <springfox-swagger2.version>3.0.0</springfox-swagger2.version>
         <sentry.version>1.7.30</sentry.version>
-        <sendgrid.version>4.5.0</sendgrid.version>
-        <vertx.version>3.9.1</vertx.version>
+        <sendgrid.version>4.6.4</sendgrid.version>
+        <vertx.version>3.9.2</vertx.version>
         <cloudinary.version>1.26.0</cloudinary.version>
-        <thumbnailator.version>0.4.11</thumbnailator.version>
-        <mapstruct.version>1.4.0.Beta2</mapstruct.version>
-        <moneta.version>1.4</moneta.version>
+        <thumbnailator.version>0.4.12</thumbnailator.version>
+        <mapstruct.version>1.4.0.CR1</mapstruct.version>
+        <moneta.version>1.4.2</moneta.version>
     </properties>
 
     <dependencies>
@@ -213,7 +213,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
                         <id>copy Angular frontend content</id>
