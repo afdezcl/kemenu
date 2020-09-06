@@ -23,4 +23,5 @@ public class UpdateMenuRequest {
     List<MenuSectionRequest> sections;
     String imageUrl;
     String currency;
+    String name;
 }
