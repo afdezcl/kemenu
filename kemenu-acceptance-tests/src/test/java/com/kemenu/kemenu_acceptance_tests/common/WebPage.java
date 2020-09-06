@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum WebPage {
-  HOME("/"),
-  REGISTER("/register");
+    HOME("/"),
+    REGISTER("/register");
 
-  private final String path;
+    private final String path;
 
-  public String url() {
-    return "http://localhost:8085/#/" + path;
-  }
+    public String url() {
+        return "http://localhost:8085" + path;
+    }
 }
