@@ -25,8 +25,6 @@ import { environment } from '@environments/environment';
 import { UploadImageButtonModule } from './components/uploadImageButton/uploadImageButton.module';
 import { CookiesBannerModule } from './components/cookies-banner/cookies-banner.module';
 import { ModalPolicyModule } from './components/modal-policy/modal-policy.module';
-import { ShareIconsModule } from 'ngx-sharebuttons/icons';
-
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -49,7 +47,6 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    ShareIconsModule.forRoot(),
 
     // My modules
     NavbarModule,

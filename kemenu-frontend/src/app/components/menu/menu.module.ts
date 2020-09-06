@@ -8,13 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateDishComponent } from './menu-digital/create-dish/create-dish.component';
 import { ShareQrComponent } from './share-qr/share-qr.component';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuDigitalModule } from './menu-digital/menu-digital.module';
 import { MenuImageModule } from './menu-image/menu-image.module';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 import { MenuRoutingModule } from './menu-routing.module';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
-import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 
 @NgModule({
   imports: [
@@ -24,9 +24,7 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
     AccordionModule,
     FormsModule,
     ReactiveFormsModule,
-    ShareButtonsModule.withConfig({
-      debug: true
-    }),
+    ShareButtonsModule,
     ShareIconsModule,
     MenuDigitalModule,
     MenuImageModule,
@@ -39,6 +37,8 @@ import { ShareIconsModule } from 'ngx-sharebuttons/icons';
     CreateDishComponent,
     ShareQrComponent,
     MenuAdvancedSettingsComponent
+  ],
+  providers: [
   ]
 })
 
