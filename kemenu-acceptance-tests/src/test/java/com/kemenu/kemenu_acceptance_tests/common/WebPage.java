@@ -10,6 +10,6 @@ public enum WebPage {
   private final String path;
 
   public String url() {
-    return "http://localhost:8085" + path;
+    return "http://localhost:8085/#/" + path;
   }
 }
