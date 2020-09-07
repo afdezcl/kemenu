@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Demo} from '@models/demo-mock/demo.mock';
 import {ShowMenu} from '@models/menu/showMenu.model';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MenuService} from '@services/menu/menu.service';
 import {Section} from '@models/menu/section.model';
 import {Dish} from '@models/menu/dish.model';
@@ -25,14 +25,14 @@ export class CustomerComponent implements OnInit {
   imageUrl: SafeResourceUrl;
 
   constructor(
-    private router: ActivatedRoute,
+    private router: Router,
     private menuService: MenuService,
     private sanitizer: DomSanitizer
   ) {
   }
 
   ngOnInit() {
-    if (!Object.is(this.router.snapshot.url[0].path, 'demo')) {
+    if (!Object.is(this.router.routerState.snapshot.url, '/demo')) {
       this.getDataToBuildMenu();
       this.menu = this.menuService.getMenuById(this.shortUrlId)
         .pipe(map(menu => {

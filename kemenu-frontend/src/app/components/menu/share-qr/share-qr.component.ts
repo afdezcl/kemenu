@@ -1,7 +1,7 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {BsModalRef} from 'ngx-bootstrap/modal';
-import {MenuService} from '@services/menu/menu.service';
-import {DomSanitizer} from '@angular/platform-browser';
+import { Component, OnInit, Input } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { MenuService } from '@services/menu/menu.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-share-qr',

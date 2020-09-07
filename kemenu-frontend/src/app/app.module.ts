@@ -3,22 +3,14 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RegisterModule } from './components/register/register.module';
-import { ForgotPasswordModule } from './components/forgotPassword/forgotPassword.module';
-import { ChangePasswordModule } from './components/changePassword/changePassword.module';
-import { LoginModule } from './components/login/login.module';
 import { FooterModule } from './components/footer/footer.module';
 import { NavbarModule } from './components/navbar/navbar.module';
-import { HomeModule } from './components/home/home.module';
-import { MenuModule } from './components/menu/menu.module';
-import { AboutUsModule } from './components/aboutUs/aboutUs.module';
-import { CustomerModule } from './components/customer/customer.module';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './ui-controls/interceptor/auth.interceptor';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { CookieService } from 'ngx-cookie-service';
-
+import { ToastrModule } from 'ngx-toastr';
 // NGX-BOOTSTRAP
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -30,12 +22,9 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { environment } from '@environments/environment';
-import { ProfileModule } from './components/profile/profile.module';
 import { UploadImageButtonModule } from './components/uploadImageButton/uploadImageButton.module';
 import { CookiesBannerModule } from './components/cookies-banner/cookies-banner.module';
-import { CookiesPolicyModule } from './components/cookies-policy/cookies-policy.module';
 import { ModalPolicyModule } from './components/modal-policy/modal-policy.module';
-
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -60,17 +49,8 @@ export function createTranslateLoader(http: HttpClient) {
     }),
 
     // My modules
-    RegisterModule,
-    ProfileModule,
-    ForgotPasswordModule,
-    ChangePasswordModule,
-    LoginModule,
     NavbarModule,
     FooterModule,
-    HomeModule,
-    MenuModule,
-    AboutUsModule,
-    CustomerModule,
     UploadImageButtonModule,
     ModalModule.forRoot(),
     BsDropdownModule.forRoot(),
@@ -78,10 +58,11 @@ export function createTranslateLoader(http: HttpClient) {
     AccordionModule.forRoot(),
     BrowserAnimationsModule,
     CookiesBannerModule,
-    CookiesPolicyModule,
-    ModalPolicyModule
+    ModalPolicyModule,
+    ToastrModule.forRoot()
   ],
-  providers: [CookieService,
+  providers: [
+    CookieService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
@@ -91,5 +72,4 @@ export function createTranslateLoader(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

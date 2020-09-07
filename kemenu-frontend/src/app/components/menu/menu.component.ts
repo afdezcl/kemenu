@@ -9,7 +9,6 @@ import { ShareQrComponent } from './share-qr/share-qr.component';
 import { MenuService } from '@services/menu/menu.service';
 import { AuthenticationService } from '@services/authentication/authentication.service';
 import { Allergen, AllAllergens } from '@models/menu/allergen.model';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ModalPolicyComponent } from '../modal-policy/modal-policy.component';
 import { ToastrService } from 'ngx-toastr';
@@ -36,7 +35,6 @@ export class MenuComponent implements OnInit {
     private menuService: MenuService,
     private authService: AuthenticationService,
     private router: Router,
-    private sanitizer: DomSanitizer,
     private toasty: ToastrService
   ) {
   }

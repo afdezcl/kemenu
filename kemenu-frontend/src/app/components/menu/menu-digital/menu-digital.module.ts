@@ -19,11 +19,7 @@ import { DishListModule } from './dish-list/dish-list.module';
     FormsModule,
     ReactiveFormsModule,
     DragDropModule,
-    ShareButtonsModule.withConfig({
-      debug: true
-    }),
-    ShareIconsModule.forRoot(),
-    DishListModule
+    DishListModule,
   ],
   exports: [
     MenuDigitalComponent

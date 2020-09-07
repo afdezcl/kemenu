@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TranslateModule } from '@ngx-translate/core';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { LoginModule } from '../login/login.module';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
     RouterModule,
     BsDropdownModule,
     CollapseModule,
-    TranslateModule
+    TranslateModule,
+    LoginModule
 
   ],
   declarations: [NavbarComponent],
