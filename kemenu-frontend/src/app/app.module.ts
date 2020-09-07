@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthInterceptor } from './ui-controls/interceptor/auth.interceptor';
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { CookieService } from 'ngx-cookie-service';
-
+import { ToastrModule } from 'ngx-toastr';
 // NGX-BOOTSTRAP
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -58,7 +58,8 @@ export function createTranslateLoader(http: HttpClient) {
     AccordionModule.forRoot(),
     BrowserAnimationsModule,
     CookiesBannerModule,
-    ModalPolicyModule
+    ModalPolicyModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     CookieService,

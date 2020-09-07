@@ -15,7 +15,6 @@ import { MenuImageModule } from './menu-image/menu-image.module';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 import { MenuRoutingModule } from './menu-routing.module';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
-import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -27,7 +26,6 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     ShareButtonsModule,
     ShareIconsModule,
-    ToastrModule.forRoot(),
     MenuDigitalModule,
     MenuImageModule,
     MenuRoutingModule,
