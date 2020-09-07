@@ -22,19 +22,23 @@ Kemenu web application, for menu management written in Java and Angular.
 
 ## Build project
 
-1. Compile frontend
+1. Build entire project
+
+`mvn -U clean install -pl :kemenu-frontend && mvn -U clean test package -pl :kemenu-backend`
+
+2. Compile frontend
 
 `mvn -U clean install -pl :kemenu-frontend`
 
-2. Compile backend
+3. Compile backend
 
 `mvn -U clean test package -pl :kemenu-backend`
 
-3. Launch acceptance tests
+4. Launch acceptance tests
 
 `mvn -U clean test -pl :kemenu-acceptance-tests`
 
-4. How to launch docker
+5. How to launch docker
 
 `docker-compose up`
 
