@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MenuService } from '@services/menu/menu.service';
 import { Allergen, AllAllergens } from '@models/menu/allergen.model';
 import { Router } from '@angular/router';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { Currency } from '@models/menu/currency.interface';
 
 @Component({
@@ -29,6 +29,7 @@ export class MenuDigitalComponent implements OnInit {
   public currencies: Currency[];
   public allergens: Allergen[] = AllAllergens;
   public selectedValue: string;
+  public sortMode: boolean;
 
   constructor(
     private modalService: BsModalService,
@@ -39,6 +40,7 @@ export class MenuDigitalComponent implements OnInit {
 
   ngOnInit() {
     this.editMode = !!this.editMode;
+    this.sortMode = false;
     if (this.editMode) {
       this.getCurrencies();
     }
@@ -61,6 +63,10 @@ export class MenuDigitalComponent implements OnInit {
           return (a.isoCode > b.isoCode) ? 1 : (a.isoCode === b.isoCode) ? ((a.name > b.name) ? 1 : -1) : -1;
         });
       });
+  }
+
+  toggleSortMode(sortMode: boolean) {
+    this.sortMode = !this.sortMode;
   }
 
   onCurrencyChange(isoCode: string) {
@@ -104,8 +110,8 @@ export class MenuDigitalComponent implements OnInit {
     });
   }
 
-  dropSection(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.menu.sections, event.previousIndex, event.currentIndex);
+  moveSection(previousIndex, currentIndex) {
+    moveItemInArray(this.menu.sections, previousIndex, currentIndex);
     this.onSaveMenu();
   }
 
