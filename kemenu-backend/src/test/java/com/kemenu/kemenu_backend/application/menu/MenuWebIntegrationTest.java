@@ -86,4 +86,22 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
         assertTrue(customer.firstBusiness().getMenus().stream().anyMatch(m -> m.getId().equals(shortUrl.getMenus().get(1))));
         assertTrue(customer.firstBusiness().getMenus().stream().anyMatch(m -> m.getId().equals(shortUrl.getMenus().get(2))));
     }
+
+    @Test
+    void aCustomerCouldCreateAMenuAndHasAllFields() {
+        customerRepository.save(randomCustomer);
+        String businessId = randomCustomer.firstBusiness().getId();
+
+        CreateMenuRequest createMenuRequest = MenuRequestHelper.withFullFields(businessId);
+        CreateMenuResponse createMenuResponse = MenuWebClient.create(webTestClient, createMenuRequest, generateAccessToken());
+
+        Customer customer = customerRepository.findById(randomCustomer.getId()).get();
+        ShortUrl shortUrl = shortUrlRepository.findById(createMenuResponse.getShortUrlId()).get();
+        Menu menu = customer.getBusinesses().get(0).getMenus().get(0);
+
+        assertTrue(customer.findMenu(businessId, shortUrl.getMenus().get(0)).isPresent());
+        assertEquals(createMenuRequest.getImageUrl(), menu.getImageUrl());
+        assertEquals(createMenuRequest.getCurrency(), menu.getCurrency().getCurrencyCode());
+        assertEquals(createMenuRequest.getName(), menu.getName());
+    }
 }

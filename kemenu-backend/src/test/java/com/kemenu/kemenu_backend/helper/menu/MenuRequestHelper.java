@@ -5,6 +5,7 @@ import com.kemenu.kemenu_backend.application.menu.CreateMenuRequest;
 import com.kemenu.kemenu_backend.application.menu.DishRequest;
 import com.kemenu.kemenu_backend.application.menu.MenuSectionRequest;
 import com.kemenu.kemenu_backend.application.menu.UpdateMenuRequest;
+import com.kemenu.kemenu_backend.helper.money.MoneyHelper;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -45,6 +46,15 @@ public class MenuRequestHelper {
                                 .available(true)
                                 .build()))
                         .build()))
+                .build();
+    }
+
+    public static CreateMenuRequest withFullFields(String businessId) {
+        CreateMenuRequest request = randomRequest(businessId);
+        return request.toBuilder()
+                .imageUrl(UUID.randomUUID().toString())
+                .currency(MoneyHelper.randomCurrencyCode())
+                .name(UUID.randomUUID().toString())
                 .build();
     }
 }

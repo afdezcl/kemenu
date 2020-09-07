@@ -10,11 +10,14 @@ import { ShareQrComponent } from './share-qr/share-qr.component';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { HttpClientModule } from '@angular/common/http';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MenuDigitalModule } from './menu-digital/menu-digital.module';
 import { MenuImageModule } from './menu-image/menu-image.module';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 import { MenuRoutingModule } from './menu-routing.module';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -26,10 +29,12 @@ import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.
     ReactiveFormsModule,
     ShareButtonsModule,
     ShareIconsModule,
+    ToastrModule,
     MenuDigitalModule,
     MenuImageModule,
     MenuRoutingModule,
-    UploadImageButtonModule
+    UploadImageButtonModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     MenuComponent,
@@ -37,9 +42,7 @@ import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.
     CreateDishComponent,
     ShareQrComponent,
     MenuAdvancedSettingsComponent
-  ],
-  providers: [
   ]
 })
-
-export class MenuModule { }
+export class MenuModule {
+}

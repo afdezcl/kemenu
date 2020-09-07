@@ -1,6 +1,10 @@
 @import '~ngx-sharebuttons/themes/modern/modern-light-theme';
 @import 'assets/icons-food/icofont.css';
 @import './variables';
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins';
+@import '~ngx-toastr/toastr-bs4-alert';
 
 /* You can add global styles to this file, and also import other style files */
 /*
@@ -316,9 +320,7 @@ html {
     display: block;
     background-color: white;
     text-align: center;
-    padding-left: 2rem;
-    padding-top: 1.3em;
-    padding-bottom: 1.1em;
+    padding: 1.3em 0;
     cursor: pointer;
     width: 100%;
     outline: none;

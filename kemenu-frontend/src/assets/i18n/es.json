@@ -99,6 +99,7 @@
   "Select currency": "Seleccione moneda",
   "SentForgotPassword": "Enviar solicitud",
   "Saved Correctly": "Guardado correctamente",
+  "Save error": "Algo ha ido mal, reinténtelo por favor",
   "Share": "Compártelo",
 	"SignIn": "Iniciar sesión",
 	"SignUp": "Registrarse",
@@ -150,24 +151,24 @@
     "Text 3": "Según la directiva de la UE, las cookies que requieren el consentimiento informado por parte del usuario son las cookies de analítica y las de publicidad y afiliación, quedando exceptuadas las de carácter técnico y las necesarias para el funcionamiento del sitio web o la prestación de servicios expresamente solicitados por el usuario.",
     "Title 4": "¿QUÉ TIPOS DE COOKIES EXISTEN?",
     "Text 4": "Sobre los tipos de cookies, existen cinco grandes grupos:",
-    "Text 4 list": ["Cookies analíticas: recogen información del uso que se realiza del sitio web.", 
-                    "Cookies sociales: son aquellas necesarias para redes sociales externas.", 
-                    "Cookies de afiliados: permiten hacer un seguimiento de las visitas procedentes de otras webs, con las que el sitio web establece un contrato de afiliación (empresas de afiliación).", 
-                    "Cookies de publicidad y comportamentales: recogen información sobre las preferencias y elecciones personales del usuario (retargeting).", 
+    "Text 4 list": ["Cookies analíticas: recogen información del uso que se realiza del sitio web.",
+                    "Cookies sociales: son aquellas necesarias para redes sociales externas.",
+                    "Cookies de afiliados: permiten hacer un seguimiento de las visitas procedentes de otras webs, con las que el sitio web establece un contrato de afiliación (empresas de afiliación).",
+                    "Cookies de publicidad y comportamentales: recogen información sobre las preferencias y elecciones personales del usuario (retargeting).",
                     "Cookies técnicas y funcionales: son las estrictamente necesarias para el uso del sitio web y para la prestación del servicio contratado."
                    ],
     "Title 5": "COOKIES QUE SE UTILIZAN EN ESTE SITIO WEB",
-    "Text 5 list": ["GDPR: cookie técnica y estrictamente necesaria que contiene el identificador de la sesión. Caduca a los 30 días.", 
-                    "_lang: cookie técnica y estrictamente necesaria que contiene el idioma de la sesión. Se elimina al cerrar el navegador.", 
-                    "ac_cookies: cookie técnica y estrictamente necesaria que contiene el valor de si se ha aceptado la instalación de cookies. Caduca en 1 año desde la última actualización.", 
-                    "_ga: cookie de Google Analytics que habilita la función de control de visitas únicas. La primera vez que un usuario entre en el sitio web a través de un navegador se instalará esta cookie. Cuando este usuario vuelva a entrar en la web con el mismo navegador, la cookie considerará que es el mismo usuario. Solo en el caso de que el usuario cambie de navegador, se considerará otro usuario. Caduca a los 2 años desde la última actualización.", 
-                    "_gat: Esta cookie se asocia con Google Analytics Universal. Se utiliza para limitar la velocidad de petición – la limitación de la recogida de datos en los sitios de alto tráfico. Caduca a los 10 minutos.", 
-                    "_utma: cookie de Google Analytics que registra la fecha de la primera y última vez que el usuario vistió el sitio web. Caduca a los 2 años desde la última actualización.", 
-                    "_utmb: cookie de Google Analytics que registra la hora de llegada a la página web. Caduca a los 30 minutos desde la última actualización.",                    
+    "Text 5 list": ["GDPR: cookie técnica y estrictamente necesaria que contiene el identificador de la sesión. Caduca a los 30 días.",
+                    "_lang: cookie técnica y estrictamente necesaria que contiene el idioma de la sesión. Se elimina al cerrar el navegador.",
+                    "ac_cookies: cookie técnica y estrictamente necesaria que contiene el valor de si se ha aceptado la instalación de cookies. Caduca en 1 año desde la última actualización.",
+                    "_ga: cookie de Google Analytics que habilita la función de control de visitas únicas. La primera vez que un usuario entre en el sitio web a través de un navegador se instalará esta cookie. Cuando este usuario vuelva a entrar en la web con el mismo navegador, la cookie considerará que es el mismo usuario. Solo en el caso de que el usuario cambie de navegador, se considerará otro usuario. Caduca a los 2 años desde la última actualización.",
+                    "_gat: Esta cookie se asocia con Google Analytics Universal. Se utiliza para limitar la velocidad de petición – la limitación de la recogida de datos en los sitios de alto tráfico. Caduca a los 10 minutos.",
+                    "_utma: cookie de Google Analytics que registra la fecha de la primera y última vez que el usuario vistió el sitio web. Caduca a los 2 años desde la última actualización.",
+                    "_utmb: cookie de Google Analytics que registra la hora de llegada a la página web. Caduca a los 30 minutos desde la última actualización.",
                     "_utmc: cookie de Google Analytics utilizada para la interoperabilidad con el código de seguimiento urchin.js. Se elimina al cerrar el navegador.",
                     "_utmt: cookie de Google Analytics. Esta cookie se utiliza para procesar el tipo de solicitud pedida por el usuario. Caduca al finalizar la sesión.",
                     "_utmv: cookie de Google Analytics. Esta cookie se utiliza para segmentar datos demográficos. Caduca al finalizar la sesión.",
-                    "_utmz: cookie de Google Analytics que almacena la fuente de tráfico o una campaña para explicar cómo el usuario llegó al sitio web. Caduca a los 6 meses desde la última actualización."                    
+                    "_utmz: cookie de Google Analytics que almacena la fuente de tráfico o una campaña para explicar cómo el usuario llegó al sitio web. Caduca a los 6 meses desde la última actualización."
                    ],
     "Title 6": "CÓMO ELIMINAR LAS COOKIES DEL NAVEGADOR",
     "Text 6 list": ["Seleccione el icono de Herramientas.",
@@ -185,7 +186,7 @@
                     "Seleccione Eliminar cookies.",
                     "Haga clic en Eliminar.",
                     "Haga clic en Aceptar.",
-                    "Cierre y reinicie el navegador."              
+                    "Cierre y reinicie el navegador."
                    ],
     "Text 7.1": "Para más información sobre Internet Explorer pulse aquí:",
     "Text 8 list": ["Seleccione Firefox | Historial | Limpiar el historial reciente.",
@@ -209,7 +210,7 @@
     "Text 11": "Otros navegadores",
     "Text 11.1": "Consulte la documentación del navegador que tenga instalado.",
     "Additional Notes": "NOTAS ADICIONALES",
-    "Additional Notes Description": "Si eres un usuario registrado está aceptando recibir ofertas y servicios a su correo electrónico que pueden ser interesantes para usted, a petición de proveedores que serán de utilidad para su restaurante. Esto no afecta a los clientes que no tienen una cuenta en KEMENU, es decir, los clientes que únicamente escanean el código QR no se verán afectados. Siempre podrá cancelar o activar la subscripción de envío de correos en la página de su perfil."               
+    "Additional Notes Description": "Si eres un usuario registrado está aceptando recibir ofertas y servicios a su correo electrónico que pueden ser interesantes para usted, a petición de proveedores que serán de utilidad para su restaurante. Esto no afecta a los clientes que no tienen una cuenta en KEMENU, es decir, los clientes que únicamente escanean el código QR no se verán afectados. Siempre podrá cancelar o activar la subscripción de envío de correos en la página de su perfil."
 
   },
   "PAR": "cheese",
@@ -246,5 +247,32 @@
   "STE": "soup-bowl",
   "ICE": "ice-cream-alt",
   "SEA": "lobster",
-  "REC": "culinary"
+  "REC": "culinary",
+  "Faq title": "Preguntas frecuentes",
+  "faq": [
+    {
+      "question": "¿Cuántas veces puedo modificar mi menú?",
+      "answer": "Puedes modificar el menú tantas veces quieras, es decir, puedes añadir, editar o eliminar las secciones de la carta y los platos de cada una de ellas todas las veces que necesites. No existe ningún límite de modificaciones del menú."
+    },
+    {
+      "question": "¿Cómo obtengo el código QR?",
+      "answer": "Para poder obtener el código QR de su restaurante necesita registrarse con sus datos e iniciar sesión. Acto seguido podrá iniciar sesión y comenzar a crear su menú digital o subir una imagen de la carta. En este momento KEMENU te proporcionará el código QR que podrás guardar e imprimir para dejarlo por su restaurante."
+    },
+    {
+      "question": "¿Cuánto tiempo dura el código QR?",
+      "answer": "El código QR es de por vida, es decir, no tiene fecha de caducidad."
+    },
+    {
+      "question": "¿Si modifico el menú cambia el código QR?",
+      "answer": "Puedes modificar el menú todas las veces que necesites y el código QR será el mismo, por lo que si ya tienes el código impreso y repartido por el restaurante, no te preocupes porque el código QR seguirá siendo el mismo aunque cambies la carta."
+    },
+    {
+      "question": "¿Puedo subir una imagen de la carta de mi restaurante?",
+      "answer": "Desde KEMENU ofrecemos la posibilidad de hacer el menú digital (dónde tendrás que introducir cada sección y plato de tu carta), pero también puedes subir una imagen de la carta para el mismo código QR."
+    },
+    {
+      "question": "¿Cómo pueden ver los clientes la carta en su móvil?",
+      "answer": "Cuando tengas el código QR repartido por tu restaurante, los clientes solo tendrán que abrir la cámara de su móvil y enfocar al código QR, acto seguido les aparecerá un enlace con la carta de tu restaurante. Si no funcionase con la cámara del móvil, recomendamos descargar alguna aplicación gratuita de lector de QR, ya que móviles de años anteriores no permiten leer el código QR directamente desde la cámara."
+    }
+  ]
 }

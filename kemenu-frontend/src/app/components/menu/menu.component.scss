@@ -3,27 +3,6 @@
   padding-top: initial;
 }
 
-.save-button {
-  position: absolute;
-  position: sticky;
-  bottom: 1rem;
-  text-align: right;
-  z-index: 2;
-  left: 0;
-  right: 0;
-  margin: auto;
-
-  & span {
-    margin-left : 5px;
-  }
-
-  @media (max-width: 991.98px) {
-
-    & button {
-      padding: 0.9rem 1rem;
-    }
-  }
-}
 
 .first-menu {
   padding: 14rem .5rem 8rem .5rem;

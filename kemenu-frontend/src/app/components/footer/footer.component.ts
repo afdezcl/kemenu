@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppVersionService } from '@services/app-version/app-version.service';
 import { AppVersion } from '@models/appVersion.interface';
+import { FaqComponent } from '../faq/faq.component';
 
 @Component({
   selector: 'app-footer',

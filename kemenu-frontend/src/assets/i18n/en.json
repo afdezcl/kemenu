@@ -99,6 +99,7 @@
   "CreateFirstMenu": "Create your menu",
   "SentForgotPassword": "Send request",
   "Saved Correctly": "Saved correctly",
+  "Save error": "Something has gone wrong, please try again",
   "Share": "Share it",
   "SignIn": "Sign in",
   "SignUp": "Sign up",
@@ -150,24 +151,24 @@
     "Text 3": "According to the EU directive, the cookies that require the user's informed consent are analytical cookies and advertising and affiliation cookies, with the exception of those of a technical nature and those necessary for the operation of the website or the provision of services. expressly requested by the user.",
     "Title 4": "WHAT TYPES OF COOKIES ARE THERE?",
     "Text 4": "Regarding the types of cookies, there are five main groups:",
-    "Text 4 list": ["Analytical cookies: they collect information on the use made of the website.", 
-                    "Social cookies: are those necessary for external social networks.", 
-                    "Affiliate cookies: allow you to track visits from other websites, with which the website establishes an affiliation contract (affiliate companies).", 
-                    "Advertising and behavioral cookies: they collect information about the user's preferences and personal choices (retargeting).", 
+    "Text 4 list": ["Analytical cookies: they collect information on the use made of the website.",
+                    "Social cookies: are those necessary for external social networks.",
+                    "Affiliate cookies: allow you to track visits from other websites, with which the website establishes an affiliation contract (affiliate companies).",
+                    "Advertising and behavioral cookies: they collect information about the user's preferences and personal choices (retargeting).",
                     "Technical and functional cookies: these are strictly necessary for the use of the website and for the provision of the contracted service."
                    ],
     "Title 5": "COOKIES THAT ARE USED ON THIS WEBSITE",
-    "Text 5 list": ["GDPR: technical and strictly necessary cookie that contains the session identifier. It expires after 30 days.", 
-                    "_lang: technical and strictly necessary cookie that contains the language of the session. It is removed when closing the browser.", 
-                    "ac_cookies: technical and strictly necessary cookie that contains the value of whether the installation of cookies has been accepted. It expires in 1 year from the last update.", 
-                    "_ga: Google Analytics cookie that enables the unique visit control function. The first time a user enters the website through a browser, this cookie will be installed. When this user re-enters the web with the same browser, the cookie will consider that he is the same user. Only in the event that the user changes the browser will another user be considered. It expires 2 years after the last update.", 
-                    "_gat: This cookie is associated with Google Analytics Universal. It is used to limit request speed - limiting data collection on high traffic sites. It expires after 10 minutes.", 
-                    "_utma: Google Analytics cookie that records the date of the first and last time the user visited the website. It expires 2 years after the last update.", 
-                    "_utmb: Google Analytics cookie that records the time of arrival on the website. It expires 30 minutes after the last update.",                    
+    "Text 5 list": ["GDPR: technical and strictly necessary cookie that contains the session identifier. It expires after 30 days.",
+                    "_lang: technical and strictly necessary cookie that contains the language of the session. It is removed when closing the browser.",
+                    "ac_cookies: technical and strictly necessary cookie that contains the value of whether the installation of cookies has been accepted. It expires in 1 year from the last update.",
+                    "_ga: Google Analytics cookie that enables the unique visit control function. The first time a user enters the website through a browser, this cookie will be installed. When this user re-enters the web with the same browser, the cookie will consider that he is the same user. Only in the event that the user changes the browser will another user be considered. It expires 2 years after the last update.",
+                    "_gat: This cookie is associated with Google Analytics Universal. It is used to limit request speed - limiting data collection on high traffic sites. It expires after 10 minutes.",
+                    "_utma: Google Analytics cookie that records the date of the first and last time the user visited the website. It expires 2 years after the last update.",
+                    "_utmb: Google Analytics cookie that records the time of arrival on the website. It expires 30 minutes after the last update.",
                     "_utmc: Google Analytics cookie used for interoperability with the tracking code urchin.js. It is removed when closing the browser.",
                     "_utmt: Google Analytics cookie. This cookie is used to process the type of request requested by the user. It expires at the end of the session.",
                     "_utmv: Google Analytics cookie. This cookie is used to segment demographic data. It expires at the end of the session.",
-                    "_utmz: Google Analytics cookie that stores the traffic source or a campaign to explain how the user reached the website. It expires 6 months after the last update."                    
+                    "_utmz: Google Analytics cookie that stores the traffic source or a campaign to explain how the user reached the website. It expires 6 months after the last update."
                    ],
     "Title 6": "HOW TO DELETE BROWSER COOKIES",
     "Text 6 list": ["Select the Tools icon.",
@@ -185,7 +186,7 @@
                     "Select Delete cookies.",
                     "Click Delete.",
                     "Click OK.",
-                    "Close and restart the browser."              
+                    "Close and restart the browser."
                    ],
     "Text 7.1": "For more information about Internet Explorer click here:",
     "Text 8 list": ["Select Firefox | History | Clear recent history.",
@@ -209,7 +210,7 @@
     "Text 11": "Other browsers",
     "Text 11.1": "Consult the documentation of the browser you have installed.",
     "Additional Notes": "ADDITIONAL NOTES",
-    "Additional Notes Description": "If you are a registered user you are agreeing to receive offers and services to your email that may be interesting to you, at the request of providers that will be useful for your restaurant. This does not affect customers who do not have a KEMENU account, that is, customers who only scan the QR code will not be affected. You can always cancel or activate the mailing subscription on your profile page."               
+    "Additional Notes Description": "If you are a registered user you are agreeing to receive offers and services to your email that may be interesting to you, at the request of providers that will be useful for your restaurant. This does not affect customers who do not have a KEMENU account, that is, customers who only scan the QR code will not be affected. You can always cancel or activate the mailing subscription on your profile page."
 
   },
   "PAR": "cheese",
@@ -246,5 +247,32 @@
   "STE": "soup-bowl",
   "ICE": "ice-cream-alt",
   "SEA": "lobster",
-  "REC": "culinary"
+  "REC": "culinary",
+  "Faq title": "FAQ",
+  "faq": [
+    {
+      "question": "How many times can I modify my menu?",
+      "answer": "You  can modify your menu as many times as you want, you can add, modify and delete the menu sections and the dishes of each one the times you need. There are no limits at all."
+    },
+    {
+      "question": "How can I get my QR code?",
+      "answer": "In order to get the QR code of your restaurant you need to sign up and log in. Then you will be able to create your digital menu or upload the full menu image of your restaurant. At this point KEMENU will give you the option to get your QR code to be placed in your restaurant."
+    },
+    {
+      "question": "Does the QR code expires?",
+      "answer": "Our QR codes don't expire. You can have the same QR code for life."
+    },
+    {
+      "question": "If I modify my menu, does the QR code change?",
+      "answer": "You can modify your menu as many times as you need and the QR code will always be the same, so if your QR code in  printed and placed around your restaurant don't worry because the QR code  will be the same even if you change the  menu."
+    },
+    {
+      "question": "Can I upload an image of my restaurant menu?",
+      "answer": "In KEMENU we bring your the opportunity to create a digital menu (where your will be able to create different sections and dishes), but at the same time you can upload an image of the full menu with the same QR code."
+    },
+    {
+      "question": "How customers can see my restaurant menu?",
+      "answer": "When you had the QR code printed and placed around your restaurant, customers would only have to open their mobile camera and read the QR code with it, then they will get a link to the menu of the restaurant. If the camera option doesn't work, we recommend to download and install a free QR code reader application, this is because many older mobiles versions don't allow reading the  QR code with the camera application."
+    }
+  ]
 }
