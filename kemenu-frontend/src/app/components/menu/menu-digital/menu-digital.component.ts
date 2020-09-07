@@ -8,9 +8,7 @@ import { Dish, SectionDish } from '@models/menu/dish.model';
 import { ConfirmDialogComponent } from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuService } from '@services/menu/menu.service';
-import { AuthenticationService } from '@services/authentication/authentication.service';
 import { Allergen, AllAllergens } from '@models/menu/allergen.model';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Currency } from '@models/menu/currency.interface';
@@ -36,11 +34,8 @@ export class MenuDigitalComponent implements OnInit {
     private modalService: BsModalService,
     private translate: TranslateService,
     private menuService: MenuService,
-    private authService: AuthenticationService,
-    private router: Router,
-    private sanitizer: DomSanitizer
-  ) {
-  }
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.editMode = !!this.editMode;

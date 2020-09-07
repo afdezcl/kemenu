@@ -10,6 +10,7 @@ import { EditInformationComponent } from './edit-information/edit-information.co
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { ResetPasswordComponent } from './resetPassword/resetPassword.component';
+import { ProfileRoutingModule } from './profile-routing.module';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { ResetPasswordComponent } from './resetPassword/resetPassword.component'
     TranslateModule,
     DialogModule,
     UploadImageButtonModule,
-    ColorPickerModule
+    ColorPickerModule,
+    ProfileRoutingModule
   ],
   declarations: [
     ProfileComponent,

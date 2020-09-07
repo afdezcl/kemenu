@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Menu} from '@models/menu/menu.model';
-import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
-import {TranslateService} from '@ngx-translate/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Menu } from '@models/menu/menu.model';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ConfirmDialogComponent } from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-menu-image',
@@ -28,7 +28,7 @@ export class MenuImageComponent {
       message: this.translate.instant('Delete Menu Image description')
     };
 
-    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
+    this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
     this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
       if (canDelete) {
         this.menu.imageUrl = '';

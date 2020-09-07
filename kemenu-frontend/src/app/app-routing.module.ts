@@ -1,44 +1,58 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RegisterComponent } from './components/register/register.component';
-import { ForgotPasswordComponent } from './components/forgotPassword/forgotPassword.component';
-import { HomeComponent } from './components/home/home.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { CustomerComponent } from './components/customer/customer.component';
-import { AuthGuard } from '@ui-controls/guards/auth/auth.guard';
-import { ProfileComponent } from './components/profile/profile.component';
-import { ChangePasswordComponent } from './components/changePassword/changePassword.component';
-import { EditInformationComponent } from './components/profile/edit-information/edit-information.component';
-import { AboutUsComponent } from './components/aboutUs/aboutUs.component';
-import { ResetPasswordComponent } from './components/profile/resetPassword/resetPassword.component';
-import { CookiesPolicyComponent } from './components/cookies-policy/cookies-policy.component';
 
 export const routes: Routes = [
 
-  { path: '', component: HomeComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'forgotPassword', component: ForgotPasswordComponent },
-  { path: 'changePassword', component: ChangePasswordComponent },
-  { path: 'cookies-policy', component: CookiesPolicyComponent},
-  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'profile/new-password', component: ResetPasswordComponent, canActivate: [AuthGuard] },
-  { path: 'profile/edit', component: EditInformationComponent, canActivate: [AuthGuard] },
-  { path: 'demo', component: CustomerComponent },
-  { path: 'show', component: CustomerComponent },
-  { path: 'aboutUs', component: AboutUsComponent },
-  { path: '**', redirectTo: '' }
+  {
+    path: '', loadChildren: () =>
+      import('./components/home/home.module').then(module => module.HomeModule)
+  },
+  {
+    path: 'register', loadChildren: () =>
+      import('./components/register/register.module').then(module => module.RegisterModule)
+  },
+  {
+    path: 'cookies-policy', loadChildren: () =>
+      import('./components/cookies-policy/cookies-policy.module').then(module => module.CookiesPolicyModule)
+  },
+  {
+    path: 'aboutUs', loadChildren: () =>
+      import('./components/aboutUs/aboutUs.module').then(module => module.AboutUsModule)
+  },
+  {
+    path: 'menu', loadChildren: () =>
+      import('./components/menu/menu.module').then(module => module.MenuModule)
+  },
+  {
+    path: 'forgotPassword', loadChildren: () =>
+      import('./components/forgotPassword/forgotPassword.module').then(module => module.ForgotPasswordModule)
+  },
+  {
+    path: 'changePassword', loadChildren: () =>
+      import('./components/changePassword/changePassword.module').then(module => module.ChangePasswordModule)
+  },
+  {
+    path: 'profile', loadChildren: () =>
+      import('./components/profile/profile.module').then(module => module.ProfileModule)
+  },
+  {
+    path: 'demo', loadChildren: () =>
+      import('./components/customer/customer.module').then(module => module.CustomerModule)
+  },
+  {
+    path: 'show', loadChildren: () =>
+      import('./components/customer/customer.module').then(module => module.CustomerModule)
+  },
+  {
+    path: '**', redirectTo: ''
+  }
 
 ];
 
 
 @NgModule({
   declarations: [],
-  imports: [
-    RouterModule.forRoot(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

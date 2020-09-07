@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {AlertsService} from '@services/alerts/alerts.service';
-import {TranslateService} from '@ngx-translate/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AlertsService } from '@services/alerts/alerts.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +12,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(
     private alertService: AlertsService,
     private translate: TranslateService
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
   }
