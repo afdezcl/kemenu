@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       recaptchaToken: token
     };
     this.authService.login(user)
-      .subscribe(result => {
+      .subscribe(() => {
         this.bsModalRef.hide();
         this.router.navigateByUrl('menu');
       },

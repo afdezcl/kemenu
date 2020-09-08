@@ -31,4 +31,9 @@ public class CommonSteps {
     public void anAlertAppears(String alertType) {
         chromeTestRule.getChrome().findElementByXPath("//div[contains(@class, 'alert-" + alertType + "')]").isDisplayed();
     }
+
+    @Then("a {string} growl appears")
+    public void aGrowlAppears(String growlType) {
+        chromeTestRule.getChrome().findElementByXPath("//div[contains(@class, 'toast-" + growlType + "')]").isDisplayed();
+    }
 }
