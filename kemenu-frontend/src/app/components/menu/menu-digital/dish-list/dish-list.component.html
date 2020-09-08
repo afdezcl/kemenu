@@ -54,10 +54,10 @@
       <button type="submit" class="delete-dish ml-3" accordion-heading (click)="deleteDish(dish, sectionCounter, dishCounter)">
         <i class="fas fa-trash"></i>
       </button>
-      <button *ngIf="sortMode" class="dish-list-dish-edit-mode-options-buttons-sort up ml-3" accordion-heading (click)="moveSection(sectionCounter - 1, sectionCounter)">
+      <button *ngIf="sortMode" class="dish-list-dish-edit-mode-options-buttons-sort up ml-3" accordion-heading (click)="moveSection(dishCounter, dishCounter - 1 )">
         <i class="fas fa-sort-up"></i>
       </button>
-      <button *ngIf="sortMode" class="dish-list-dish-edit-mode-options-buttons-sort down ml-3" accordion-heading (click)="moveSection(sectionCounter, sectionCounter + 1)">
+      <button *ngIf="sortMode" class="dish-list-dish-edit-mode-options-buttons-sort down ml-3" accordion-heading (click)="moveSection(dishCounter, dishCounter + 1)">
         <i class="fas fa-sort-down"></i>
       </button>
     </div>

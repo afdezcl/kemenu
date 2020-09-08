@@ -30,8 +30,10 @@ export class DishListComponent implements OnInit {
     this.editMode = !!this.editMode;
   }
 
-  moveSection(previousIndex, currentIndex) {
-    moveItemInArray(this.dishes, previousIndex, currentIndex);
+  moveSection(from, to) {
+    if (to >= 0 && to <= this.dishes.length) {
+      moveItemInArray(this.dishes, from, to);
+    }
     this.changeOrder();
   }
 

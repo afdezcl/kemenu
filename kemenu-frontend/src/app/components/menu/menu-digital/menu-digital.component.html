@@ -59,8 +59,11 @@
 
       <ng-template #sectionContent let-section='section' let-sectionCounter='sectionCounter'>
         <accordion-group>
+          <button *ngIf="!editMode" class="col-2 col-lg-1 clearfix pl-2 pr-1" accordion-heading>
+              <i class="menu-digital-section-icon-food icofont-{{getSectionIcon(section.name)}}"></i>
+          </button>
           <button type="submit" class="clearfix pl-1" accordion-heading>
-            <div class="pull-left float-left menu-digital-section-title-text">
+            <div class="pull-left float-left menu-digital-section-title-text {{editMode ? 'edit-mode' : ''}}">
               <span>{{section.name}}</span>
               <span> ({{editMode ? section.dishes.length : getActiveDishes(section).length}})</span>
             </div>

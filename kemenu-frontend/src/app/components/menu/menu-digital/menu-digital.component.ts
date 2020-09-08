@@ -110,8 +110,10 @@ export class MenuDigitalComponent implements OnInit {
     });
   }
 
-  moveSection(previousIndex, currentIndex) {
-    moveItemInArray(this.menu.sections, previousIndex, currentIndex);
+  moveSection(from, to) {
+    if (to >= 0 && to <= this.menu.sections.length) {
+      moveItemInArray(this.menu.sections, from, to);
+    }
     this.onSaveMenu();
   }
 
