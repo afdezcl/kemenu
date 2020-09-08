@@ -5,35 +5,45 @@
         <img src="../../../assets/images/logo-kemenu.png" />
       </a>
 
-      <button type="button" (click)="isCollapsed = !isCollapsed"
-        aria-controls="collapseBasic" [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation"
+      <button #navbarToggler type="button" (click)="isCollapsed = !isCollapsed" aria-controls="collapseBasic"
+        [attr.aria-expanded]="!isCollapsed" aria-label="Toggle navigation"
         class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars ml-2"></i></button>
 
 
-        <div id="collapseBasic" class="collapse navbar-collapse" [collapse]="isCollapsed" [isAnimated]="true">
+      <div id="collapseBasic" class="collapse navbar-collapse" [collapse]="isCollapsed" [isAnimated]="true">
         <ul class="navbar-nav ml-auto">
           <!-- Link-->
-          <li class="nav-item"> <a [routerLink]="['']"  class="nav-link active">{{ 'Home' | translate }}</a></li>
-          <li class="nav-item bottom-separator"> <a [routerLink]="['/aboutUs']" class="nav-link">{{ 'AboutUs' | translate }}</a></li>
           <li class="nav-item">
-            <a class="nav-link pointer-cursor" *ngIf="authService.isLoggedIn()" [routerLink]="['profile']" >{{ 'My profile' | translate }}</a>
+            <a (click)="collapseNav()" [routerLink]="['']" class="nav-link active">{{ 'Home' | translate }}</a>
           </li>
           <li class="nav-item bottom-separator">
-            <a class="nav-link pointer-cursor" *ngIf="authService.isLoggedIn()" [routerLink]="['menu']" >{{ 'My menu' | translate }}</a>
+            <a (click)="collapseNav()" [routerLink]="['/aboutUs']" class="nav-link">{{ 'AboutUs' | translate }}</a>
+          </li>
+          <li class="nav-item">
+            <a (click)="collapseNav()" class="nav-link pointer-cursor" *ngIf="authService.isLoggedIn()"
+              [routerLink]="['profile']">{{ 'My profile' | translate }}</a>
+          </li>
+          <li class="nav-item bottom-separator">
+            <a (click)="collapseNav()" class="nav-link pointer-cursor" *ngIf="authService.isLoggedIn()"
+              [routerLink]="['menu']">{{ 'My menu' | translate }}</a>
           </li>
           <li class="nav-item dropdown" dropdown>
             <a id="languages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-               class="nav-link dropdown-toggle pointer-cursor" dropdownToggle >{{ 'Languages' | translate }}</a>
+              class="nav-link dropdown-toggle pointer-cursor" dropdownToggle>{{ 'Languages' | translate }}</a>
             <div class="dropdown-menu" *dropdownMenu role="menu">
-              <a (click)="changeLanguage('en')" class="dropdown-item pointer-cursor" role="menuitem">{{ 'English' | translate }}</a>
-              <a (click)="changeLanguage('es')" class="dropdown-item pointer-cursor" role="menuitem">{{ 'Spanish' | translate }}</a>
+              <a (click)="changeLanguage('en'); collapseNav()" class="dropdown-item pointer-cursor"
+                role="menuitem">{{ 'English' | translate }}</a>
+              <a (click)="changeLanguage('es'); collapseNav()" class="dropdown-item pointer-cursor"
+                role="menuitem">{{ 'Spanish' | translate }}</a>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link pointer-cursor" (click)="onLogout()" *ngIf="authService.isLoggedIn()">{{ 'Log out' | translate }}</a>
+            <a class="nav-link pointer-cursor" (click)="onLogout(); collapseNav()"
+              *ngIf="authService.isLoggedIn()">{{ 'Log out' | translate }}</a>
           </li>
 
-        </ul><a style="color: white;" (click)="openModalLogIn()" class="btn btn-primary navbar-btn ml-0 ml-lg-3" *ngIf="!authService.isLoggedIn()">{{ 'SignIn' | translate }}</a>
+        </ul><a style="color: white;" (click)="openModalLogIn(); collapseNav()" class="btn btn-primary navbar-btn ml-0 ml-lg-3"
+          *ngIf="!authService.isLoggedIn()">{{ 'SignIn' | translate }}</a>
       </div>
     </div>
   </nav>
