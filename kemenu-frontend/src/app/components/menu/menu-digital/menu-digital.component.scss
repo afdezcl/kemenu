@@ -6,7 +6,6 @@
   }
 
   &-title {
-    padding-left: 2rem;
     text-transform: uppercase;
 
     @media (max-width: 991.98px) {
@@ -14,7 +13,7 @@
     }
 
     > div {
-      padding-left: 1em;
+      padding-left: 2em;
     }
 
     > * {
@@ -43,7 +42,16 @@
 
   &-options {
     position: relative;
-    padding: 2rem 0 1rem 0;
+    padding: 0rem 0 1rem 0;
+
+    &-sort {
+      color: #333333;
+      padding-top: 5px;
+
+      > span {
+        margin-left: 1rem;
+      }
+    }
 
     &-new-section {
       & span {
@@ -122,6 +130,11 @@
   }
 
   &-section {
+
+    &-title-text {
+      padding-left: 1rem;
+    }
+
     &-add-dish {
       right: 1rem;
 
@@ -153,6 +166,24 @@
       button {
         background: white;
         font-weight: bolder;
+      }
+    }
+
+    &-sort {
+      border-left: 1px solid #ffe0e0!important;
+      padding: 0 1.5rem 0 1rem !important;
+
+
+      @media (min-width: 992px) {
+        padding: 0 1rem !important;
+      }
+
+      &.up i {
+        margin-top: 15px;
+      }
+
+      &.down i {
+        margin-top: -10px;
       }
     }
   }

@@ -1,14 +1,24 @@
 <accordion class="accordion-custom menu-digital {{editMode ? 'edit-mode' : ''}}" [isAnimated]="true">
   <div>
-    <accordion-group>
+    <accordion-group [isOpen]="true">
       <button type="submit" class="btn btn-link clearfix menu-digital-title" accordion-heading>
         <div class="pull-left">{{ 'Digital Menu' | translate }}</div>
         <i class="icofont-collapse ml-2"></i>
       </button>
 
-      <accordion *ngIf="editMode" class="accordion-custom section menu-digital-section" cdkDropList [isAnimated]="true" (cdkDropListDropped)="dropSection($event)">
+      <accordion *ngIf="editMode" class="accordion-custom section menu-digital-section" [isAnimated]="true">
+        <div class="menu-digital-options row justify-content-between">
+          <div class="col-12 col-md-6 mt-3 mt-md-0">
+            <div class="select">
+              <select #currency (change)='onCurrencyChange(currency.value)' name="currency" id="currency" class="form-control" [(ngModel)]="selectedValue">
+                <option *ngFor="let currency of currencies" [value]="currency.isoCode">{{currency.isoCode}} - {{currency.name}} - {{currency.symbol}}</option>
+              </select>
+              <div class="select_arrow"></div>
+            </div>
+          </div>
+        </div>
         <div *ngIf="menu">
-          <div *ngFor="let section of menu.sections; let sectionCounter = index;" cdkDrag>
+          <div *ngFor="let section of menu.sections; let sectionCounter = index;">
             <ng-container
               [ngTemplateOutlet]="menu.sections.length !== 0 ? sectionContent : ''"
               [ngTemplateOutletContext]="{section:section, sectionCounter:sectionCounter}">
@@ -18,16 +28,17 @@
         <div class="menu-digital-no-sections" *ngIf="!menu || !menu.sections || menu.sections.length === 0">
           {{ "noSections" | translate }}
         </div>
-        <div class="menu-digital-options row">
-          <div class="col-12 col-md-6">
-            <div class="select">
-              <select #currency (change)='onCurrencyChange(currency.value)' name="currency" id="currency" class="form-control" [(ngModel)]="selectedValue">
-                <option *ngFor="let currency of currencies" [value]="currency.isoCode">{{currency.isoCode}} - {{currency.name}} - {{currency.symbol}}</option>
-              </select>
-              <div class="select_arrow"></div>
+        <div class="menu-digital-options row justify-content-between mt-4">
+          <div class="col-5 col-md-6 text-left">
+            <div class="menu-digital-options-sort">
+              <label class="switch">
+                <input type="checkbox" [checked]="sortMode" (click)="toggleSortMode(sortMode)">
+                <span class="slider"></span>
+              </label>
+              <span>{{ 'Sort' | translate }}</span>
             </div>
           </div>
-          <div class="col-12 col-md-6 text-md-right mt-3 mt-md-0">
+          <div class="col-7 col-md-6 text-right">
             <button *ngIf="editMode" type="submit" class="btn btn-primary menu-digital-options-new-section btn-link" (click)="openCreateSection($event)">
               <i class="fas fa-plus"></i><span>{{ 'Create Section' | translate }}</span>
             </button>
@@ -48,24 +59,27 @@
 
       <ng-template #sectionContent let-section='section' let-sectionCounter='sectionCounter'>
         <accordion-group>
-          <button class="col-2 col-lg-1 clearfix pl-2 pr-1" accordion-heading cdkDragHandle>
-            <i *ngIf="editMode else elseSectionName" class="fas fa-sort"></i>
-            <ng-template #elseSectionName>
-              <i *ngIf="!editMode" class="menu-digital-section-icon-food icofont-{{getSectionIcon(section.name)}}"></i>
-            </ng-template>
-          </button>
           <button type="submit" class="clearfix pl-1" accordion-heading>
             <div class="pull-left float-left menu-digital-section-title-text">
               <span>{{section.name}}</span>
               <span> ({{editMode ? section.dishes.length : getActiveDishes(section).length}})</span>
             </div>
           </button>
-          <button *ngIf="editMode" type="submit" class="accordion-heading-button text-right" accordion-heading>
+
+          <button *ngIf="editMode && !sortMode" type="submit" class="accordion-heading-button text-right" accordion-heading>
             <i class="fas fa-edit mr-2" (click)="editSection(section, sectionCounter)"></i>
+          </button>
+
+          <button *ngIf="sortMode" class="menu-digital-section-sort up col-1 clearfix pl-2 pr-1" accordion-heading (click)="moveSection(sectionCounter - 1, sectionCounter)">
+            <i class="fas fa-sort-up"></i>
+          </button>
+          <button *ngIf="sortMode" class="menu-digital-section-sort down col-1 clearfix pl-2 pr-1" accordion-heading (click)="moveSection(sectionCounter, sectionCounter + 1)">
+            <i class="fas fa-sort-down"></i>
           </button>
 
           <app-dish-list
             [editMode]="editMode"
+            [sortMode]="sortMode"
             [dishes]="editMode ? section.dishes : getActiveDishes(section)"
             [sectionCounter]="sectionCounter"
             (editClicked)="editDish($event)"
