@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  
-  @ViewChild('navbarToggler') navbarToggler:ElementRef;
+
+  @ViewChild('navbarToggler') navbarToggler: ElementRef;
 
   public isCollapsed = true;
   public bsModalRef: BsModalRef;
