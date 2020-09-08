@@ -2,6 +2,24 @@
 
 Kemenu web application, for menu management written in Java and Angular.
 
+## Roadmap
+
+1. Monetization
+2. SEO
+3. Admin panels
+4. Home redesign
+5. `/show` customization
+6. Contact form
+
+## Server
+
+* **Vendor:** OVH
+* **Expenses:** 15.71 € / month.
+* **Spec:**
+  * **CPU:** 2 vCores
+  * **RAM:** 8 GB
+  * **Storage:** 80 GB
+
 ## IMPORTANT:exclamation:: Use npm as follows
 
 :warning: Before running the frontend you have to compile the frontend:
