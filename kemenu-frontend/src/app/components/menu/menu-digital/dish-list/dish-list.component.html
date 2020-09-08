@@ -1,5 +1,5 @@
-<div class="dish-list" *ngIf="editMode" cdkDropList (cdkDropListDropped)="dropDish($event)">
-  <div class="dish-list-dish mt-3" *ngFor="let dish of dishes; let dishCounter = index;" cdkDrag>
+<div class="dish-list" *ngIf="editMode">
+  <div class="dish-list-dish mt-3" *ngFor="let dish of dishes; let dishCounter = index;">
     <ng-container
       [ngTemplateOutlet]="dishes.length !== 0 ? dishContent : ''"
       [ngTemplateOutletContext]="{dish:dish, dishCounter:dishCounter}">
@@ -48,14 +48,17 @@
     </div>
     <div *ngIf="editMode" class="row dish-list-dish-edit-mode-options mt-2 pt-3">
     <div class="col-12 dish-list-dish-edit-mode-options-buttons text-right">
-      <button type="submit" class="edit-dish mr-3" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">
+      <button type="submit" class="edit-dish ml-3" accordion-heading (click)="editDish(dish, sectionCounter, dishCounter)">
         <i class="fas fa-edit"></i>
       </button>
-      <button type="submit" class="delete-dish mr-3" accordion-heading (click)="deleteDish(dish, sectionCounter, dishCounter)">
+      <button type="submit" class="delete-dish ml-3" accordion-heading (click)="deleteDish(dish, sectionCounter, dishCounter)">
         <i class="fas fa-trash"></i>
       </button>
-      <button type="submit" class="move-dish" accordion-heading cdkDragHandle>
-        <i class="fas fa-sort"></i>
+      <button *ngIf="sortMode" class="dish-list-dish-edit-mode-options-buttons-sort up ml-3" accordion-heading (click)="moveSection(sectionCounter - 1, sectionCounter)">
+        <i class="fas fa-sort-up"></i>
+      </button>
+      <button *ngIf="sortMode" class="dish-list-dish-edit-mode-options-buttons-sort down ml-3" accordion-heading (click)="moveSection(sectionCounter, sectionCounter + 1)">
+        <i class="fas fa-sort-down"></i>
       </button>
     </div>
   </div>

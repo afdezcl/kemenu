@@ -291,6 +291,88 @@ html {
 
   /*
   * =====================================================
+  *     Toggle Switch Button
+  * =====================================================
+  */
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 41px;
+    height: 25px;
+
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+      border-radius: 34px;
+
+      :before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 4px;
+        bottom: 4px;
+        border-radius: 50%;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 4px;
+      bottom: 4px;
+      border-radius: 50%;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    input:checked + .slider {
+      background-color: $kemenu-red;
+    }
+
+    input:focus + .slider {
+      box-shadow: 0 0 1px $kemenu-red;
+    }
+
+    input:checked + .slider:before {
+      -webkit-transform: translateX(15px);
+      -ms-transform: translateX(15px);
+      transform: translateX(15px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
+    }
+  }
+
+
+  /*
+  * =====================================================
   *     FAQ SECTION
   * =====================================================
   */
@@ -576,33 +658,15 @@ html {
   }
 
   .btn-secondary:hover {
-    color: #fff;
-    background-color: #5a6268;
-    border-color: #545b62;
-  }
-
-  .btn-secondary:focus, .btn-secondary.focus {
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
-    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+    color: #E7475E;
+    background-color: white;
+    border-color: #E7475E;
   }
 
   .btn-secondary.disabled, .btn-secondary:disabled {
     color: #fff;
     background-color: #6c757d;
     border-color: #6c757d;
-  }
-
-  .btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active,
-  .show > .btn-secondary.dropdown-toggle {
-    color: #fff;
-    background-color: #545b62;
-    border-color: #4e555b;
-  }
-
-  .btn-secondary:not(:disabled):not(.disabled):active:focus, .btn-secondary:not(:disabled):not(.disabled).active:focus,
-  .show > .btn-secondary.dropdown-toggle:focus {
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
-    box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
   }
 
   .btn-success {
@@ -1358,7 +1422,7 @@ html {
   a.bg-secondary:hover, a.bg-secondary:focus,
   button.bg-secondary:hover,
   button.bg-secondary:focus {
-    background-color: #545b62 !important;
+    background-color: #db364c !important;
   }
 
   .bg-success {
@@ -1466,7 +1530,7 @@ html {
   }
 
   a.text-secondary:hover, a.text-secondary:focus {
-    color: #545b62 !important;
+    color: #db364c !important;
   }
 
   .text-success {
@@ -1536,7 +1600,7 @@ html {
   .badge-secondary[href]:hover, .badge-secondary[href]:focus {
     color: #fff;
     text-decoration: none;
-    background-color: #545b62;
+    background-color: #db364c;
   }
 
   .badge-success {

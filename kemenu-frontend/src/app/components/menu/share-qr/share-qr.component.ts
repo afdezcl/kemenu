@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { MenuService } from '@services/menu/menu.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-share-qr',
@@ -24,7 +25,7 @@ export class ShareQrComponent implements OnInit {
 
   ngOnInit() {
     this.getQRcode();
-    this.url = `https://kemenu.com/show/` + this.shortUrlId;
+    this.url = environment.apiBaseUrl + '/show/' + this.shortUrlId;
   }
 
   getQRcode() {

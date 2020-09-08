@@ -84,14 +84,18 @@
     &-edit-mode-options {
       border-top: 1px solid #eaeaea;
 
+      .up i {
+        vertical-align: sub;
+      }
+
+      .down i {
+        vertical-align: top;
+      }
+
       & button {
         background-color: transparent;
         color: #e7475e;
         border: none;
-      }
-
-      &-message {
-        color: #7f7f7f;
       }
     }
   }

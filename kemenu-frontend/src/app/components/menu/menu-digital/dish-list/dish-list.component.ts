@@ -3,7 +3,7 @@ import {Menu} from '@models/menu/menu.model';
 import {Dish, SectionDish} from '@models/menu/dish.model';
 import {Section, SectionIndex} from '@models/menu/section.model';
 import {Allergen, AllAllergens} from '@models/menu/allergen.model';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-dish-list',
@@ -14,6 +14,7 @@ export class DishListComponent implements OnInit {
 
   @Input() public dishes: Dish[];
   @Input() editMode: boolean;
+  @Input() sortMode: boolean;
   @Input() sectionCounter: number;
   @Output() editClicked: EventEmitter<SectionDish> = new EventEmitter<SectionDish>();
   @Output() deleteClicked: EventEmitter<SectionDish> = new EventEmitter<SectionDish>();
@@ -29,8 +30,8 @@ export class DishListComponent implements OnInit {
     this.editMode = !!this.editMode;
   }
 
-  dropDish(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.dishes, event.previousIndex, event.currentIndex);
+  moveSection(previousIndex, currentIndex) {
+    moveItemInArray(this.dishes, previousIndex, currentIndex);
     this.changeOrder();
   }
 
