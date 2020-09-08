@@ -5,8 +5,9 @@ Feature: Create a menu
     Given A user visits REGISTER
     When fill the register form with "createMenuTest1@example.com" as email
     And clicks on SIGN_UP
-    Then a "success" alert appears
-    And A user visits HOME
+    Then a "success" growl appears
+    Then is redirected to "/menu"
+    And clicks on LOG_OUT
     When clicks on SIGN_IN
     And puts "createMenuTest1@example.com" as EMAIL and "testPassword" as PASSWORD in login form
     And clicks on SIGN_IN_SUBMIT

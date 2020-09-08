@@ -11,7 +11,8 @@ public enum Button {
     SIGN_UP("//button[contains(., 'Sign up')]"),
     FIRST_MENU_BUTTON("(//div[contains(@class, 'first-menu-button')])[2]"),
     CREATE_SECTION("//input[@type = 'submit' and @value = 'Section']"),
-    DIGITAL_MENU_COLLAPSE("//button[@type = 'submit' and contains(@class, 'menu-digital-title')]");
+    DIGITAL_MENU_COLLAPSE("//button[@type = 'submit' and contains(@class, 'menu-digital-title')]"),
+    LOG_OUT("//a[contains(@class,'nav-link') and text() = 'Log out']");
 
     private final String xPath;
 }
