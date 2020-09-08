@@ -51,8 +51,7 @@ public class UserActions {
     public static String getQRLink() {
         UserActions.clickOn("//button[@type = 'submit' and contains(text(), 'Get QR and share')]");
         new WebDriverWait(chromeTestRule.getChrome(), 2)
-                .until(webDriver -> webDriver.findElement(By.xpath("//a[@target = '_blank' and contains(text(), 'https://kemenu.com/show/')]")).getText().contains("https://kemenu.com/show/"));
-        String kemenuUrl = chromeTestRule.getChrome().findElementByXPath("//a[@target = '_blank' and contains(text(), 'https://kemenu.com/show/')]").getText();
-        return kemenuUrl.replace("https://kemenu.com", "http://localhost:8085");
+                .until(webDriver -> webDriver.findElement(By.xpath("//a[@target = '_blank' and contains(text(), 'http://localhost:8085/show/')]")).getText().contains("http://localhost:8085/show/"));
+        return chromeTestRule.getChrome().findElementByXPath("//a[@target = '_blank' and contains(text(), 'http://localhost:8085/show/')]").getText();
     }
 }
