@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { LoginComponent } from '../login/login.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  @ViewChild('navbarToggler') navbarToggler: ElementRef;
 
   public isCollapsed = true;
   public bsModalRef: BsModalRef;
@@ -37,5 +39,15 @@ export class NavbarComponent implements OnInit {
     this.authService.logout();
     this.router.navigateByUrl('');
     this.ngOnInit();
+  }
+
+  private navBarTogglerIsVisible() {
+    return this.navbarToggler.nativeElement.offsetParent !== null;
+  }
+
+  collapseNav() {
+    if (this.navBarTogglerIsVisible()) {
+      this.navbarToggler.nativeElement.click();
+    }
   }
 }
