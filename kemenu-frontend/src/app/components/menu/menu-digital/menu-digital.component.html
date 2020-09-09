@@ -70,13 +70,13 @@
           </button>
 
           <button *ngIf="editMode && !sortMode" type="submit" class="accordion-heading-button text-right" accordion-heading>
-            <i class="fas fa-edit mr-2" (click)="editSection(section, sectionCounter)"></i>
+            <i class="fas fa-edit mr-2" (click)="editSection($event, section, sectionCounter)"></i>
           </button>
 
-          <button *ngIf="sortMode" class="menu-digital-section-sort up col-1 clearfix pl-2 pr-1" accordion-heading (click)="moveSection(sectionCounter - 1, sectionCounter)">
+          <button *ngIf="sortMode" class="menu-digital-section-sort up col-1 clearfix pl-2 pr-1" accordion-heading (click)="moveSection($event, sectionCounter - 1, sectionCounter)">
             <i class="fas fa-sort-up"></i>
           </button>
-          <button *ngIf="sortMode" class="menu-digital-section-sort down col-1 clearfix pl-2 pr-1" accordion-heading (click)="moveSection(sectionCounter, sectionCounter + 1)">
+          <button *ngIf="sortMode" class="menu-digital-section-sort down col-1 clearfix pl-2 pr-1" accordion-heading (click)="moveSection($event, sectionCounter, sectionCounter + 1)">
             <i class="fas fa-sort-down"></i>
           </button>
 

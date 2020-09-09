@@ -152,7 +152,6 @@ export class MenuComponent implements OnInit {
       .subscribe((response: string) => {
         this.menu.id = response;
         this.matchAllergens();
-        this.loadMenu();
         this.showSuccessToasty();
       }, () => {
         this.showErrorToasty();

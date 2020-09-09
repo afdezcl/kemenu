@@ -98,7 +98,8 @@ export class MenuDigitalComponent implements OnInit {
     });
   }
 
-  editSection(sectionToEdit: Section, sectionIndex: number) {
+  editSection(event: Event, sectionToEdit: Section, sectionIndex: number) {
+    this.stopOpenSection(event);
     const initialState = {
       name: sectionToEdit.name,
       editing: true
@@ -110,7 +111,13 @@ export class MenuDigitalComponent implements OnInit {
     });
   }
 
-  moveSection(from, to) {
+  stopOpenSection(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
+  }
+
+  moveSection(event: Event, from, to) {
+    this.stopOpenSection(event);
     if (to >= 0 && to <= this.menu.sections.length) {
       moveItemInArray(this.menu.sections, from, to);
     }
