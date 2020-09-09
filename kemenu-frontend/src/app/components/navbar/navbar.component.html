@@ -19,6 +19,9 @@
           <li class="nav-item bottom-separator">
             <a (click)="collapseNav()" [routerLink]="['/aboutUs']" class="nav-link">{{ 'AboutUs' | translate }}</a>
           </li>
+          <li class="nav-item bottom-separator">
+            <a (click)="collapseNav()" href="#faq" class="nav-link">{{ 'Faq title' | translate }}</a>
+          </li>
           <li class="nav-item">
             <a (click)="collapseNav()" class="nav-link pointer-cursor" *ngIf="authService.isLoggedIn()"
               [routerLink]="['profile']">{{ 'My profile' | translate }}</a>
