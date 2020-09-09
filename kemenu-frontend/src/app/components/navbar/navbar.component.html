@@ -15,6 +15,7 @@
           <!-- Link-->
           <li class="nav-item"> <a [routerLink]="['']"  class="nav-link active">{{ 'Home' | translate }}</a></li>
           <li class="nav-item bottom-separator"> <a [routerLink]="['/aboutUs']" class="nav-link">{{ 'AboutUs' | translate }}</a></li>
+          <li class="nav-item bottom-separator"> <a href="#faq" class="nav-link">{{ 'Faq title' | translate }}</a></li>
           <li class="nav-item">
             <a class="nav-link pointer-cursor" *ngIf="authService.isLoggedIn()" [routerLink]="['profile']" >{{ 'My profile' | translate }}</a>
           </li>

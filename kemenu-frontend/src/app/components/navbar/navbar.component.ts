@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  isCollapsed = true;
-  bsModalRef: BsModalRef;
+  public isCollapsed = true;
+  public bsModalRef: BsModalRef;
 
   constructor(
     private modalService: BsModalService,

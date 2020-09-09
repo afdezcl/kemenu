@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { DialogModule } from '@ui-controls/dialogs/dialog.module';
 import { HomeRoutingModule } from './home-routing.module';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { HomeRoutingModule } from './home-routing.module';
     RouterModule,
     TranslateModule,
     DialogModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    CarouselModule
   ],
   declarations: [HomeComponent]
 })
