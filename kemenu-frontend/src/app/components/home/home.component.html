@@ -10,10 +10,12 @@
           </div>
         </div>
         <div class="form-group">
-          <button type="submit" [routerLink]="['/register']" class="btn btn-secondary">{{ 'GetStarted' | translate }}</button>
+          <button type="submit" [routerLink]="['/register']"
+            class="btn btn-secondary">{{ 'GetStarted' | translate }}</button>
         </div>
       </div>
-      <div class="col-lg-6"><img class="home-image d-none d-lg-block" src="../../../assets/images/kemenu-home.png" alt="home-image"></div>
+      <div class="col-lg-6"><img class="home-image d-none d-lg-block" src="../../../assets/images/kemenu-home.png"
+          alt="home-image"></div>
     </div>
   </div>
 </section>
@@ -23,8 +25,8 @@
   <div class="container">
     <div class="text-center">
       <h2>{{ 'Home-No installations title' | translate }}</h2>
-      <p class="lead text-muted mt-2">{{ 'Home-No installations description' | translate }}</p><a
-        href="#howWorks" class="btn btn-primary">{{ 'Read More' | translate }}</a>
+      <p class="lead text-muted mt-2">{{ 'Home-No installations description' | translate }}</p><a href="#howWorks"
+        class="btn btn-primary">{{ 'Read More' | translate }}</a>
     </div>
     <div class="row">
       <div class="col-lg-7 mx-auto mt-5"><img src="../../../assets/images/list-menu.svg" alt="list-menu"
@@ -87,20 +89,110 @@
   </div>
 </section>
 
-<!-- How it works Section-->
 <section class="bg-gray">
   <div class="container text-center text-lg-left">
     <div class="row align-items-center">
-      <div class="col-lg-7">
-        <h2 class="divider-heading">{{ 'Home-Advice title' | translate }}</h2>
-        <div class="row">
-          <div class="col-lg-10">
-            <p class="lead divider-subtitle mt-2 text-muted">{{ 'Home-Advice description' | translate }}</p>
+      <div class="col-sm-12 text-center">
+        <h2 class="divider-heading">{{ 'Opinions users' | translate }}</h2>
+        <div class="row mt-3">
+          <div class="col-sm-12">
+            <carousel [isAnimated]="true">
+              <slide>
+                <div class="text-center py-5 text-black">
+                  <img src="../../../assets/images/testimonials/el-salitre.png" alt="el-salitre" height="50"
+                    class="mb-3">
+                  <h3>Restaurante El Salitre</h3>
+                  <div class="lead">
+                    <h4>Málaga ({{ 'Spain' | translate }})</h4>
+                    <p class="pl-5 pr-5 font-italic">
+                      "{{ 'Review Restaurant 1' | translate }}"
+                    </p>
+                  </div>
+                </div>
+              </slide>
+              <slide>
+                <div class="text-center py-5 text-black">
+                  <img src="../../../assets/images/testimonials/lapera.png" alt="el-salitre" height="100" class="mb-3">
+                  <h3>Restaurante La Pera</h3>
+                  <div class="lead">
+                    <h4>Málaga ({{ 'Spain' | translate }})</h4>
+                    <p class="pl-5 pr-5 font-italic">
+                      "{{ 'Review Restaurant 2' | translate }}"
+                    </p>
+                  </div>
+                </div>
+              </slide>
+              <slide>
+                <div class="text-center py-5 text-black">
+                  <img src="../../../assets/images/testimonials/chiringuito.png" alt="el-salitre" height="100"
+                    class="mb-3">
+                  <h3>Chiringuito Alonso "El Pionero"</h3>
+                  <div class="lead">
+                    <h4>Torrox ({{ 'Spain' | translate }})</h4>
+                    <p class="pl-5 pr-5 font-italic">
+                      "{{ 'Review Restaurant 3' | translate }}"
+                    </p>
+                  </div>
+                </div>
+              </slide>
+            </carousel>
           </div>
-        </div><a [routerLink]="['/register']" class="btn btn-primary">{{ 'GetStarted' | translate }}</a>
+        </div>
       </div>
-      <div class="col-lg-5 mt-5 mt-lg-0"><img src="../../../assets/images/restaurant.svg" alt=""
-          class="divider-image img-fluid"></div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-gray-dark">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-sm-12 text-center">
+        <h2 class="divider-heading">{{ 'Talk about us' | translate }}</h2>
+        <div class="row">
+          <div class="col-sm-12">
+            <ul class="list-group list-group-horizontal-xl">
+              <li class="list-group-item">
+                <a target="_blank"
+                  href="https://www.youtube.com/watch?v=YNq6c6-Q6nA&ab_channel=EquipoKEMENU">
+                  <img src="../../../assets/images/testimonials/canalsur.png" alt="canalsur" height="80">
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a target="_blank"
+                  href="https://www.europapress.es/andalucia/malaga-00356/noticia-crean-aplicacion-permite-restaurantes-crear-cartas-digitales-ver-movil-20200523125942.html">
+                  <img src="../../../assets/images/testimonials/europapress.png" alt="europapress" height="80">
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a target="_blank"
+                  href="https://www.laopiniondemalaga.es/malaga/2020/05/20/menu-coronavirus-telefono-movil/1166795.html">
+                  <img src="../../../assets/images/testimonials/la-opinion-de-malaga-logo-vector.png"
+                    alt="la-opinion-de-malaga" height="80">
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a target="_blank"
+                  href="https://www.pronto.es/noticias-del-corazon/sorprendente/dos-ingenieros-crean-app-digitalizar-cartas-restaurantes-320733102.html">
+                  <img src="../../../assets/images/testimonials/pronto.png" alt="pronto" height="80">
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a target="_blank"
+                  href="https://www.lavanguardia.com/local/sevilla/20200523/481346293154/coronavirus--crean-una-aplicacion-que-permite-a-restaurantes-hacer-cartas-digitales-para-ver-desde-el-movil.html">
+                  <img src="../../../assets/images/testimonials/vanguardia-logo.png" alt="vanguardia" height="80">
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a target="_blank"
+                  href="https://7tvandalucia.es/malaga/noticias-7-malaga/5-334-21052020-noticias-7-malaga/53682/">
+                  <img src="../../../assets/images/testimonials/logo7TV.png" alt="7tv" height="80">
+                </a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

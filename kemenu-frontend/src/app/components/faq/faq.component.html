@@ -1,11 +1,11 @@
-<accordion class="accordion-custom faq" [isAnimated]="true">
+<accordion class="accordion-custom faq" id="faq" [isAnimated]="true">
     <accordion-group>
       <button type="submit" class="btn btn-link clearfix faq-title" accordion-heading>
         <div class="pull-left">{{ 'Faq title' | translate }}</div>
         <i class="icofont-collapse ml-2"></i>
       </button>
 
-      <div>
+      <div class="container">
         <div *ngFor="let questionObject of ('faq' | translate)">
           <accordion class="accordion-custom faq-question" [isAnimated]="true">
             <accordion-group>

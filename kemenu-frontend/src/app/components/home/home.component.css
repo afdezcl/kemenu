@@ -20,3 +20,8 @@ app-alert {
   float: right;
   max-width: 750px;
 }
+
+.list-group-item {
+  border: none;
+  background: none;
+}
