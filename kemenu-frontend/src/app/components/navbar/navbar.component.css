@@ -23,6 +23,10 @@
     max-width: 140px;
   }
 
+  .dropdown-item:hover {
+    color: white;
+  }
+
 
 /* NAVBAR MEDIAQUERY */
   @media (max-width: 991.98px) {
