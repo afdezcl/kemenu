@@ -4,7 +4,6 @@ import { CustomerComponent } from './customer.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { TranslateModule } from '@ngx-translate/core';
 import { MenuDigitalModule } from '../menu/menu-digital/menu-digital.module';
-import { MenuImageModule } from '../menu/menu-image/menu-image.module';
 import { CustomerRoutingModule } from './customer-routing.module';
 
 @NgModule({
@@ -13,7 +12,6 @@ import { CustomerRoutingModule } from './customer-routing.module';
     AccordionModule,
     TranslateModule,
     MenuDigitalModule,
-    MenuImageModule,
     CustomerRoutingModule
   ],
   declarations: [CustomerComponent]

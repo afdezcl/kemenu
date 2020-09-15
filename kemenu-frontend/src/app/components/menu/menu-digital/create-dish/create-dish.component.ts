@@ -3,10 +3,7 @@ import {Validators, FormGroup, FormBuilder} from '@angular/forms';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {Dish} from '@models/menu/dish.model';
 import {Allergen, AllAllergens, AllergenRequestResponse} from '@models/menu/allergen.model';
-import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
-import {TranslateService} from '@ngx-translate/core';
 import {Router} from '@angular/router';
-
 
 @Component({
   selector: 'app-create-dish',
@@ -35,7 +32,6 @@ export class CreateDishComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private formBuilder: FormBuilder,
-    private translate: TranslateService,
     public bsModalRef: BsModalRef,
     public router: Router
   ) {
