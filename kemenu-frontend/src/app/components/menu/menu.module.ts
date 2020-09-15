@@ -11,10 +11,10 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuDigitalModule } from './menu-digital/menu-digital.module';
-import { MenuImageModule } from './menu-image/menu-image.module';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 import { MenuRoutingModule } from './menu-routing.module';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
+import {MenuImageComponent} from './menu-image/menu-image.component';
 
 @NgModule({
   imports: [
@@ -27,7 +27,6 @@ import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.
     ShareButtonsModule,
     ShareIconsModule,
     MenuDigitalModule,
-    MenuImageModule,
     MenuRoutingModule,
     UploadImageButtonModule
   ],
@@ -36,7 +35,8 @@ import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.
     CreateSectionComponent,
     CreateDishComponent,
     ShareQrComponent,
-    MenuAdvancedSettingsComponent
+    MenuAdvancedSettingsComponent,
+    MenuImageComponent
   ]
 })
 export class MenuModule {

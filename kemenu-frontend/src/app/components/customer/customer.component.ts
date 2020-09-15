@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Demo} from '@models/demo-mock/demo.mock';
 import {ShowMenu} from '@models/menu/showMenu.model';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {MenuService} from '@services/menu/menu.service';
 import {Section} from '@models/menu/section.model';
 import {Dish} from '@models/menu/dish.model';
