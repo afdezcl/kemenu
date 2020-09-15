@@ -9,7 +9,6 @@ import { CreateDishComponent } from './menu-digital/create-dish/create-dish.comp
 import { ShareQrComponent } from './share-qr/share-qr.component';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
-import { HttpClientModule } from '@angular/common/http';
 import { MenuDigitalModule } from './menu-digital/menu-digital.module';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 import { MenuRoutingModule } from './menu-routing.module';
@@ -18,7 +17,6 @@ import {MenuImageComponent} from './menu-image/menu-image.component';
 
 @NgModule({
   imports: [
-    HttpClientModule,
     CommonModule,
     TranslateModule,
     AccordionModule,
