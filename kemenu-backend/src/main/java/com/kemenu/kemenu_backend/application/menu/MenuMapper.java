@@ -36,6 +36,7 @@ public class MenuMapper {
                 )
                 .imageUrl(!StringUtils.isEmpty(menu.getImageUrl()) ? cloudinaryService.getOptimizedUrl(menu.getImageUrl()) : "")
                 .currency(menu.getCurrency().getCurrencyCode())
+                .name(menu.getName())
                 .build();
     }
 }

@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.kemenu</groupId>
         <artifactId>kemenu</artifactId>
-        <version>0.0.219-SNAPSHOT</version>
+        <version>0.0.220-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -13,7 +13,7 @@
         <logstash-logback-encoder.version>6.4</logstash-logback-encoder.version>
         <java-jwt.version>3.10.3</java-jwt.version>
         <zxing.version>3.4.0</zxing.version>
-        <springfox-swagger2.version>3.0.0</springfox-swagger2.version>
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
         <sentry.version>1.7.30</sentry.version>
         <sendgrid.version>4.6.4</sendgrid.version>
         <vertx.version>3.9.2</vertx.version>
