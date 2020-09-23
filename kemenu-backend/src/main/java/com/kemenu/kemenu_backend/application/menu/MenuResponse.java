@@ -16,4 +16,5 @@ public class MenuResponse {
     List<MenuSectionResponse> sections;
     String imageUrl;
     String currency;
+    String name;
 }
