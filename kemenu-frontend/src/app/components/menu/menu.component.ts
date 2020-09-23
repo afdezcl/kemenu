@@ -12,6 +12,7 @@ import { Allergen, AllAllergens } from '@models/menu/allergen.model';
 import { Router } from '@angular/router';
 import { ModalPolicyComponent } from '../modal-policy/modal-policy.component';
 import { ToastrService } from 'ngx-toastr';
+import { CreateMenuNameComponent } from './menu-digital/create-menu-name/create-menu-name.component';
 
 @Component({
   selector: 'app-menu',
@@ -28,6 +29,7 @@ export class MenuComponent implements OnInit {
   public menuId: string;
   public allergens: Allergen[] = AllAllergens;
   public newsletterStatus = '';
+  public menuName: string;
 
   constructor(
     private modalService: BsModalService,
@@ -78,6 +80,15 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  openCreateMenuName() {
+    this.modalReference = this.modalService.show(CreateMenuNameComponent);
+    this.modalReference.content.messageEvent.subscribe(name => {
+      // this.addNewSection(name);
+      this.menu.name = name;
+      this.openCreateSection();
+    });
+  }
+
   openCreateSection() {
     this.modalReference = this.modalService.show(CreateSectionComponent);
     this.modalReference.content.messageEvent.subscribe(name => {
@@ -125,7 +136,8 @@ export class MenuComponent implements OnInit {
     const menuToSave = {
       businessId: this.businessId,
       sections: menuSections,
-      imageUrl: this.menu.imageUrl
+      imageUrl: this.menu.imageUrl,
+      name: this.menu.name
     };
     this.menuService.createMenu(menuToSave)
       .subscribe((response: any) => {

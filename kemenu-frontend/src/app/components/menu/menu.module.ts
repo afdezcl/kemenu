@@ -14,6 +14,7 @@ import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-adv
 import { MenuRoutingModule } from './menu-routing.module';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
 import {MenuImageComponent} from './menu-image/menu-image.component';
+import { CreateMenuNameComponent } from './menu-digital/create-menu-name/create-menu-name.component';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import {MenuImageComponent} from './menu-image/menu-image.component';
   ],
   declarations: [
     MenuComponent,
+    CreateMenuNameComponent,
     CreateSectionComponent,
     CreateDishComponent,
     ShareQrComponent,

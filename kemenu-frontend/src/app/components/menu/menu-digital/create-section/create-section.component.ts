@@ -1,6 +1,6 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {Validators, FormGroup, FormBuilder} from '@angular/forms';
-import {BsModalRef} from 'ngx-bootstrap/modal';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-create-section',
