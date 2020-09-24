@@ -21,7 +21,8 @@ import { CreateMenuNameComponent } from './menu-digital/create-menu-name/create-
 })
 export class MenuComponent implements OnInit {
 
-  public menu: Menu;
+  public menusSaved: Menu[] = [];
+  public simpleMenu: Menu;
   public modalReference: BsModalRef;
   public businessId: string;
   public customerId: string;
@@ -42,14 +43,14 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadMenu();
+    this.loadMenus();
   }
 
-  loadMenu() {
+  loadMenus() {
     const customerEmail = this.authService.getUserEmail();
-    this.menu = new Menu(
-      customerEmail,
-      []
+    this.menusSaved[0] = new Menu(
+      [],
+      ''
     );
     this.menuService.getCustomer(customerEmail)
       .subscribe((response: any) => {
@@ -57,12 +58,11 @@ export class MenuComponent implements OnInit {
         this.businessId = response.businesses[0].id;
         this.newsletterStatus = response.newsletterStatus;
         if (response.businesses[0].menus.length !== 0) {
-          this.menu.sections = response.businesses[0].menus[0].sections;
-          this.menu.shortUrlId = response.businesses[0].menus[0].shortUrlId;
-          this.menu.imageUrl = response.businesses[0].menus[0].imageUrl;
-          this.menu.id = response.businesses[0].menus[0].id;
-          this.menu.currency = response.businesses[0].menus[0].currency;
-          this.matchAllergens();
+          this.menusSaved = response.businesses[0].menus;
+          console.log(this.menusSaved);
+          for(let menu of response.businesses[0].menus) {
+            this.matchAllergens(menu);
+          }
         }
         this.checkNewsletterStatus();
       });
@@ -83,67 +83,75 @@ export class MenuComponent implements OnInit {
   openCreateMenuName() {
     this.modalReference = this.modalService.show(CreateMenuNameComponent);
     this.modalReference.content.messageEvent.subscribe(name => {
-      // this.addNewSection(name);
-      this.menu.name = name;
-      this.openCreateSection();
+      this.simpleMenu = new Menu(
+        [],
+        name
+      );
+      if(this.menusSaved.length > 0 ) {
+        this.menusSaved.push(this.simpleMenu);
+      } else {
+        this.menusSaved[0].name = name;
+      }
+      this.openCreateSection(this.simpleMenu);
     });
   }
 
-  openCreateSection() {
+  openCreateSection(menu: Menu) {
     this.modalReference = this.modalService.show(CreateSectionComponent);
-    this.modalReference.content.messageEvent.subscribe(name => {
-      this.addNewSection(name);
+    this.modalReference.content.messageEvent.subscribe(( sectionName: string ) => {
+      this.addNewSection(menu, sectionName);
     });
   }
 
-  private addNewSection(name: string) {
+  private addNewSection(menu: Menu, sectionName: string) {
     const section = new Section(
-      name,
+      sectionName,
       []
     );
-    this.menu.sections.push(section);
-    this.onSaveMenu();
+    this.menusSaved.find((menusSaved: Menu) => Object.is(menusSaved.name, menu.name)).sections.push(section);
+    this.onSaveMenu(menu);
   }
-
+/* 
   private addNewDish(dish: Dish, sectionIndex: number) {
-    this.menu.sections[sectionIndex].dishes.push(dish);
+    this.menusSaved[0].sections[sectionIndex].dishes.push(dish);
     this.onSaveMenu();
-  }
+  } */
 
   menuChange(menu: Menu) {
-    this.menu = menu;
-    this.onSaveMenu();
+    const index = this.menusSaved.findIndex((menusSaved: Menu) => Object.is(menusSaved.name, menu.name));
+    this.menusSaved[index] = menu;    
+    this.onSaveMenu(menu);
   }
 
   openShareQR() {
     const initialState = {
-      shortUrlId: this.menu.shortUrlId
+      shortUrlId: this.menusSaved[0].shortUrlId
     };
     this.modalReference = this.modalService.show(ShareQrComponent, { initialState });
   }
 
-  onSaveMenu() {
-    if (this.menu.id) {
-      this.updateMenu();
+  onSaveMenu(menu: Menu) {
+    if (menu.id) {
+      this.updateMenu(menu);
     } else {
-      this.createMenu();
+      this.createMenu(menu);
     }
     this.thereIsChange = false;
   }
 
-  private createMenu() {
-    const menuSections = this.sanitizeAllergensMenuToUpdate();
+  private createMenu(menu: Menu) {
+    const menuSections = this.sanitizeAllergensMenuToUpdate(menu);
     const menuToSave = {
       businessId: this.businessId,
       sections: menuSections,
-      imageUrl: this.menu.imageUrl,
-      name: this.menu.name
+      imageUrl: menu.imageUrl,
+      name: menu.name
     };
     this.menuService.createMenu(menuToSave)
       .subscribe((response: any) => {
-        this.menu.shortUrlId = response.shortUrlId;
-        this.menu.id = response.menuId;
-        this.matchAllergens();
+        this.menusSaved.find((menusSaved: Menu) => Object.is(menusSaved.name, menu.name)).shortUrlId = response.shortUrlId;
+        this.menusSaved.find((menusSaved: Menu) => Object.is(menusSaved.name, menu.name)).id = response.menuId;
+        this.matchAllergens(menu);
         this.router.navigateByUrl('menu');
         this.showSuccessToasty();
       }, () => {
@@ -151,27 +159,28 @@ export class MenuComponent implements OnInit {
       });
   }
 
-  private updateMenu() {
-    const menuSections = this.sanitizeAllergensMenuToUpdate();
+  private updateMenu(menu: Menu) {
+    const menuSections = this.sanitizeAllergensMenuToUpdate(menu);
     const menuToUpdate = {
       businessId: this.businessId,
-      menuId: this.menu.id,
+      menuId: menu.id,
       sections: menuSections,
-      imageUrl: this.menu.imageUrl,
-      currency: this.menu.currency
+      imageUrl: menu.imageUrl,
+      currency: menu.currency,
+      name: menu.name
     };
     this.menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
-        this.menu.id = response;
-        this.matchAllergens();
+        this.menusSaved.find((menusSaved: Menu) => Object.is(menusSaved.name, menu.name)).id = response;
+        this.matchAllergens(menu);
         this.showSuccessToasty();
       }, () => {
         this.showErrorToasty();
       });
   }
 
-  sanitizeAllergensMenuToUpdate() {
-    const sections = this.menu.sections;
+  sanitizeAllergensMenuToUpdate(menu: Menu) {
+    const sections = menu.sections;
     sections.map((section: Section) => {
       section.dishes.map((dish: Dish) => {
         dish.allergens.map((allergen: Allergen) => delete allergen.imageName);
@@ -180,8 +189,8 @@ export class MenuComponent implements OnInit {
     return sections;
   }
 
-  matchAllergens() {
-    this.menu.sections.map((section: Section) => {
+  matchAllergens(menu: Menu) {
+    this.menusSaved.find((menusSaved: Menu) => Object.is(menusSaved.name, menu.name)).sections.map((section: Section) => {
       section.dishes.map((dish: Dish) => {
         dish.allergens.map((allergen: Allergen) => {
           allergen.imageName = this.allergens.find(item => item.id === allergen.id).imageName;
@@ -190,10 +199,10 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  handleFileUpload(event) {
+  handleFileUpload(event, menu: Menu) {
     if (event) {
-      this.menu.imageUrl = event.url;
-      this.onSaveMenu();
+      menu.imageUrl = event.url;
+      this.onSaveMenu(menu);
     }
   }
 

@@ -16,6 +16,7 @@ import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.
 import { MenuImageComponent } from './menu-image/menu-image.component';
 import { CreateMenuNameComponent } from './menu-digital/create-menu-name/create-menu-name.component';
 import { TabsModule } from 'ngx-bootstrap/tabs'
+import { TabOrderDirective } from '@ui-controls/directives/tab-order.directive';
 
 
 @NgModule({
@@ -39,7 +40,11 @@ import { TabsModule } from 'ngx-bootstrap/tabs'
     CreateDishComponent,
     ShareQrComponent,
     MenuAdvancedSettingsComponent,
-    MenuImageComponent
+    MenuImageComponent,
+    TabOrderDirective
+  ],
+  providers: [
+    TabOrderDirective
   ]
 })
 export class MenuModule {

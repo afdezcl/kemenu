@@ -1,59 +1,62 @@
 <section class="menu-section">
 
-  <div class="row section-header align-items-center" *ngIf="menu.sections.length > 0 || menu.imageUrl">
+  <div class="row section-header align-items-center" *ngIf="menusSaved[0].sections.length > 0 || menusSaved[0].imageUrl">
     <div class="col-sm-12 text-center">
-      <button type="submit" class="btn btn-primary mt-3" (click)="openShareQR()" [disabled]="!menu.shortUrlId || thereIsChange">
+      <button type="submit" class="btn btn-primary mt-3" (click)="openShareQR()" [disabled]="!menusSaved[0].shortUrlId || thereIsChange">
         {{ 'Get QR and share' | translate }}<i class="fas fa-qrcode pl-2"></i></button>
     </div>
   </div>
 
-  <div class="container">
+  <div class="container mt-3">
 
 
-    <tabset class="mt-5">
-      <tab heading="Basic title" id="tab1">Basic content</tab>
-      <tab heading="Basic Title 1">Basic content 1</tab>
-      <tab heading="Basic Title 2">Basic content 2</tab>
+    <tabset>
+
+      <tab tabOrder="1" *ngFor="let menu of menusSaved" heading="{{ menu.name }}" [active]="true">
+
+        <div class="row text-center card-buttons-container first-menu" *ngIf="menu.sections.length === 0 && !menu.imageUrl">
+          <div class="col-lg-5 col-md-12 card first-menu-button">
+            <img src="../../../assets/images/photo_sharing.svg" alt="no-sections" class="img-fluid first-menu-image">
+            <h5 class="font-weight-bold">{{ 'Upload Menu Image' | translate }}</h5>
+            <span class="text-muted">{{ 'WarningMenuImage' | translate }}</span>
+            <app-upload-image-button firstMenu="true" (uploadFileEvent)="handleFileUpload($event, menu)"></app-upload-image-button>
+          </div>
+          <div class="col-lg-2 col-md-12 first-menu-or">
+            <h5 class="font-weight-bold">{{ 'Or' | translate }}</h5>
+          </div>
+          <div class="col-lg-5 col-md-12 card first-menu-button" (click)="openCreateMenuName()">
+            <img src="../../../assets/images/no-sections.svg" alt="no-sections" class="img-fluid first-menu-image">
+            <h5 class="font-weight-bold">{{ 'CreateDigitalFirstMenu' | translate }}</h5>
+            <span class="text-muted">{{ 'WarningFirstMenu' | translate }}</span>
+          </div>
+        </div>
+    
+        <div class="row mt-3 mt-md-5 mb-md-5" *ngIf="menu.sections.length > 0 || menu.imageUrl">
+          <div class="col-12 p-0">
+            <app-menu-image
+              [editMode]="true"
+              [menu]="menu"
+              (uploadedMenuImage)="menuChange($event)">
+            </app-menu-image>
+          </div>
+    
+          <div class="col-12 p-0 mt-2">
+            <app-menu-digital
+              [editMode]="true"
+              [menu]="menu"
+              (menuChange)="menuChange($event)">
+            </app-menu-digital>
+          </div>
+        </div>
+
+      </tab>
+      <tab tabOrder="2" (selectTab)="openCreateMenuName()">
+        <ng-template tabHeading>
+          <span class="badge badge-primary">+</span>
+        </ng-template>
+      </tab>
+
     </tabset>
-
-
-
-
-    <div class="row text-center card-buttons-container first-menu" *ngIf="menu.sections.length === 0 && !menu.imageUrl">
-      <div class="col-lg-5 col-md-12 card first-menu-button">
-        <img src="../../../assets/images/photo_sharing.svg" alt="no-sections" class="img-fluid first-menu-image">
-        <h5 class="font-weight-bold">{{ 'Upload Menu Image' | translate }}</h5>
-        <span class="text-muted">{{ 'WarningMenuImage' | translate }}</span>
-        <app-upload-image-button firstMenu="true" (uploadFileEvent)="handleFileUpload($event)"></app-upload-image-button>
-      </div>
-      <div class="col-lg-2 col-md-12 first-menu-or">
-        <h5 class="font-weight-bold">{{ 'Or' | translate }}</h5>
-      </div>
-      <div class="col-lg-5 col-md-12 card first-menu-button" (click)="openCreateMenuName()">
-        <img src="../../../assets/images/no-sections.svg" alt="no-sections" class="img-fluid first-menu-image">
-        <h5 class="font-weight-bold">{{ 'CreateDigitalFirstMenu' | translate }}</h5>
-        <span class="text-muted">{{ 'WarningFirstMenu' | translate }}</span>
-      </div>
-    </div>
-
-    <div class="row mt-3 mt-md-5 mb-md-5" *ngIf="menu.sections.length > 0 || menu.imageUrl">
-      <div class="col-12 p-0">
-        <app-menu-image
-          [editMode]="true"
-          [menu]="menu"
-          (uploadedMenuImage)="menuChange($event)">
-        </app-menu-image>
-      </div>
-
-      <div class="col-12 p-0 mt-2">
-        <app-menu-digital
-          [editMode]="true"
-          [menu]="menu"
-          (menuChange)="menuChange($event)">
-        </app-menu-digital>
-      </div>
-
-    </div>
 
   </div>
 </section>
