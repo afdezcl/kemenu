@@ -1,4 +1,4 @@
-import {ShowMenu} from '@models/menu/showMenu.model';
+import { ShowMenu } from '@models/menu/showMenu.model';
 
 export const Demo: ShowMenu = {
   businessName: 'Bar Demo',

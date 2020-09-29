@@ -22,7 +22,7 @@ import { CreateMenuNameComponent } from './menu-digital/create-menu-name/create-
 export class MenuComponent implements OnInit {
 
   public menusSaved: Menu[] = [];
-  public simpleMenu: Menu;
+  public menu: Menu[];
   public modalReference: BsModalRef;
   public businessId: string;
   public customerId: string;
@@ -48,24 +48,24 @@ export class MenuComponent implements OnInit {
 
   loadMenus() {
     const customerEmail = this.authService.getUserEmail();
-    this.menusSaved[0] = new Menu(
-      [],
-      ''
-    );
     this.menuService.getCustomer(customerEmail)
       .subscribe((response: any) => {
         this.customerId = response.id;
         this.businessId = response.businesses[0].id;
         this.newsletterStatus = response.newsletterStatus;
         if (response.businesses[0].menus.length !== 0) {
-          this.menusSaved = response.businesses[0].menus;
+          this.menu = response.businesses[0].menus;
           console.log(this.menusSaved);
-          for(let menu of response.businesses[0].menus) {
+          for (let menu of response.businesses[0].menus) {
             this.matchAllergens(menu);
           }
         }
         this.checkNewsletterStatus();
       });
+  }
+
+  trackByMenuName(menu) {
+    return menu.name;
   }
 
   private checkNewsletterStatus() {
@@ -83,22 +83,18 @@ export class MenuComponent implements OnInit {
   openCreateMenuName() {
     this.modalReference = this.modalService.show(CreateMenuNameComponent);
     this.modalReference.content.messageEvent.subscribe(name => {
-      this.simpleMenu = new Menu(
+      const menu = new Menu(
         [],
         name
       );
-      if(this.menusSaved.length > 0 ) {
-        this.menusSaved.push(this.simpleMenu);
-      } else {
-        this.menusSaved[0].name = name;
-      }
-      this.openCreateSection(this.simpleMenu);
+      this.menusSaved.push(menu);
+      this.openCreateSection(menu);
     });
   }
 
   openCreateSection(menu: Menu) {
     this.modalReference = this.modalService.show(CreateSectionComponent);
-    this.modalReference.content.messageEvent.subscribe(( sectionName: string ) => {
+    this.modalReference.content.messageEvent.subscribe((sectionName: string) => {
       this.addNewSection(menu, sectionName);
     });
   }
@@ -111,15 +107,10 @@ export class MenuComponent implements OnInit {
     this.menusSaved.find((menusSaved: Menu) => Object.is(menusSaved.name, menu.name)).sections.push(section);
     this.onSaveMenu(menu);
   }
-/* 
-  private addNewDish(dish: Dish, sectionIndex: number) {
-    this.menusSaved[0].sections[sectionIndex].dishes.push(dish);
-    this.onSaveMenu();
-  } */
 
   menuChange(menu: Menu) {
     const index = this.menusSaved.findIndex((menusSaved: Menu) => Object.is(menusSaved.name, menu.name));
-    this.menusSaved[index] = menu;    
+    this.menusSaved[index] = menu;
     this.onSaveMenu(menu);
   }
 
@@ -199,12 +190,6 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  handleFileUpload(event, menu: Menu) {
-    if (event) {
-      menu.imageUrl = event.url;
-      this.onSaveMenu(menu);
-    }
-  }
 
   showSuccessToasty() {
     this.toasty.success(this.translate.instant('Saved Correctly'));

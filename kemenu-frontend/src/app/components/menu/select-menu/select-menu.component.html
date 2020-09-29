@@ -1,0 +1,30 @@
+<!--Initial view-->
+<div class="container">
+  <div class="row text-center card-buttons-container first-menu" *ngIf="menusSaved.length === 0">
+    <div class="col-lg-5 col-md-12 card first-menu-button">
+      <img src="../../../assets/images/photo_sharing.svg" alt="no-sections" class="img-fluid first-menu-image">
+      <h5 class="font-weight-bold">{{ 'Upload Menu Image' | translate }}</h5>
+      <span class="text-muted">{{ 'WarningMenuImage' | translate }}</span>
+      <app-upload-image-button firstMenu="true" (uploadFileEvent)="handleFileUpload($event)">
+      </app-upload-image-button>
+    </div>
+    <div class="col-lg-2 col-md-12 first-menu-or">
+      <h5 class="font-weight-bold">{{ 'Or' | translate }}</h5>
+    </div>
+    <div class="col-lg-5 col-md-12 card first-menu-button" (click)="openCreateMenuName()">
+      <img src="../../../assets/images/no-sections.svg" alt="no-sections" class="img-fluid first-menu-image">
+      <h5 class="font-weight-bold">{{ 'CreateDigitalFirstMenu' | translate }}</h5>
+      <span class="text-muted">{{ 'WarningFirstMenu' | translate }}</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row text-center card-buttons-container first-menu" *ngIf="menusSaved.length !== 0">
+    <div class="col-lg-12 col-md-12 card first-menu-button" *ngFor="let menu of menusSaved; let counter = index;" (click)="goToMenu(counter)">
+      <img src="../../../assets/images/no-sections.svg" alt="no-sections" class="img-fluid first-menu-image">
+      <h5 class="font-weight-bold">{{ menu.name !== '' ? menu.name : 'Primer menú'}}</h5>
+      <span class="text-muted">Este es uno de tus menús</span>
+    </div>
+  </div>
+</div>

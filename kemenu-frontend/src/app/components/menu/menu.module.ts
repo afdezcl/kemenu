@@ -17,6 +17,7 @@ import { MenuImageComponent } from './menu-image/menu-image.component';
 import { CreateMenuNameComponent } from './menu-digital/create-menu-name/create-menu-name.component';
 import { TabsModule } from 'ngx-bootstrap/tabs'
 import { TabOrderDirective } from '@ui-controls/directives/tab-order.directive';
+import { SelectMenuComponent } from './select-menu/select-menu.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { TabOrderDirective } from '@ui-controls/directives/tab-order.directive';
     ShareQrComponent,
     MenuAdvancedSettingsComponent,
     MenuImageComponent,
-    TabOrderDirective
+    TabOrderDirective,
+    SelectMenuComponent,
   ],
   providers: [
     TabOrderDirective
