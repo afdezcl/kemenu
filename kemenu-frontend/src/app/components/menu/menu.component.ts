@@ -9,10 +9,10 @@ import { ShareQrComponent } from './share-qr/share-qr.component';
 import { MenuService } from '@services/menu/menu.service';
 import { AuthenticationService } from '@services/authentication/authentication.service';
 import { Allergen, AllAllergens } from '@models/menu/allergen.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalPolicyComponent } from '../modal-policy/modal-policy.component';
 import { ToastrService } from 'ngx-toastr';
-import { CreateMenuNameComponent } from './menu-digital/create-menu-name/create-menu-name.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-menu',
@@ -21,8 +21,8 @@ import { CreateMenuNameComponent } from './menu-digital/create-menu-name/create-
 })
 export class MenuComponent implements OnInit {
 
-  public menusSaved: Menu[] = [];
-  public menu: Menu[];
+
+  public menu: Menu;
   public modalReference: BsModalRef;
   public businessId: string;
   public customerId: string;
@@ -38,28 +38,32 @@ export class MenuComponent implements OnInit {
     private menuService: MenuService,
     private authService: AuthenticationService,
     private router: Router,
-    private toasty: ToastrService
+    private route: ActivatedRoute,
+    private toasty: ToastrService,
+    private location: Location
   ) {
   }
 
   ngOnInit() {
-    this.loadMenus();
+    this.route.params.subscribe(params => {
+      this.menuId = params['id'];
+      this.loadMenus();
+    });
   }
 
   loadMenus() {
     const customerEmail = this.authService.getUserEmail();
+    this.menu = new Menu(
+      [],
+      ''
+    );
     this.menuService.getCustomer(customerEmail)
       .subscribe((response: any) => {
         this.customerId = response.id;
         this.businessId = response.businesses[0].id;
         this.newsletterStatus = response.newsletterStatus;
-        if (response.businesses[0].menus.length !== 0) {
-          this.menu = response.businesses[0].menus;
-          console.log(this.menusSaved);
-          for (let menu of response.businesses[0].menus) {
-            this.matchAllergens(menu);
-          }
-        }
+        this.menu = response.businesses[0].menus[this.menuId];
+        this.matchAllergens(this.menu);
         this.checkNewsletterStatus();
       });
   }
@@ -80,18 +84,6 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  openCreateMenuName() {
-    this.modalReference = this.modalService.show(CreateMenuNameComponent);
-    this.modalReference.content.messageEvent.subscribe(name => {
-      const menu = new Menu(
-        [],
-        name
-      );
-      this.menusSaved.push(menu);
-      this.openCreateSection(menu);
-    });
-  }
-
   openCreateSection(menu: Menu) {
     this.modalReference = this.modalService.show(CreateSectionComponent);
     this.modalReference.content.messageEvent.subscribe((sectionName: string) => {
@@ -104,19 +96,19 @@ export class MenuComponent implements OnInit {
       sectionName,
       []
     );
-    this.menusSaved.find((menusSaved: Menu) => Object.is(menusSaved.name, menu.name)).sections.push(section);
+    this.menu.sections.push(section);
     this.onSaveMenu(menu);
   }
 
   menuChange(menu: Menu) {
-    const index = this.menusSaved.findIndex((menusSaved: Menu) => Object.is(menusSaved.name, menu.name));
-    this.menusSaved[index] = menu;
+    //const index = this.menusSaved.findIndex((menusSaved: Menu) => Object.is(menusSaved.name, menu.name));
+    this.menu = menu;
     this.onSaveMenu(menu);
   }
 
   openShareQR() {
     const initialState = {
-      shortUrlId: this.menusSaved[0].shortUrlId
+      shortUrlId: this.menu.shortUrlId
     };
     this.modalReference = this.modalService.show(ShareQrComponent, { initialState });
   }
@@ -140,8 +132,8 @@ export class MenuComponent implements OnInit {
     };
     this.menuService.createMenu(menuToSave)
       .subscribe((response: any) => {
-        this.menusSaved.find((menusSaved: Menu) => Object.is(menusSaved.name, menu.name)).shortUrlId = response.shortUrlId;
-        this.menusSaved.find((menusSaved: Menu) => Object.is(menusSaved.name, menu.name)).id = response.menuId;
+        this.menu.shortUrlId = response.shortUrlId;
+        this.menu.id = response.menuId;
         this.matchAllergens(menu);
         this.router.navigateByUrl('menu');
         this.showSuccessToasty();
@@ -162,10 +154,8 @@ export class MenuComponent implements OnInit {
     };
     this.menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
-        this.menusSaved.find((menusSaved: Menu) => Object.is(menusSaved.name, menu.name)).id = response;
+        this.menu.id = response;
         this.matchAllergens(menu);
-        this.showSuccessToasty();
-      }, () => {
         this.showErrorToasty();
       });
   }
@@ -181,7 +171,7 @@ export class MenuComponent implements OnInit {
   }
 
   matchAllergens(menu: Menu) {
-    this.menusSaved.find((menusSaved: Menu) => Object.is(menusSaved.name, menu.name)).sections.map((section: Section) => {
+    this.menu.sections.map((section: Section) => {
       section.dishes.map((dish: Dish) => {
         dish.allergens.map((allergen: Allergen) => {
           allergen.imageName = this.allergens.find(item => item.id === allergen.id).imageName;
@@ -197,5 +187,9 @@ export class MenuComponent implements OnInit {
 
   showErrorToasty() {
     this.toasty.error(this.translate.instant('Save error'));
+  }
+
+  goToMenuList() {
+    this.location.back();
   }
 }
