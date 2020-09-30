@@ -50,8 +50,4 @@ public class MenuService {
                         })
                 );
     }
-
-    public void delete(String customerEmail, String businessId) {
-
-    }
 }
