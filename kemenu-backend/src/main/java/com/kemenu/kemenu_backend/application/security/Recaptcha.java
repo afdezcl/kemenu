@@ -5,12 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.BodyInserters;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.math.BigDecimal;
 
@@ -20,7 +18,7 @@ import java.math.BigDecimal;
 public class Recaptcha {
 
     private final ObjectMapper mapper;
-    private final OkHttpClient httpClient;
+    private final WebClient webClient;
 
     @Value("${app.recaptcha.secret}")
     private String recaptchaSecret;
@@ -49,17 +47,11 @@ public class Recaptcha {
 
     @SneakyThrows
     private String verifyRecaptcha(String recaptchaToken) {
-        RequestBody requestBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("secret", recaptchaSecret)
-                .addFormDataPart("response", recaptchaToken)
-                .build();
-
-        Request request = new Request.Builder()
-                .url("https://www.google.com/recaptcha/api/siteverify")
-                .post(requestBody)
-                .build();
-
-        return httpClient.newCall(request).execute().body().string();
+        return webClient.post()
+                .uri("https://www.google.com/recaptcha/api/siteverify")
+                .body(BodyInserters.fromMultipartData("secret", recaptchaSecret).with("response", recaptchaToken))
+                .retrieve()
+                .bodyToMono(String.class)
+                .block();
     }
 }

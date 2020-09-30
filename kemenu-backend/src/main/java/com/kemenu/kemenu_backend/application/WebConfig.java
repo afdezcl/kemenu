@@ -13,13 +13,13 @@ import com.kemenu.kemenu_backend.domain.model.ConfirmedEmailRepository;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
 import lombok.extern.slf4j.Slf4j;
-import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
@@ -56,11 +56,6 @@ class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
-    OkHttpClient okHttpClient() {
-        return new OkHttpClient();
-    }
-
-    @Bean
     CommandLineRunner initAdminUser(CustomerRepository repository, PasswordEncoder passwordEncoder, ConfirmedEmailRepository confirmedEmailRepository) {
         return args -> repository.findByEmail(adminUsername)
                 .ifPresentOrElse(
@@ -80,5 +75,10 @@ class WebConfig implements WebMvcConfigurer {
         FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
         configurer.setTemplateLoaderPath("classpath:/templates/");
         return configurer;
+    }
+
+    @Bean
+    WebClient webClient() {
+        return WebClient.builder().build();
     }
 }
