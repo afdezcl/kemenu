@@ -19,12 +19,27 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row text-center card-buttons-container first-menu" *ngIf="menusSaved.length !== 0">
-    <div class="col-lg-12 col-md-12 card first-menu-button" *ngFor="let menu of menusSaved; let counter = index;" (click)="goToMenu(counter)">
-      <img src="../../../assets/images/no-sections.svg" alt="no-sections" class="img-fluid first-menu-image">
-      <h5 class="font-weight-bold">{{ menu.name !== '' ? menu.name : 'Primer menú'}}</h5>
-      <span class="text-muted">Este es uno de tus menús</span>
+<!--MENU LIST-->
+<div class="container" *ngIf="menusSaved.length !== 0">
+  <div class="row text-center card-buttons-container first-menu">
+    <div class="col-sm-12 card-deck">
+      <div class="card shadow rounded-lg" style="cursor: pointer;" *ngFor="let menu of menusSaved">
+        <div class="card-body"  (click)="goToMenu(menu.id)">
+          <h5 class="font-weight-bold">{{ menu.name !== '' ? menu.name : 'Primer menú'}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Click para entrar al menú</h6>
+        </div>
+        <div class="card-footer">
+          <span class="card-link" (click)="openEditMenuName(menu)"><i class="fas fa-edit"></i> Editar nombre del menú</span>
+        </div>
+      </div>
+      <div class="card shadow pt-4 rounded" style="cursor: pointer;" (click)="openCreateMenuName()">
+        <div class="card-body">
+          <h5 class="card-title">Añadir nuevo menú</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Puedes añadir otro menú distinto (por ejemplo el menú del día)</h6>
+          <i class="fas fa-plus"></i><br>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+

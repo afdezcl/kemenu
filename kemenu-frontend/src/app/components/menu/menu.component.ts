@@ -9,7 +9,7 @@ import { ShareQrComponent } from './share-qr/share-qr.component';
 import { MenuService } from '@services/menu/menu.service';
 import { AuthenticationService } from '@services/authentication/authentication.service';
 import { Allergen, AllAllergens } from '@models/menu/allergen.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ModalPolicyComponent } from '../modal-policy/modal-policy.component';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from '@angular/common';
@@ -26,7 +26,6 @@ export class MenuComponent implements OnInit {
   public modalReference: BsModalRef;
   public businessId: string;
   public customerId: string;
-  public thereIsChange = false;
   public menuId: string;
   public allergens: Allergen[] = AllAllergens;
   public newsletterStatus = '';
@@ -37,7 +36,6 @@ export class MenuComponent implements OnInit {
     private translate: TranslateService,
     private menuService: MenuService,
     private authService: AuthenticationService,
-    private router: Router,
     private route: ActivatedRoute,
     private toasty: ToastrService,
     private location: Location
@@ -62,8 +60,8 @@ export class MenuComponent implements OnInit {
         this.customerId = response.id;
         this.businessId = response.businesses[0].id;
         this.newsletterStatus = response.newsletterStatus;
-        this.menu = response.businesses[0].menus[this.menuId];
-        this.matchAllergens(this.menu);
+        this.menu = response.businesses[0].menus.find((menu: Menu) => Object.is(menu.id, this.menuId));
+        this.matchAllergens();
         this.checkNewsletterStatus();
       });
   }
@@ -97,13 +95,12 @@ export class MenuComponent implements OnInit {
       []
     );
     this.menu.sections.push(section);
-    this.onSaveMenu(menu);
+    this.updateMenu(menu);
   }
 
   menuChange(menu: Menu) {
-    //const index = this.menusSaved.findIndex((menusSaved: Menu) => Object.is(menusSaved.name, menu.name));
     this.menu = menu;
-    this.onSaveMenu(menu);
+    this.updateMenu(menu);
   }
 
   openShareQR() {
@@ -111,35 +108,6 @@ export class MenuComponent implements OnInit {
       shortUrlId: this.menu.shortUrlId
     };
     this.modalReference = this.modalService.show(ShareQrComponent, { initialState });
-  }
-
-  onSaveMenu(menu: Menu) {
-    if (menu.id) {
-      this.updateMenu(menu);
-    } else {
-      this.createMenu(menu);
-    }
-    this.thereIsChange = false;
-  }
-
-  private createMenu(menu: Menu) {
-    const menuSections = this.sanitizeAllergensMenuToUpdate(menu);
-    const menuToSave = {
-      businessId: this.businessId,
-      sections: menuSections,
-      imageUrl: menu.imageUrl,
-      name: menu.name
-    };
-    this.menuService.createMenu(menuToSave)
-      .subscribe((response: any) => {
-        this.menu.shortUrlId = response.shortUrlId;
-        this.menu.id = response.menuId;
-        this.matchAllergens(menu);
-        this.router.navigateByUrl('menu');
-        this.showSuccessToasty();
-      }, () => {
-        this.showErrorToasty();
-      });
   }
 
   private updateMenu(menu: Menu) {
@@ -155,7 +123,9 @@ export class MenuComponent implements OnInit {
     this.menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
         this.menu.id = response;
-        this.matchAllergens(menu);
+        this.matchAllergens();
+        this.showSuccessToasty();
+      }, () => {
         this.showErrorToasty();
       });
   }
@@ -170,7 +140,7 @@ export class MenuComponent implements OnInit {
     return sections;
   }
 
-  matchAllergens(menu: Menu) {
+  matchAllergens() {
     this.menu.sections.map((section: Section) => {
       section.dishes.map((dish: Dish) => {
         dish.allergens.map((allergen: Allergen) => {
