@@ -82,6 +82,10 @@ public class Customer implements GrantedAuthority {
         return findBusiness(businessId).flatMap(b -> b.findMenu(menuId));
     }
 
+    public void deleteMenu(String businessId, String menuId) {
+        findBusiness(businessId).ifPresent(b -> b.deleteMenu(menuId));
+    }
+
     public Optional<String> changeBusiness(Business newBusiness) {
         for (int i = 0; i < businesses.size(); i++) {
             if (businesses.get(i).getId().equals(newBusiness.getId())) {

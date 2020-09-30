@@ -87,4 +87,11 @@ public class CustomerService {
                     return Optional.of(customerRepository.save(c));
                 });
     }
+
+    public void deleteMenu(String email, String businessId, String menuId) {
+        customerRepository.findByEmail(email).ifPresent(c -> {
+            c.deleteMenu(businessId, menuId);
+            customerRepository.save(c);
+        });
+    }
 }

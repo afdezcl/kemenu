@@ -51,4 +51,8 @@ public class Business {
     public Optional<Menu> findMenu(String menuId) {
         return menus.stream().filter(m -> m.getId().equals(menuId)).findFirst();
     }
+
+    public void deleteMenu(String menuId) {
+        menus.removeIf(menu -> menu.getId().equals(menuId));
+    }
 }

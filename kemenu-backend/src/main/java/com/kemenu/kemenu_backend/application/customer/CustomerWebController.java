@@ -1,9 +1,9 @@
 package com.kemenu.kemenu_backend.application.customer;
 
-import com.kemenu.kemenu_backend.application.security.JWTService;
+import com.kemenu.kemenu_backend.application.security.IntrospectiveService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +21,7 @@ import java.util.UUID;
 @RequestMapping("/web/v1")
 class CustomerWebController {
 
-    private final JWTService jwtService;
+    private final IntrospectiveService introspectiveService;
     private final CustomerService customerService;
     private final CustomerMapper customerMapper;
 
@@ -29,44 +29,43 @@ class CustomerWebController {
     ResponseEntity<CustomerResponse> read(@RequestHeader(value = "Authorization") String token,
                                           @PathVariable String email,
                                           Locale locale) {
-        String tokenEmail = jwtService.decodeAccessToken(token).getSubject();
-
-        if (!email.equals(tokenEmail)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        return customerService.read(tokenEmail)
+        return introspectiveService.doCallOnMe(token, email, () -> customerService
+                .read(email)
                 .map(c -> ResponseEntity.ok(customerMapper.from(c, locale)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build())
+        );
     }
 
     @PatchMapping("/customer/{email}/password/change")
     ResponseEntity<UUID> changePassword(@RequestHeader(value = "Authorization") String token,
                                         @PathVariable String email,
                                         @RequestBody @Valid PasswordChangeRequest passwordChangeRequest) {
-        String tokenEmail = jwtService.decodeAccessToken(token).getSubject();
-
-        if (!email.equals(tokenEmail)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        return customerService.changePassword(email, passwordChangeRequest.getPassword())
+        return introspectiveService.doCallOnMe(token, email, () -> customerService
+                .changePassword(email, passwordChangeRequest.getPassword())
                 .map(c -> ResponseEntity.ok(UUID.fromString(c)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build())
+        );
     }
 
     @PatchMapping("/customer/{email}/marketing")
     ResponseEntity<UUID> changeMarketing(@RequestHeader(value = "Authorization") String token,
                                          @PathVariable String email,
                                          @RequestBody @Valid CustomerMarketingRequest customerMarketingRequest) {
-        String tokenEmail = jwtService.decodeAccessToken(token).getSubject();
-
-        if (!email.equals(tokenEmail)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        return customerService.changeMarketing(email, customerMarketingRequest)
+        return introspectiveService.doCallOnMe(token, email, () -> customerService
+                .changeMarketing(email, customerMarketingRequest)
                 .map(c -> ResponseEntity.ok(UUID.fromString(c)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build())
+        );
+    }
+
+    @DeleteMapping("/customer/{email}/business/{businessId}/menus/{menuId}")
+    ResponseEntity<String> delete(@RequestHeader(value = "Authorization") String token,
+                                  @PathVariable String email,
+                                  @PathVariable String businessId,
+                                  @PathVariable String menuId) {
+        return introspectiveService.doCallOnMe(token, email, () -> {
+            customerService.deleteMenu(email, businessId, menuId);
+            return ResponseEntity.ok("");
+        });
     }
 }

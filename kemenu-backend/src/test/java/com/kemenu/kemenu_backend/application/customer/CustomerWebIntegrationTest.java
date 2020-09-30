@@ -2,14 +2,19 @@ package com.kemenu.kemenu_backend.application.customer;
 
 import com.kemenu.kemenu_backend.application.business.BusinessResponse;
 import com.kemenu.kemenu_backend.application.business.UpdateBusinessRequest;
+import com.kemenu.kemenu_backend.application.menu.CreateMenuResponse;
 import com.kemenu.kemenu_backend.common.KemenuIntegrationTest;
 import com.kemenu.kemenu_backend.domain.model.Business;
 import com.kemenu.kemenu_backend.domain.model.Customer;
 import com.kemenu.kemenu_backend.domain.model.CustomerRepository;
+import com.kemenu.kemenu_backend.domain.model.Menu;
 import com.kemenu.kemenu_backend.domain.model.NewsletterStatus;
+import com.kemenu.kemenu_backend.domain.model.ShortUrl;
+import com.kemenu.kemenu_backend.domain.model.ShortUrlRepository;
 import com.kemenu.kemenu_backend.helper.business.UpdateBusinessRequestHelper;
 import com.kemenu.kemenu_backend.helper.customer.CustomerHelper;
 import com.kemenu.kemenu_backend.helper.customer.PasswordChangeRequestHelper;
+import com.kemenu.kemenu_backend.helper.menu.MenuWebClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import reactor.core.publisher.Mono;
@@ -24,6 +29,9 @@ class CustomerWebIntegrationTest extends KemenuIntegrationTest {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private ShortUrlRepository shortUrlRepository;
 
     @Test
     void aCustomerCanFindHimself() {
@@ -170,5 +178,27 @@ class CustomerWebIntegrationTest extends KemenuIntegrationTest {
                 .header("Authorization", generateAccessToken(customer.getEmail()))
                 .exchange()
                 .expectStatus().isBadRequest();
+    }
+
+    @Test
+    void aCustomerCouldDeleteAMenu() {
+        customerRepository.save(randomCustomer);
+        String businessId = randomCustomer.firstBusiness().getId();
+
+        CreateMenuResponse createMenuResponse = MenuWebClient.create(webTestClient, businessId, generateAccessToken());
+
+        Customer customer = customerRepository.findById(randomCustomer.getId()).get();
+        ShortUrl shortUrl = shortUrlRepository.findById(createMenuResponse.getShortUrlId()).get();
+
+        Menu menu = customer.findMenu(businessId, shortUrl.getMenus().get(0)).get();
+
+        webTestClient
+                .delete().uri("/web/v1/customer/" + customer.getEmail() + "/business/" + businessId + "/menus/" + menu.getId())
+                .header("Authorization", generateAccessToken(customer.getEmail()))
+                .exchange()
+                .expectStatus().isOk();
+
+        Customer customerWithDeletedMenu = customerRepository.findById(randomCustomer.getId()).get();
+        assertEquals(0, customerWithDeletedMenu.findBusiness(businessId).get().getMenus().size());
     }
 }
