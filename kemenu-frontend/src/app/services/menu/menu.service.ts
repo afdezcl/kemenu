@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from 'src/environments/environment';
-import {ShowMenu} from '@models/menu/showMenu.model';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { ShowMenu } from '@models/menu/showMenu.model';
 import { Currency } from '@models/menu/currency.interface';
 
 @Injectable({
@@ -22,9 +22,10 @@ export class MenuService {
   updateMenu(menuToUpdate) {
     return this.httpClient.put(environment.apiBaseUrl + '/web/v1/menus', menuToUpdate);
   }
-  
+
   deleteMenu(params) {
-    return this.httpClient.delete(environment.apiBaseUrl + `/web/v1/customer/${params.email}/business/${params.businessId}/menus/${params.menuId}`);
+    return this.httpClient.delete(environment.apiBaseUrl +
+      `/web/v1/customer/${params.email}/business/${params.businessId}/menus/${params.menuId}`);
   }
 
   getCustomer(customerEmail: string) {

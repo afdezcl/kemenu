@@ -75,7 +75,7 @@ export class SelectMenuComponent implements OnInit {
 
     this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
     this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
-      if (canDelete) {        
+      if (canDelete) {
         this.attemptToDelete(menuToDelete);
       }
     });

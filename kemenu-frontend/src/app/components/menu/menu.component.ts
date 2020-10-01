@@ -43,8 +43,8 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.menuId = params['id'];
+    this.route.params.subscribe((params: {id: string}) => {
+      this.menuId = params.id;
       this.loadMenus();
     });
   }
