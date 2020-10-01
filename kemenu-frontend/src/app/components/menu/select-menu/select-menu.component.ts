@@ -4,6 +4,7 @@ import { Menu } from '@models/menu/menu.model';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from '@services/authentication/authentication.service';
 import { MenuService } from '@services/menu/menu.service';
+import { ConfirmDialogComponent } from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { CreateMenuNameComponent } from '../menu-digital/create-menu-name/create-menu-name.component';
@@ -64,6 +65,36 @@ export class SelectMenuComponent implements OnInit {
       this.menusSaved.find((menuSaved: Menu) => Object.is(menu.id, menuSaved.id)).name = name;
       this.onSaveMenu(menu);
     });
+  }
+
+  onDeleteMenu(menuToDelete: Menu) {
+    const initialState = {
+      title: this.translate.instant('Delete Menu title'),
+      message: this.translate.instant('Delete Menu description')
+    };
+
+    this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
+    this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
+      if (canDelete) {        
+        this.attemptToDelete(menuToDelete);
+      }
+    });
+  }
+
+  private attemptToDelete(menuToDelete: Menu) {
+    const paramsToDelete = {
+      email: this.authService.getUserEmail(),
+      businessId: this.businessId,
+      menuId: menuToDelete.id,
+    };
+
+    this.menuService.deleteMenu(paramsToDelete)
+      .subscribe(() => {
+        this.menusSaved = this.menusSaved.filter(menu => menu !== menuToDelete);
+        this.showSuccessToasty();
+      }, () => {
+        this.showErrorToasty();
+      });
   }
 
   onSaveMenu(menu: Menu) {
