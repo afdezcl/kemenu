@@ -1,9 +1,8 @@
 package com.kemenu.kemenu_backend.application.business;
 
 import com.kemenu.kemenu_backend.application.customer.CustomerService;
-import com.kemenu.kemenu_backend.application.security.JWTService;
+import com.kemenu.kemenu_backend.application.security.IntrospectiveService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -20,7 +19,7 @@ import java.util.UUID;
 @RequestMapping("/web/v1")
 class BusinessWebController {
 
-    private final JWTService jwtService;
+    private final IntrospectiveService introspectiveService;
     private final CustomerService customerService;
 
     @PutMapping("/customer/{email}/business/{businessId}")
@@ -28,14 +27,10 @@ class BusinessWebController {
                                         @PathVariable String email,
                                         @PathVariable String businessId,
                                         @RequestBody @Valid UpdateBusinessRequest request) {
-        String tokenEmail = jwtService.decodeAccessToken(token).getSubject();
-
-        if (!email.equals(tokenEmail)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        return customerService.changeBusiness(email, businessId, request)
+        return introspectiveService.doCallOnMe(token, email, () -> customerService
+                .changeBusiness(email, businessId, request)
                 .map(c -> ResponseEntity.ok(UUID.fromString(c)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+                .orElseGet(() -> ResponseEntity.notFound().build())
+        );
     }
 }
