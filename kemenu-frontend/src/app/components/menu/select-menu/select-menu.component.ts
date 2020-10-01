@@ -14,12 +14,12 @@ import { CreateMenuNameComponent } from '../menu-digital/create-menu-name/create
   styleUrls: ['./select-menu.component.scss']
 })
 export class SelectMenuComponent implements OnInit {
-  
+
   public menusSaved: Menu[] = [];
   public customerId: string;
   public businessId: string;
   public modalReference: BsModalRef;
-  
+
   constructor(
     private authService: AuthenticationService,
     private menuService: MenuService,
@@ -54,12 +54,12 @@ export class SelectMenuComponent implements OnInit {
       this.createMenu(menu);
     });
   }
-  
+
   openEditMenuName(menu: Menu) {
     const initialState = {
       name: menu.name
     };
-    this.modalReference = this.modalService.show(CreateMenuNameComponent,{ initialState });
+    this.modalReference = this.modalService.show(CreateMenuNameComponent, { initialState });
     this.modalReference.content.messageEvent.subscribe(name => {
       this.menusSaved.find((menuSaved: Menu) => Object.is(menu.id, menuSaved.id)).name = name;
       this.onSaveMenu(menu);
@@ -84,7 +84,7 @@ export class SelectMenuComponent implements OnInit {
       name: menu.name
     };
     this.menuService.updateMenu(menuToUpdate)
-      .subscribe(() => {        
+      .subscribe(() => {
         this.showSuccessToasty();
       }, () => {
         this.showErrorToasty();
@@ -117,7 +117,7 @@ export class SelectMenuComponent implements OnInit {
   }
 
 
-  goToMenu(menuId: string) {    
+  goToMenu(menuId: string) {
     this.router.navigateByUrl(`/menu/${menuId}`);
   }
   showSuccessToasty() {
