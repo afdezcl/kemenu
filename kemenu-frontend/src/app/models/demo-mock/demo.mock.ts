@@ -182,7 +182,7 @@ export const Demo: ShowMenu[] =
       businessName: 'Bar Demo',
       name: 'Menú del dia',
       currency: 'EUR',
-      sections: [ {
+      sections: [{
         name: 'Hamburguesas',
         dishes: [{
           name: 'César',
@@ -233,7 +233,7 @@ export const Demo: ShowMenu[] =
           ],
           available: true
         }]
-      },{
+      }, {
         name: 'Bebidas',
         dishes: [{
           name: 'Coca-Cola',
