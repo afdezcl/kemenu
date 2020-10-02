@@ -18,6 +18,7 @@ import { CreateMenuNameComponent } from './menu-digital/create-menu-name/create-
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { SelectMenuComponent } from './select-menu/select-menu.component';
+import { LazyImgDirective } from '@ui-controls/directives/lazy-img.directive';
 
 
 @NgModule({

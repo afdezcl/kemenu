@@ -6,9 +6,7 @@ import { MenuService } from '@services/menu/menu.service';
 import { Section } from '@models/menu/section.model';
 import { Dish } from '@models/menu/dish.model';
 import { AllAllergens, Allergen } from '@models/menu/allergen.model';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-customer',
@@ -20,14 +18,13 @@ export class CustomerComponent implements OnInit {
   public allergens: Allergen[] = AllAllergens;
 
   public menusSaved: ShowMenu[];
-  cookieBASE64: string;
-  shortUrlId: string;
-  imageUrl: SafeResourceUrl;
+  public cookieBASE64: string;
+  public shortUrlId: string;
+  public imageUrl: SafeResourceUrl;
 
   constructor(
     private router: Router,
     private menuService: MenuService,
-    private sanitizer: DomSanitizer
   ) {
   }
 
@@ -37,7 +34,6 @@ export class CustomerComponent implements OnInit {
       this.menuService.getMenuById(this.shortUrlId)
         .subscribe((menusSaved: ShowMenu[]) => {
           const showMenu = this.matchAllergens(menusSaved);
-          return showMenu;
         });
     } else {
       this.menusSaved = Demo;
@@ -63,21 +59,4 @@ export class CustomerComponent implements OnInit {
     })
     return menusSaved;
   }
-
-/*   loadImagesWhenOpen(isOpenEvent: boolean, sectionIdx: number) {
-    if (isOpenEvent) {
-      this.menu.subscribe(showMenu => {
-        for (let i = 0; i < showMenu.sections.length; i++) {
-          if (i === sectionIdx) {
-            for (let j = 0; j < showMenu.sections[i].dishes.length; j++) {
-              const img = document.querySelector<HTMLImageElement>('#dish-img-' + i + '-' + j);
-              if (img && !img.src) {
-                img.src = img.dataset.urlsrc;
-              }
-            }
-          }
-        }
-      });
-    }
-  } */
 }
