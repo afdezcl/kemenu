@@ -37,7 +37,7 @@ export class MenuService {
   }
 
   getMenuById(shortUrlId: string) {
-    return this.httpClient.get<ShowMenu>(environment.apiBaseUrl + `/public/short/${shortUrlId}`);
+    return this.httpClient.get<ShowMenu[]>(environment.apiBaseUrl + `/public/v1/short/${shortUrlId}`);
   }
 
   getCurrencies() {
