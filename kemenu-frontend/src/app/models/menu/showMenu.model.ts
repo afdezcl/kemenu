@@ -1,4 +1,4 @@
-import {Section} from './section.model';
+import { Section } from './section.model';
 
 export class ShowMenu {
   constructor(
@@ -6,7 +6,8 @@ export class ShowMenu {
     public sections: Section[],
     public shortUrlId: string,
     public imageUrl: string,
+    public currency: string,
+    public name: string,
     public id?: string
-  ) {
-  }
+  ) { }
 }

@@ -15,9 +15,10 @@ import { MenuRoutingModule } from './menu-routing.module';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
 import { MenuImageComponent } from './menu-image/menu-image.component';
 import { CreateMenuNameComponent } from './menu-digital/create-menu-name/create-menu-name.component';
-import { TabsModule } from 'ngx-bootstrap/tabs'
-import { TabOrderDirective } from '@ui-controls/directives/tab-order.directive';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+
 import { SelectMenuComponent } from './select-menu/select-menu.component';
+import { LazyImgDirective } from '@ui-controls/directives/lazy-img.directive';
 
 
 @NgModule({
@@ -42,11 +43,7 @@ import { SelectMenuComponent } from './select-menu/select-menu.component';
     ShareQrComponent,
     MenuAdvancedSettingsComponent,
     MenuImageComponent,
-    TabOrderDirective,
     SelectMenuComponent,
-  ],
-  providers: [
-    TabOrderDirective
   ]
 })
 export class MenuModule {

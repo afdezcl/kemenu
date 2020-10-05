@@ -4,6 +4,7 @@ import { Menu } from '@models/menu/menu.model';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from '@services/authentication/authentication.service';
 import { MenuService } from '@services/menu/menu.service';
+import { ConfirmDialogComponent } from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { CreateMenuNameComponent } from '../menu-digital/create-menu-name/create-menu-name.component';
@@ -14,12 +15,12 @@ import { CreateMenuNameComponent } from '../menu-digital/create-menu-name/create
   styleUrls: ['./select-menu.component.scss']
 })
 export class SelectMenuComponent implements OnInit {
-  
+
   public menusSaved: Menu[] = [];
   public customerId: string;
   public businessId: string;
   public modalReference: BsModalRef;
-  
+
   constructor(
     private authService: AuthenticationService,
     private menuService: MenuService,
@@ -54,16 +55,46 @@ export class SelectMenuComponent implements OnInit {
       this.createMenu(menu);
     });
   }
-  
+
   openEditMenuName(menu: Menu) {
     const initialState = {
       name: menu.name
     };
-    this.modalReference = this.modalService.show(CreateMenuNameComponent,{ initialState });
+    this.modalReference = this.modalService.show(CreateMenuNameComponent, { initialState });
     this.modalReference.content.messageEvent.subscribe(name => {
       this.menusSaved.find((menuSaved: Menu) => Object.is(menu.id, menuSaved.id)).name = name;
       this.onSaveMenu(menu);
     });
+  }
+
+  onDeleteMenu(menuToDelete: Menu) {
+    const initialState = {
+      title: this.translate.instant('Delete Menu title'),
+      message: this.translate.instant('Delete Menu description')
+    };
+
+    this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
+    this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
+      if (canDelete) {
+        this.attemptToDelete(menuToDelete);
+      }
+    });
+  }
+
+  private attemptToDelete(menuToDelete: Menu) {
+    const paramsToDelete = {
+      email: this.authService.getUserEmail(),
+      businessId: this.businessId,
+      menuId: menuToDelete.id,
+    };
+
+    this.menuService.deleteMenu(paramsToDelete)
+      .subscribe(() => {
+        this.menusSaved = this.menusSaved.filter(menu => menu !== menuToDelete);
+        this.showSuccessToasty();
+      }, () => {
+        this.showErrorToasty();
+      });
   }
 
   onSaveMenu(menu: Menu) {
@@ -84,7 +115,7 @@ export class SelectMenuComponent implements OnInit {
       name: menu.name
     };
     this.menuService.updateMenu(menuToUpdate)
-      .subscribe(() => {        
+      .subscribe(() => {
         this.showSuccessToasty();
       }, () => {
         this.showErrorToasty();
@@ -117,7 +148,7 @@ export class SelectMenuComponent implements OnInit {
   }
 
 
-  goToMenu(menuId: string) {    
+  goToMenu(menuId: string) {
     this.router.navigateByUrl(`/menu/${menuId}`);
   }
   showSuccessToasty() {

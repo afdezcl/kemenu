@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from 'src/environments/environment';
-import {ShowMenu} from '@models/menu/showMenu.model';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { ShowMenu } from '@models/menu/showMenu.model';
 import { Currency } from '@models/menu/currency.interface';
 
 @Injectable({
@@ -23,6 +23,11 @@ export class MenuService {
     return this.httpClient.put(environment.apiBaseUrl + '/web/v1/menus', menuToUpdate);
   }
 
+  deleteMenu(params) {
+    return this.httpClient.delete(environment.apiBaseUrl +
+      `/web/v1/customer/${params.email}/business/${params.businessId}/menus/${params.menuId}`);
+  }
+
   getCustomer(customerEmail: string) {
     return this.httpClient.get(environment.apiBaseUrl + `/web/v1/customer/${customerEmail}`);
   }
@@ -32,7 +37,7 @@ export class MenuService {
   }
 
   getMenuById(shortUrlId: string) {
-    return this.httpClient.get<ShowMenu>(environment.apiBaseUrl + `/public/short/${shortUrlId}`);
+    return this.httpClient.get<ShowMenu[]>(environment.apiBaseUrl + `/public/v1/short/${shortUrlId}`);
   }
 
   getCurrencies() {

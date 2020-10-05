@@ -1,32 +1,35 @@
 <div class="customer">
   <div class="customer-header kemenu-dark-background">
     <div class="text-center">
-      <h3 class="font-weight-bold title">{{ 'Welcome to' | translate}} {{(menu | async)?.businessName}}</h3>
+      <h3 class="font-weight-bold title">{{ 'Welcome to' | translate}} {{menusSaved[0]?.businessName}}</h3>
       <span class="subtitle">{{ 'Here you can see our menu' | translate}}</span>
     </div>
   </div>
 
-  <div *ngIf="(menu | async)?.imageUrl" class="customer-menu-image kemenu-watermark">
-    <div class="col-12 text-center">
-      {{ "MenuImageText" | translate }}
-    </div>
-    <div class="col-12 text-center">
-      <a class="btn btn-secondary customer-menu-image-button" [href]="imageUrl"
-         target="_blank">{{'Menu Image' | translate}}</a>
-    </div>
-    <div class="col-12 text-center customer-menu-image-or">
-      <span class="btn btn-primary">
-        {{ "MenuImageTextOr" | translate }}
-      </span>
-    </div>
-  </div>
+
 
   <div class="customer-digital-menu">
     <div>
-      <app-menu-digital
-        [editMode]="false"
-        [menu]="(menu | async)">
-      </app-menu-digital>
+      <tabset>
+        <tab *ngFor="let menu of menusSaved; let counter = index;" heading="{{menu.name}}" [active]="counter === 0">
+          <div *ngIf="menu.imageUrl" class="customer-menu-image kemenu-watermark">
+            <div class="col-12 text-center">
+              {{ "MenuImageText" | translate }}
+            </div>
+            <div class="col-12 text-center">
+              <a class="btn btn-secondary customer-menu-image-button" [href]="imageUrl"
+                target="_blank">{{'Menu Image' | translate}}</a>
+            </div>
+            <div class="col-12 text-center customer-menu-image-or">
+              <span class="btn btn-primary">
+                {{ "MenuImageTextOr" | translate }}
+              </span>
+            </div>
+          </div>
+          <app-menu-digital [editMode]="false" [menu]="menu">
+          </app-menu-digital>
+        </tab>
+      </tabset>
     </div>
   </div>
 </div>

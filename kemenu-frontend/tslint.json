@@ -11,8 +11,7 @@
     "directive-class-suffix": true,
     "directive-selector": [
       true,
-      "attribute",
-      "app",
+      ["element","attribute"],
       "camelCase"
     ],
     "component-selector": [
