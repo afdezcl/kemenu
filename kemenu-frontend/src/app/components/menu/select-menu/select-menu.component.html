@@ -24,13 +24,21 @@
   <div class="row text-center card-buttons-container first-menu">
     <div class="col-sm-12 card-deck">
       <div class="card shadow rounded-lg" style="cursor: pointer;" *ngFor="let menu of menusSaved">
-        <div class="card-body"  (click)="goToMenu(menu.id)">
+        <div class="card-body" (click)="goToMenu(menu.id)">
           <h5 class="font-weight-bold">{{ menu.name !== '' ? menu.name : ('First menu' | translate)}}</h5>
           <h6 class="card-subtitle mb-2 text-muted">{{ 'Click to enter the menu' | translate }}</h6>
         </div>
         <div class="card-footer">
-          <span class="card-link" (click)="openEditMenuName(menu)"><i class="fas fa-edit"></i> {{ 'Edit menu name' | translate }}</span><br>
-          <span class="card-link" (click)="onDeleteMenu(menu)"><i class="fas fa-trash"></i> {{ 'Delete Menu title' | translate }}</span>
+          <button type="submit"
+            class="btn btn-secondary circular-button float-left"
+            (click)="openEditMenuName(menu)">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button type="submit"
+            class="btn btn-secondary circular-button float-right"
+            (click)="onDeleteMenu(menu)">
+            <i class="fas fa-trash"></i>
+          </button>
         </div>
       </div>
       <div class="card shadow pt-4 rounded" style="cursor: pointer;" (click)="openCreateMenuName()">
@@ -43,4 +51,3 @@
     </div>
   </div>
 </div>
-

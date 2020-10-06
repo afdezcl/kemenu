@@ -16,8 +16,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 export class CustomerComponent implements OnInit {
 
   public allergens: Allergen[] = AllAllergens;
-
-  public menusSaved: ShowMenu[];
+  public menusSaved: ShowMenu[] = [];
   public cookieBASE64: string;
   public shortUrlId: string;
   public imageUrl: SafeResourceUrl;
@@ -33,7 +32,7 @@ export class CustomerComponent implements OnInit {
       this.getDataToBuildMenu();
       this.menuService.getMenuById(this.shortUrlId)
         .subscribe((menusSaved: ShowMenu[]) => {
-          const showMenu = this.matchAllergens(menusSaved);
+          this.menusSaved = this.matchAllergens(menusSaved);
         });
     } else {
       this.menusSaved = Demo;
