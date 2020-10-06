@@ -9,11 +9,12 @@ import com.kemenu.kemenu_backend.domain.model.ConfirmedEmail;
 import com.kemenu.kemenu_backend.domain.model.ConfirmedEmailRepository;
 import com.kemenu.kemenu_backend.infrastructure.vertx.VertxEventSubscriber;
 import freemarker.template.Template;
+import freemarker.template.TemplateException;
 import io.vertx.core.eventbus.EventBus;
-import lombok.SneakyThrows;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,18 +39,21 @@ public class ConfirmationEmailEventSubscriber extends VertxEventSubscriber<Confi
     }
 
     @Override
-    @SneakyThrows
     public void subscribe(ConfirmationEmailEvent event) {
-        String confirmEmailId = confirmedEmailRepository.save(new ConfirmedEmail(event.getSendEmailEvent().getTo()));
-        String confirmUrl = kemenuDomain + "/public/confirm/email/" + confirmEmailId;
-        Template template = freeMarkerConfigurer.getConfiguration().getTemplate(event.getHtmlTemplate());
-        Map<String, Object> data = new HashMap<>();
-        data.put("confirmUrl", confirmUrl);
-        String emailContent = FreeMarkerTemplateUtils.processTemplateIntoString(template, data);
-        SendEmailEvent sendEmailEvent = event.getSendEmailEvent().toBuilder()
-                .content(emailContent)
-                .build();
-        eventPublisher.publish(sendEmailEvent);
+        try {
+            String confirmEmailId = confirmedEmailRepository.save(new ConfirmedEmail(event.getSendEmailEvent().getTo()));
+            String confirmUrl = kemenuDomain + "/public/confirm/email/" + confirmEmailId;
+            Template template = freeMarkerConfigurer.getConfiguration().getTemplate(event.getHtmlTemplate());
+            Map<String, Object> data = new HashMap<>();
+            data.put("confirmUrl", confirmUrl);
+            String emailContent = FreeMarkerTemplateUtils.processTemplateIntoString(template, data);
+            SendEmailEvent sendEmailEvent = event.getSendEmailEvent().toBuilder()
+                    .content(emailContent)
+                    .build();
+            eventPublisher.publish(sendEmailEvent);
+        } catch (IOException | TemplateException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

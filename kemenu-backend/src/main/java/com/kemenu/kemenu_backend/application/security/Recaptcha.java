@@ -1,9 +1,9 @@
 package com.kemenu.kemenu_backend.application.security;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,29 +23,31 @@ public class Recaptcha {
     @Value("${app.recaptcha.secret}")
     private String recaptchaSecret;
 
-    @SneakyThrows
     public boolean isValid(String recaptchaToken) {
-        JsonNode responseRecaptcha = mapper.readTree(verifyRecaptcha(recaptchaToken));
-        boolean success = responseRecaptcha.get("success").asBoolean();
+        try {
+            JsonNode responseRecaptcha = mapper.readTree(verifyRecaptcha(recaptchaToken));
+            boolean success = responseRecaptcha.get("success").asBoolean();
 
-        if (!success) {
-            log.info("Recaptcha does not success");
-            return false;
+            if (!success) {
+                log.info("Recaptcha does not success");
+                return false;
+            }
+
+            BigDecimal score = new BigDecimal(responseRecaptcha.get("score").asText());
+            String action = responseRecaptcha.get("action").asText();
+
+            boolean isValid = score.compareTo(new BigDecimal("0.3")) >= 0 && action.equals("login");
+
+            if (!isValid) {
+                log.info("Invalid Recaptcha with score {} and action {}", score.toPlainString(), action);
+            }
+
+            return isValid;
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
         }
-
-        BigDecimal score = new BigDecimal(responseRecaptcha.get("score").asText());
-        String action = responseRecaptcha.get("action").asText();
-
-        boolean isValid = score.compareTo(new BigDecimal("0.3")) >= 0 && action.equals("login");
-
-        if (!isValid) {
-            log.info("Invalid Recaptcha with score {} and action {}", score.toPlainString(), action);
-        }
-
-        return isValid;
     }
 
-    @SneakyThrows
     private String verifyRecaptcha(String recaptchaToken) {
         return webClient.post()
                 .uri("https://www.google.com/recaptcha/api/siteverify")
