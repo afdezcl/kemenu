@@ -13,6 +13,10 @@ Feature: Create a menu
     And clicks on SIGN_IN_SUBMIT
     Then is redirected to "/menu"
     And clicks on FIRST_MENU_BUTTON
+    Then puts "createMenuTest1" as menu name
+    And clicks on SAVE_MENU_BUTTON
+    Then clicks on ENTER_THE_MENU
+    And clicks on PLUS_CREATE_SECTION
     Then puts "createMenuTest1Section1" as section
     And clicks on CREATE_SECTION
     And clicks on DIGITAL_MENU_COLLAPSE

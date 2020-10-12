@@ -11,7 +11,8 @@ public enum Input {
     BUSINESS_NAME("//input[@id = 'businessName']"),
     REGISTER_EMAIL("//input[@id = 'email']"),
     CONFIRM_PASSWORD("//input[@id = 'confirmPassword']"),
-    SECTION_NAME("//input[contains(@placeholder, 'Fishes, meals, hamburgers...')]");
+    SECTION_NAME("//input[contains(@placeholder, 'Fishes, meals, hamburgers...')]"),
+    MENU_NAME("//input[contains(@placeholder, 'Main menu, daily menu...')]");
 
     private final String xPath;
 }
