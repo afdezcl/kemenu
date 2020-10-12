@@ -24,21 +24,26 @@
 <section>
   <div class="container">
     <div class="text-center">
-      <h2>{{ 'Home-No installations title' | translate }}</h2>
+      <h2 class="font-weight-bold">{{ 'Home-section one title' | translate }}</h2>
+      <h3 class="text-primary font-weight-bold">{{ 'Home-No installations title' | translate }}</h3>
       <p class="lead text-muted mt-2">{{ 'Home-No installations description' | translate }}</p><a href="#howWorks"
         class="btn btn-primary">{{ 'Read More' | translate }}</a>
     </div>
     <div class="row">
-      <div class="col-lg-7 mx-auto mt-5"><img src="../../../assets/images/list-menu.svg" alt="list-menu"
-          class="intro-image img-fluid"></div>
+      <div class="col-lg-7 mx-auto mt-5"><img src="../../../assets/images/Dibujo-movil.svg" alt="list-menu"
+          class="intro-image img-fluid "></div>
     </div>
   </div>
 </section>
 <!-- Divider Section-->
-<section class="bg-primary text-white">
+<section class="bg-primary text-white p-5">
   <div class="container">
     <div class="text-center">
-      <h2>{{ 'Home-Demo title' | translate }}</h2>
+      <h2 class="font-weight-bold">{{ 'Home-Demo title' | translate }}</h2>
+      <div class="qr-code">
+        <img src="../../../assets/images/demo.jpg" alt="qr-code" class="mb-1 rounded qr-code-image" height="100">
+        <h4>¡Pruébame!</h4>
+      </div>
       <div class="row">
         <div class="col-lg-9 mx-auto">
           <p class="lead text-white mt-2">{{ 'Home-Demo description' | translate }}</p>
@@ -64,7 +69,7 @@
           <div class="box text-center">
             <div class="icon d-flex align-items-end"><img src="../../../assets/images/monitor.svg" alt="monitor"
                 class="img-fluid"></div>
-            <h3 class="h4">{{ 'SignUp' | translate }}</h3>
+            <h4 class="font-weight-bold">{{ 'SignUp' | translate }}</h4>
             <p class="text-small font-weight-light">{{ 'Home-Step one' | translate }}</p>
           </div>
         </div>
@@ -72,7 +77,7 @@
           <div class="box text-center">
             <div class="icon d-flex align-items-end"><img src="../../../assets/images/coffee-cup.svg" alt="coffee-cup"
                 class="img-fluid"></div>
-            <h3 class="h4">{{ 'Create menu' | translate }}</h3>
+            <h4 class="font-weight-bold">{{ 'Create menu' | translate }}</h4>
             <p class="text-small font-weight-light">{{ 'Home-Step two' | translate }}</p>
           </div>
         </div>
@@ -80,9 +85,35 @@
           <div class="box text-center">
             <div class="icon d-flex align-items-end"><img src="../../../assets/images/chat.svg" alt="chat"
                 class="img-fluid"></div>
-            <h3 class="h4">{{ 'Share' | translate }}</h3>
+            <h4 class="font-weight-bold">{{ 'Share' | translate }}</h4>
             <p class="text-small font-weight-light">{{ 'Home-Step three' | translate }}</p>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Advantages Section-->
+<section class="bg-primary text-white p-5">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="font-weight-bold">{{ 'Home-Advantages title' | translate }}</h2>
+      <div class="row mt-5">
+        <div class="col-lg-4">
+          <img src="../../../assets/images/infinity-icon-pixabay.png" alt="" height="80">
+          <h4 class="font-weight-bold mb-4">{{ 'Home-Advantage one title' | translate }}</h4>
+          <p class="text-white mt-2">{{ 'Home-Advantage one description' | translate }}</p>
+        </div>
+        <div class="col-lg-4">
+          <img src="../../../assets/images/hucha-icon-pixabay.png" alt="" height="80">
+          <h4 class="font-weight-bold mb-4">{{ 'Home-Advantage two title' | translate }}</h4>
+          <p class="text-white mt-2">{{ 'Home-Advantage two description' | translate }}</p>
+        </div>
+        <div class="col-lg-4">
+          <img src="../../../assets/images/gluten-icon-pixabay.png" alt="" height="80">
+          <h4 class="font-weight-bold mb-4">{{ 'Home-Advantage three title' | translate }}</h4>
+          <p class="text-white mt-2">{{ 'Home-Advantage three description' | translate }}</p>
         </div>
       </div>
     </div>
