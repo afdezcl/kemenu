@@ -51,10 +51,6 @@ export class MenuComponent implements OnInit {
 
   loadMenus() {
     const customerEmail = this.authService.getUserEmail();
-    this.menu = new Menu(
-      [],
-      ''
-    );
     this.menuService.getCustomer(customerEmail)
       .subscribe((response: any) => {
         this.customerId = response.id;
