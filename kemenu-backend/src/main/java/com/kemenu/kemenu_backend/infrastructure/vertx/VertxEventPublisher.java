@@ -1,11 +1,11 @@
 package com.kemenu.kemenu_backend.infrastructure.vertx;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kemenu.kemenu_backend.domain.event.Event;
 import com.kemenu.kemenu_backend.domain.event.EventPublisher;
 import io.vertx.core.eventbus.EventBus;
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,8 +16,11 @@ class VertxEventPublisher implements EventPublisher {
     private final ObjectMapper mapper;
 
     @Override
-    @SneakyThrows
     public <T extends Event> void publish(T event) {
-        eventBus.send(event.address().toString(), mapper.writeValueAsString(event));
+        try {
+            eventBus.send(event.address().toString(), mapper.writeValueAsString(event));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

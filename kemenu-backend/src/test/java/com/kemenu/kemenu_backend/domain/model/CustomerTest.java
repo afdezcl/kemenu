@@ -91,4 +91,19 @@ class CustomerTest {
         assertTrue(optionalBusinessId.isEmpty());
         assertNotEquals(unknown.getName(), business.getName());
     }
+
+    @Test
+    void aCustomerCanDeleteAMenu() {
+        Customer customer = CustomerHelper.randomCustomer();
+        Business business = customer.firstBusiness();
+        Menu menu = MenuHelper.randomMenu();
+
+        String menuId = customer.createMenu(business.getId(), menu).get();
+
+        assertEquals(1, customer.firstBusiness().getMenus().size());
+
+        customer.deleteMenu(business.getId(), menuId);
+
+        assertEquals(0, customer.firstBusiness().getMenus().size());
+    }
 }

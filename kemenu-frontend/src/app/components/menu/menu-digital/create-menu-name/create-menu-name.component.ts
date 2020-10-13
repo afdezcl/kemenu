@@ -3,13 +3,14 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-create-section',
-  templateUrl: './create-section.component.html'
+  selector: 'app-create-menu-name',
+  templateUrl: './create-menu-name.component.html',
+  styleUrls: ['./create-menu-name.component.scss']
 })
-export class CreateSectionComponent implements OnInit {
+export class CreateMenuNameComponent implements OnInit {
 
   @Output() messageEvent = new EventEmitter<string>();
-  public section: FormGroup;
+  public menuNameForm: FormGroup;
   public name: string;
   public editing: boolean;
 
@@ -20,13 +21,13 @@ export class CreateSectionComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.section = this.formBuilder.group({
+    this.menuNameForm = this.formBuilder.group({
       name: [this.name, Validators.required]
     });
   }
 
   get form() {
-    return this.section.controls;
+    return this.menuNameForm.controls;
   }
 
   onSubmit() {

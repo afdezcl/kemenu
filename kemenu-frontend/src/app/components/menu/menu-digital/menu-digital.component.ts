@@ -93,8 +93,8 @@ export class MenuDigitalComponent implements OnInit {
     this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
       if (canDelete) {
         this.menu.sections = this.menu.sections.filter(section => section !== sectionToRemove);
+        this.onSaveMenu();
       }
-      this.onSaveMenu();
     });
   }
 

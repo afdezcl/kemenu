@@ -5,6 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { LazyImgDirective } from '@ui-controls/directives/lazy-img.directive';
 
 @NgModule({
   imports: [
@@ -20,6 +21,9 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
   ],
   declarations: [
     DishListComponent
+  ],
+  providers: [
+    LazyImgDirective
   ]
 })
 export class DishListModule {

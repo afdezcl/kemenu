@@ -7,9 +7,16 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.WebElement;
 
 import static com.kemenu.kemenu_acceptance_tests.RunCucumberTests.chromeTestRule;
+import static com.kemenu.kemenu_acceptance_tests.common.Input.MENU_NAME;
 import static com.kemenu.kemenu_acceptance_tests.common.Input.SECTION_NAME;
 
 public class MenuSteps {
+
+    @Then("puts {string} as menu name")
+    public void fillMenuName(String menuName) {
+        WebElement menuNameInput = chromeTestRule.getChrome().findElementByXPath(MENU_NAME.getXPath());
+        menuNameInput.sendKeys(menuName);
+    }
 
     @Then("puts {string} as section")
     public void fillSectionName(String sectionName) {

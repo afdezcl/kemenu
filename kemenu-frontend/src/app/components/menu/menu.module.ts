@@ -13,7 +13,13 @@ import { MenuDigitalModule } from './menu-digital/menu-digital.module';
 import { MenuAdvancedSettingsComponent } from './menu-advanced-settings/menu-advanced-settings.component';
 import { MenuRoutingModule } from './menu-routing.module';
 import { UploadImageButtonModule } from '../uploadImageButton/uploadImageButton.module';
-import {MenuImageComponent} from './menu-image/menu-image.component';
+import { MenuImageComponent } from './menu-image/menu-image.component';
+import { CreateMenuNameComponent } from './menu-digital/create-menu-name/create-menu-name.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+
+import { SelectMenuComponent } from './select-menu/select-menu.component';
+import { LazyImgDirective } from '@ui-controls/directives/lazy-img.directive';
+
 
 @NgModule({
   imports: [
@@ -26,15 +32,18 @@ import {MenuImageComponent} from './menu-image/menu-image.component';
     ShareIconsModule,
     MenuDigitalModule,
     MenuRoutingModule,
-    UploadImageButtonModule
+    UploadImageButtonModule,
+    TabsModule.forRoot()
   ],
   declarations: [
     MenuComponent,
+    CreateMenuNameComponent,
     CreateSectionComponent,
     CreateDishComponent,
     ShareQrComponent,
     MenuAdvancedSettingsComponent,
-    MenuImageComponent
+    MenuImageComponent,
+    SelectMenuComponent,
   ]
 })
 export class MenuModule {

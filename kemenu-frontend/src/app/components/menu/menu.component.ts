@@ -9,9 +9,10 @@ import { ShareQrComponent } from './share-qr/share-qr.component';
 import { MenuService } from '@services/menu/menu.service';
 import { AuthenticationService } from '@services/authentication/authentication.service';
 import { Allergen, AllAllergens } from '@models/menu/allergen.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ModalPolicyComponent } from '../modal-policy/modal-policy.component';
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-menu',
@@ -20,50 +21,53 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class MenuComponent implements OnInit {
 
+
   public menu: Menu;
   public modalReference: BsModalRef;
   public businessId: string;
   public customerId: string;
-  public thereIsChange = false;
   public menuId: string;
   public allergens: Allergen[] = AllAllergens;
   public newsletterStatus = '';
+  public menuName: string;
 
   constructor(
     private modalService: BsModalService,
     private translate: TranslateService,
     private menuService: MenuService,
     private authService: AuthenticationService,
-    private router: Router,
-    private toasty: ToastrService
+    private route: ActivatedRoute,
+    private toasty: ToastrService,
+    private location: Location
   ) {
   }
 
   ngOnInit() {
-    this.loadMenu();
+    this.route.params.subscribe((params: {id: string}) => {
+      this.menuId = params.id;
+      this.loadMenus();
+    });
   }
 
-  loadMenu() {
+  loadMenus() {
     const customerEmail = this.authService.getUserEmail();
     this.menu = new Menu(
-      customerEmail,
-      []
+      [],
+      ''
     );
     this.menuService.getCustomer(customerEmail)
       .subscribe((response: any) => {
         this.customerId = response.id;
         this.businessId = response.businesses[0].id;
         this.newsletterStatus = response.newsletterStatus;
-        if (response.businesses[0].menus.length !== 0) {
-          this.menu.sections = response.businesses[0].menus[0].sections;
-          this.menu.shortUrlId = response.businesses[0].menus[0].shortUrlId;
-          this.menu.imageUrl = response.businesses[0].menus[0].imageUrl;
-          this.menu.id = response.businesses[0].menus[0].id;
-          this.menu.currency = response.businesses[0].menus[0].currency;
-          this.matchAllergens();
-        }
+        this.menu = response.businesses[0].menus.find((menu: Menu) => Object.is(menu.id, this.menuId));
+        this.matchAllergens();
         this.checkNewsletterStatus();
       });
+  }
+
+  trackByMenuName(menu) {
+    return menu.name;
   }
 
   private checkNewsletterStatus() {
@@ -78,30 +82,25 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  openCreateSection() {
+  openCreateSection(menu: Menu) {
     this.modalReference = this.modalService.show(CreateSectionComponent);
-    this.modalReference.content.messageEvent.subscribe(name => {
-      this.addNewSection(name);
+    this.modalReference.content.messageEvent.subscribe((sectionName: string) => {
+      this.addNewSection(menu, sectionName);
     });
   }
 
-  private addNewSection(name: string) {
+  private addNewSection(menu: Menu, sectionName: string) {
     const section = new Section(
-      name,
+      sectionName,
       []
     );
     this.menu.sections.push(section);
-    this.onSaveMenu();
-  }
-
-  private addNewDish(dish: Dish, sectionIndex: number) {
-    this.menu.sections[sectionIndex].dishes.push(dish);
-    this.onSaveMenu();
+    this.updateMenu(menu);
   }
 
   menuChange(menu: Menu) {
     this.menu = menu;
-    this.onSaveMenu();
+    this.updateMenu(menu);
   }
 
   openShareQR() {
@@ -111,42 +110,15 @@ export class MenuComponent implements OnInit {
     this.modalReference = this.modalService.show(ShareQrComponent, { initialState });
   }
 
-  onSaveMenu() {
-    if (this.menu.id) {
-      this.updateMenu();
-    } else {
-      this.createMenu();
-    }
-    this.thereIsChange = false;
-  }
-
-  private createMenu() {
-    const menuSections = this.sanitizeAllergensMenuToUpdate();
-    const menuToSave = {
-      businessId: this.businessId,
-      sections: menuSections,
-      imageUrl: this.menu.imageUrl
-    };
-    this.menuService.createMenu(menuToSave)
-      .subscribe((response: any) => {
-        this.menu.shortUrlId = response.shortUrlId;
-        this.menu.id = response.menuId;
-        this.matchAllergens();
-        this.router.navigateByUrl('menu');
-        this.showSuccessToasty();
-      }, () => {
-        this.showErrorToasty();
-      });
-  }
-
-  private updateMenu() {
-    const menuSections = this.sanitizeAllergensMenuToUpdate();
+  private updateMenu(menu: Menu) {
+    const menuSections = this.sanitizeAllergensMenuToUpdate(menu);
     const menuToUpdate = {
       businessId: this.businessId,
-      menuId: this.menu.id,
+      menuId: menu.id,
       sections: menuSections,
-      imageUrl: this.menu.imageUrl,
-      currency: this.menu.currency
+      imageUrl: menu.imageUrl,
+      currency: menu.currency,
+      name: menu.name
     };
     this.menuService.updateMenu(menuToUpdate)
       .subscribe((response: string) => {
@@ -158,8 +130,8 @@ export class MenuComponent implements OnInit {
       });
   }
 
-  sanitizeAllergensMenuToUpdate() {
-    const sections = this.menu.sections;
+  sanitizeAllergensMenuToUpdate(menu: Menu) {
+    const sections = menu.sections;
     sections.map((section: Section) => {
       section.dishes.map((dish: Dish) => {
         dish.allergens.map((allergen: Allergen) => delete allergen.imageName);
@@ -178,12 +150,6 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  handleFileUpload(event) {
-    if (event) {
-      this.menu.imageUrl = event.url;
-      this.onSaveMenu();
-    }
-  }
 
   showSuccessToasty() {
     this.toasty.success(this.translate.instant('Saved Correctly'));
@@ -191,5 +157,9 @@ export class MenuComponent implements OnInit {
 
   showErrorToasty() {
     this.toasty.error(this.translate.instant('Save error'));
+  }
+
+  goToMenuList() {
+    this.location.back();
   }
 }
