@@ -9,7 +9,7 @@
   <div class="customer-digital-menu">
     <div>
       <tabset>
-        <tab *ngFor="let menu of menusSaved; let counter = index;" heading="{{menu.name}}" [active]="counter === 0">
+        <tab *ngFor="let menu of menusSaved; let counter = index;" heading="{{ menu.name !== '' ? menu.name : ('First menu' | translate)}}" [active]="counter === 0">
           <div *ngIf="menu.imageUrl" class="customer-menu-image kemenu-watermark">
             <div class="col-12 text-center">
               {{ "MenuImageText" | translate }}
