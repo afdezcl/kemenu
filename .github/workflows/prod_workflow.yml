@@ -58,7 +58,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     env:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
-      JAVA_CMD_PATH: ~/jdk/bin/java
+      JAVA_CMD_PATH: ~/jdk-15/bin/java
       JAR_NAME: kemenu-backend-
     steps:
       - name: Check out repository
@@ -133,7 +133,7 @@ jobs:
     if: github.ref == 'refs/heads/rollback'
     env:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
-      JAVA_CMD_PATH: ~/jdk/bin/java
+      JAVA_CMD_PATH: ~/jdk-15/bin/java
       JAR_NAME: kemenu-backend-
     steps:
       - name: Check out repository
@@ -170,7 +170,7 @@ jobs:
     if: github.ref == 'refs/heads/redeploy'
     env:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
-      JAVA_CMD_PATH: ~/jdk/bin/java
+      JAVA_CMD_PATH: ~/jdk-15/bin/java
       JAR_NAME: kemenu-backend-
     steps:
       - name: Check out repository
