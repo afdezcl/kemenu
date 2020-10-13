@@ -50,19 +50,19 @@ class MenuWebIntegrationTest extends KemenuIntegrationTest {
         ShortUrl createdShortUrl = shortUrlRepository.findById(createMenuResponse.getShortUrlId()).get();
         Menu createdMenu = customerWithCreatedMenu.findMenu(businessId, createdShortUrl.getMenus().get(0)).get();
 
-        UUID updatedMenuId = webTestClient
+        UpdateMenuResponse updatedMenu = webTestClient
                 .put().uri("/web/v1/menus")
                 .body(Mono.just(MenuRequestHelper.updateMenuRequest(businessId, createdShortUrl.getMenus().get(0))), UpdateMenuRequest.class)
                 .header("Authorization", generateAccessToken())
                 .exchange()
                 .expectStatus().isOk()
-                .expectBody(UUID.class).returnResult().getResponseBody();
+                .expectBody(UpdateMenuResponse.class).returnResult().getResponseBody();
 
         Customer customerWithUpdatedMenu = customerRepository.findById(randomCustomer.getId()).get();
-        Menu updatedMenu = customerWithUpdatedMenu.findMenu(businessId, updatedMenuId.toString()).get();
+        Menu storedUpdatedMenu = customerWithUpdatedMenu.findMenu(businessId, updatedMenu.getId()).get();
 
-        assertEquals(createdMenu.getId(), updatedMenu.getId());
-        assertNotEquals(createdMenu.getSections().get(0).getName(), updatedMenu.getSections().get(0).getName());
+        assertEquals(createdMenu.getId(), storedUpdatedMenu.getId());
+        assertNotEquals(createdMenu.getSections().get(0).getName(), storedUpdatedMenu.getSections().get(0).getName());
     }
 
     @Test

@@ -37,10 +37,10 @@ class CustomerTest {
 
         Menu newMenu = MenuHelper.from(oldMenuId, MenuHelper.randomMenu().getSections());
 
-        String menuId = customer.changeMenu(business.getId(), newMenu).get();
+        Menu updatedMenu = customer.changeMenu(business.getId(), newMenu).get();
 
-        assertEquals(newMenu.getId(), menuId);
-        assertNotEquals(oldMenu.getSections().get(0).getName(), customer.findMenu(business.getId(), menuId).get().getSections().get(0).getName());
+        assertEquals(newMenu.getId(), updatedMenu.getId());
+        assertNotEquals(oldMenu.getSections().get(0).getName(), customer.findMenu(business.getId(), updatedMenu.getId()).get().getSections().get(0).getName());
     }
 
     @Test
@@ -58,9 +58,9 @@ class CustomerTest {
         Customer customer = CustomerHelper.randomCustomer();
         Menu menu = MenuHelper.randomMenu();
 
-        Optional<String> optionalMenuId = customer.changeMenu(UUID.randomUUID().toString(), menu);
+        Optional<Menu> optionalMenu = customer.changeMenu(UUID.randomUUID().toString(), menu);
 
-        assertTrue(optionalMenuId.isEmpty());
+        assertTrue(optionalMenu.isEmpty());
     }
 
     @Test

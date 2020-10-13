@@ -117,8 +117,8 @@ export class MenuComponent implements OnInit {
       name: menu.name
     };
     this.menuService.updateMenu(menuToUpdate)
-      .subscribe((response: string) => {
-        this.menu.id = response;
+      .subscribe((response: Menu) => {
+        this.menu = response;
         this.matchAllergens();
         this.showSuccessToasty();
       }, () => {
