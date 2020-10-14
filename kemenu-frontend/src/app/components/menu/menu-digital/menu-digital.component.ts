@@ -1,17 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Menu } from '@models/menu/menu.model';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { CreateSectionComponent } from './create-section/create-section.component';
-import { Section, SectionIndex } from '@models/menu/section.model';
-import { CreateDishComponent } from './create-dish/create-dish.component';
-import { Dish, SectionDish } from '@models/menu/dish.model';
-import { ConfirmDialogComponent } from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
-import { TranslateService } from '@ngx-translate/core';
-import { MenuService } from '@services/menu/menu.service';
-import { Allergen, AllAllergens } from '@models/menu/allergen.model';
-import { Router } from '@angular/router';
-import { moveItemInArray } from '@angular/cdk/drag-drop';
-import { Currency } from '@models/menu/currency.interface';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Menu} from '@models/menu/menu.model';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {CreateSectionComponent} from './create-section/create-section.component';
+import {Section, SectionIndex} from '@models/menu/section.model';
+import {CreateDishComponent} from './create-dish/create-dish.component';
+import {Dish, SectionDish} from '@models/menu/dish.model';
+import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
+import {TranslateService} from '@ngx-translate/core';
+import {MenuService} from '@services/menu/menu.service';
+import {AllAllergens, Allergen} from '@models/menu/allergen.model';
+import {moveItemInArray} from '@angular/cdk/drag-drop';
+import {Currency} from '@models/menu/currency.interface';
 
 @Component({
   selector: 'app-menu-digital',
@@ -34,9 +33,9 @@ export class MenuDigitalComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private translate: TranslateService,
-    private menuService: MenuService,
-    private router: Router
-  ) { }
+    private menuService: MenuService
+  ) {
+  }
 
   ngOnInit() {
     this.editMode = !!this.editMode;
@@ -89,7 +88,7 @@ export class MenuDigitalComponent implements OnInit {
       message: this.translate.instant('Delete Section description')
     };
 
-    this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
+    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
     this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
       if (canDelete) {
         this.menu.sections = this.menu.sections.filter(section => section !== sectionToRemove);
@@ -104,7 +103,7 @@ export class MenuDigitalComponent implements OnInit {
       name: sectionToEdit.name,
       editing: true
     };
-    this.modalReference = this.modalService.show(CreateSectionComponent, { initialState });
+    this.modalReference = this.modalService.show(CreateSectionComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[sectionIndex].name = data;
       this.onSaveMenu();
@@ -133,7 +132,7 @@ export class MenuDigitalComponent implements OnInit {
     const initialState = {
       editMode: this.editMode
     };
-    this.modalReference = this.modalService.show(CreateDishComponent, { initialState });
+    this.modalReference = this.modalService.show(CreateDishComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(dish => {
       this.addNewDish(dish, sectionIndex);
       this.matchAllergens();
@@ -156,7 +155,7 @@ export class MenuDigitalComponent implements OnInit {
       message: this.translate.instant('Delete Dish description'),
     };
 
-    this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
+    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
     this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
       if (canDelete) {
         this.menu.sections[dishToRemove.sectionIndex].dishes =
@@ -179,7 +178,7 @@ export class MenuDigitalComponent implements OnInit {
       editing: true,
       formattedPrice: dishToEdit.dish.formattedPrice
     };
-    this.modalReference = this.modalService.show(CreateDishComponent, { initialState });
+    this.modalReference = this.modalService.show(CreateDishComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(data => {
       this.menu.sections[dishToEdit.sectionIndex].dishes[dishToEdit.dishIndex] = data;
       this.matchAllergens();
@@ -199,37 +198,6 @@ export class MenuDigitalComponent implements OnInit {
 
   onSaveMenu() {
     this.menuChange.emit(this.menu);
-  }
-
-  private createMenu() {
-    const menuSections = this.sanitizeAllergensMenuToUpdate();
-    const menuToSave = {
-      businessId: this.businessId,
-      sections: menuSections,
-      imageUrl: this.menu.imageUrl
-    };
-    this.menuService.createMenu(menuToSave)
-      .subscribe((response: any) => {
-        this.menu.shortUrlId = response.shortUrlId;
-        this.menu.id = response.menuId;
-        this.matchAllergens();
-        this.router.navigateByUrl('show');
-      });
-  }
-
-  private updateMenu() {
-    const menuSections = this.sanitizeAllergensMenuToUpdate();
-    const menuToUpdate = {
-      businessId: this.businessId,
-      menuId: this.menu.id,
-      sections: menuSections,
-      imageUrl: this.menu.imageUrl
-    };
-    this.menuService.updateMenu(menuToUpdate)
-      .subscribe((response: string) => {
-        this.menu.id = response;
-        this.matchAllergens();
-      });
   }
 
   sanitizeAllergensMenuToUpdate() {

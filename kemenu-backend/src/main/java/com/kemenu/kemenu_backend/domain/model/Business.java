@@ -37,11 +37,11 @@ public class Business {
         return menu.getId();
     }
 
-    public Optional<String> changeMenu(Menu newMenu) {
+    public Optional<Menu> changeMenu(Menu newMenu) {
         for (int i = 0; i < menus.size(); i++) {
             if (menus.get(i).getId().equals(newMenu.getId())) {
                 menus.set(i, newMenu);
-                return Optional.of(newMenu.getId());
+                return Optional.of(newMenu);
             }
         }
 

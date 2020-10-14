@@ -13,10 +13,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Run docker-compose
         run: docker-compose up -d
-      - name: Set up JDK 14
+      - name: Set up JDK 15
         uses: actions/setup-java@v1
         with:
-          java-version: 14
+          java-version: 15
       - name: Cache maven repository
         uses: actions/cache@v2
         with:
@@ -58,15 +58,15 @@ jobs:
     if: github.ref == 'refs/heads/master'
     env:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
-      JAVA_CMD_PATH: ~/jdk/bin/java
+      JAVA_CMD_PATH: ~/jdk-15/bin/java
       JAR_NAME: kemenu-backend-
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Set up JDK 14
+      - name: Set up JDK 15
         uses: actions/setup-java@v1
         with:
-          java-version: 14
+          java-version: 15
       - name: Set up Node 14
         uses: actions/setup-node@v2-beta
         with:
@@ -133,15 +133,15 @@ jobs:
     if: github.ref == 'refs/heads/rollback'
     env:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
-      JAVA_CMD_PATH: ~/jdk/bin/java
+      JAVA_CMD_PATH: ~/jdk-15/bin/java
       JAR_NAME: kemenu-backend-
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Set up JDK 14
+      - name: Set up JDK 15
         uses: actions/setup-java@v1
         with:
-          java-version: 14
+          java-version: 15
       - name: Create version
         run: |
           APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
@@ -170,15 +170,15 @@ jobs:
     if: github.ref == 'refs/heads/redeploy'
     env:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
-      JAVA_CMD_PATH: ~/jdk/bin/java
+      JAVA_CMD_PATH: ~/jdk-15/bin/java
       JAR_NAME: kemenu-backend-
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Set up JDK 14
+      - name: Set up JDK 15
         uses: actions/setup-java@v1
         with:
-          java-version: 14
+          java-version: 15
       - name: Create version
         run: |
           APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)

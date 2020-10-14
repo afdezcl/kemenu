@@ -41,7 +41,7 @@ public class MenuService {
                 });
     }
 
-    public Optional<String> update(String customerEmail, UpdateMenuRequest updateMenuRequest) {
+    public Optional<Menu> update(String customerEmail, UpdateMenuRequest updateMenuRequest) {
         return customerRepository.findByEmail(customerEmail)
                 .flatMap(customer -> customer.changeMenu(updateMenuRequest.getBusinessId(), menuRequestMapper.from(updateMenuRequest))
                         .flatMap(menuId -> {

@@ -74,7 +74,7 @@ public class Customer implements GrantedAuthority {
         return findBusiness(businessId).map(b -> b.createMenu(menu));
     }
 
-    public Optional<String> changeMenu(String businessId, Menu newMenu) {
+    public Optional<Menu> changeMenu(String businessId, Menu newMenu) {
         return findBusiness(businessId).flatMap(b -> b.changeMenu(newMenu));
     }
 

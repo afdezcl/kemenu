@@ -12,18 +12,18 @@
         <span (click)="goToMenuList()" style="cursor: pointer;"><i class="fas fa-arrow-left"></i> {{ 'See my menus' | translate }}</span>
       </div>
       <div class="col-sm-12 text-center">
-        <h5>{{ menu.name !== '' ? menu.name : ('First menu' | translate)}}</h5>
+        <h5>{{menu?.name}}</h5>
       </div>
     </div>
 
     <div class="row mt-3 mt-md-5 mb-md-5">
       <div class="col-12 p-0">
-        <app-menu-image [editMode]="true" [menu]="menu" (uploadedMenuImage)="menuChange($event)">
+        <app-menu-image *ngIf="menu" [editMode]="true" [menu]="menu" (uploadedMenuImage)="menuChange($event)">
         </app-menu-image>
       </div>
 
       <div class="col-12 p-0 mt-2">
-        <app-menu-digital [editMode]="true" [menu]="menu" (menuChange)="menuChange($event)">
+        <app-menu-digital *ngIf="menu" [editMode]="true" [menu]="menu" (menuChange)="menuChange($event)">
         </app-menu-digital>
       </div>
     </div>
