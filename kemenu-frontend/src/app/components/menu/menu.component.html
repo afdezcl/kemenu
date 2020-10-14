@@ -12,7 +12,7 @@
         <span (click)="goToMenuList()" style="cursor: pointer;"><i class="fas fa-arrow-left"></i> {{ 'See my menus' | translate }}</span>
       </div>
       <div class="col-sm-12 text-center">
-        <h5>{{menu?.name}}</h5>
+        <h5>{{ menu?.name !== '' ? menu?.name : ('First menu' | translate) }}</h5>
       </div>
     </div>
 
