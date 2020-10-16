@@ -58,7 +58,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     env:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
-      JAVA_CMD_PATH: ~/jdk-15/bin/java
+      JAVA_CMD_PATH: ~/jdk/bin/java
       JAR_NAME: kemenu-backend-
     steps:
       - name: Check out repository
@@ -86,10 +86,13 @@ jobs:
       - name: Create version
         run: |
           APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          APP_RELEASE_VERSION=${APP_RELEASE_VERSION%"-SNAPSHOT"}
           APP_RELEASE_VERSION_ARRAY=(${APP_RELEASE_VERSION//./ })
-          ((APP_RELEASE_VERSION_ARRAY[2]++))
-          APP_RELEASE_VERSION="${APP_RELEASE_VERSION_ARRAY[0]}.${APP_RELEASE_VERSION_ARRAY[1]}.${APP_RELEASE_VERSION_ARRAY[2]}"
-          echo "::set-env name=JAR_NAME::$JAR_NAME$APP_RELEASE_VERSION-SNAPSHOT.jar"
+          APP_RELEASE_VERSION_MINOR=APP_RELEASE_VERSION_ARRAY[2]
+          APP_RELEASE_VERSION_MINOR=$((APP_RELEASE_VERSION_MINOR + 1))
+          APP_RELEASE_VERSION="${APP_RELEASE_VERSION_ARRAY[0]}.${APP_RELEASE_VERSION_ARRAY[1]}.${APP_RELEASE_VERSION_MINOR}"
+          echo "JAR_NAME=$JAR_NAME$APP_RELEASE_VERSION-SNAPSHOT.jar" >> $GITHUB_ENV
+          echo "RELEASE VERSION: ${APP_RELEASE_VERSION}-SNAPSHOT"
           mvn -B --batch-mode release:update-versions -DdevelopmentVersion=$APP_RELEASE_VERSION-SNAPSHOT
       - name: Cache maven repository
         uses: actions/cache@v2
@@ -133,7 +136,7 @@ jobs:
     if: github.ref == 'refs/heads/rollback'
     env:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
-      JAVA_CMD_PATH: ~/jdk-15/bin/java
+      JAVA_CMD_PATH: ~/jdk/bin/java
       JAR_NAME: kemenu-backend-
     steps:
       - name: Check out repository
@@ -145,10 +148,12 @@ jobs:
       - name: Create version
         run: |
           APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          APP_RELEASE_VERSION=${APP_RELEASE_VERSION%"-SNAPSHOT"}
           APP_RELEASE_VERSION_ARRAY=(${APP_RELEASE_VERSION//./ })
-          ((APP_RELEASE_VERSION_ARRAY[2]--))
-          APP_RELEASE_VERSION="${APP_RELEASE_VERSION_ARRAY[0]}.${APP_RELEASE_VERSION_ARRAY[1]}.${APP_RELEASE_VERSION_ARRAY[2]}"
-          echo "::set-env name=JAR_NAME::$JAR_NAME$APP_RELEASE_VERSION-SNAPSHOT.jar"
+          APP_RELEASE_VERSION_MINOR=APP_RELEASE_VERSION_ARRAY[2]
+          APP_RELEASE_VERSION_MINOR=$((APP_RELEASE_VERSION_MINOR - 1))
+          APP_RELEASE_VERSION="${APP_RELEASE_VERSION_ARRAY[0]}.${APP_RELEASE_VERSION_ARRAY[1]}.${APP_RELEASE_VERSION_MINOR}"
+          echo "JAR_NAME=$JAR_NAME$APP_RELEASE_VERSION-SNAPSHOT.jar" >> $GITHUB_ENV
           echo $JAR_NAME
       - name: Prepare SSH Keys
         run: |
@@ -170,7 +175,7 @@ jobs:
     if: github.ref == 'refs/heads/redeploy'
     env:
       KILL_JAVA_SH: ${{ github.workspace }}/ci/kill_java_process.sh
-      JAVA_CMD_PATH: ~/jdk-15/bin/java
+      JAVA_CMD_PATH: ~/jdk/bin/java
       JAR_NAME: kemenu-backend-
     steps:
       - name: Check out repository
@@ -182,7 +187,7 @@ jobs:
       - name: Create version
         run: |
           APP_RELEASE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
-          echo "::set-env name=JAR_NAME::$JAR_NAME$APP_RELEASE_VERSION.jar"
+          echo "JAR_NAME=$JAR_NAME$APP_RELEASE_VERSION.jar" >> $GITHUB_ENV
       - name: Prepare SSH Keys
         run: |
           mkdir -p ~/.ssh
