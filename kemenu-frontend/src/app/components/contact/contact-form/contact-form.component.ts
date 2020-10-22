@@ -12,9 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ContactFormComponent implements OnInit {
 
-  /*   email = '';
-    subject = '';
-    details = ''; */
   contactForm: FormGroup;
 
   constructor(
