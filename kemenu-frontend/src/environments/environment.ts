@@ -5,7 +5,12 @@
 export const environment = {
   production: false,
   apiBaseUrl: 'http://localhost:8085',
-  recaptchaToken: '6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM'
+  recaptchaToken: '6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM',
+  contactForm: {
+    serviceId: 'service_m5nqzgm',
+    templateId: 'template_pokz20s',
+    userId: 'user_gSN1oKuEcNtrlp9zgExsr'
+  }
 };
 
 /*
