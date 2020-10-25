@@ -18,14 +18,6 @@ class MenuPublicController {
 
     private final CustomerService customerService;
 
-    @Deprecated(forRemoval = true)
-    @GetMapping("/short/{shortUrlId}")
-    ResponseEntity<MenuResponse> readMenu(@PathVariable String shortUrlId, Locale locale) {
-        return customerService.readMenus(shortUrlId, locale)
-                .map(menus -> ResponseEntity.ok(menus.get(0)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
     @GetMapping("/v1/short/{shortUrlId}")
     ResponseEntity<List<MenuResponse>> readMenus(@PathVariable String shortUrlId, Locale locale) {
         return customerService.readMenus(shortUrlId, locale)
