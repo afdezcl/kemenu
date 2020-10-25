@@ -2,6 +2,7 @@ package com.kemenu.kemenu_backend.application.customer;
 
 import com.kemenu.kemenu_backend.application.security.IntrospectiveService;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 import java.util.Locale;
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @AllArgsConstructor
 @RequestMapping("/web/v1")
@@ -65,6 +67,7 @@ class CustomerWebController {
                                   @PathVariable String menuId) {
         return introspectiveService.doCallOnMe(token, email, () -> {
             customerService.deleteMenu(email, businessId, menuId);
+            log.info("Customer {} with business {} deleted {} menu", email, businessId, menuId);
             return ResponseEntity.ok("");
         });
     }
