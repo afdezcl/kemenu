@@ -3,14 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
-import { FaqModule } from '../faq/faq.module';
 
 @NgModule({
   imports: [
     CommonModule,
     TranslateModule,
-    RouterModule,
-    FaqModule
+    RouterModule
   ],
   declarations: [FooterComponent],
   exports: [FooterComponent]
