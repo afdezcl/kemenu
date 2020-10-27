@@ -4,6 +4,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {AccordionModule} from 'ngx-bootstrap/accordion';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FaqComponent} from './faq.component';
+import { FaqRoutingModule } from './faq-routing.module';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import {FaqComponent} from './faq.component';
     TranslateModule,
     AccordionModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FaqRoutingModule
   ],
   exports: [
     FaqComponent
