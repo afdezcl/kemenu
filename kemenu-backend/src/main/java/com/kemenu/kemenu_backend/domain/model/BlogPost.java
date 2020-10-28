@@ -29,6 +29,7 @@ public class BlogPost {
     private final String content;
     private final String imageUrl;
     private final String createdBy;
+    private final String updatedBy;
     @CreatedDate
     private Instant createdAt;
     @LastModifiedDate
