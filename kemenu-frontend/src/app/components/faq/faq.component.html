@@ -1,26 +1,27 @@
-<accordion class="accordion-custom faq" id="faq" [isAnimated]="true">
-    <accordion-group>
-      <button type="submit" class="btn btn-link clearfix faq-title" accordion-heading>
-        <div class="pull-left">{{ 'Faq title' | translate }}</div>
-        <i class="icofont-collapse ml-2"></i>
-      </button>
-
-      <div class="container">
-        <div *ngFor="let questionObject of ('faq' | translate)">
-          <accordion class="accordion-custom faq-question" [isAnimated]="true">
-            <accordion-group>
-              <button type="submit" class="faq-title-question d-flex align-items-center" accordion-heading>
-                <div>
-                  <span>
-                    {{questionObject.question}}
-                  </span>
-                  <i class="icofont-collapse"></i>
-                </div>
-              </button>
-              <div class="faq-question-answer">{{questionObject.answer}}</div>
-            </accordion-group>
-          </accordion>
-        </div>
+<section class="hero">
+  <div class="container mb-10">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="hero-heading text-white mb-5">{{ 'Faq title' | translate }}</h1>
       </div>
-    </accordion-group>
-</accordion>
+    </div>
+  </div>
+</section>
+
+<div class="faq container mt-5 mb-5">
+  <div *ngFor="let questionObject of ('faq' | translate)">
+    <accordion class="accordion-custom faq-question" [isAnimated]="true">
+      <accordion-group>
+        <button type="submit" class="faq-title-question d-flex align-items-center" accordion-heading>
+          <div>
+            <span>
+              {{questionObject.question}}
+            </span>
+            <i class="icofont-collapse"></i>
+          </div>
+        </button>
+        <div class="faq-question-answer">{{questionObject.answer}}</div>
+      </accordion-group>
+    </accordion>
+  </div>
+</div>

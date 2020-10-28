@@ -48,6 +48,10 @@ export const routes: Routes = [
       import('./components/contact/contact.module').then(module => module.ContactModule)
   },
   {
+    path: 'faq', loadChildren: () =>
+      import('./components/faq/faq.module').then(module => module.FaqModule)
+  },
+  {
     path: '**', redirectTo: ''
   }
 
