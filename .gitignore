@@ -57,3 +57,5 @@ kemenu-backend/src/main/resources/public/*
 !kemenu-backend/src/main/resources/public/index.html
 dist/
 *.log
+
+.vscode/
