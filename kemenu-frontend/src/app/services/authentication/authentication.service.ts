@@ -5,7 +5,7 @@ import {environment} from '@environments/environment';
 import {Tokens} from '@models/auth/tokens.model';
 import {Login} from '@models/auth/login.interface';
 import {Register} from '@models/auth/register.interface';
-import * as jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 import {ForgotPassword} from '@models/auth/forgotPassword.interface';
 import {ChangePassword, ForgotPasswordId} from '@models/auth/changePassword.interface';
 import { ResetPassword } from '@models/auth/resetPassword.interface';
@@ -99,7 +99,7 @@ export class AuthenticationService {
   }
 
   private storeTokens(tokens: Tokens) {
-    const jwtDecoded = jwt_decode(tokens.jwt);
+    const jwtDecoded: any = jwt_decode(tokens.jwt);
     this.storeUserEmail(jwtDecoded.sub);
     this.storeUserRole(jwtDecoded.role[0]);
     localStorage.setItem(this.JWT_TOKEN, tokens.jwt);
@@ -120,7 +120,7 @@ export class AuthenticationService {
   }
 
   refreshTokenHasExpirated(tokens: Tokens): boolean {
-    const jwtDecoded = jwt_decode(tokens.refreshToken);
+    const jwtDecoded: any = jwt_decode(tokens.refreshToken);
     const experationDate = new Date(jwtDecoded.exp * 1000);
     const now = new Date();
     return experationDate < now;
