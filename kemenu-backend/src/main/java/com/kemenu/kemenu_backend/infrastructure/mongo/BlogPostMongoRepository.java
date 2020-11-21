@@ -15,6 +15,11 @@ class BlogPostMongoRepository implements BlogPostRepository {
     private final BlogPostSpringMongoRepository repository;
 
     @Override
+    public Optional<BlogPost> findById(String id) {
+        return repository.findById(id);
+    }
+
+    @Override
     public Optional<BlogPost> findByReadableId(String readableId) {
         return repository.findByReadableId(readableId);
     }
