@@ -1,0 +1,34 @@
+server:
+  port: 8085
+  address: 127.0.0.1
+  tomcat:
+    mbeanregistry:
+      enabled: true
+
+app:
+  version: @project.version@
+  secret: secret
+  refresh: refresh
+  recaptcha:
+    public: 6LdTMfUUAAAAANcZwb0O_jEXYMElMEAyYdHmnKeM
+    secret: ${RECAPTCHA_TOKEN}
+  cors: http://localhost:8085, http://localhost:4200
+  admin:
+    username: admin@example.com
+    password: adminPassword
+  sendgrid: ${KEMENU_REGISTER_EMAILS}
+  cloudinary:
+    key: ${CLOUDINARY_KEY}
+    secret: ${CLOUDINARY_SECRET}
+    cloudname: ${CLOUDINARY_CLOUDNAME}
+
+spring:
+  jmx:
+    enabled: true
+  data:
+    mongodb:
+      uri: mongodb://admin:password@localhost:27018/kemenudb
+  servlet:
+    multipart:
+      max-file-size: 7MB
+      max-request-size: 7MB
