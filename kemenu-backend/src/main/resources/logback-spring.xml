@@ -45,12 +45,12 @@
         </encoder>
     </appender>
 
-    <springProfile name="dev, test">
+    <springProfile name="dev | test">
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
         </root>
     </springProfile>
-    <springProfile name="default">
+    <springProfile name="default"> <!-- PROD -->
         <root level="INFO">
             <appender-ref ref="ASYNC"/>
             <appender-ref ref="Sentry"/>
