@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Menu } from '@models/menu/menu.model';
-import { TranslateService } from '@ngx-translate/core';
-import { AuthenticationService } from '@services/authentication/authentication.service';
-import { MenuService } from '@services/menu/menu.service';
-import { ConfirmDialogComponent } from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { ToastrService } from 'ngx-toastr';
-import { CreateMenuNameComponent } from '../menu-digital/create-menu-name/create-menu-name.component';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Menu} from '@models/menu/menu.model';
+import {TranslateService} from '@ngx-translate/core';
+import {AuthenticationService} from '@services/authentication/authentication.service';
+import {MenuService} from '@services/menu/menu.service';
+import {ConfirmDialogComponent} from '@ui-controls/dialogs/confirmDialog/confirmDialog.component';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {ToastrService} from 'ngx-toastr';
+import {CreateMenuNameComponent} from '../menu-digital/create-menu-name/create-menu-name.component';
 
 @Component({
   selector: 'app-select-menu',
@@ -28,7 +28,8 @@ export class SelectMenuComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private toasty: ToastrService,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.loadMenus();
@@ -60,7 +61,7 @@ export class SelectMenuComponent implements OnInit {
     const initialState = {
       name: menu.name
     };
-    this.modalReference = this.modalService.show(CreateMenuNameComponent, { initialState });
+    this.modalReference = this.modalService.show(CreateMenuNameComponent, {initialState});
     this.modalReference.content.messageEvent.subscribe(name => {
       this.menusSaved.find((menuSaved: Menu) => Object.is(menu.id, menuSaved.id)).name = name;
       this.onSaveMenu(menu);
@@ -73,7 +74,7 @@ export class SelectMenuComponent implements OnInit {
       message: this.translate.instant('Delete Menu description')
     };
 
-    this.modalReference = this.modalService.show(ConfirmDialogComponent, { initialState });
+    this.modalReference = this.modalService.show(ConfirmDialogComponent, {initialState});
     this.modalReference.content.onClose.subscribe((canDelete: boolean) => {
       if (canDelete) {
         this.attemptToDelete(menuToDelete);
@@ -126,7 +127,7 @@ export class SelectMenuComponent implements OnInit {
     const menuToSave = {
       businessId: this.businessId,
       sections: [],
-      imageUrl: '',
+      imageUrl: menu.imageUrl,
       name: menu.name
     };
     this.menuService.createMenu(menuToSave)
@@ -142,8 +143,13 @@ export class SelectMenuComponent implements OnInit {
 
   handleFileUpload(event) {
     if (event) {
-      this.menusSaved[0].imageUrl = event.url;
-      this.createMenu(this.menusSaved[0]);
+      const menu = new Menu(
+        [],
+        this.translate.instant('First menu')
+      );
+      menu.imageUrl = event.url;
+      this.menusSaved.push(menu);
+      this.createMenu(menu);
     }
   }
 
@@ -151,6 +157,7 @@ export class SelectMenuComponent implements OnInit {
   goToMenu(menuId: string) {
     this.router.navigateByUrl(`/menu/${menuId}`);
   }
+
   showSuccessToasty() {
     this.toasty.success(this.translate.instant('Saved Correctly'));
   }
